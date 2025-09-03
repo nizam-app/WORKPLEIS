@@ -6,6 +6,7 @@ import 'package:workpleis/features/auth/screens/register_screen.dart';
 import 'package:workpleis/features/auth/screens/splash_screen.dart';
 
 import 'error_screen.dart';
+
 class AppRouter {
   static final String initial = SplashScreen.routeName;
  static final GoRouter appRouter = GoRouter(
