@@ -10,6 +10,7 @@ void main(){
         designSize: const Size(393, 852),
         minTextAdapt: true,
         splitScreenMode: true,
+        useInheritedMediaQuery: true,
         child: const App(),
       ),
     ),

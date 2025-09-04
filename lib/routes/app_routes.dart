@@ -5,7 +5,10 @@ import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:workpleis/features/auth/screens/register_screen.dart';
 import 'package:workpleis/features/auth/screens/splash_screen.dart';
 
+import '../features/home/screen/home_screen.dart';
+import '../features/nav_bar/screen/bottom_nav_bar.dart';
 import 'error_screen.dart';
+
 class AppRouter {
   static final String initial = SplashScreen.routeName;
  static final GoRouter appRouter = GoRouter(
@@ -36,7 +39,15 @@ class AppRouter {
         ), GoRoute(
           path: RegisterScreen.routeName,
           name: RegisterScreen.routeName,
-          builder: (context, state) => const RegisterScreen(),
+          builder: (context, state) =>  RegisterScreen(),
+        ), GoRoute(
+          path: HomeScreen.routeName,
+          name: HomeScreen.routeName,
+          builder: (context, state) =>  HomeScreen(),
+        ),GoRoute(
+          path: BottomNavBar.routeName,
+          name: BottomNavBar.routeName,
+          builder: (context, state) =>  BottomNavBar(),
         ),
 
       ]);

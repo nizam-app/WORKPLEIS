@@ -5,22 +5,33 @@ import 'package:workpleis/core/constants/color_control/theme_color_controller.da
 import 'package:workpleis/core/theme/text_theme.dart';
 import 'input_decoration_theme.dart';
 import 'logic/theme_changer.dart';
+
 final ThemeChanger _themeController = Get.put(ThemeChanger());
-ThemeData themeMood(){
-  Brightness brightness = _themeController.isDarkMode.value? Brightness.light : Brightness.dark;
+
+ThemeData themeMood() {
+  Brightness brightness = _themeController.isDarkMode.value
+      ? Brightness.light
+      : Brightness.dark;
+
   return ThemeData(
-      brightness:brightness,
-      colorScheme: ColorScheme.light(
-          brightness: brightness,
-          primary: AllColor.orange,
-          onPrimary:_themeController.isDarkMode.value?  AllColor.white :ThemeColorController.black,
-          secondary:ThemeColorController.green,
-          onSecondary:_themeController.isDarkMode.value? AllColor.white:ThemeColorController.black,
-          surface:  ThemeColorController.grey,
-          onSurface:_themeController.isDarkMode.value? ThemeColorController.black:AllColor.white),
-      inputDecorationTheme: inputDecorationTheme,
-      useMaterial3: true,
-      // scaffoldBackgroundColor: _themeController.isDarkMode.value? ThemeColorController.white: ThemeColorController.black,
-      textTheme: textTheme
+    brightness: brightness,
+    colorScheme: ColorScheme.light(
+      brightness: brightness,
+      primary: AllColor.lightBlue,
+      onPrimary: _themeController.isDarkMode.value
+          ? AllColor.white
+          : ThemeColorController.black,
+      secondary: ThemeColorController.green,
+      onSecondary: _themeController.isDarkMode.value
+          ? AllColor.white
+          : ThemeColorController.black,
+      surface: ThemeColorController.grey,
+      onSurface: _themeController.isDarkMode.value
+          ? ThemeColorController.black
+          : AllColor.white,
+    ),
+    inputDecorationTheme: inputDecorationTheme, // apply globally
+    useMaterial3: true,
+    textTheme: textTheme,
   );
 }

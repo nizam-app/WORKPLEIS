@@ -1,9 +1,7 @@
 import 'global_api.dart';
 
 class AuthAPIController {
- static String _base_api = "$api/users";
-  static String allUsers = "${_base_api}/all";
-  static String singleUser(String id) => "${_base_api}/$id";
-  static String userLogin = "${_base_api}/login";
-  static String userSignUp = "${_base_api}/signup";
+ static String _base_api = "$api/api";
+  static String register = "${_base_api}/v1/user/register";
+  static String login = "${_base_api}/v1/auth/login";
 }
