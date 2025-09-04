@@ -32,12 +32,16 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             children: [
               const Spacer(),
-                Image.asset(ImagePath.pngLogo),
+                Image.asset(ImagePath.pngLogo,
+                  height: 150.h,
+                  width: 150.w,),
+              SizedBox(height: 20.h),
+              Text("Get things  done, together ",style: TextStyle(color: AllColor.black,fontSize: 18.sp,fontWeight: FontWeight.w400)),
               SizedBox(height: 10.h),
               Spacer(),
               const CircularProgressIndicator(),
-              SizedBox(height: 10.h),
-              Text("v1.1.0",style: TextStyle(color: AllColor.white70),)     ,
+              SizedBox(height: 20.h),
+              Text("v1.1.0",style: TextStyle(color: AllColor.grey,fontSize: 15.sp,fontWeight: FontWeight.w600),)     ,
               SizedBox(height: 20.h,)
             ],
           ),
