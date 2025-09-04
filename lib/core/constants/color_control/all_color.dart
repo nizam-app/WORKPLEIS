@@ -14,9 +14,13 @@ class AllColor {
 
   static const Color black = Colors.black;
   static const Color black45 = Colors.black45;
+  static const Color black54 = Colors.black54;
+  static const Color black87 = Colors.black87;
   static final Color red200 = Colors.red.shade200;
   static const Color green = Color(0xffd1ff57);
   static const Color blue = Colors.blue;
+  static const Color lime = Colors.lime;
+  static const Color red = Colors.red;
 
 
 }
