@@ -9,6 +9,7 @@ import 'package:workpleis/core/constants/image_control/image_path.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';
 import 'package:workpleis/features/auth/screens/register_screen.dart';
 
+import '../../nav_bar/screen/bottom_nav_bar.dart';
 import '../logic/login_reverpod.dart';
 
 
@@ -239,25 +240,29 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   // lib/features/auth/login_screen.dart
 
   Future<void> _submit() async {
-  final ok = _formKey.currentState?.validate() ?? false;
-  if (!ok) return;
+    if (!(_formKey.currentState?.validate() ?? false)) return;
 
-  ref.read(loginLoadingProvider.notifier).state = true; // loading শুরু
+    ref.read(loginLoadingProvider.notifier).state = true;
 
-  final loginService = ref.read(loginProvider);
+    final loginService = ref.read(loginProvider);
+    final result = await loginService.login(
+      _emailController.text.trim(),
+      _passController.text.trim(),
+    );
 
-  final result = await loginService.login(
-  email: _emailController.text.trim(),
-  password: _passController.text.trim(),
-  );
+    ref.read(loginLoadingProvider.notifier).state = false;
 
-  ref.read(loginLoadingProvider.notifier).state = false; // loading শেষ
+    if (result["success"]) {
+      GlobalSnackBar.show(context,
+          title: "Success", message: result["message"], type: CustomSnackType.success);
 
-  if (result["success"]) {
- GlobalSnackBar.show(context, title: "Success", message: "Login successful",type: CustomSnackType.error);
-  } else {
- GlobalSnackBar.show(context, title: "Error", message: "Something went wrong",type: CustomSnackType.error);
+      context.go(BottomNavBar.routeName); // ✅ Next page এ যাবে
+    } else {
+      GlobalSnackBar.show(context,
+          title: "Error", message: result["message"], type: CustomSnackType.error);
+    }
   }
-  }
+
+
 
 }

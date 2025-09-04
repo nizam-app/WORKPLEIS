@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/features/home/screen/home_screen.dart';
 
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
 
@@ -8,6 +9,10 @@ class BottomNavBar extends ConsumerWidget {
   const BottomNavBar({super.key});
   static const String routeName = '/BottomNavBar';
   final List<Widget> _pages = const [
+    HomeScreen(),
+    HomeScreen(),
+    HomeScreen(),
+    HomeScreen(),
 
   ];
   @override
@@ -53,10 +58,7 @@ class BottomNavBar extends ConsumerWidget {
             icon: Icon(Icons.shopping_cart_outlined), // Changed Icon
             label: "Cart",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline), // Changed Icon
-            label: "Account",
-          ),
+
         ],
       ),
     );

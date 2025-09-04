@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 class AllColor {
+  static const Color appBar = Color(0xFF1F222B);
   static const Color white = Colors.white;
   static const Color white70 = Colors.white70;
   static const Color orange = Colors.orange;

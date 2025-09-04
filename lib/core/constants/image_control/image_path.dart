@@ -5,4 +5,5 @@ class ImagePath {
  static final String pngLogo = "assets/images/logo.png";
  static final String logoText = "assets/images/logoText.png";
  static final String google = "assets/images/google.png";
+ static final String logoColorText = "assets/images/logoColorText.png";
 }
