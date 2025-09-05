@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class GlobalCustomButton extends StatelessWidget {
+class GlobalButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final Color? color;
   final double? fontSize;
   final EdgeInsetsGeometry? padding;
 
-  const GlobalCustomButton({
+  const GlobalButton({
     super.key,
     required this.text,
     required this.onPressed,
@@ -26,7 +26,7 @@ class GlobalCustomButton extends StatelessWidget {
           backgroundColor: color ?? Colors.black, // default black
           padding: padding ?? EdgeInsets.symmetric(vertical: 12.h),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(12.r),
           ),
         ),
         onPressed: onPressed,

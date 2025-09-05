@@ -181,7 +181,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         'Sign up',
                         style: TextStyle(
                           fontSize: 12.sp,
-                          color: AllColor.green,
+                          color: AllColor.logoColor,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

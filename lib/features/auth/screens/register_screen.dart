@@ -157,12 +157,12 @@ class RegisterScreen extends ConsumerWidget {
                           padding: EdgeInsets.symmetric(vertical: 14.h),
                           side: BorderSide(
                             color: role == "CLIENT"
-                                ? AllColor.green
+                                ? AllColor.logoColor
                                 : Colors.grey,
                             width: 1,
                           ),
                           backgroundColor: role == "CLIENT"
-                              ? AllColor.green.withOpacity(0.5)
+                              ? AllColor.logoColor.withOpacity(0.5)
                               : Colors.transparent,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.r),
@@ -189,12 +189,12 @@ class RegisterScreen extends ConsumerWidget {
                           padding: EdgeInsets.symmetric(vertical: 14.h),
                           side: BorderSide(
                             color: role == "JOB_SEEKER"
-                                ? AllColor.green
+                                ? AllColor.logoColor
                                 : Colors.grey,
                             width: 1,
                           ),
                           backgroundColor: role == "JOB_SEEKER"
-                              ? AllColor.green.withOpacity(0.5)
+                              ? AllColor.logoColor.withOpacity(0.5)
                               : Colors.transparent,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.r),
