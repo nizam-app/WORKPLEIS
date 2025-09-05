@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workpleis/core/constants/image_control/image_path.dart';
+import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:workpleis/features/home/screen/post_a_job.dart';
 import 'package:workpleis/features/security/screen/security_faq_screen.dart';
 import 'package:workpleis/features/security/screen/security_screen.dart';
@@ -346,7 +348,7 @@ class CustomDrawer extends StatelessWidget {
                     _drawerItem(
                       icon: Icons.logout,
                       text: "Sign out",
-                      onTap: () {},
+                      onTap: () {logOut(context);},
                       color: AllColor.red,
                     ),
 
@@ -367,6 +369,11 @@ class CustomDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+  Future <void> logOut(BuildContext context)async{
+    SharedPreferences _prefe = await SharedPreferences.getInstance();
+    _prefe.clear();
+    context.push(LoginScreen.routeName);
   }
 }
 
