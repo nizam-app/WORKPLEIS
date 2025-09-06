@@ -8,6 +8,7 @@ import 'package:workpleis/features/auth/logic/email_valitedor.dart';
 import 'package:workpleis/core/constants/image_control/image_path.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';
 import 'package:workpleis/features/auth/screens/register_screen.dart';
+import 'package:workpleis/features/home/screen/home_screen.dart';
 
 import '../../nav_bar/screen/bottom_nav_bar.dart';
 import '../logic/login_reverpod.dart';
@@ -181,7 +182,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         'Sign up',
                         style: TextStyle(
                           fontSize: 12.sp,
-                          color: AllColor.green,
+                          color: AllColor.logoColor,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -256,7 +257,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       GlobalSnackBar.show(context,
           title: "Success", message: result["message"], type: CustomSnackType.success);
 
-      context.go(BottomNavBar.routeName); // ✅ Next page এ যাবে
+      context.go(HomeScreen.routeName); // ✅ Next page এ যাবে
     } else {
       GlobalSnackBar.show(context,
           title: "Error", message: result["message"], type: CustomSnackType.error);

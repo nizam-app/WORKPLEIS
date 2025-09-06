@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workpleis/core/constants/image_control/image_path.dart';
-import 'package:workpleis/core/screen/global_custom_bottom.dart';
+import 'package:workpleis/features/auth/screens/login_screen.dart';
+import 'package:workpleis/features/home/screen/post_a_job.dart';
+import 'package:workpleis/features/security/screen/security_faq_screen.dart';
+import 'package:workpleis/features/security/screen/security_screen.dart';
+import 'package:workpleis/features/verification/screen/verification_screen.dart';
 import '../../../core/constants/color_control/all_color.dart';
+import '../widget/custom_category_type.dart';
+import '../widget/custom_filter_chips.dart';
+import '../widget/custom_job_posts.dart';
+import '../widget/custom_search_box_bottom.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,87 +25,82 @@ class HomeScreen extends StatelessWidget {
       appBar: CustomTopBar(),
 
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: Column(
-            children: [
-              CustomHomeTest(),
-              SizedBox(height: 10.h),
-              CustomJobButtons(),
-              SizedBox(height: 20),
+        child: Column(
+          children: [
+            Container(
+              color: AllColor.appBar,
+                child: Column(
+              children: [
+                CustomHomeTest(),
+                SizedBox(height: 10.h),
+                CustomJobButtons(),
+                SizedBox(height: 20),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _statsCard("50k+", "Posted Jobs", Icons.trending_up),
+                    _statsCard("25k+", "Users", Icons.people),
+                    _statsCard("4.8", "Users", Icons.star),
+                  ],
+                ),
+                SizedBox(height: 15.h,)
+              ],
+            )),
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
                 children: [
-                  _statsCard("50k+", "Posted Jobs", Icons.trending_up),
-                  _statsCard("25k+", "Users", Icons.people),
-                  _statsCard("4.8", "Users", Icons.star),
+                  SizedBox(height: 20.h),
+                  CustomSearchBoxBottom(),
+                  SizedBox(height: 10.h),
+                  CustomCategoryType(),
+                  SizedBox(height: 10.h),
+                  CustomFilterChips(),
+                  SizedBox(height: 15.h),
+                  // ===== Recent Job Posts =====
+                  JobListScreen(),
+                  SizedBox(height: 10),
+                  CustomHowITWorkTest(),
+
+                  HowItWorksCard(
+                    icon: Icons.search,
+                    title: "Post a job",
+                    subtitle:
+                    "Share what you need done, add details, and set your budget.",
+                    onTap: () {},
+                  ),
+                  HowItWorksCard(
+                    icon: Icons.group,
+                    title: "Get Offers",
+                    subtitle:
+                    "Skilled job seekers respond with quotes and availability.",
+                  ),
+                  HowItWorksCard(
+                    icon: Icons.verified,
+                    title: "Choose with Confidence",
+                    subtitle: "Compare profiles, past reviews, and skills.",
+                  ),
+                  HowItWorksCard(
+                    icon: Icons.check_circle,
+                    title: "Work Completed",
+                    subtitle:
+                    "Get your task done and pay securely through our platform.",
+                  ),
                 ],
               ),
-              SizedBox(height: 20.h),
-              SearchBoxBottom(),
-              SizedBox(height: 10.h),
-              CustomJobTest(),
-              SizedBox(height: 10.h),
-              FilterChips(),
-              SizedBox(height: 15.h),
-              // ===== Recent Job Posts =====
-              _jobCard(
-                category: "Web Development",
-                icon: Icons.access_time,
-                time: "2h ago",
-                title: "E-commerce Website Development",
-                description:
-                    "Seeking experienced full-stack developer to build modern e-commerce platform with React/Node.js.",
-                budget: "\$3,500 total budget",
-              ),
-              SizedBox(height: 16.h),
-              _jobCard(
-                category: "Design",
-                icon: Icons.access_time,
-                time: "4h ago",
-                title: "Complete Brand Identity Design",
-                description:
-                    "Seeking experienced full-stack developer to build modern e-commerce platform with React/Node.js.",
-                budget: "\$55/hr per hour",
-              ),
+            ),
 
-              SizedBox(height: 10),
-              CustomHowITWorkTest(),
 
-              HowItWorksCard(
-                icon: Icons.search,
-                title: "Post a job",
-                subtitle:
-                    "Share what you need done, add details, and set your budget.",
-                onTap: () {},
-              ),
-              HowItWorksCard(
-                icon: Icons.group,
-                title: "Get Offers",
-                subtitle:
-                    "Skilled job seekers respond with quotes and availability.",
-              ),
-              HowItWorksCard(
-                icon: Icons.verified,
-                title: "Choose with Confidence",
-                subtitle: "Compare profiles, past reviews, and skills.",
-              ),
-              HowItWorksCard(
-                icon: Icons.check_circle,
-                title: "Work Completed",
-                subtitle:
-                    "Get your task done and pay securely through our platform.",
-              ),
-            ],
-          ),
+          ],
         ),
       ),
     );
   }
 }
 
-class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomTopBar extends StatelessWidget implements
+    PreferredSizeWidget {
   const CustomTopBar({super.key});
 
   @override
@@ -103,8 +108,8 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: AllColor.appBar, // dark background
       elevation: 0,
-      //automaticallyImplyLeading: false,
-      titleSpacing: 0,
+      scrolledUnderElevation: 0,
+      surfaceTintColor: Colors.transparent,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -147,7 +152,7 @@ class CustomTopBar extends StatelessWidget implements PreferredSizeWidget {
                       width: 8,
                       height: 8,
                       decoration: const BoxDecoration(
-                        color: AllColor.green,
+                        color: AllColor.logoColor,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -189,7 +194,7 @@ class CustomHomeTest extends StatelessWidget {
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.w900,
-                color: AllColor.black,
+                color: AllColor.white,
               ),
               textAlign: TextAlign.center,
             ),
@@ -202,7 +207,7 @@ class CustomHomeTest extends StatelessWidget {
               style: TextStyle(
                 fontSize: 22.sp,
                 fontWeight: FontWeight.w700,
-                color: AllColor.green,
+                color: AllColor.allcolor,
               ),
               textAlign: TextAlign.center,
             ),
@@ -215,7 +220,7 @@ class CustomHomeTest extends StatelessWidget {
               style: TextStyle(
                 fontSize: 22.sp,
                 fontWeight: FontWeight.w800,
-                color: AllColor.black87,
+                color: AllColor.white,
               ),
               textAlign: TextAlign.center,
             ),
@@ -228,7 +233,7 @@ class CustomHomeTest extends StatelessWidget {
               style: TextStyle(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w500,
-                color: AllColor.black54,
+                color: AllColor.white,
                 height: 1.4,
               ),
               textAlign: TextAlign.center,
@@ -268,13 +273,15 @@ class CustomDrawer extends StatelessWidget {
     return Drawer(
       shadowColor: Colors.white,
       child: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Logo + Close Button
-              Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 🔹 Header Section with Background Color
+            Container(
+              width: double.infinity,
+              color: AllColor.appBar, // <-- ekhane background color set korlam
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset(
@@ -283,120 +290,90 @@ class CustomDrawer extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
                   IconButton(
-                    icon: Icon(Icons.close, size: 26.sp, color: AllColor.black),
+                    icon: Icon(Icons.close, size: 26.sp, color: AllColor.white),
                     onPressed: () => Navigator.pop(context),
                   ),
                 ],
               ),
+            ),
 
-              SizedBox(height: 20.h),
+            // 🔹 Drawer content scrollable rakhlam
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+                child: ListView(
+                  children: [
+                    SizedBox(height: 20.h),
 
-              // Main Section
-              Text(
-                "Main",
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: AllColor.grey,
+                    // Main Section
+                    Text(
+                      "Main",
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                        color: AllColor.grey,
+                      ),
+                    ),
+                    _drawerItem(icon: Icons.home, text: "Home", onTap: () {}),
+                    _drawerItem(icon: Icons.search, text: "Browse Jobs", onTap: () {}),
+                    _drawerItem(icon: Icons.folder_copy_outlined, text: "My Tasks", onTap: () {}),
+                    _drawerItem(icon: Icons.message_outlined, text: "Messages", onTap: () {}),
+
+                    SizedBox(height: 20.h),
+
+                    // Account Section
+                    Text(
+                      "ACCOUNT",
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                        color: AllColor.grey,
+                      ),
+                    ),
+                    _drawerItem(icon: Icons.person_outline, text: "Profile", onTap: () {}),
+                    _drawerItem(icon: Icons.notifications_none, text: "Notifications", onTap: () {}),
+                    _drawerItem(icon: Icons.credit_card_outlined, text: "Payments", onTap: () {}),
+                    _drawerItem(icon: Icons.verified_user_outlined, text: "Verification", onTap: () {context.push(VerificationScreen.routeName);}),
+                    _drawerItem(icon: Icons.security,
+                        text: "security",
+                        onTap: () {context.push(
+                            SecurityScreen.routeName);}),
+                    _drawerItem(icon: Icons.help_outline,
+                        text: "Help & Support",
+                        onTap: () {context.push(
+                            SecurityFAQScreen.routeName);}),
+
+                    Divider(),
+
+                    _drawerItem(
+                      icon: Icons.logout,
+                      text: "Sign out",
+                      onTap: () {logOut(context);},
+                      color: AllColor.red,
+                    ),
+
+                    Divider(),
+                    SizedBox(height: 30.h),
+
+                    Center(
+                      child: Text(
+                        "Workpleis v1.0.0",
+                        style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-
-              _drawerItem(
-                icon: Icons.home,
-                text: "Home",
-                onTap: () {
-                  /* TODO */
-                },
-              ),
-              _drawerItem(
-                icon: Icons.search,
-                text: "Browse Jobs",
-                onTap: () {
-                  /* TODO */
-                },
-              ),
-              _drawerItem(
-                icon: Icons.folder_copy_outlined,
-                text: "My Tasks",
-                onTap: () {
-                  /* TODO */
-                },
-              ),
-              _drawerItem(
-                icon: Icons.message_outlined,
-                text: "Messages",
-                onTap: () {
-                  /* TODO */
-                },
-              ),
-
-              SizedBox(height: 20.h),
-
-              // Account Section
-              Text(
-                "ACCOUNT",
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: AllColor.grey,
-                ),
-              ),
-
-              _drawerItem(
-                icon: Icons.person_outline,
-                text: "Profile",
-                onTap: () {
-                  /* TODO */
-                },
-              ),
-              _drawerItem(
-                icon: Icons.notifications_none,
-                text: "Notifications",
-                onTap: () {
-                  /* TODO */
-                },
-              ),
-              _drawerItem(
-                icon: Icons.credit_card_outlined,
-                text: "Payments",
-                onTap: () {
-                  /* TODO */
-                },
-              ),
-              _drawerItem(
-                icon: Icons.help_outline,
-                text: "Help & Support",
-                onTap: () {
-                  /* TODO */
-                },
-              ),
-
-              Divider(),
-
-              // Sign out
-              _drawerItem(
-                icon: Icons.logout,
-                text: "Sign out",
-                onTap: () {
-                  /* TODO: logout */
-                },
-                color: AllColor.red,
-              ),
-
-              Divider(),
-              SizedBox(height: 30),
-              // Version Text
-              Center(
-                child: Text(
-                  "Workpleis v1.0.0",
-                  style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
+  }
+  Future <void> logOut(BuildContext context)async{
+    SharedPreferences _prefe = await SharedPreferences.getInstance();
+    _prefe.clear();
+    context.push(LoginScreen.routeName);
   }
 }
 
@@ -414,14 +391,14 @@ Widget _statsCard(String value, String label, IconData icon) {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: AllColor.green, size: 22.sp),
+            Icon(icon, color: AllColor.logoColor, size: 22.sp),
             SizedBox(width: 4.w),
             Text(
               value,
               style: TextStyle(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.bold,
-                color: AllColor.green,
+                color: AllColor.logoColor,
               ),
             ),
           ],
@@ -436,219 +413,11 @@ Widget _statsCard(String value, String label, IconData icon) {
   );
 }
 
-class FilterChips extends StatefulWidget {
-  const FilterChips({super.key});
 
-  @override
-  State<FilterChips> createState() => _FilterChipsState();
-}
 
-class CustomJobTest extends StatelessWidget {
-  const CustomJobTest({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          "Recent Job Posts",
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w900,
-            color: AllColor.black87,
-          ),
-        ),
 
-        InkWell(
-          onTap: () {},
-          child: Text(
-            "See All",
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w800,
-              color: AllColor.black87,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
-    );
-  }
-}
 
-class _FilterChipsState extends State<FilterChips> {
-  int selectedIndex = 0;
-
-  Widget _filterChip(String text, int index) {
-    final bool selected = index == selectedIndex;
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedIndex = index;
-        });
-      },
-      child: Container(
-        margin: EdgeInsets.only(right: 8.w),
-        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
-        decoration: BoxDecoration(
-          color: selected ? AllColor.green : AllColor.white,
-          borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(color: AllColor.green),
-        ),
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(fontSize: 12.sp, color: AllColor.black),
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final filters = ["All", "Nearby", "Urgent", "High Budget", "Remote"];
-
-    return SizedBox(
-      height: 40.h,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: filters.length,
-        itemBuilder: (context, index) {
-          return _filterChip(filters[index], index);
-        },
-      ),
-    );
-  }
-}
-
-Widget _jobCard({
-  required String category,
-  required String time,
-  required IconData icon,
-  required String title,
-  required String description,
-  required String budget,
-}) {
-  return Container(
-    padding: EdgeInsets.all(14.w),
-    decoration: BoxDecoration(
-      border: Border.all(color: AllColor.green),
-      borderRadius: BorderRadius.circular(12.r),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Category + Time
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _tag(category),
-
-            Row(
-              children: [
-                Icon(icon, size: 11.sp, color: AllColor.black87),
-                SizedBox(width: 4.w),
-                Text(
-                  time,
-                  style: TextStyle(fontSize: 11.sp, color: AllColor.black87),
-                ),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(height: 8.h),
-
-        // Title
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 15.sp,
-            fontWeight: FontWeight.bold,
-            color: AllColor.black,
-          ),
-        ),
-        SizedBox(height: 6.h),
-
-        // Description
-        Text(
-          description,
-          style: TextStyle(fontSize: 12.sp, color: AllColor.black87),
-        ),
-        SizedBox(height: 8.h),
-
-        // Budget
-        Text(
-          budget,
-          style: TextStyle(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w600,
-            color: AllColor.black,
-          ),
-        ),
-        SizedBox(height: 15.h),
-
-        // Bottom Info + Apply Button
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Icon(Icons.location_on, size: 14.sp, color: AllColor.black),
-                SizedBox(width: 4.w),
-                Text(
-                  "United States",
-                  style: TextStyle(fontSize: 11.sp, color: AllColor.black87),
-                ),
-                SizedBox(width: 8.w),
-                Icon(
-                  Icons.home_work_outlined,
-                  size: 14.sp,
-                  color: AllColor.black,
-                ),
-                SizedBox(width: 4.w),
-                Text(
-                  "Remote",
-                  style: TextStyle(fontSize: 11.sp, color: AllColor.black87),
-                ),
-                SizedBox(width: 8.w),
-                Icon(Icons.verified, size: 14.sp, color: AllColor.black),
-                SizedBox(width: 4.w),
-                Text(
-                  "Payment verified",
-                  style: TextStyle(fontSize: 11.sp, color: AllColor.black87),
-                ),
-              ],
-            ),
-            Text(
-              "12 applied",
-              style: TextStyle(fontSize: 11.sp, color: AllColor.black87),
-            ),
-          ],
-        ),
-        SizedBox(height: 15.h),
-        // Apply Button
-        GlobalCustomButton(text: "Apply Now ", onPressed: () {}),
-      ],
-    ),
-  );
-}
-
-Widget _tag(String text) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-    decoration: BoxDecoration(
-      color: AllColor.white,
-      borderRadius: BorderRadius.circular(8.r),
-      border: Border.all(color: AllColor.green, width: 2),
-    ),
-    child: Text(
-      text,
-      style: TextStyle(fontSize: 11.sp, color: AllColor.black),
-    ),
-  );
-}
 
 class CustomJobButtons extends StatelessWidget {
   const CustomJobButtons({super.key});
@@ -660,31 +429,34 @@ class CustomJobButtons extends StatelessWidget {
         // ==== Post a Job ====
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 40.h),
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 14.h),
-            decoration: BoxDecoration(
-              color: AllColor.black, // Background color
-              borderRadius: BorderRadius.circular(40.r), // rounded shape
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.add_circle_outline,
-                  color: AllColor.white,
-                  size: 18.sp,
-                ),
-                SizedBox(width: 6.w),
-                Text(
-                  "Post a Job",
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w600,
-                    color: AllColor.white,
+          child: GestureDetector(
+            onTap: (){context.push(PostJobScreen.routeName);},
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 14.h),
+              decoration: BoxDecoration(
+                color: AllColor.allcolor, // Background color
+                borderRadius: BorderRadius.circular(40.r), // rounded shape
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_circle_outline,
+                    color: AllColor.black,
+                    size: 18.sp,
                   ),
-                ),
-              ],
+                  SizedBox(width: 6.w),
+                  Text(
+                    "Post a Job",
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w600,
+                      color: AllColor.black
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -700,7 +472,7 @@ class CustomJobButtons extends StatelessWidget {
             decoration: BoxDecoration(
               color: AllColor.white,
               borderRadius: BorderRadius.circular(40.r),
-              border: Border.all(color: AllColor.green, width: 1.2), // outline
+              border: Border.all(color: AllColor.logoColor, width: 1.2), // outline
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -724,60 +496,7 @@ class CustomJobButtons extends StatelessWidget {
   }
 }
 
-class SearchBoxBottom extends StatelessWidget {
-  const SearchBoxBottom({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(12.w), // SafeArea + padding
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12.w),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(color: AllColor.green),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.search, color: AllColor.grey),
-                  SizedBox(width: 8.w),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: "What do you need done today",
-                        hintStyle: TextStyle(fontSize: 13.sp),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                  Icon(Icons.tune, color: AllColor.grey),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(width: 10.w),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: 40.h,
-              width: 40.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: AllColor.black,
-              ),
-              child: Center(
-                child: Icon(Icons.filter_alt, size: 25, color: AllColor.white),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class CustomHowITWorkTest extends StatelessWidget {
   const CustomHowITWorkTest({super.key});
@@ -796,7 +515,7 @@ class CustomHowITWorkTest extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w900,
-                color: AllColor.black,
+                color: AllColor.white,
               ),
               textAlign: TextAlign.center,
             ),
