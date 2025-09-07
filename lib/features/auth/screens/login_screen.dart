@@ -12,6 +12,9 @@ import 'package:workpleis/features/home/screen/home_screen.dart';
 
 import '../../nav_bar/screen/bottom_nav_bar.dart';
 import '../logic/login_reverpod.dart';
+import '../widgets/custom_google_button.dart';
+import '../widgets/outline_border.dart';
+import 'base_gradient_scaffold.dart';
 
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -37,113 +40,73 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 16.h),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                upper_text(),
-
-                // ── Email
-                _fieldLabel('Email'),
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: emailValidator,
-                  decoration: const InputDecoration(hintText: 'Enter your Email'),
-                ),
-                SizedBox(height: 16.h),
-
-                // ── Password
-                _fieldLabel('Password'),
-                TextFormField(
-                  controller: _passController,
-                  obscureText: _obscure,
-                  validator: passwordValidator,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your Password',
-                    suffixIcon: IconButton(
-                      onPressed: () => setState(() => _obscure = !_obscure),
-                      icon: Icon(
-                        _obscure ? Icons.visibility_off : Icons.visibility,
+    return BaseGradientScaffold(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 16.h),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  upper_text(),
+        
+                  // ── Email
+                  _fieldLabel('Email'),
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: emailValidator,
+                    decoration: const InputDecoration(hintText: 'Enter your Email').copyWith(
+                      enabledBorder: CustomOutlineBorder.border(),
+                      focusedBorder: CustomOutlineBorder.border(),
+                  )),
+                  SizedBox(height: 16.h),
+        
+                  // ── Password
+                  _fieldLabel('Password'),
+                  TextFormField(
+                    controller: _passController,
+                    obscureText: _obscure,
+                    validator: passwordValidator,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your Password',
+                      suffixIcon: IconButton(
+                        onPressed: () => setState(() => _obscure = !_obscure),
+                        icon: Icon(
+                          _obscure ? Icons.visibility_off : Icons.visibility,
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-
-                // ── Forgot password
-                SizedBox(height: 8.h),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      foregroundColor: AllColor.grey,
-                      padding: EdgeInsets.symmetric(horizontal: 6.w),
-                      minimumSize: Size(10.w, 28.h),
-                    ),
-                    child: Text(
-                      'Forgot password?',
-                      style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 6.h),
-
-                // ── Sign In button
-              SizedBox(
-                width: double.infinity,
-                height: 46.h,
-                child: ElevatedButton(
-                  onPressed: ref.watch(loginLoadingProvider) ? null : _submit, // disable হলে null
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AllColor.black,
-                    foregroundColor: AllColor.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: ref.watch(loginLoadingProvider)
-                      ? SizedBox(
-                    width: 20.w,
-                    height: 20.h,
-                    child: const CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Colors.white,
-                    ),
-                  )
-                      : Text('Sign In', style: TextStyle(fontSize: 14.sp)),
-                ),
-              ),
-                SizedBox(height: 18.h),
-
-                // ── Divider with text
-                Row(
-                  children: [
-                    Expanded(child: Container(height: 1, color: AllColor.grey.withOpacity(.2))),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    ).copyWith(
+                      enabledBorder: CustomOutlineBorder.border(),
+                      focusedBorder: CustomOutlineBorder.border(),
+                  )),
+        
+                  // ── Forgot password
+                  SizedBox(height: 8.h),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                        foregroundColor: AllColor.grey,
+                        padding: EdgeInsets.symmetric(horizontal: 6.w),
+                        minimumSize: Size(10.w, 28.h),
+                      ),
                       child: Text(
-                        'OR CONTINUW WITH',
-                        style: TextStyle(fontSize: 11.sp, color: AllColor.grey),
+                        'Forgot password?',
+                        style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
                       ),
                     ),
-                    Expanded(child: Container(height: 1, color: AllColor.grey.withOpacity(.2))),
-                  ],
-                ),
-                SizedBox(height: 14.h),
-
-                // ── Google button
+                  ),
+                  SizedBox(height: 6.h),
+        
+                  // ── Sign In button
                 SizedBox(
                   width: double.infinity,
                   height: 46.h,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: ref.watch(loginLoadingProvider) ? null : _submit, // disable হলে null
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AllColor.black,
                       foregroundColor: AllColor.white,
@@ -152,57 +115,40 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       elevation: 0,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          ImagePath.google,
-                          height: 18.h,
-                        ),
-                        SizedBox(width: 8.w),
-                        Text('Continue with Google', style: TextStyle(fontSize: 14.sp)),
-                      ],
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: 22.h),
-
-                // ── Sign up link
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account? ",
-                      style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
-                    ),
-                    GestureDetector(
-                      onTap: () => context.push(RegisterScreen.routeName),
-                      child: Text(
-                        'Sign up',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: AllColor.black,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    child: ref.watch(loginLoadingProvider)
+                        ? SizedBox(
+                      width: 20.w,
+                      height: 20.h,
+                      child: const CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
                       ),
                     )
-                  ],
+                        : Text('Sign In', style: TextStyle(fontSize: 14.sp)),
+                  ),
                 ),
-                SizedBox(height: 18.h),
-              ],
+        
+                  // ── Google button
+                  CustomGmailButton(onTop: () { context.push(RegisterScreen.routeName);}, taxt: 'Sign up',),
+        
+        
+        
+                  // ── Sign up link
+        
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      )
+    ;
   }
 
   Column upper_text() {
     return Column(
       children: [
         SizedBox(height: 20.h),
-        Image.asset(ImagePath.logoText, height: 34.h),
+        Image.asset(ImagePath.pngLogo, height: 110.h),
         SizedBox(height: 18.h),
         Text(
           'Welcome back',
