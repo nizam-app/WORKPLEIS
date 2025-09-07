@@ -85,65 +85,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         
                   // ── Forgot password
                   SizedBox(height: 8.h),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        foregroundColor: AllColor.grey,
-                        padding: EdgeInsets.symmetric(horizontal: 6.w),
-                        minimumSize: Size(10.w, 28.h),
-                      ),
 
-                    ),
-                  ),
-                ),
+
 
                 // ── Forgot password
-                SizedBox(height: 8.h),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {context.push(ForgotScreen.routeName);},
-                    style: TextButton.styleFrom(
-                      foregroundColor: AllColor.grey,
-                      padding: EdgeInsets.symmetric(horizontal: 6.w),
-                      minimumSize: Size(10.w, 28.h),
-                    ),
-                    child: Text(
-                      'Forgot password?',
-                      style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 6.h),
-
-                // ── Sign In button
-              SizedBox(
-                width: double.infinity,
-                height: 46.h,
-                child: ElevatedButton(
-                  onPressed: ref.watch(loginLoadingProvider) ? null : _submit, // disable হলে null
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AllColor.black,
-                    foregroundColor: AllColor.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: ref.watch(loginLoadingProvider)
-                      ? SizedBox(
-                    width: 20.w,
-                    height: 20.h,
-                    child: const CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Colors.white,
-                    ),
-                  )
-                      : Text('Sign In', style: TextStyle(fontSize: 14.sp)),
-                ),
-              ),
                 SizedBox(height: 18.h),
 
                 // ── Divider with text
@@ -157,10 +102,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         'Forgot password?',
                         style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
                       ),
-                    ),
+                    ),]
                   ),
                   SizedBox(height: 6.h),
-        
+
                   // ── Sign In button
                 SizedBox(
                   width: double.infinity,
@@ -187,11 +132,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         : Text('Sign In', style: TextStyle(fontSize: 14.sp)),
                   ),
                 ),
-        
+
                   // ── Google button
                   CustomGmailButton(onTop: () { context.push(RegisterScreen.routeName);}, taxt: 'Sign up',),
-        
-        
+
+
         
                   // ── Sign up link
         
