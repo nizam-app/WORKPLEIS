@@ -330,6 +330,14 @@ class CustomDrawer extends ConsumerWidget {
                           text: "Browse Jobs",
                           onTap: () {},
                         ),
+                        if (role == "JOB_SEEKER")
+                          _drawerItem(
+                            icon: Icons.assignment_outlined,
+                            text: "My Offers",
+                            onTap: () {
+
+                            },
+                          ),
 
                         // 🔹 Role Based Items
                         if (role == "CLIENT")
@@ -340,14 +348,7 @@ class CustomDrawer extends ConsumerWidget {
                               // context.push(MyTasksScreen.routeName);
                             },
                           ),
-                        if (role == "JOB_SEEKER")
-                          _drawerItem(
-                            icon: Icons.assignment_outlined,
-                            text: "My Offers",
-                            onTap: () {
-                              // context.push(MyOffersScreen.routeName);
-                            },
-                          ),
+                        
 
                         _drawerItem(
                           icon: Icons.message_outlined,
