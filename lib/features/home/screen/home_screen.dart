@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workpleis/core/constants/image_control/image_path.dart';
+import 'package:workpleis/features/Payment/screen/payment_methods_screen.dart';
+import 'package:workpleis/features/account/screen/account_screen.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:workpleis/features/home/screen/post_a_job.dart';
+import 'package:workpleis/features/message/screen/message_screen.dart';
+import 'package:workpleis/features/my_task/screen/my_task_screen.dart';
+import 'package:workpleis/features/notification/screen/notificaition_screen.dart';
 import 'package:workpleis/features/security/screen/security_faq_screen.dart';
 import 'package:workpleis/features/security/screen/security_screen.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
 import '../../../core/constants/color_control/all_color.dart';
+import '../../../core/widget/global_role_check.dart';
 import '../widget/custom_category_type.dart';
 import '../widget/custom_filter_chips.dart';
 import '../widget/custom_job_posts.dart';
@@ -36,13 +43,16 @@ class HomeScreen extends StatelessWidget {
                 CustomJobButtons(),
                 SizedBox(height: 20),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _statsCard("50k+", "Posted Jobs", Icons.trending_up),
-                    _statsCard("25k+", "Users", Icons.people),
-                    _statsCard("4.8", "Users", Icons.star),
-                  ],
+                Padding(
+                  padding:  EdgeInsets.all(8.0.r),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _statsCard("50k+", "Posted Jobs", Icons.trending_up),
+                      _statsCard("25k+", "Users", Icons.people),
+                      _statsCard("4.8", "Users", Icons.star),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 15.h,)
               ],
@@ -139,7 +149,7 @@ class CustomTopBar extends StatelessWidget implements
                 clipBehavior: Clip.none,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {context.push(NotificationsScreen.routeName);},
                     icon: const Icon(
                       Icons.notifications_none,
                       color: AllColor.white,
@@ -160,7 +170,7 @@ class CustomTopBar extends StatelessWidget implements
                 ],
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {context.push(MessageScreen.routeName);},
                 icon: const Icon(
                   Icons.chat_bubble_outline,
                   color: AllColor.white,
@@ -244,8 +254,7 @@ class CustomHomeTest extends StatelessWidget {
     );
   }
 }
-
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends ConsumerWidget {
   const CustomDrawer({super.key});
 
   Widget _drawerItem({
@@ -269,17 +278,17 @@ class CustomDrawer extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userAsync = ref.watch(userPrefsProvider);
+
     return Drawer(
-      shadowColor: Colors.white,
       child: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 🔹 Header Section with Background Color
+            // 🔹 Header
             Container(
               width: double.infinity,
-              color: AllColor.appBar, // <-- ekhane background color set korlam
+              color: AllColor.appBar,
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -297,71 +306,137 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
 
-            // 🔹 Drawer content scrollable rakhlam
+            // 🔹 Drawer Content
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-                child: ListView(
-                  children: [
-                    SizedBox(height: 20.h),
+                child: userAsync.when(
+                  data: (user) {
+                    final role = user["role"];
 
-                    // Main Section
-                    Text(
-                      "Main",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: AllColor.grey,
-                      ),
-                    ),
-                    _drawerItem(icon: Icons.home, text: "Home", onTap: () {}),
-                    _drawerItem(icon: Icons.search, text: "Browse Jobs", onTap: () {}),
-                    _drawerItem(icon: Icons.folder_copy_outlined, text: "My Tasks", onTap: () {}),
-                    _drawerItem(icon: Icons.message_outlined, text: "Messages", onTap: () {}),
+                    return ListView(
+                      children: [
+                        SizedBox(height: 20.h),
+                        Text(
+                          "MAIN",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                            color: AllColor.grey,
+                          ),
+                        ),
+                        _drawerItem(
+                          icon: Icons.search,
+                          text: "Browse Jobs",
+                          onTap: () {},
+                        ),
 
-                    SizedBox(height: 20.h),
+                        // 🔹 Role Based Items
+                        if (role == "CLIENT")
+                          _drawerItem(
+                            icon: Icons.folder_copy_outlined,
+                            text: "My Tasks",
+                            onTap: () {  context.push(MyTaskScreen.routeName);
+                              // context.push(MyTasksScreen.routeName);
+                            },
+                          ),
+                        if (role == "JOB_SEEKER")
+                          _drawerItem(
+                            icon: Icons.assignment_outlined,
+                            text: "My Offers",
+                            onTap: () {
+                              // context.push(MyOffersScreen.routeName);
+                            },
+                          ),
 
-                    // Account Section
-                    Text(
-                      "ACCOUNT",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: AllColor.grey,
-                      ),
-                    ),
-                    _drawerItem(icon: Icons.person_outline, text: "Profile", onTap: () {}),
-                    _drawerItem(icon: Icons.notifications_none, text: "Notifications", onTap: () {}),
-                    _drawerItem(icon: Icons.credit_card_outlined, text: "Payments", onTap: () {}),
-                    _drawerItem(icon: Icons.verified_user_outlined, text: "Verification", onTap: () {context.push(VerificationScreen.routeName);}),
-                    _drawerItem(icon: Icons.security,
-                        text: "security",
-                        onTap: () {context.push(
-                            SecurityScreen.routeName);}),
-                    _drawerItem(icon: Icons.help_outline,
-                        text: "Help & Support",
-                        onTap: () {context.push(
-                            SecurityFAQScreen.routeName);}),
+                        _drawerItem(
+                          icon: Icons.message_outlined,
+                          text: "Messages",
+                          onTap: () {
+                            context.push(MessageScreen.routeName);
+                          },
+                        ),
 
-                    Divider(),
+                        SizedBox(height: 20.h),
+                        Text(
+                          "ACCOUNT",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                            color: AllColor.grey,
+                          ),
+                        ),
+                        _drawerItem(
+                          icon: Icons.person_outline,
+                          text: "Profile",
+                          onTap: () {
+                            context.push(AccountOverviewScreen.routeName);
+                          },
+                        ),
+                        _drawerItem(
+                          icon: Icons.notifications_none,
+                          text: "Notifications",
+                          onTap: () {
+                            context.push(NotificationsScreen.routeName);
+                          },
+                        ),
+                        _drawerItem(
+                          icon: Icons.credit_card_outlined,
+                          text: "Payments",
+                          onTap: () {
+                            context.push(PaymentMethodsScreen.routeName);
+                          },
+                        ),
+                        _drawerItem(
+                          icon: Icons.verified_user_outlined,
+                          text: "Verification",
+                          onTap: () {
+                            context.push(VerificationScreen.routeName);
+                          },
+                        ),
+                        _drawerItem(
+                          icon: Icons.security,
+                          text: "Security",
+                          onTap: () {
+                            context.push(SecurityScreen.routeName);
+                          },
+                        ),
+                        _drawerItem(
+                          icon: Icons.help_outline,
+                          text: "Help & Support",
+                          onTap: () {
+                            context.push(SecurityFAQScreen.routeName);
+                          },
+                        ),
 
-                    _drawerItem(
-                      icon: Icons.logout,
-                      text: "Sign out",
-                      onTap: () {logOut(context);},
-                      color: AllColor.red,
-                    ),
-
-                    Divider(),
-                    SizedBox(height: 30.h),
-
-                    Center(
-                      child: Text(
-                        "Workpleis v1.0.0",
-                        style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
-                      ),
-                    ),
-                  ],
+                        Divider(),
+                        _drawerItem(
+                          icon: Icons.logout,
+                          text: "Sign out",
+                          onTap: () async {
+                            await ref
+                                .read(userPrefsProvider.notifier)
+                                .clearUser();
+                            context.go(LoginScreen.routeName);
+                          },
+                          color: AllColor.red,
+                        ),
+                        Divider(),
+                        SizedBox(height: 30.h),
+                        Center(
+                          child: Text(
+                            "Workpleis v1.0.0",
+                            style:
+                            TextStyle(fontSize: 12.sp, color: AllColor.grey),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  loading: () =>
+                  const Center(child: CircularProgressIndicator()),
+                  error: (e, _) =>
+                      Center(child: Text("Error loading user data")),
                 ),
               ),
             ),
@@ -370,12 +445,9 @@ class CustomDrawer extends StatelessWidget {
       ),
     );
   }
-  Future <void> logOut(BuildContext context)async{
-    SharedPreferences _prefe = await SharedPreferences.getInstance();
-    _prefe.clear();
-    context.push(LoginScreen.routeName);
-  }
 }
+
+
 
 Widget _statsCard(String value, String label, IconData icon) {
   return Container(

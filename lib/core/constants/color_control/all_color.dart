@@ -15,6 +15,7 @@ class AllColor {
   static final Color grey100 = Colors.grey.shade100;
   static final Color grey300 = Colors.grey.shade300;
   static final Color grey400 = Colors.grey.shade400;
+  static final Color grey600 = Colors.grey.shade600;
   static final Color grey700 = Colors.grey.shade700;
 
   static const Color black = Colors.black;
@@ -25,6 +26,7 @@ class AllColor {
 
   static final Color green = Colors.green;
   static const Color blue = Colors.blue;
+  static final Color blue50 = Colors.blue.shade50;
   static const Color lime = Colors.lime;
   static const Color red = Colors.red;
 

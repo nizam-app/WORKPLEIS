@@ -7,6 +7,7 @@ import 'package:workpleis/core/widget/global_snack_bar.dart';
 import 'package:workpleis/features/auth/logic/email_valitedor.dart';
 import 'package:workpleis/core/constants/image_control/image_path.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';
+import 'package:workpleis/features/auth/screens/forgot_screen.dart';
 import 'package:workpleis/features/auth/screens/register_screen.dart';
 import 'package:workpleis/features/home/screen/home_screen.dart';
 
@@ -80,7 +81,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {context.push(ForgotScreen.routeName);},
                     style: TextButton.styleFrom(
                       foregroundColor: AllColor.grey,
                       padding: EdgeInsets.symmetric(horizontal: 6.w),

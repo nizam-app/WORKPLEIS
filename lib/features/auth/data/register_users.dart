@@ -13,7 +13,7 @@ Future<void> registerUsers({
   required String email,
   required String password,
   required String confirmPassword,
-  required String role, // 🔹 role যোগ হলো
+  required String role,
 }) async {
   final url = Uri.parse(AuthAPIController.register);
 
@@ -26,17 +26,34 @@ Future<void> registerUsers({
         "email": email,
         "password": password,
         "password_confirmation": confirmPassword,
-        "role": role, // 🔹 backend এ পাঠানো হলো
+        "role": role,
       }),
     );
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-     GlobalSnackBar.show(context, title: "Success", message: "User created successfully");
+    final data = jsonDecode(response.body);
+
+    if ( data["status"] == "Success") {
+      // ✅ Success case
+      GlobalSnackBar.show(
+        context,
+        title: "Success",
+        message: data["message"] ?? "User created successfully",
+      );
       context.push(LoginScreen.routeName);
     } else {
-     GlobalSnackBar.show(context, title: "Error", message: "Something went wrong", type: CustomSnackType.error);
+      GlobalSnackBar.show(
+        context,
+        title: "Error",
+        message: data["message"] ?? "Something went wrong",
+        type: CustomSnackType.error,
+      );
     }
   } catch (e) {
-    GlobalSnackBar.show(context, title: "Error", message: "Something went wrong", type: CustomSnackType.error);
+    GlobalSnackBar.show(
+      context,
+      title: "Error",
+      message: "Something went wrong",
+      type: CustomSnackType.error,
+    );
   }
 }

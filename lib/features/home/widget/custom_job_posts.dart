@@ -147,21 +147,21 @@ class JobListScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.location_on, size: 14.sp, color: AllColor.black),
+                    Icon(Icons.location_on, size: 12.sp, color: AllColor.black),
                     SizedBox(width: 4.w),
                     Text("United States",
-                        style: TextStyle(fontSize: 11.sp, color: AllColor.black87)),
+                        style: TextStyle(fontSize: 10.sp, color: AllColor.black87)),
                     SizedBox(width: 8.w),
                     Icon(Icons.home_work_outlined,
                         size: 14.sp, color: AllColor.black),
                     SizedBox(width: 4.w),
                     Text("Remote",
-                        style: TextStyle(fontSize: 11.sp, color: AllColor.black87)),
+                        style: TextStyle(fontSize: 10.sp, color: AllColor.black87)),
                     SizedBox(width: 8.w),
                     Icon(Icons.verified, size: 14.sp, color: AllColor.logoColor),
                     SizedBox(width: 4.w),
                     Text("Payment verified",
-                        style: TextStyle(fontSize: 11.sp, color: AllColor.black87)),
+                        style: TextStyle(fontSize: 10.sp, color: AllColor.black87)),
                   ],
                 ),
                 Text(

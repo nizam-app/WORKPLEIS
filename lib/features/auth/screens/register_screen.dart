@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/core/widget/global_snack_bar.dart';
 import 'package:workpleis/features/auth/logic/email_valitedor.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';
 import 'package:workpleis/features/auth/logic/textfromfield_revarpod.dart';
@@ -222,11 +224,7 @@ class RegisterScreen extends ConsumerWidget {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         if (role == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Please select a role"),
-                            ),
-                          );
+                          GlobalSnackBar.show(context, title: "Error", message: "Please Select a Role",type: CustomSnackType.error);
                           return;
                         }
                         registerUsers(
@@ -255,6 +253,27 @@ class RegisterScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: 10,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account? ",
+                      style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
+                    ),
+                    GestureDetector(
+                      onTap: () => context.push(LoginScreen.routeName),
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: AllColor.black,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
           ),
