@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/core/widget/global_snack_bar.dart';
 import 'package:workpleis/features/auth/logic/email_valitedor.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';
 import 'package:workpleis/features/auth/logic/textfromfield_revarpod.dart';
@@ -227,6 +228,7 @@ class RegisterScreen extends ConsumerWidget {
                           ),
                         ),
                       ),
+
                     ],
                   ),
                   SizedBox(height: 24.h),
@@ -253,6 +255,7 @@ class RegisterScreen extends ConsumerWidget {
                             confirmPassword: _confirmPassController.text.trim(),
                             role: role, // 🔹 Riverpod থেকে role পাঠানো হলো
                           );
+
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -271,10 +274,12 @@ class RegisterScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
+
         
                   CustomGmailButton(onTop: () { context.push(LoginScreen.routeName);}, taxt: 'Sign in',)
                 ],
               ),
+
             ),
           ),
         ),

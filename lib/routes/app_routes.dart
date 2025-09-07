@@ -11,10 +11,17 @@ import 'package:workpleis/features/message/screen/chat_screen.dart';
 import 'package:workpleis/features/message/screen/message_screen.dart';
 import 'package:workpleis/features/projects/screen/special_request_screen3.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
+import '../features/Payment/screen/payment_methods_screen.dart';
 import '../features/account/screen/account_screen.dart';
+import '../features/auth/screens/forgot_screen.dart';
+import '../features/auth/screens/new_password_screen.dart';
+import '../features/auth/screens/otp_screen.dart';
 import '../features/home/screen/post_a_job.dart';
+import '../features/my_task/screen/applicants_screen.dart';
+import '../features/my_task/screen/my_task_screen.dart';
 import '../features/nav_bar/screen/bottom_nav_bar.dart';
-import '../features/notification/screen/notification_screen.dart';
+import '../features/notification/screen/notificaition_screen.dart';
+import '../features/notification/screen/notification_setting_screen.dart';
 import '../features/projects/screen/project_screen.dart';
 import '../features/projects/screen/recieved_request.dart';
 import '../features/projects/screen/request_tracker.dart';
@@ -101,6 +108,18 @@ GoRoute(
         path: SecurityFAQScreen.routeName,
         name: SecurityFAQScreen.routeName,
         builder: (context, state) => const SecurityFAQScreen(),
+      ),GoRoute(
+        path: ForgotScreen.routeName,
+        name: ForgotScreen.routeName,
+        builder: (context, state) => const ForgotScreen(),
+      ),GoRoute(
+        path: OtpScreen.routeName,
+        name: OtpScreen.routeName,
+        builder: (context, state) => const OtpScreen(),
+      ),GoRoute(
+        path: NewPasswordScreen.routeName,
+        name: NewPasswordScreen.routeName,
+        builder: (context, state) => const NewPasswordScreen(),
       ),
 
       /// 🚀 ShellRoute with BottomNavBar
@@ -149,9 +168,9 @@ GoRoute(
             name: ProjectScreen.routeName,
             builder: (context, state) => const ProjectScreen(),
           ), GoRoute(
-            path: NotificationScreen.routeName,
-            name: NotificationScreen.routeName,
-            builder: (context, state) => const NotificationScreen(),
+            path: NotificationSettingScreen.routeName,
+            name: NotificationSettingScreen.routeName,
+            builder: (context, state) => const NotificationSettingScreen(),
           ), GoRoute(
             path: SecurityContactScreen.routeName,
             name: SecurityContactScreen.routeName,
@@ -160,6 +179,22 @@ GoRoute(
             path: SecurityGuideScreen.routeName,
             name: SecurityGuideScreen.routeName,
             builder: (context, state) => const SecurityGuideScreen(),
+          ), GoRoute(
+            path: PaymentMethodsScreen.routeName,
+            name: PaymentMethodsScreen.routeName,
+            builder: (context, state) => const PaymentMethodsScreen(),
+          ),GoRoute(
+            path: NotificationsScreen.routeName,
+            name: NotificationsScreen.routeName,
+            builder: (context, state) =>  NotificationsScreen(),
+          ),GoRoute(
+            path: MyTaskScreen.routeName,
+            name: MyTaskScreen.routeName,
+            builder: (context, state) =>  MyTaskScreen(),
+          ),GoRoute(
+            path: ApplicantsScreen.routeName,
+            name: ApplicantsScreen.routeName,
+            builder: (context, state) =>  ApplicantsScreen(),
           ),
         ],
       ),

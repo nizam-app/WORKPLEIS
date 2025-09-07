@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/core/widget/global_app_bar.dart';
 
-class NotificationScreen extends StatefulWidget {
-  const NotificationScreen({super.key});
-  static const routeName = '/notificationScreen';
+class NotificationSettingScreen extends StatefulWidget {
+  const NotificationSettingScreen({super.key});
+  static const routeName = '/notificationSettingScreen';
 
   @override
-  State<NotificationScreen> createState() => _NotificationScreenState();
+  State<NotificationSettingScreen> createState() => _NotificationSettingScreenState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> {
+class _NotificationSettingScreenState extends State<NotificationSettingScreen> {
   bool emailNotification = true;
   bool taskUpdates = false;
   bool messageNotification = false;
@@ -19,7 +20,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AllColor.white,
+      appBar: GlobalAppbar(text: "Notification"),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
