@@ -1,8 +1,14 @@
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:workpleis/core/widget/global_logo.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
 import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_logo.dart';
+import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
+import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
 
 class OnboardingScreen02 extends StatelessWidget {
   const OnboardingScreen02({super.key});
@@ -17,11 +23,25 @@ class OnboardingScreen02 extends StatelessWidget {
       children: [
         SizedBox(height: 10.h,),
         CustomOnboardingUpperLogo(),
-        SizedBox(height: 50.h,),
-        Image.asset("assets/images/Onboardin02.png", width: double.infinity,),
+        SizedBox(height: 80.h,),
+        Image.asset("assets/images/Onboardin02.png",
+          width: double.infinity,),
+        Center(
+          child: CustomPageIndicator(
+            currentIndex: 0, // এখন কোন index active
+          ),
+        ),
         SizedBox(height: 30.h,),
         buildColumn(theme),
-        
+        Spacer(),
+        Onboarding02Bottonbar(
+          onLogin: () {},
+          onSignup: () {},
+          onTapTerms: () {},
+          onTapGuidelines: () {},
+          onTapPrivacy: () {},
+        )
+
 
       ],
     )));
@@ -39,3 +59,161 @@ class OnboardingScreen02 extends StatelessWidget {
       );
   }
 }
+
+class Onboarding02Bottonbar extends ConsumerStatefulWidget {
+  const Onboarding02Bottonbar({
+    super.key,
+    this.onLogin,
+    this.onSignup,
+    this.onTapTerms,
+    this.onTapGuidelines,
+    this.onTapPrivacy,
+  });
+
+  final VoidCallback? onLogin;
+  final VoidCallback? onSignup;
+  final VoidCallback? onTapTerms;
+  final VoidCallback? onTapGuidelines;
+  final VoidCallback? onTapPrivacy;
+
+  @override
+  ConsumerState<Onboarding02Bottonbar> createState() =>
+      _Onboarding02BottonbarState();
+}
+
+enum AuthTab { login, signup }
+final authTabProvider = StateProvider<AuthTab?>((ref) => null);
+
+class _Onboarding02BottonbarState
+    extends ConsumerState<Onboarding02Bottonbar> {
+  late final TapGestureRecognizer _termsTap;
+  late final TapGestureRecognizer _guidelinesTap;
+  late final TapGestureRecognizer _privacyTap;
+
+  @override
+  void initState() {
+    super.initState();
+    _termsTap = TapGestureRecognizer()..onTap = widget.onTapTerms;
+    _guidelinesTap = TapGestureRecognizer()..onTap = widget.onTapGuidelines;
+    _privacyTap = TapGestureRecognizer()..onTap = widget.onTapPrivacy;
+  }
+
+  @override
+  void dispose() {
+    _termsTap.dispose();
+    _guidelinesTap.dispose();
+    _privacyTap.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final selected = ref.watch(authTabProvider);
+
+    return Container(
+      width: double.infinity,
+      height: 180.h,
+      decoration: BoxDecoration(
+        color: AllColor.primary,
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(24.r), // 👈 সরাসরি বসানো
+        ),
+      ),
+      padding: EdgeInsets.fromLTRB(
+        20.w, // horizontalPadding
+        25.h, // topPadding
+        20.w,
+        14.h, // bottomPadding
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+
+          Row(
+            children: [
+              Expanded(
+                child: CustomPillButton(
+                  label: "Log in",
+                  isSelected: selected == AuthTab.login,
+                  onPressed: () {
+                    ref.read(authTabProvider.notifier).state = AuthTab.login;
+                    widget.onLogin?.call();
+                  },
+                ),
+              ),
+              SizedBox(width: 16.w), // buttonSpacing
+              Expanded(
+                child: CustomPillButton(
+                  label: "Sign up",
+                  isSelected: selected == AuthTab.signup,
+                  onPressed: () {
+                    ref.read(authTabProvider.notifier).state = AuthTab.signup;
+                    widget.onSignup?.call();
+                    context.push(OnboardingScreen03.routeName);
+                    },
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 25.h),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  height: 1.35,
+                  color: AllColor.black.withOpacity(0.75),
+                  fontWeight: FontWeight.w400,
+                ),
+                children: [
+                  const TextSpan(
+                    text: 'By signing up, I agree to Workpleis ',
+                  ),
+                  TextSpan(
+                    text: 'Terms & Conditions',
+                    style: const TextStyle(
+                      color: AllColor.black,
+                      fontWeight: FontWeight.w700,
+                      decoration: TextDecoration.underline,
+                      decorationThickness: 1.1,
+                    ),
+                    recognizer: _termsTap,
+                  ),
+                  const TextSpan(text: ', & '),
+                  TextSpan(
+                    text: 'Community Guidelines',
+                    style: const TextStyle(
+                      color: AllColor.black,
+                      fontWeight: FontWeight.w700,
+                      decoration: TextDecoration.underline,
+                      decorationThickness: 1.1,
+                    ),
+                    recognizer: _guidelinesTap,
+                  ),
+                  const TextSpan(text: '. '),
+                  TextSpan(
+                    text: 'Privacy Policy',
+                    style: const TextStyle(
+                      color: AllColor.black,
+                      fontWeight: FontWeight.w700,
+                      decoration: TextDecoration.underline,
+                      decorationThickness: 1.1,
+                    ),
+                    recognizer: _privacyTap,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 12.h + MediaQuery.paddingOf(context).bottom),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
+/* Example color class — replace with your own */

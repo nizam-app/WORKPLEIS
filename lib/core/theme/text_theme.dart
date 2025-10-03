@@ -28,11 +28,13 @@ TextTheme get textTheme {
         fontSize: 30,
         fontWeight: FontWeight.w900,
         fontFamily: "bodyFont",
+        color: AllColor.black
       ),
       bodyMedium: TextStyle(
           fontSize: 14,
           fontWeight:
           FontWeight.w300,
-          fontFamily: "bodyFont"
+          fontFamily: "bodyFont",
+          color: AllColor.black
       ));
   }

@@ -33,5 +33,8 @@ ThemeData themeMood() {
     inputDecorationTheme: inputDecorationTheme, // apply globally
     useMaterial3: true,
     textTheme: textTheme,
+    scaffoldBackgroundColor: _themeController.isDarkMode.value
+        ? ThemeColorController.black
+        : AllColor.white,
   );
 }

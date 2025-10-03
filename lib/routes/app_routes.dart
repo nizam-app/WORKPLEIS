@@ -11,6 +11,7 @@ import 'package:workpleis/features/message/screen/chat_screen.dart';
 import 'package:workpleis/features/message/screen/message_screen.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
 import 'package:workpleis/features/projects/screen/special_request_screen3.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
 import '../features/Payment/screen/payment_methods_screen.dart';
@@ -66,6 +67,15 @@ class AppRouter {
         path: OnboardingScreen02.routeName,
         name: OnboardingScreen02.routeName,
         builder: (context, state) => const OnboardingScreen02(),
+      ),
+      GoRoute(
+        path: OnboardingScreen01.routeName,
+        name: OnboardingScreen01.routeName,
+        builder: (context, state) => const OnboardingScreen01(),
+      ), GoRoute(
+        path: OnboardingScreen03.routeName,
+        name: OnboardingScreen03.routeName,
+        builder: (context, state) => const OnboardingScreen03(),
       ),
       GoRoute(
         path: LoginScreen.routeName,
@@ -127,10 +137,6 @@ class AppRouter {
         path: NewPasswordScreen.routeName,
         name: NewPasswordScreen.routeName,
         builder: (context, state) => const NewPasswordScreen(),
-      ), GoRoute(
-        path: OnboardingScreen01.routeName,
-        name: OnboardingScreen01.routeName,
-        builder: (context, state) => const OnboardingScreen01(),
       ),
 
 

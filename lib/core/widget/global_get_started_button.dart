@@ -7,7 +7,7 @@ class GlobalGetStartedButton extends StatelessWidget {
     super.key, this.buttonName = "Get Started", required this.onTap,
   });
   final String buttonName;
-  final Function() onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
