@@ -17,15 +17,13 @@ class ForgotScreen  extends StatelessWidget {
         padding:  EdgeInsets.symmetric(horizontal: 20.w,vertical: 20.h),
         child: Column(
           children: [
-            SizedBox(height: 20.h),
-            Image.asset(ImagePath.logoText, height: 40.h),
-            SizedBox(height: 16.h),
-
-            Text("Forgot Password",
+            Spacer(),
+            Text("Enter Your Email",
                 style: TextStyle(
                     fontSize: 24.sp, fontWeight: FontWeight.bold)),
             SizedBox(height: 4.h),
-            Text("Please Enter your Email",
+            Text("We’ll send you a one time code to \n "
+                "verify your email.",
                 style: TextStyle(fontSize: 16.sp, color: Colors.grey)),
             SizedBox(height: 30.h),
 
@@ -47,6 +45,8 @@ class ForgotScreen  extends StatelessWidget {
             ),
             SizedBox(height: 25.h),
             GlobalButton(text: "Send OTP", onPressed: () {context.push(OtpScreen.routeName);})
+            ,
+            Spacer(),
           ],
         ),
       )),

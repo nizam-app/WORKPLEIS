@@ -15,7 +15,7 @@ import '../../nav_bar/screen/bottom_nav_bar.dart';
 import '../logic/login_reverpod.dart';
 import '../widgets/custom_google_button.dart';
 import '../widgets/outline_border.dart';
-import 'base_gradient_scaffold.dart';
+import '../../../core/screen/base_gradient_scaffold.dart';
 
 
 class LoginScreen extends ConsumerStatefulWidget {

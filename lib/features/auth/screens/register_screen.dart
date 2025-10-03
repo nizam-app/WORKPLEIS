@@ -8,7 +8,7 @@ import 'package:workpleis/core/widget/global_snack_bar.dart';
 import 'package:workpleis/features/auth/logic/email_valitedor.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';
 import 'package:workpleis/features/auth/logic/textfromfield_revarpod.dart';
-import 'package:workpleis/features/auth/screens/base_gradient_scaffold.dart';
+import 'package:workpleis/core/screen/base_gradient_scaffold.dart';
 
 import '../../../core/constants/image_control/image_path.dart';
 import '../data/register_users.dart';
