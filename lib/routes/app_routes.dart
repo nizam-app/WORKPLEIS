@@ -9,6 +9,7 @@ import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/home/screen/tasks_screen.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
 import 'package:workpleis/features/message/screen/message_screen.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 import 'package:workpleis/features/projects/screen/special_request_screen3.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
 import '../features/Payment/screen/payment_methods_screen.dart';
@@ -35,7 +36,7 @@ import '../features/security/screen/security_screen.dart';
 import 'error_screen.dart';
 
 class AppRouter {
-  static final String initial = SplashScreen.routeName;
+  static final String initial = OnboardingScreen01.routeName;
 
   static final GoRouter appRouter = GoRouter(
     initialLocation: initial,
@@ -96,7 +97,7 @@ class AppRouter {
         name: RequestTrackerScreen.routeName,
         builder: (context, state) => const RequestTrackerScreen(),
       ),
-GoRoute(
+       GoRoute(
         path: PostJobScreen.routeName,
         name: PostJobScreen.routeName,
         builder: (context, state) => const PostJobScreen(),
@@ -116,11 +117,17 @@ GoRoute(
         path: OtpScreen.routeName,
         name: OtpScreen.routeName,
         builder: (context, state) => const OtpScreen(),
-      ),GoRoute(
+      ),
+      GoRoute(
         path: NewPasswordScreen.routeName,
         name: NewPasswordScreen.routeName,
         builder: (context, state) => const NewPasswordScreen(),
+      ), GoRoute(
+        path: OnboardingScreen01.routeName,
+        name: OnboardingScreen01.routeName,
+        builder: (context, state) => const OnboardingScreen01(),
       ),
+
 
       /// 🚀 ShellRoute with BottomNavBar
       ShellRoute(

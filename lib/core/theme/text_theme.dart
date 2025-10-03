@@ -19,11 +19,17 @@ TextTheme get textTheme {
         fontWeight: FontWeight.w600,
 
     ),
-    headlineLarge: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w800, color: AllColor.black),
+    headlineSmall: TextStyle(fontSize: 10.sp,
+        fontWeight: FontWeight.w500,
+        color: AllColor.black,
+        fontFamily: "bodyFont"),
     headlineMedium: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400
     ),
+    headlineLarge: TextStyle(fontSize: 24.sp,
+        fontWeight: FontWeight.w800, color:
+        AllColor.black),
 
 
   );
