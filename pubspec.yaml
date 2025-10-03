@@ -95,7 +95,9 @@ flutter:
      - family: bodyFont
        fonts:
          - asset: assets/fonts/OpenSauceOne-Black.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+           weight: 900
+         - asset: assets/fonts/OpenSauceOne-Light.ttf
+           weight: 300
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

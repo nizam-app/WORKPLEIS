@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:workpleis/core/constants/color_control/all_color.dart';
+
+class GlobalGetStartedButton extends StatelessWidget {
+  const GlobalGetStartedButton({
+    super.key, this.buttonName = "Get Started", required this.onTap,
+  });
+  final String buttonName;
+  final Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+          // responsive width
+        height: 50.h,  // responsive height
+        decoration: BoxDecoration(
+          color:AllColor.white, // neon green background
+          borderRadius: BorderRadius.circular(12.r), // rounded corners
+        ),
+        child: Center(
+          child: Text(
+            buttonName,
+            style: TextStyle(
+              fontSize: 18.sp,   // responsive font
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
