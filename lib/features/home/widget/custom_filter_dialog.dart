@@ -83,8 +83,8 @@ class _CustomDialogState extends State<CustomDialog> {
                     padding:
                     EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
                     decoration: BoxDecoration(
-                      color: isSelected ? AllColor.logoColor : AllColor.white,
-                      border: Border.all(color: AllColor.logoColor),
+                      color: isSelected ? AllColor.borderColor : AllColor.white,
+                      border: Border.all(color: AllColor.borderColor),
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Text(
@@ -114,8 +114,8 @@ class _CustomDialogState extends State<CustomDialog> {
               values: _budgetRange,
               min: 0,
               max: 3000,
-              activeColor: AllColor.logoColor,
-              inactiveColor: AllColor.logoColor.withOpacity(0.3),
+              activeColor: AllColor.borderColor,
+              inactiveColor: AllColor.borderColor.withOpacity(0.3),
               labels: RangeLabels(
                 "\$${_budgetRange.start.round()}",
                 "\$${_budgetRange.end.round()}",

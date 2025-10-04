@@ -78,7 +78,7 @@ class ProfileHeaderSection extends StatelessWidget {
                   padding:
                   EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                   decoration: BoxDecoration(
-                    color: AllColor.logoColor,
+                    color: AllColor.borderColor,
                     borderRadius: BorderRadius.circular(6.r),
                   ),
                   child: Text(
@@ -132,7 +132,7 @@ class AccountStatsSection extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
-                      color: AllColor.logoColor)),
+                      color: AllColor.borderColor)),
               Text(stats[index]["subtitle"]!,
                   style: TextStyle(fontSize: 12.sp, color: AllColor.white)),
             ],
@@ -175,7 +175,7 @@ class ExtraStatsSection extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
       decoration: BoxDecoration(
-        color: AllColor.logoColor,
+        color: AllColor.borderColor,
         borderRadius: BorderRadius.circular(10.r),
       ),
       child: Row(
@@ -301,12 +301,12 @@ class SkillsSection extends StatelessWidget {
               padding:
               EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
               decoration: BoxDecoration(
-                border: Border.all(color: AllColor.logoColor),
+                border: Border.all(color: AllColor.borderColor),
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: Text("+ Add Skill",
                   style: TextStyle(
-                      fontSize: 11.sp, color: AllColor.logoColor)),
+                      fontSize: 11.sp, color: AllColor.borderColor)),
             ),
           ],
         ),
@@ -340,7 +340,7 @@ class ApplicationCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 10.h),
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
-        border: Border.all(color: AllColor.logoColor),
+        border: Border.all(color: AllColor.borderColor),
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Column(
@@ -349,7 +349,7 @@ class ApplicationCard extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
             decoration: BoxDecoration(
-              color: AllColor.logoColor.withOpacity(0.2),
+              color: AllColor.borderColor.withOpacity(0.2),
               borderRadius: BorderRadius.circular(6.r),
             ),
             child: Text(category,
@@ -407,7 +407,7 @@ class RecentTasksSection extends StatelessWidget {
                 EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
                   color: t["status"] == "Completed"
-                      ? AllColor.logoColor.withOpacity(0.2)
+                      ? AllColor.borderColor.withOpacity(0.2)
                       : AllColor.orange.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(6.r),
                 ),
@@ -501,11 +501,11 @@ class _CustomApplicationsBarState extends State<CustomApplicationsBar> {
                   EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? AllColor.logoColor
+                        ? AllColor.borderColor
                         : AllColor.white,
                     border: Border.all(
                       color: isSelected
-                          ? AllColor.logoColor
+                          ? AllColor.borderColor
                           : AllColor.grey300,
                     ),
                     borderRadius: BorderRadius.circular(20.r),

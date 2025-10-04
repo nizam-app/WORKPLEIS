@@ -61,11 +61,11 @@ class ProjectTitleSection extends StatelessWidget {
             contentPadding:
             EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AllColor.logoColor, width: 1.2),
+              borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
               borderRadius: BorderRadius.circular(6.r),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AllColor.logoColor, width: 1.5),
+              borderSide: BorderSide(color: AllColor.borderColor, width: 1.5),
               borderRadius: BorderRadius.circular(6.r),
             ),
           ),
@@ -108,7 +108,7 @@ class _CategoryDropdownSectionState extends State<CategoryDropdownSection> {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           decoration: BoxDecoration(
-            border: Border.all(color: AllColor.logoColor, width: 1.2),
+            border: Border.all(color: AllColor.borderColor, width: 1.2),
             borderRadius: BorderRadius.circular(6.r),
           ),
           child: DropdownButtonHideUnderline(

@@ -64,11 +64,11 @@ class ProjectDescriptionSection extends StatelessWidget {
             contentPadding: EdgeInsets.all(12.w),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide(color: AllColor.logoColor),
+              borderSide: BorderSide(color: AllColor.borderColor),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide(color: AllColor.logoColor, width: 1.5),
+              borderSide: BorderSide(color: AllColor.borderColor, width: 1.5),
             ),
           ),
         ),
@@ -139,7 +139,7 @@ class _UrgencySectionState extends State<UrgencySection> {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
         decoration: BoxDecoration(
           border: Border.all(
-              color: isSelected ? AllColor.logoColor : AllColor.grey300, width: 1),
+              color: isSelected ? AllColor.borderColor : AllColor.grey300, width: 1),
           borderRadius: BorderRadius.circular(8.r),
         ),
         child: Row(

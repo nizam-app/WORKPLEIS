@@ -20,7 +20,7 @@ class ReceivedRequest extends StatelessWidget {
             // Success Icon
             CircleAvatar(
               radius: 30.r,
-              backgroundColor: AllColor.logoColor,
+              backgroundColor: AllColor.borderColor,
               child: Icon(Icons.check, size: 30.sp, color: AllColor.white),
             ),
             SizedBox(height: 20.h),
@@ -50,7 +50,7 @@ class ReceivedRequest extends StatelessWidget {
               width: double.infinity,
               padding: EdgeInsets.all(14.w),
               decoration: BoxDecoration(
-                border: Border.all(color: AllColor.logoColor),
+                border: Border.all(color: AllColor.borderColor),
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: Column(

@@ -65,7 +65,7 @@ class StepCircle extends StatelessWidget {
         CircleAvatar(
           radius: 14.r,
           backgroundColor:
-          isCompleted || isActive ? AllColor.logoColor : AllColor.grey200,
+          isCompleted || isActive ? AllColor.borderColor : AllColor.grey200,
           child: isCompleted
               ? Icon(Icons.check, size: 14.sp, color: AllColor.white)
               : Text(
@@ -118,7 +118,7 @@ class _BudgetRangeSectionState extends State<BudgetRangeSection> {
           decoration: BoxDecoration(
             border: Border.all(
                 color: selectedBudget == b
-                    ? AllColor.logoColor
+                    ? AllColor.borderColor
                     : AllColor.grey300,
                 width: 1.2),
             borderRadius: BorderRadius.circular(8.r),
@@ -130,7 +130,7 @@ class _BudgetRangeSectionState extends State<BudgetRangeSection> {
                     ? Icons.radio_button_checked
                     : Icons.radio_button_off,
                 color: selectedBudget == b
-                    ? AllColor.logoColor
+                    ? AllColor.borderColor
                     : AllColor.grey,
                 size: 20.sp,
               ),

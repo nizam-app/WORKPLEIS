@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
-import 'package:workpleis/features/auth/screens/forgot_screen.dart';
-import 'package:workpleis/features/auth/screens/otp_screen.dart';
+import 'package:workpleis/features/auth/screens/enter_your_email.dart';
+import 'package:workpleis/features/auth/screens/email_verification.dart';
 import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_logo.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
@@ -120,7 +120,7 @@ class _Onboarding02BottonbarState
                   onPressed: () {
                     ref.read(authTabProvider.notifier).state = AuthTab.login;
                     widget.onLogin?.call();
-                    context.push(ForgotScreen.routeName);
+                    context.push(EnterYourEmail.routeName);
                   },
                 ),
               ),

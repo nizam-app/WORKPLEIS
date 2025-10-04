@@ -65,7 +65,7 @@ class StepItem extends StatelessWidget {
         CircleAvatar(
           radius: 14.r,
           backgroundColor: isCompleted || isCurrent
-              ? AllColor.logoColor
+              ? AllColor.borderColor
               : AllColor.grey200,
           child: isCompleted
               ? Icon(Icons.check, color: AllColor.white, size: 16.r)

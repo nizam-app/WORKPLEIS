@@ -67,7 +67,7 @@ class BottomNavBar extends ConsumerWidget {
             topRight: Radius.circular(20.r),
           ),
           border: Border.all(
-            color: AllColor.logoColor,
+            color: AllColor.borderColor,
             width: 1.5,
           ),
         ),

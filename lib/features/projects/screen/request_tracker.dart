@@ -88,7 +88,7 @@ class ProjectHeaderCard extends StatelessWidget {
             child: LinearProgressIndicator(
               value: 0.5,
               backgroundColor: AllColor.white24,
-              color: AllColor.logoColor,
+              color: AllColor.borderColor,
               minHeight: 8.h,
             ),
           ),
@@ -159,7 +159,7 @@ class TimelineItem extends StatelessWidget {
         children: [
           Icon(
             isDone ? Icons.check_circle : Icons.radio_button_unchecked,
-            color: isDone ? AllColor.logoColor : AllColor.grey,
+            color: isDone ? AllColor.borderColor : AllColor.grey,
             size: 22.sp,
           ),
           SizedBox(width: 10.w),

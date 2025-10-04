@@ -6,7 +6,7 @@ class AllColor {
   static const Color appBar = Color(0xFF28273A);
   static const Color white = Colors.white;
   static const Color allcolor = Color(0xFFCAFF45);
-  static const Color logoColor = Color(0xffCAFF45);
+  static const Color borderColor = Color(0xff686382);
   static const Color white24 = Colors.white24;
   static const Color white70 = Colors.white70;
   static const Color orange = Colors.orange;

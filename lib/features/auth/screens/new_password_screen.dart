@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_bottom.dart';
 import '../../../core/constants/image_control/image_path.dart';
-import 'otp_screen.dart';
+import 'email_verification.dart';
 
 class NewPasswordScreen extends StatefulWidget {
   const NewPasswordScreen({super.key});
@@ -99,7 +99,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                   text: "Send OTP",
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.push(OtpScreen.routeName);
+                      context.push(EmailVerification.routeName);
                     }
                   },
                 )

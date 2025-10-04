@@ -95,10 +95,10 @@ class JobHeaderSection extends StatelessWidget {
             Text("12 applied",
                 style: TextStyle(fontSize: 11.sp, color: AllColor.black87)),
             SizedBox(width: 14.w),
-            Icon(Icons.star, size: 14.sp, color: AllColor.logoColor),
+            Icon(Icons.star, size: 14.sp, color: AllColor.borderColor),
             SizedBox(width: 4.w),
             Text("4.9",
-                style: TextStyle(fontSize: 11.sp, color: AllColor.logoColor)),
+                style: TextStyle(fontSize: 11.sp, color: AllColor.borderColor)),
           ],
         ),
       ],
@@ -116,7 +116,7 @@ class JobDetailsSection extends StatelessWidget {
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: AllColor.grey100,
-        border: Border.all(color: AllColor.logoColor),
+        border: Border.all(color: AllColor.borderColor),
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Column(
@@ -366,11 +366,11 @@ class CustomBottomDialog extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: AllColor.logoColor, width: 1.2),
+          borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: AllColor.logoColor, width: 1.5),
+          borderSide: BorderSide(color: AllColor.borderColor, width: 1.5),
         ),
       ),
     );

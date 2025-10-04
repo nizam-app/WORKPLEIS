@@ -177,7 +177,7 @@ class _StepCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: AllColor.logoColor.withOpacity(0.3),
+            color: AllColor.borderColor.withOpacity(0.3),
             blurRadius: 6,
             offset: const Offset(0, 3),
           )
@@ -193,7 +193,7 @@ class _StepCard extends StatelessWidget {
               color: AllColor.white,
               borderRadius: BorderRadius.circular(8.r),
             ),
-            child: Icon(icon, size: 20.sp, color: AllColor.logoColor),
+            child: Icon(icon, size: 20.sp, color: AllColor.borderColor),
           ),
           SizedBox(width: 12.w),
 

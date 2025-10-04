@@ -15,7 +15,7 @@ import 'package:workpleis/features/security/screen/security_faq_screen.dart';
 import 'package:workpleis/features/security/screen/security_screen.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
 import '../../../core/constants/color_control/all_color.dart';
-import '../../../core/widget/global_role_check.dart';
+import '../../../core/utils/global_role_check.dart';
 import '../widget/custom_category_type.dart';
 import '../widget/custom_filter_chips.dart';
 import '../widget/custom_job_posts.dart';
@@ -162,7 +162,7 @@ class CustomTopBar extends StatelessWidget implements
                       width: 8,
                       height: 8,
                       decoration: const BoxDecoration(
-                        color: AllColor.logoColor,
+                        color: AllColor.borderColor,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -463,14 +463,14 @@ Widget _statsCard(String value, String label, IconData icon) {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: AllColor.logoColor, size: 22.sp),
+            Icon(icon, color: AllColor.borderColor, size: 22.sp),
             SizedBox(width: 4.w),
             Text(
               value,
               style: TextStyle(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.bold,
-                color: AllColor.logoColor,
+                color: AllColor.borderColor,
               ),
             ),
           ],
@@ -544,7 +544,7 @@ class CustomJobButtons extends StatelessWidget {
             decoration: BoxDecoration(
               color: AllColor.white,
               borderRadius: BorderRadius.circular(40.r),
-              border: Border.all(color: AllColor.logoColor, width: 1.2), // outline
+              border: Border.all(color: AllColor.borderColor, width: 1.2), // outline
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

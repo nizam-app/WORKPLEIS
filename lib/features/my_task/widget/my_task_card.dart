@@ -74,7 +74,7 @@ class CusotmMyTaskCard extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 14.h),
         padding: EdgeInsets.all(14.w),
         decoration: BoxDecoration(
-          border: Border.all(color: AllColor.logoColor),
+          border: Border.all(color: AllColor.borderColor),
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Column(
@@ -162,7 +162,7 @@ class CusotmMyTaskCard extends StatelessWidget {
                 Row(
                   children: [
                     Icon(Icons.verified,
-                        size: 14.sp, color: AllColor.logoColor),
+                        size: 14.sp, color: AllColor.borderColor),
                     SizedBox(width: 4.w),
                     Text(
                       "Payment verified",
@@ -197,7 +197,7 @@ class CusotmMyTaskCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AllColor.white,
         borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(color: AllColor.logoColor, width: 2),
+        border: Border.all(color: AllColor.borderColor, width: 2),
       ),
       child: Text(
         text,

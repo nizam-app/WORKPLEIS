@@ -17,12 +17,12 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
 
   enabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.r),
-    borderSide: BorderSide(color: AllColor.logoColor, width: 1),
+    borderSide: BorderSide(color: AllColor.borderColor, width: 1),
   ),
 
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.r),
-    borderSide: BorderSide(color: AllColor.logoColor, width: 1.2),
+    borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
   ),
 
   errorBorder: OutlineInputBorder(

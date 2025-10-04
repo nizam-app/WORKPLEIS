@@ -1,7 +1,11 @@
 
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/widget/global_snack_bar.dart';
+import 'package:workpleis/features/auth/screens/address_and_password.dart';
+import 'package:workpleis/features/auth/screens/enter_your_phone_number.dart';
+import 'package:workpleis/features/auth/screens/indentity_verification.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
+import 'package:workpleis/features/auth/screens/phone_number_verification.dart';
 import 'package:workpleis/features/auth/screens/register_screen.dart';
 import 'package:workpleis/features/auth/screens/splash_screen.dart';
 import 'package:workpleis/features/home/screen/home_screen.dart';
@@ -17,9 +21,9 @@ import 'package:workpleis/features/projects/screen/special_request_screen3.dart'
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
 import '../features/Payment/screen/payment_methods_screen.dart';
 import '../features/account/screen/account_screen.dart';
-import '../features/auth/screens/forgot_screen.dart';
+import '../features/auth/screens/enter_your_email.dart';
 import '../features/auth/screens/new_password_screen.dart';
-import '../features/auth/screens/otp_screen.dart';
+import '../features/auth/screens/email_verification.dart';
 import '../features/home/screen/post_a_job.dart';
 import '../features/my_task/screen/applicants_screen.dart';
 import '../features/my_task/screen/my_task_screen.dart';
@@ -64,6 +68,22 @@ class AppRouter {
         path: SplashScreen.routeName,
         name: SplashScreen.routeName,
         builder: (context, state) => const SplashScreen(),
+      ),  GoRoute(
+        path: IndentityVerification.routeName,
+        name: IndentityVerification.routeName,
+        builder: (context, state) => const IndentityVerification(),
+      ),  GoRoute(
+        path: AddressAndPassword.routeName,
+        name: AddressAndPassword.routeName,
+        builder: (context, state) => const AddressAndPassword(),
+      ), GoRoute(
+        path: EnterYourPhoneNumber.routeName,
+        name: EnterYourPhoneNumber.routeName,
+        builder: (context, state) => const EnterYourPhoneNumber(),
+      ), GoRoute(
+        path: PhoneNumberVerification.routeName,
+        name: PhoneNumberVerification.routeName,
+        builder: (context, state) => const PhoneNumberVerification(),
       ), GoRoute(
         path: OnboardingScreen02.routeName,
         name: OnboardingScreen02.routeName,
@@ -130,13 +150,13 @@ class AppRouter {
         name: SecurityFAQScreen.routeName,
         builder: (context, state) => const SecurityFAQScreen(),
       ),GoRoute(
-        path: ForgotScreen.routeName,
-        name: ForgotScreen.routeName,
-        builder: (context, state) => const ForgotScreen(),
+        path: EnterYourEmail.routeName,
+        name: EnterYourEmail.routeName,
+        builder: (context, state) => const EnterYourEmail(),
       ),GoRoute(
-        path: OtpScreen.routeName,
-        name: OtpScreen.routeName,
-        builder: (context, state) => const OtpScreen(),
+        path: EmailVerification.routeName,
+        name: EmailVerification.routeName,
+        builder: (context, state) => const EmailVerification(),
       ),
       GoRoute(
         path: NewPasswordScreen.routeName,
