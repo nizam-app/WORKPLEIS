@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_aleart_box.dart';
 import 'package:workpleis/core/widget/global_bottom.dart';
-import 'package:workpleis/features/auth/screens/enter_your_phone_number.dart';
 import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 class BusinessPasswordScreen extends StatelessWidget {
