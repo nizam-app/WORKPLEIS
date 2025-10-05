@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
 import 'package:workpleis/core/widget/global_snack_bar.dart';
-import 'package:workpleis/features/auth/logic/add_payment_method_screen.dart';
+import 'package:workpleis/features/auth/screens/add_payment_method_screen.dart';
 import 'package:workpleis/features/auth/logic/email_valitedor.dart';
 import 'package:workpleis/core/constants/image_control/image_path.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';

@@ -22,7 +22,7 @@ class OnboardingScreen01 extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
               children: [
                 Spacer(),
-                const GlobalLogo(),
+                const GlobalLogo(image: "assets/images/workpleis1.png",),
                 Text("A SUSTAINABLE MARKETPLACE FOR BUSINESSES",style: Theme.of(context).textTheme.headlineSmall,),
                 Spacer(),
                 GlobalGetStartedButton(onTap: (){context.push(OnboardingScreen02.routeName);},),

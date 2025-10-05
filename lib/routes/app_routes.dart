@@ -1,7 +1,7 @@
 
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/widget/global_snack_bar.dart';
-import 'package:workpleis/features/auth/logic/add_payment_method_screen.dart';
+import 'package:workpleis/features/auth/screens/add_payment_method_screen.dart';
 import 'package:workpleis/features/auth/screens/address_and_password.dart';
 import 'package:workpleis/features/auth/screens/bisiness_password_screen.dart';
 import 'package:workpleis/features/auth/screens/business_verification_screen.dart';
@@ -11,7 +11,6 @@ import 'package:workpleis/features/auth/screens/indentity_verification_screen.da
 import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:workpleis/features/auth/screens/phone_number_verification.dart';
 import 'package:workpleis/features/auth/screens/register_screen.dart';
-import 'package:workpleis/features/auth/screens/splash_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/community_guidenlines_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/privacy_policy_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/terms_and_conditions_screen.dart';
@@ -72,10 +71,6 @@ class AppRouter {
     routes: [
       /// 🚀 No BottomNavBar Routes
       GoRoute(
-        path: SplashScreen.routeName,
-        name: SplashScreen.routeName,
-        builder: (context, state) => const SplashScreen(),
-      ),GoRoute(
         path: PrivacyPolicyScreen.routeName,
         name: PrivacyPolicyScreen.routeName,
         builder: (context, state) => const PrivacyPolicyScreen(),

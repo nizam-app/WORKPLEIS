@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_aleart_box.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
 import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
+import 'package:workpleis/features/home/screen/home_screen.dart';
 
 class AddPaymentMethodScreen extends StatelessWidget {
   const AddPaymentMethodScreen({super.key});
@@ -44,7 +46,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
               Spacer(),
               GlobalGetStartedButton(
                 onTap: () {
-                  globalShowAlertDialog(context: context, oneTap: () {});
+                  globalShowAlertDialog(context: context, oneTap: () {context.push(HomeScreen.routeName);});
                 },
                 color: AllColor.primary,
                 buttonName: "Add",

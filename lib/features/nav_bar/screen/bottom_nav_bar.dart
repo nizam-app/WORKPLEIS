@@ -86,7 +86,7 @@ class BottomNavBar extends ConsumerWidget {
                   Icon(
                     isSelected ? _selectedIcons[index] : _unselectedIcons[index],
                     size: 30.sp,
-                    color: AllColor.black,
+                    color:isSelected ? AllColor.brand2_light: AllColor.black,
                   ),
                   SizedBox(height: 5.h),
                   Text(
@@ -95,7 +95,7 @@ class BottomNavBar extends ConsumerWidget {
                       fontSize: 12.sp,
                       fontWeight:
                       isSelected ? FontWeight.bold : FontWeight.w400,
-                      color: AllColor.black,
+                      color:isSelected ? AllColor.brand2_light: AllColor.black,
                     ),
                   ),
                 ],

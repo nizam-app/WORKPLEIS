@@ -43,31 +43,32 @@ ThemeData themeMood() {
       ),
 
       suffixIconColor: Colors.grey,
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.r)),
 
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide(color: AllColor.borderColor, width: 1),
-      ),
-
+      // enabledBorder: OutlineInputBorder(
+      //   borderRadius: BorderRadius.circular(10.r),
+      //   borderSide: BorderSide(color: AllColor.borderColor, width: 1),
+      // ),
+      //
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.r),
         borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
       ),
-
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide(color: AllColor.red200, width: 1),
-      ),
-
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide(color: AllColor.red200, width: 1.2),
-      ),
-
-      errorStyle: TextStyle(
-        fontSize: 12.sp,
-        color: AllColor.red200,
-      ),
+      //
+      // errorBorder: OutlineInputBorder(
+      //   borderRadius: BorderRadius.circular(10.r),
+      //   borderSide: BorderSide(color: AllColor.red200, width: 1),
+      // ),
+      //
+      // focusedErrorBorder: OutlineInputBorder(
+      //   borderRadius: BorderRadius.circular(10.r),
+      //   borderSide: BorderSide(color: AllColor.red200, width: 1.2),
+      // ),
+      //
+      // errorStyle: TextStyle(
+      //   fontSize: 12.sp,
+      //   color: AllColor.red200,
+      // ),
     ), // apply globally
     useMaterial3: true,
     textTheme: textTheme,
