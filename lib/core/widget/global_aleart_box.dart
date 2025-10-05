@@ -5,11 +5,12 @@ import 'package:workpleis/core/constants/color_control/all_color.dart';
 class GlobalAleartBox extends StatelessWidget {
   const GlobalAleartBox({
     super.key,
-    this.message =
-    "You’ve successfully completed all verification steps. Our team will verify your information and notify you once your account is approved.",
+    required this.message,
+    required this.oneTap,
   });
 
   final String message;
+  final VoidCallback oneTap;
 
   @override
   Widget build(BuildContext context) {
@@ -39,17 +40,13 @@ class GlobalAleartBox extends StatelessWidget {
               color: AllColor.primary,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
-              Icons.check,
-              color: Colors.white,
-              size: 32,
-            ),
+            child: const Icon(Icons.check, color: Colors.white, size: 32),
           ),
           SizedBox(height: 20.h),
 
           // ✅ Message text
           Text(
-            message,
+            message ?? "Summit Successfully",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14.sp,
@@ -72,7 +69,7 @@ class GlobalAleartBox extends StatelessWidget {
                 ),
                 elevation: 0,
               ),
-              onPressed: () => Navigator.pop(context),
+              onPressed: oneTap,
               child: Text(
                 "OK",
                 style: TextStyle(
@@ -90,7 +87,13 @@ class GlobalAleartBox extends StatelessWidget {
 }
 
 /// ✅ Use this function to show the dialog
-void showCustomAlertDialog(BuildContext context) {
+void globalShowAlertDialog({
+  required BuildContext context,
+  required VoidCallback oneTap,
+   String message ="You’ve successfully completed all verification "
+   "steps. Our team will verify your information"
+   " and notify you once your account is approved.",
+}) {
   showDialog(
     context: context,
     barrierDismissible: false, // prevent closing by tapping outside
@@ -98,7 +101,7 @@ void showCustomAlertDialog(BuildContext context) {
       return Dialog(
         backgroundColor: Colors.transparent,
         insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: const GlobalAleartBox(),
+        child: GlobalAleartBox(oneTap: oneTap, message: message),
       );
     },
   );

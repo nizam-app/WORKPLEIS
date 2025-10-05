@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_bottom.dart';
+import 'package:workpleis/features/auth/logic/signup_screen_check.dart';
 import 'package:workpleis/features/auth/screens/enter_your_phone_number.dart';
-import 'package:workpleis/features/auth/screens/indentity_verification.dart';
+import 'package:workpleis/features/auth/screens/indentity_verification_screen.dart';
+
+import 'business_verification_screen.dart';
 
 class PhoneNumberVerification extends StatelessWidget {
   const PhoneNumberVerification({super.key});
@@ -22,15 +26,12 @@ class PhoneNumberVerification extends StatelessWidget {
           child: Column(
             children: [
               Spacer(),
-              Text(
-                "Verify Your Phone Number",
-                style:theme.headlineLarge,
-              ),
+              Text("Verify Your Phone Number", style: theme.headlineLarge),
               SizedBox(height: 8.h),
               Text(
                 "Enter the 6-digit code we just sent to \n your mobile number.",
                 textAlign: TextAlign.center,
-                style:theme.titleMedium,
+                style: theme.titleMedium,
               ),
               SizedBox(height: 30.h),
 
@@ -59,10 +60,20 @@ class PhoneNumberVerification extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 25.h),
-              GlobalButton(
-                text: "Verify Email",
-                onPressed: () {
-                  context.push(IndentityVerification.routeName);
+              Consumer(
+                builder: (context, ref, child) {
+                  final isActive = ref.watch(boolControllerProvider);
+                  return GlobalButton(
+                    text: "Verify Phone",
+                    onPressed: () {
+
+                      if (isActive) {
+                        context.push(BusinessVerificationScreen.routeName);
+                      } else {
+                        context.push(IndentityVerificationScreen.routeName);
+                      }
+                    },
+                  );
                 },
               ),
               Spacer(),

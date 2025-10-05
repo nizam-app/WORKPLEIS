@@ -4,9 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_bottom.dart';
 import 'package:workpleis/features/auth/screens/address_and_password.dart';
+import 'package:workpleis/features/auth/widgets/custom_choose_file.dart';
 
-class IndentityVerification extends StatelessWidget {
-  const IndentityVerification({super.key});
+class IndentityVerificationScreen extends StatelessWidget {
+  const IndentityVerificationScreen({super.key});
 
   static final routeName = "/identityVerification";
 
@@ -27,9 +28,9 @@ class IndentityVerification extends StatelessWidget {
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  "Upload a clear photo of the front and back of your \n government-issued ID to complete verification",
+                  "Upload a clear photo of the front and back of \n your government-issued ID to complete verification",
                   textAlign: TextAlign.center,
-                  style:theme.titleMedium,
+                  style:theme.titleMedium!.copyWith(fontSize:14.sp ),
                 ),
                 SizedBox(height: 30.h),
                 const CustomChooseFile(),
@@ -52,84 +53,7 @@ class IndentityVerification extends StatelessWidget {
   }
 }
 
-class CustomChooseFile extends StatelessWidget {
-  const CustomChooseFile({super.key, this.title = 'Front Side', this.onTap});
 
-  final String title;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        /// ---- Title ----
-        Padding(
-          padding: EdgeInsets.only(bottom: 8.h),
-          child: Text(
-            title,
-            style: TextStyle(
-              color: AllColor.borderColor, // soft purple-gray
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w600,
-              fontFamily: "bodyFont",
-            ),
-          ),
-        ),
-
-        /// ---- Upload Box ----
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            width: double.infinity,
-            height: 140.h,
-            decoration: BoxDecoration(
-              color: const Color(0xFFF7F6FB), // soft lavender background
-              borderRadius: BorderRadius.circular(12.r),
-              border: Border.all(
-                color: const Color(0xFFD1CCE1), // dotted look
-                width: 1,
-                style: BorderStyle.solid,
-              ),
-            ),
-            child: DottedBorderOverlay(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.upload_outlined,
-                    size: 28.sp,
-                    color: const Color(0xFF8A7CA8),
-                  ),
-                  SizedBox(height: 10.h),
-                  Text(
-                    'Choose files or drag and drop',
-                    style: TextStyle(
-                      color: AllColor.borderColor.withOpacity(0.6),
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "bodyFont",
-                    ),
-                  ),
-                  SizedBox(height: 4.h),
-                  Text(
-                    'Only jpg or png file type accepted',
-                    style: TextStyle(
-                      color: AllColor.borderColor.withOpacity(0.6),
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "bodyFont",
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 /// Simple overlay for dotted border look
 class DottedBorderOverlay extends StatelessWidget {

@@ -1,13 +1,20 @@
 
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/widget/global_snack_bar.dart';
+import 'package:workpleis/features/auth/logic/add_payment_method_screen.dart';
 import 'package:workpleis/features/auth/screens/address_and_password.dart';
+import 'package:workpleis/features/auth/screens/bisiness_password_screen.dart';
+import 'package:workpleis/features/auth/screens/business_verification_screen.dart';
 import 'package:workpleis/features/auth/screens/enter_your_phone_number.dart';
-import 'package:workpleis/features/auth/screens/indentity_verification.dart';
+import 'package:workpleis/features/auth/screens/get_started_screen.dart';
+import 'package:workpleis/features/auth/screens/indentity_verification_screen.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:workpleis/features/auth/screens/phone_number_verification.dart';
 import 'package:workpleis/features/auth/screens/register_screen.dart';
 import 'package:workpleis/features/auth/screens/splash_screen.dart';
+import 'package:workpleis/features/community_guidenlines/screen/community_guidenlines_screen.dart';
+import 'package:workpleis/features/community_guidenlines/screen/privacy_policy_screen.dart';
+import 'package:workpleis/features/community_guidenlines/screen/terms_and_conditions_screen.dart';
 import 'package:workpleis/features/home/screen/home_screen.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/home/screen/tasks_screen.dart';
@@ -68,11 +75,45 @@ class AppRouter {
         path: SplashScreen.routeName,
         name: SplashScreen.routeName,
         builder: (context, state) => const SplashScreen(),
+      ),GoRoute(
+        path: PrivacyPolicyScreen.routeName,
+        name: PrivacyPolicyScreen.routeName,
+        builder: (context, state) => const PrivacyPolicyScreen(),
+      ),GoRoute(
+        path: CommunityGuidenlinesScreen.routeName,
+        name: CommunityGuidenlinesScreen.routeName,
+        builder: (context, state) => const CommunityGuidenlinesScreen(),
+      ),GoRoute(
+        path: TermsAndConditionsScreen.routeName,
+        name: TermsAndConditionsScreen.routeName,
+        builder: (context, state) => const TermsAndConditionsScreen(),
+      ),GoRoute(
+        path: AddPaymentMethodScreen.routeName,
+        name: AddPaymentMethodScreen.routeName,
+        builder: (context, state) => const AddPaymentMethodScreen(),
+      ),GoRoute(
+        path: BusinessPasswordScreen.routeName,
+        name: BusinessPasswordScreen.routeName,
+        builder: (context, state) => const BusinessPasswordScreen(),
+      ), GoRoute(
+        path: BusinessVerificationScreen.routeName,
+        name: BusinessVerificationScreen.routeName,
+        builder: (context, state) => const BusinessVerificationScreen(),
       ),  GoRoute(
-        path: IndentityVerification.routeName,
-        name: IndentityVerification.routeName,
-        builder: (context, state) => const IndentityVerification(),
+        path: IndentityVerificationScreen.routeName,
+        name: IndentityVerificationScreen.routeName,
+        builder: (context, state) => const IndentityVerificationScreen(),
       ),  GoRoute(
+        path: GetStartedScreen.routeName, // 👈 no :param in path
+        name: GetStartedScreen.routeName,
+        builder: (context, state) {
+          // 👇 safely read optional value
+          final title = state.extra is String ? state.extra as String : null;
+          return GetStartedScreen(title: title);
+        },
+      ),
+
+      GoRoute(
         path: AddressAndPassword.routeName,
         name: AddressAndPassword.routeName,
         builder: (context, state) => const AddressAndPassword(),

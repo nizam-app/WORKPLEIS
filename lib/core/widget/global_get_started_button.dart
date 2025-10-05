@@ -4,10 +4,11 @@ import 'package:workpleis/core/constants/color_control/all_color.dart';
 
 class GlobalGetStartedButton extends StatelessWidget {
   const GlobalGetStartedButton({
-    super.key, this.buttonName = "Get Started", required this.onTap,
+    super.key, this.buttonName = "Get Started", required this.onTap,this.color = AllColor.white,
   });
   final String buttonName;
   final VoidCallback onTap;
+  final Color color ;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class GlobalGetStartedButton extends StatelessWidget {
           // responsive width
         height: 50.h,  // responsive height
         decoration: BoxDecoration(
-          color:AllColor.white, // neon green background
+          color:color, // neon green background
           borderRadius: BorderRadius.circular(12.r), // rounded corners
         ),
         child: Center(

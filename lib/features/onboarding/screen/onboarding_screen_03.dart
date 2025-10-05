@@ -132,6 +132,7 @@ class _Onboarding02BottonbarState
                   onPressed: () {
                     ref.read(authTabProvider.notifier).state = AuthTab.signup;
                     widget.onSignup?.call();
+                    context.push(OnboardingScreen04.routeName);
                   },
                 ),
               ),

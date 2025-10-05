@@ -5,10 +5,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/features/auth/screens/get_started_screen.dart';
+import 'package:workpleis/features/community_guidenlines/screen/community_guidenlines_screen.dart';
+import 'package:workpleis/features/community_guidenlines/screen/privacy_policy_screen.dart';
+import 'package:workpleis/features/community_guidenlines/screen/terms_and_conditions_screen.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
 import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_logo.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
+import 'package:workpleis/features/security/screen/security_contact_screen.dart';
+import 'package:workpleis/features/security/screen/security_faq_screen.dart';
+import 'package:workpleis/features/security/screen/security_guide_screen.dart';
 
 class OnboardingScreen02 extends StatelessWidget {
   const OnboardingScreen02({super.key});
@@ -37,9 +44,11 @@ class OnboardingScreen02 extends StatelessWidget {
         Onboarding02Bottonbar(
           onLogin: () {},
           onSignup: () {},
-          onTapTerms: () {},
-          onTapGuidelines: () {},
-          onTapPrivacy: () {},
+          onTapTerms: () {
+            context.push(TermsAndConditionsScreen.routeName);
+          },
+          onTapGuidelines: () { context.push(CommunityGuidenlinesScreen.routeName);},
+          onTapPrivacy: () { context.push(PrivacyPolicyScreen.routeName);},
         )
 
 
@@ -138,6 +147,7 @@ class _Onboarding02BottonbarState
                   onPressed: () {
                     ref.read(authTabProvider.notifier).state = AuthTab.login;
                     widget.onLogin?.call();
+                    context.push(GetStartedScreen.routeName,extra:"login");
                   },
                 ),
               ),

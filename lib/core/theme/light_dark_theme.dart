@@ -27,8 +27,8 @@ ThemeData themeMood() {
           : ThemeColorController.black,
       surface: ThemeColorController.grey,
       onSurface: _themeController.isDarkMode.value
-          ? ThemeColorController.black
-          : AllColor.white,
+          ? ThemeColorController.white
+          : AllColor.black,
     ),
     inputDecorationTheme: inputDecorationTheme, // apply globally
     useMaterial3: true,

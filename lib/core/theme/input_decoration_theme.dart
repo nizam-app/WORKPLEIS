@@ -4,7 +4,7 @@ import 'package:workpleis/core/constants/color_control/all_color.dart';
 
 InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   filled: true,
-  fillColor: AllColor.white, // Background same like screenshot
+  fillColor: Color(0xffA49ACF).withOpacity(0.05), // Background same like screenshot
   contentPadding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
 
   hintStyle: TextStyle(

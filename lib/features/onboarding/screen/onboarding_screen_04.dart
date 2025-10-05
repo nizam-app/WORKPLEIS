@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/features/auth/screens/enter_your_email.dart';
 import 'package:workpleis/features/auth/screens/email_verification.dart';
+import 'package:workpleis/features/auth/screens/get_started_screen.dart';
 import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_logo.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
@@ -132,6 +133,10 @@ class _Onboarding02BottonbarState
                   onPressed: () {
                     ref.read(authTabProvider.notifier).state = AuthTab.signup;
                     widget.onSignup?.call();
+                    context.push(
+                      GetStartedScreen.routeName,
+                      extra: 'business',
+                    );
                   },
                 ),
               ),
