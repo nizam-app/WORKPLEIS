@@ -30,7 +30,7 @@ import '../features/account/screen/account_screen.dart';
 import '../features/auth/screens/enter_your_email.dart';
 import '../features/auth/screens/new_password_screen.dart';
 import '../features/auth/screens/email_verification.dart';
-import '../features/home/screen/post_a_job.dart';
+import '../features/home/screen/post_job_screen.dart';
 import '../features/my_task/screen/applicants_screen.dart';
 import '../features/my_task/screen/my_task_screen.dart';
 import '../features/nav_bar/screen/bottom_nav_bar.dart';

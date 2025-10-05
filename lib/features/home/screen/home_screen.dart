@@ -8,7 +8,7 @@ import 'package:workpleis/core/widget/global_get_started_button.dart';
 import 'package:workpleis/features/Payment/screen/payment_methods_screen.dart';
 import 'package:workpleis/features/account/screen/account_screen.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
-import 'package:workpleis/features/home/screen/post_a_job.dart';
+import 'package:workpleis/features/home/screen/post_job_screen.dart';
 import 'package:workpleis/features/message/screen/message_screen.dart';
 import 'package:workpleis/features/my_task/screen/my_task_screen.dart';
 import 'package:workpleis/features/notification/screen/notificaition_screen.dart';
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             HomeHeaderSection(),
             SizedBox(height: 20.h),
-            buildPadding(),
+            buildPadding(context),
             CategoriesSection(),
             ActiveJobsSection(),
             ServiceProvidersSection(),
@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Padding buildPadding() {
+  Padding buildPadding(BuildContext context) {
     return Padding(
           padding: EdgeInsets.symmetric(horizontal: 25.w),
           child: Column(
@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
               ),
               SizedBox(height: 20.h),
               GlobalGetStartedButton(
-                onTap: () {},
+                onTap: () {showChooseJobTypeBottomBar(context);},
                 color: AllColor.primary,
                 buttonName: "Next",
                 borderRadius: 25,
@@ -899,6 +899,117 @@ class _StepCard extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+
+Future<void> showChooseJobTypeBottomBar(BuildContext context) {
+  return showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+    ),
+    builder: (_) => const ChooseJobTypeBottomBar(),
+  );
+}
+
+class ChooseJobTypeBottomBar extends StatefulWidget {
+  const ChooseJobTypeBottomBar({super.key});
+
+  @override
+  State<ChooseJobTypeBottomBar> createState() =>
+      _ChooseJobTypeBottomBarState();
+}
+
+class _ChooseJobTypeBottomBarState extends State<ChooseJobTypeBottomBar> {
+  String selectedType = "Single Job";
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Choose job type",
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 16.sp,
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(height: 20.h),
+          Row(
+            children: [
+              Expanded(
+                child: _PillButton(
+                  label: "Single Job",
+                  isSelected: selectedType == "Single Job",
+                  onTap: () {
+                    setState(() => selectedType = "Single Job");
+                    context.push(PostJobScreen.routeName);
+
+                  },
+                ),
+              ),
+              SizedBox(width: 16.w),
+              Expanded(
+                child: _PillButton(
+                  label: "Project",
+                  isSelected: selectedType == "Project",
+                  onTap: () {
+                    setState(() => selectedType = "Project");
+                    Navigator.pop(context, selectedType);
+                  },
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10.h + MediaQuery.paddingOf(context).bottom),
+        ],
+      ),
+    );
+  }
+}
+
+class _PillButton extends StatelessWidget {
+  const _PillButton({
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        height: 45.h,
+        decoration: BoxDecoration(
+          color: isSelected ? AllColor.primary : Colors.white,
+          borderRadius: BorderRadius.circular(40.r),
+          border: Border.all(color: Colors.black, width: 1),
+        ),
+        child: Center(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 14.sp,
+              color: Colors.black,
+            ),
+          ),
+        ),
       ),
     );
   }
