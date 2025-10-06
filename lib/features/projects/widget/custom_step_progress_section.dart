@@ -15,7 +15,7 @@ class CustomStepProgressSection extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
-        border: Border.all(color: AllColor.grey300),
+        border: Border.all(color: AllColor.brand2_light),
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
@@ -23,7 +23,7 @@ class CustomStepProgressSection extends StatelessWidget {
         children: [
           Text("Project Setup Progress",style:
           TextStyle(fontSize: 13.sp,fontWeight:
-          FontWeight.w500,color: AllColor.black),),
+          FontWeight.w900,color: AllColor.black,fontFamily: "bodyFont"),),
           SizedBox(height: 10.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,34 +56,29 @@ class StepItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isCompleted = activeStep > step;   // ager step gula
-    bool isCurrent = activeStep == step;    // current step
-    bool isUpcoming = activeStep < step;    // pore er gula
+    final bool isCurrent = activeStep == step;
 
     return Column(
       children: [
-        CircleAvatar(
-          radius: 14.r,
-          backgroundColor: isCompleted || isCurrent
-              ? AllColor.borderColor
-              : AllColor.grey200,
-          child: isCompleted
-              ? Icon(Icons.check, color: AllColor.white, size: 16.r)
-              : isCurrent
-              ? Text(
-            "$number",
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-              color: AllColor.black,
+        Container(
+          width: 32.w,
+          height: 32.w,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: isCurrent ? AllColor.primary : AllColor.primary,
+              width: 1.6,
             ),
-          )
-              : Text(
-            "$number",
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-              color: AllColor.grey,
+            color: Colors.white,
+          ),
+          child: Center(
+            child: Text(
+              "$number",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
             ),
           ),
         ),
@@ -92,7 +87,9 @@ class StepItem extends StatelessWidget {
           title,
           style: TextStyle(
             fontSize: 12.sp,
-            color: isCompleted || isCurrent ? AllColor.black : AllColor.grey,
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            fontFamily: "bodyFont"
           ),
         ),
       ],

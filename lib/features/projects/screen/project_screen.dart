@@ -1,95 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-import 'package:workpleis/features/projects/screen/special_request_screen.dart';
 
-class ProjectScreen extends StatelessWidget {
+class ProjectScreen extends ConsumerWidget {
   const ProjectScreen({super.key});
   static const routeName = "/projectScreen";
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedStatus = ref.watch(jobStatusProvider);
+
     return Scaffold(
       appBar: GlobalAppbar(text: "Project"),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header
-            Text(
-              "Got a Challenge too Complex\nfor the marketplace?",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: AllColor.black,
+            /// 🔹 Filter tabs
+            const JobStatusList(),
+            SizedBox(height: 16.h),
+
+            /// 🔹 Job list
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return JobCard(
+                    title: "Deliver something for me",
+                    status: selectedStatus,
+                    time: "Immediate",
+                    budget: "\$5,000–\$20,000",
+                    period: "Afternoon (12PM–5PM)",
+                    price: "\$50",
+                  );
+                },
               ),
-            ),
-            SizedBox(height: 10.h),
-            Text(
-              "Australia’s trusted marketplace connecting skilled Workpeers\nwith people who need things done.",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12.sp,
-                color: AllColor.black87,
-              ),
-            ),
-            SizedBox(height: 20.h),
-
-            // Badges
-            Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 10.w,
-              runSpacing: 10.h,
-              children: const [
-                _InfoBadge(icon: Icons.lock, text: "Confidentiality"),
-                _InfoBadge(icon: Icons.security, text: "Escrow Protected"),
-                _InfoBadge(icon: Icons.timer, text: "24h Response"),
-              ],
-            ),
-            SizedBox(height: 20.h),
-
-            // Buttons
-            _ActionButton(text: "Start a Special Request"),
-            SizedBox(height: 12.h),
-            _ActionButton(text: "Talk to Manager"),
-            SizedBox(height: 30.h),
-
-            // How it Works Section
-            Text(
-              "How it works",
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: AllColor.black,
-              ),
-            ),
-            SizedBox(height: 6.h),
-            Text(
-              "Simple steps to get your work done\nor start earning",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12.sp, color: AllColor.black87),
-            ),
-            SizedBox(height: 20.h),
-
-            // Step Cards
-            const _StepCard(
-              icon: Icons.check_circle_outline,
-              title: "Submit",
-              subtitle: "Share what you need done, add details, and set your budget.",
-            ),
-            const _StepCard(
-              icon: Icons.people_alt_outlined,
-              title: "Dedicated Review",
-              subtitle: "Skilled job seekers respond with quotes and availability.",
-            ),
-            const _StepCard(
-              icon: Icons.verified_outlined,
-              title: "Secure Delivery",
-              subtitle: "Compare profiles, past reviews, and skills.",
             ),
           ],
         ),
@@ -98,128 +46,200 @@ class ProjectScreen extends StatelessWidget {
   }
 }
 
-/* ================== BADGE ================== */
-class _InfoBadge extends StatelessWidget {
-  final IconData icon;
-  final String text;
+/// 🔹 Riverpod provider to track selected status
+final jobStatusProvider = StateProvider<String>((ref) => "Submitted");
 
-  const _InfoBadge({required this.icon, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
-      decoration: BoxDecoration(
-        color: AllColor.black,
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 16.sp, color: AllColor.white),
-          SizedBox(width: 6.w),
-          Text(
-            text,
-            style: TextStyle(fontSize: 12.sp, color: AllColor.white),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/* ================== BUTTON ================== */
-class _ActionButton extends StatelessWidget {
-  final String text;
-  const _ActionButton({required this.text});
+/// 🔹 Horizontal status selector
+class JobStatusList extends ConsumerWidget {
+  const JobStatusList({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedStatus = ref.watch(jobStatusProvider);
+
+    final statuses = [
+      "Submitted",
+      "Proposal Sent",
+      "In Progress",
+      "Completed",
+    ];
+
     return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AllColor.black,
-          padding: EdgeInsets.symmetric(vertical: 14.h),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-        ),
-        onPressed: () {context.push(ProjectSetupScreen.routeName);},
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 13.sp, color: AllColor.white),
-        ),
+      height: 40.h,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: 4.w),
+        itemCount: statuses.length,
+        separatorBuilder: (_, __) => SizedBox(width: 10.w),
+        itemBuilder: (context, index) {
+          final label = statuses[index];
+          final isSelected = label == selectedStatus;
+
+          return GestureDetector(
+            onTap: () {
+              ref.read(jobStatusProvider.notifier).state = label;
+            },
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
+              decoration: BoxDecoration(
+                color: isSelected ? AllColor.primary : Colors.transparent,
+                borderRadius: BorderRadius.circular(30.r),
+                border: Border.all(
+                  color: const Color(0xff154E7B).withOpacity(0.2),
+                  width: 1,
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  label,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 }
 
-/* ================== STEP CARD ================== */
-class _StepCard extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subtitle;
-
-  const _StepCard({
-    required this.icon,
+/// 🔹 Single job card widget
+class JobCard extends StatelessWidget {
+  const JobCard({
+    super.key,
     required this.title,
-    required this.subtitle,
+    required this.status,
+    required this.time,
+    required this.budget,
+    required this.period,
+    required this.price,
   });
+
+  final String title;
+  final String status;
+  final String time;
+  final String budget;
+  final String period;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 14.h),
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
-        color: AllColor.black, // dark background
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: AllColor.borderColor.withOpacity(0.3),
+            color: Colors.black.withOpacity(0.05),
             blurRadius: 6,
             offset: const Offset(0, 3),
-          )
+          ),
         ],
+        border: Border.all(color: Colors.black.withOpacity(0.1)),
       ),
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Icon in rounded box
-          Container(
-            padding: EdgeInsets.all(8.w),
-            decoration: BoxDecoration(
-              color: AllColor.white,
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-            child: Icon(icon, size: 20.sp, color: AllColor.borderColor),
-          ),
-          SizedBox(width: 12.w),
-
-          // Title + Subtitle
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
+          /// 🔹 Header Row (title + status chip)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
                   title,
                   style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.bold,
-                    color: AllColor.white,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                    fontFamily: "bodyFont"
                   ),
                 ),
-                SizedBox(height: 6.h),
-                Text(
-                  subtitle,
+              ),
+              Container(
+                padding:
+                EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                decoration: BoxDecoration(
+                  color: AllColor.primary,
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+                child: Text(
+                  status,
                   style: TextStyle(
-                    fontSize: 11.sp,
-                    color: AllColor.white.withOpacity(0.9),
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                      fontFamily: "bodyFont"
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8.h),
+
+          /// 🔹 Details
+          Row(
+            children: [
+              const Icon(Icons.local_shipping_outlined,
+                  size: 18, color: Color(0xFF7A6FA2)),
+              SizedBox(width: 6.w),
+              Text(
+                time,
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  color: const Color(0xFF7A6FA2),
+                    fontFamily: "bodyFont"
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 6.h),
+
+          Row(
+            children: [
+              const Icon(Icons.request_quote_outlined,
+                  size: 18, color: Color(0xFF7A6FA2)),
+              SizedBox(width: 6.w),
+              Text(
+                budget,
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  color: const Color(0xFF7A6FA2),
+                    fontFamily: "bodyFont"
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 6.h),
+
+          Row(
+            children: [
+              const Icon(Icons.call_outlined,
+                  size: 18, color: Color(0xFF7A6FA2)),
+              SizedBox(width: 6.w),
+              Expanded(
+                child: Text(
+                  period,
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                    color: const Color(0xFF7A6FA2),
+                  ),
+                ),
+              ),
+              Text(
+                price,
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
+            ],
           ),
         ],
       ),

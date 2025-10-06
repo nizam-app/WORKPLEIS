@@ -166,7 +166,9 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   hintText: "Total amount",
                 )),
             SizedBox(height: 30.h),
-            GlobalGetStartedButton(onTap: () {  }, buttonName: "Post Job", color: AllColor.primary,),
+            const CustomCategoryDropdown(),
+
+            // GlobalGetStartedButton(onTap: () { showSearchLocationBottomBar(context);}, buttonName: "Post a Job", color: AllColor.primary,),
           SizedBox(height: 20.h,)
           ],
         ),
@@ -382,7 +384,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                               : FontWeight.w400,
                           fontSize: 14.sp,
                         ),
-                      ),
+                      )
                     ),
                     if (isSelected)
                       Icon(
@@ -402,6 +404,151 @@ class _CustomDropdownState extends State<CustomDropdown> {
           },
         ),
       ),
+    );
+  }
+}
+
+
+class CustomCategoryDropdown extends StatefulWidget {
+  const CustomCategoryDropdown({super.key});
+
+  @override
+  State<CustomCategoryDropdown> createState() =>
+      _CustomCategoryDropdownState();
+}
+
+class _CustomCategoryDropdownState extends State<CustomCategoryDropdown> {
+  String? selectedCategory;
+  bool showDropdown = false;
+
+  final categories = [
+    "Compliance",
+    "Complaince",
+    "Specialized Procurement",
+    "Rare & Specialized Procurement",
+    "Technical & Engineering",
+    "Confidential & Sensitive Services",
+    "Executive & VIP Services",
+    "Custom Projects",
+    "Custom",
+  ];
+
+  void toggleDropdown() {
+    setState(() {
+      showDropdown = !showDropdown;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const CustomLabelText(title: "Category"),
+        SizedBox(height: 6.h),
+
+        /// Container wrapping dropdown logic
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            /// Dropdown button
+            GestureDetector(
+              onTap: toggleDropdown,
+              child: Container(
+                padding:
+                EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border:
+                  Border.all(color: AllColor.borderColor, width: 1.2),
+                  borderRadius: BorderRadius.circular(6.r),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        selectedCategory ?? "Select a category",
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          color: selectedCategory == null
+                              ? AllColor.grey
+                              : Colors.black,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Icon(Icons.keyboard_arrow_down_rounded,
+                        color: AllColor.borderColor),
+                  ],
+                ),
+              ),
+            ),
+
+            /// Custom dropdown list (below the box)
+            if (showDropdown)
+              Positioned(
+                top: 48.h,
+                left: 0,
+                right: 0,
+                child: Material(
+                  elevation: 2,
+                  borderRadius: BorderRadius.circular(6.r),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(6.r),
+                      border: Border.all(
+                        color: AllColor.borderColor.withOpacity(0.4),
+                      ),
+                    ),
+                    constraints: BoxConstraints(maxHeight: 180.h),
+                    child: ListView.separated(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: categories.length,
+                      separatorBuilder: (_, __) => Divider(
+                        height: 1,
+                        color: Colors.grey.shade200,
+                      ),
+                      itemBuilder: (context, index) {
+                        final cat = categories[index];
+                        final isSelected = cat == selectedCategory;
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectedCategory = cat;
+                              showDropdown = false;
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.h, horizontal: 12.w),
+                            color: isSelected
+                                ? AllColor.borderColor
+                                : Colors.transparent,
+                            child: Text(
+                              cat,
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                color: isSelected
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontWeight: isSelected
+                                    ? FontWeight.w600
+                                    : FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ],
     );
   }
 }

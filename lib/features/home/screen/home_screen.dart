@@ -12,6 +12,7 @@ import 'package:workpleis/features/home/screen/post_job_screen.dart';
 import 'package:workpleis/features/message/screen/message_screen.dart';
 import 'package:workpleis/features/my_task/screen/my_task_screen.dart';
 import 'package:workpleis/features/notification/screen/notificaition_screen.dart';
+import 'package:workpleis/features/projects/screen/special_request_screen.dart';
 import 'package:workpleis/features/security/screen/security_faq_screen.dart';
 import 'package:workpleis/features/security/screen/security_screen.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
@@ -964,7 +965,7 @@ class _ChooseJobTypeBottomBarState extends State<ChooseJobTypeBottomBar> {
                   isSelected: selectedType == "Project",
                   onTap: () {
                     setState(() => selectedType = "Project");
-                    Navigator.pop(context, selectedType);
+                    context.push(ProjectSetupScreen.routeName);
                   },
                 ),
               ),

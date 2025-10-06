@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
+import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
 import 'package:workpleis/features/projects/screen/spcial_request_screen1.dart';
 
 import '../widget/custom_bottom_buttons_section.dart';
@@ -49,25 +50,12 @@ class ProjectTitleSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Project Title",
-            style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w600,
-                color: AllColor.black)),
-        SizedBox(height: 6.h),
+        CustomLabelText(title: 'Project Title',),
         TextField(
-          controller: TextEditingController(text: "Development"),
+          controller: TextEditingController(),
           decoration: InputDecoration(
-            contentPadding:
-            EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
-              borderRadius: BorderRadius.circular(6.r),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AllColor.borderColor, width: 1.5),
-              borderRadius: BorderRadius.circular(6.r),
-            ),
+            hintText: "Enter project title",
+
           ),
         ),
       ],
@@ -75,7 +63,7 @@ class ProjectTitleSection extends StatelessWidget {
   }
 }
 
-/* ================= Category Dropdown ================= */
+
 class CategoryDropdownSection extends StatefulWidget {
   const CategoryDropdownSection({super.key});
 
@@ -86,11 +74,17 @@ class CategoryDropdownSection extends StatefulWidget {
 
 class _CategoryDropdownSectionState extends State<CategoryDropdownSection> {
   String? selectedCategory;
+  bool menuOpened = false;
 
   final categories = [
     "Compliance",
     "Complaince",
     "Specialized Procurement",
+    "Rare & Specialized Procurement",
+    "Technical & Engineering",
+    "Confidential & Sensitive Services",
+    "Executive & VIP Services",
+    "Custom Projects",
     "Custom",
   ];
 
@@ -99,12 +93,10 @@ class _CategoryDropdownSectionState extends State<CategoryDropdownSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Category",
-            style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w600,
-                color: AllColor.black)),
+        const CustomLabelText(title: 'Category'),
         SizedBox(height: 6.h),
+
+        /// Dropdown container
         Container(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           decoration: BoxDecoration(
@@ -116,25 +108,71 @@ class _CategoryDropdownSectionState extends State<CategoryDropdownSection> {
               value: selectedCategory,
               hint: Text(
                 "Select a category",
-                style: TextStyle(fontSize: 13.sp, color: AllColor.grey),
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  color: AllColor.grey,
+                ),
               ),
               isExpanded: true,
-              icon: Icon(Icons.keyboard_arrow_down, color: AllColor.black),
-              dropdownColor: AllColor.black,
-              style: TextStyle(fontSize: 13.sp, color: AllColor.white),
+              icon: Icon(
+                Icons.keyboard_arrow_down_rounded,
+                color: AllColor.borderColor,
+              ),
+              dropdownColor: Colors.white,
+              style: TextStyle(
+                fontSize: 13.sp,
+                color: Colors.black,
+              ),
+
+              /// 👇 When dropdown opens or closes
+              onTap: () async {
+                // showMenu returns when dropdown closes, so:
+                setState(() => menuOpened = true);
+                await Future.delayed(const Duration(milliseconds: 400));
+                setState(() => menuOpened = false);
+              },
+
               onChanged: (value) {
                 setState(() {
                   selectedCategory = value;
+                  menuOpened = false;
                 });
               },
-              items: categories
-                  .map((cat) => DropdownMenuItem(
-                value: cat,
-                child: Text(cat,
-                    style: TextStyle(
-                        fontSize: 13.sp, color:AllColor.grey)),
-              ))
-                  .toList(),
+
+              /// Dropdown items
+              items: categories.map((cat) {
+                final isSelected = cat == selectedCategory;
+                return DropdownMenuItem(
+                  value: cat,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 150),
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
+                    decoration: BoxDecoration(
+                      color: (menuOpened && isSelected)
+                          ? AllColor.borderColor.withOpacity(0.9)
+                          : Colors.transparent,
+                      border: Border(
+                        bottom: BorderSide(
+                          color: AllColor.borderColor.withOpacity(0.3),
+                          width: 0.6,
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      cat,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight:
+                        isSelected ? FontWeight.w600 : FontWeight.w400,
+                        color: (menuOpened && isSelected)
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
           ),
         ),

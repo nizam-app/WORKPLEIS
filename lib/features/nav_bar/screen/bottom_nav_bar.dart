@@ -22,7 +22,6 @@ class BottomNavBar extends ConsumerWidget {
 
   final List<IconData> _selectedIcons = const [
     Icons.home,
-    Icons.folder,
     Icons.business_center,
     Icons.chat_bubble,
     Icons.person,
@@ -30,7 +29,6 @@ class BottomNavBar extends ConsumerWidget {
 
   final List<IconData> _unselectedIcons = const [
     Icons.home_outlined,
-    Icons.folder_outlined,
     Icons.business_center_outlined,
     Icons.chat_bubble_outline,
     Icons.person_outline,
@@ -38,7 +36,6 @@ class BottomNavBar extends ConsumerWidget {
 
   final List<String> _labels = const [
     "Home",
-    "Task",
     "Project",
     "Messages",
     "Account",
@@ -46,7 +43,6 @@ class BottomNavBar extends ConsumerWidget {
 
   final List<String> _routes = const [
     HomeScreen.routeName,
-    TasksScreen.routeName,
     ProjectScreen.routeName,
    MessageScreen.routeName,
     AccountOverviewScreen.routeName
