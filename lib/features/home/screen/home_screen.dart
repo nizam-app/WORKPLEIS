@@ -74,6 +74,7 @@ class HomeScreen extends StatelessWidget {
                 buttonName: "Next",
                 borderRadius: 25,
                 height: 40,
+                textColor: AllColor.borderColor,
               ),
             ],
           ),

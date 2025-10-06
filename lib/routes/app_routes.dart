@@ -148,23 +148,7 @@ class AppRouter {
         name: RegisterScreen.routeName,
         builder: (context, state) =>  RegisterScreen(),
       ),
-      GoRoute(
-        path: ProjectSetupScreen.routeName,
-        name: ProjectSetupScreen.routeName,
-        builder: (context, state) => const ProjectSetupScreen(),
-      ),GoRoute(
-        path: SpecialRequestScreen1.routeName,
-        name: SpecialRequestScreen1.routeName,
-        builder: (context, state) => const SpecialRequestScreen1(),
-      ),GoRoute(
-        path: SpecialRequestScreen2.routeName,
-        name: SpecialRequestScreen2.routeName,
-        builder: (context, state) => const SpecialRequestScreen2(),
-      ),GoRoute(
-        path: SpecialRequestScreen3.routeName,
-        name: SpecialRequestScreen3.routeName,
-        builder: (context, state) => const SpecialRequestScreen3(),
-      ),GoRoute(
+    GoRoute(
         path: ReceivedRequest.routeName,
         name: ReceivedRequest.routeName,
         builder: (context, state) => const ReceivedRequest(),
@@ -274,6 +258,26 @@ class AppRouter {
             path: ApplicantsScreen.routeName,
             name: ApplicantsScreen.routeName,
             builder: (context, state) =>  ApplicantsScreen(),
+          ),
+          GoRoute(
+            path: ProjectSetupScreen.routeName,
+            name: ProjectSetupScreen.routeName,
+            builder: (context, state) => const ProjectSetupScreen(),
+          ),
+          GoRoute(
+            path: SpecialRequestScreen3.routeName,
+            name: SpecialRequestScreen3.routeName,
+            builder: (context, state) => const SpecialRequestScreen3(),
+          ),
+          GoRoute(
+            path: SpecialRequestScreen1.routeName,
+            name: SpecialRequestScreen1.routeName,
+            builder: (context, state) => const SpecialRequestScreen1(),
+          ),
+          GoRoute(
+            path: SpecialRequestScreen2.routeName,
+            name: SpecialRequestScreen2.routeName,
+            builder: (context, state) => const SpecialRequestScreen2(),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
@@ -6,7 +7,7 @@ import 'package:workpleis/core/widget/global_app_bar.dart';
 import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
 import 'package:workpleis/features/projects/screen/spcial_request_screen1.dart';
 
-import '../widget/custom_bottom_buttons_section.dart';
+import '../widget/custom_back_next_buttons.dart';
 import '../widget/custom_step_progress_section.dart';
 
 class ProjectSetupScreen extends StatelessWidget {
@@ -21,27 +22,26 @@ class ProjectSetupScreen extends StatelessWidget {
         padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            CustomStepProgressSection(activeStep: 0,),
-            SizedBox(height: 20),
-            ProjectTitleSection(),
-            SizedBox(height: 20),
-            CategoryDropdownSection(),
-
+          children: [
+            const CustomStepProgressSection(activeStep: 0),
+            SizedBox(height: 20.h),
+            const ProjectTitleSection(),
+            SizedBox(height: 20.h),
+            const CustomCategoryDropdown(),
+            SizedBox(height: 20.h),
+            CustomBackNextButtons(onBack: () {
+              context.pop();
+            }, onNext: () {
+              context.push(SpecialRequestScreen1.routeName) ;},)
           ],
         ),
       ),
-      bottomNavigationBar:  CustomBottomButtonsSection(onPressed: (){context.push(SpecialRequestScreen1.routeName);},)
+
+
     );
   }
 }
 
-/* ================= Step Progress ================= */
-
-
-
-
-/* ================= Project Title ================= */
 class ProjectTitleSection extends StatelessWidget {
   const ProjectTitleSection({super.key});
 
@@ -50,12 +50,12 @@ class ProjectTitleSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomLabelText(title: 'Project Title',),
+        const CustomLabelText(title: 'Project Title'),
+        SizedBox(height: 6.h),
         TextField(
           controller: TextEditingController(),
           decoration: InputDecoration(
             hintText: "Enter project title",
-
           ),
         ),
       ],
@@ -64,115 +64,98 @@ class ProjectTitleSection extends StatelessWidget {
 }
 
 
-class CategoryDropdownSection extends StatefulWidget {
-  const CategoryDropdownSection({super.key});
+
+final selectedCategoryProvider = StateProvider<String?>((ref) => null);
+
+class CustomCategoryDropdown extends ConsumerWidget {
+  const CustomCategoryDropdown({super.key});
 
   @override
-  State<CategoryDropdownSection> createState() =>
-      _CategoryDropdownSectionState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedCategory = ref.watch(selectedCategoryProvider);
 
-class _CategoryDropdownSectionState extends State<CategoryDropdownSection> {
-  String? selectedCategory;
-  bool menuOpened = false;
+    final categories = [
+      "Compliance",
+      "Specialized Procurement",
+      "Rare & Specialized Procurement",
+      "Technical & Engineering",
+      "Confidential & Sensitive Services",
+      "Executive & VIP Services",
+      "Custom Projects",
+      "Custom",
+    ];
 
-  final categories = [
-    "Compliance",
-    "Complaince",
-    "Specialized Procurement",
-    "Rare & Specialized Procurement",
-    "Technical & Engineering",
-    "Confidential & Sensitive Services",
-    "Executive & VIP Services",
-    "Custom Projects",
-    "Custom",
-  ];
-
-  @override
-  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomLabelText(title: 'Category'),
+        const CustomLabelText(title: "Category"),
         SizedBox(height: 6.h),
-
-        /// Dropdown container
         Container(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           decoration: BoxDecoration(
-            border: Border.all(color: AllColor.borderColor, width: 1.2),
-            borderRadius: BorderRadius.circular(6.r),
+            color: Colors.white,
+            border: Border.all(
+              color: AllColor.borderColor,
+              width: 1.2,
+            ),
+            borderRadius: BorderRadius.circular(12.r),
           ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: selectedCategory,
-              hint: Text(
-                "Select a category",
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  color: AllColor.grey,
-                ),
-              ),
-              isExpanded: true,
-              icon: Icon(
-                Icons.keyboard_arrow_down_rounded,
-                color: AllColor.borderColor,
-              ),
-              dropdownColor: Colors.white,
-              style: TextStyle(
-                fontSize: 13.sp,
-                color: Colors.black,
-              ),
-
-              /// 👇 When dropdown opens or closes
-              onTap: () async {
-                // showMenu returns when dropdown closes, so:
-                setState(() => menuOpened = true);
-                await Future.delayed(const Duration(milliseconds: 400));
-                setState(() => menuOpened = false);
-              },
-
-              onChanged: (value) {
-                setState(() {
-                  selectedCategory = value;
-                  menuOpened = false;
-                });
-              },
-
-              /// Dropdown items
-              items: categories.map((cat) {
-                final isSelected = cat == selectedCategory;
-                return DropdownMenuItem(
-                  value: cat,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 150),
+          child: PopupMenuButton<String>(
+            onSelected: (value) {
+              ref.read(selectedCategoryProvider.notifier).state = value;
+            },
+            itemBuilder: (BuildContext context) {
+              return categories.map((String value) {
+                final isSelected = value == selectedCategory;
+                return PopupMenuItem<String>(
+                  value: value,
+                  height: 48.h,
+                  child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
+                    padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
                     decoration: BoxDecoration(
-                      color: (menuOpened && isSelected)
-                          ? AllColor.borderColor.withOpacity(0.9)
-                          : Colors.transparent,
-                      border: Border(
-                        bottom: BorderSide(
-                          color: AllColor.borderColor.withOpacity(0.3),
-                          width: 0.6,
-                        ),
-                      ),
+                      color: isSelected ? const Color(0xFF4C4470) : Colors.white,
                     ),
                     child: Text(
-                      cat,
+                      value,
                       style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.w400,
-                        color: (menuOpened && isSelected)
-                            ? Colors.white
-                            : Colors.black,
+                        fontSize: 14.sp,
+                        color: isSelected ? Colors.white : Colors.black87,
+                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                       ),
                     ),
                   ),
                 );
-              }).toList(),
+              }).toList();
+            },
+            offset: const Offset(0, -310), // Opens upward
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.r),
+              side: BorderSide(
+                color: AllColor.borderColor.withOpacity(0.6),
+                width: 1.0,
+              ),
+            ),
+            child: SizedBox(
+              height: 48.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      selectedCategory ?? "Select a category",
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: selectedCategory == null ? AllColor.grey : Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Icon(Icons.keyboard_arrow_down_rounded,
+                      color: AllColor.borderColor),
+                ],
+              ),
             ),
           ),
         ),

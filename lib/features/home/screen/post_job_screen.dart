@@ -166,9 +166,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   hintText: "Total amount",
                 )),
             SizedBox(height: 30.h),
-            const CustomCategoryDropdown(),
-
-            // GlobalGetStartedButton(onTap: () { showSearchLocationBottomBar(context);}, buttonName: "Post a Job", color: AllColor.primary,),
+            GlobalGetStartedButton(onTap: () { showSearchLocationBottomBar(context);}, buttonName: "Post a Job", color: AllColor.primary,),
           SizedBox(height: 20.h,)
           ],
         ),
@@ -409,146 +407,187 @@ class _CustomDropdownState extends State<CustomDropdown> {
 }
 
 
-class CustomCategoryDropdown extends StatefulWidget {
-  const CustomCategoryDropdown({super.key});
 
-  @override
-  State<CustomCategoryDropdown> createState() =>
-      _CustomCategoryDropdownState();
+Future<void> showSearchLocationBottomBar(BuildContext context) {
+  return showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+    ),
+    builder: (_) => const SearchLocationBottomBar(),
+  );
 }
 
-class _CustomCategoryDropdownState extends State<CustomCategoryDropdown> {
-  String? selectedCategory;
-  bool showDropdown = false;
+class SearchLocationBottomBar extends StatefulWidget {
+  const SearchLocationBottomBar({super.key});
 
-  final categories = [
-    "Compliance",
-    "Complaince",
-    "Specialized Procurement",
-    "Rare & Specialized Procurement",
-    "Technical & Engineering",
-    "Confidential & Sensitive Services",
-    "Executive & VIP Services",
-    "Custom Projects",
-    "Custom",
+  @override
+  State<SearchLocationBottomBar> createState() =>
+      _SearchLocationBottomBarState();
+}
+
+class _SearchLocationBottomBarState extends State<SearchLocationBottomBar> {
+  final TextEditingController _controller = TextEditingController();
+
+  final List<String> allLocations = [
+    "Banasree, Dhaka",
+    "Feni, Bangladesh",
+    "Chittagong, Bangladesh",
+    "Gulshan, Dhaka",
+    "Mirpur, Dhaka",
+    "Sylhet, Bangladesh",
+    "Rajshahi, Bangladesh",
   ];
 
-  void toggleDropdown() {
+  List<String> filteredLocations = [];
+  bool showDropdown = false;
+
+  void _onSearchChanged(String query) {
+    if (query.isEmpty) {
+      setState(() {
+        showDropdown = false;
+        filteredLocations = [];
+      });
+      return;
+    }
+
+    final results = allLocations
+        .where((loc) => loc.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
     setState(() {
-      showDropdown = !showDropdown;
+      filteredLocations = results;
+      showDropdown = results.isNotEmpty;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const CustomLabelText(title: "Category"),
-        SizedBox(height: 6.h),
-
-        /// Container wrapping dropdown logic
-        Stack(
-          clipBehavior: Clip.none,
-          children: [
-            /// Dropdown button
-            GestureDetector(
-              onTap: toggleDropdown,
-              child: Container(
-                padding:
-                EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border:
-                  Border.all(color: AllColor.borderColor, width: 1.2),
-                  borderRadius: BorderRadius.circular(6.r),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        selectedCategory ?? "Select a category",
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          color: selectedCategory == null
-                              ? AllColor.grey
-                              : Colors.black,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Icon(Icons.keyboard_arrow_down_rounded,
-                        color: AllColor.borderColor),
-                  ],
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 20.w,
+        right: 20.w,
+        top: 20.h,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 20.h,
+      ),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          /// 🔹 Main Column (title, search, map)
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              /// Title
+              Text(
+                "Search the location",
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
                 ),
               ),
-            ),
+              SizedBox(height: 10.h),
 
-            /// Custom dropdown list (below the box)
-            if (showDropdown)
-              Positioned(
-                top: 48.h,
-                left: 0,
-                right: 0,
-                child: Material(
-                  elevation: 2,
-                  borderRadius: BorderRadius.circular(6.r),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(6.r),
-                      border: Border.all(
-                        color: AllColor.borderColor.withOpacity(0.4),
-                      ),
-                    ),
-                    constraints: BoxConstraints(maxHeight: 180.h),
-                    child: ListView.separated(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      itemCount: categories.length,
-                      separatorBuilder: (_, __) => Divider(
-                        height: 1,
-                        color: Colors.grey.shade200,
-                      ),
-                      itemBuilder: (context, index) {
-                        final cat = categories[index];
-                        final isSelected = cat == selectedCategory;
-                        return InkWell(
-                          onTap: () {
-                            setState(() {
-                              selectedCategory = cat;
-                              showDropdown = false;
-                            });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.h, horizontal: 12.w),
-                            color: isSelected
-                                ? AllColor.borderColor
-                                : Colors.transparent,
-                            child: Text(
-                              cat,
-                              style: TextStyle(
-                                fontSize: 13.sp,
-                                color: isSelected
-                                    ? Colors.white
-                                    : Colors.black,
-                                fontWeight: isSelected
-                                    ? FontWeight.w600
-                                    : FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+              /// Search Field
+              TextField(
+                controller: _controller,
+                onChanged: _onSearchChanged,
+                decoration: InputDecoration(
+                  hintText: "Enter your location",
+                  prefixIcon:
+                  const Icon(Icons.search_rounded, color: Colors.grey),
+                  hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey),
+                  contentPadding:
+                  EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide: BorderSide(color: AllColor.borderColor),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide:
+                    BorderSide(color: AllColor.borderColor, width: 1.4),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 60.h),
+
+              /// Map Placeholder (Always visible)
+              Container(
+                width: double.infinity,
+                height: 220.h,
+                decoration: BoxDecoration(
+                  color: AllColor.primary.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                child: Center(
+                  child: Text(
+                    "Map preview placeholder",
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black54,
                     ),
                   ),
                 ),
               ),
-          ],
-        ),
-      ],
+            ],
+          ),
+
+          /// 🔹 Floating Dropdown (on top of map)
+          if (showDropdown)
+            Positioned(
+              top: 90.h,
+              left: 0,
+              right: 0,
+              child: Material(
+                elevation: 3,
+                borderRadius: BorderRadius.circular(10.r),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.r),
+                    border: Border.all(
+                      color: AllColor.borderColor.withOpacity(0.4),
+                    ),
+                  ),
+                  constraints: BoxConstraints(maxHeight: 150.h),
+                  child: ListView.separated(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemCount: filteredLocations.length,
+                    separatorBuilder: (_, __) => Divider(
+                      height: 1,
+                      color: Colors.grey.shade200,
+                    ),
+                    itemBuilder: (context, index) {
+                      final location = filteredLocations[index];
+                      return ListTile(
+                        dense: true,
+                        title: Text(
+                          location,
+                          style: TextStyle(
+                              fontSize: 14.sp, color: Colors.black87),
+                        ),
+                        onTap: () {
+                          _controller.text = location;
+                          setState(() {
+                            showDropdown = false;
+                          });
+                          Navigator.pop(context, location);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

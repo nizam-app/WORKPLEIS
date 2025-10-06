@@ -13,7 +13,7 @@ class ProjectScreen extends ConsumerWidget {
     final selectedStatus = ref.watch(jobStatusProvider);
 
     return Scaffold(
-      appBar: GlobalAppbar(text: "Project"),
+      appBar: GlobalAppbar(text: "My Projects"),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -61,7 +61,8 @@ class JobStatusList extends ConsumerWidget {
       "Submitted",
       "Proposal Sent",
       "In Progress",
-      "Completed",
+      "In Review",
+      "Delivered", // ← new
     ];
 
     return SizedBox(
@@ -146,9 +147,8 @@ class JobCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// 🔹 Header Row (title + status chip)
+          /// Header (title + status chip)
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Text(
@@ -157,91 +157,173 @@ class JobCard extends StatelessWidget {
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.black,
-                    fontFamily: "bodyFont"
+                    fontFamily: "bodyFont",
                   ),
                 ),
               ),
-              Container(
-                padding:
-                EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: AllColor.primary,
-                  borderRadius: BorderRadius.circular(20.r),
-                ),
-                child: Text(
-                  status,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                      fontFamily: "bodyFont"
-                  ),
-                ),
-              ),
+              _StatusChip(text: status),
             ],
           ),
           SizedBox(height: 8.h),
 
-          /// 🔹 Details
-          Row(
-            children: [
-              const Icon(Icons.local_shipping_outlined,
-                  size: 18, color: Color(0xFF7A6FA2)),
-              SizedBox(width: 6.w),
-              Text(
-                time,
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  color: const Color(0xFF7A6FA2),
-                    fontFamily: "bodyFont"
-                ),
-              ),
-            ],
-          ),
+          /// Details
+          _DetailRow(icon: Icons.timer, text: time),
           SizedBox(height: 6.h),
-
-          Row(
-            children: [
-              const Icon(Icons.request_quote_outlined,
-                  size: 18, color: Color(0xFF7A6FA2)),
-              SizedBox(width: 6.w),
-              Text(
-                budget,
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  color: const Color(0xFF7A6FA2),
-                    fontFamily: "bodyFont"
-                ),
-              ),
-            ],
-          ),
+          _DetailRow(icon: Icons.request_quote_outlined, text: budget),
           SizedBox(height: 6.h),
+          _DetailRow(icon: Icons.call_outlined, text: period, expandable: true),
+          SizedBox(height: 10.h),
 
-          Row(
-            children: [
-              const Icon(Icons.call_outlined,
-                  size: 18, color: Color(0xFF7A6FA2)),
-              SizedBox(width: 6.w),
-              Expanded(
-                child: Text(
-                  period,
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    color: const Color(0xFF7A6FA2),
-                  ),
-                ),
-              ),
-              Text(
-                price,
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black,
-                ),
-              ),
-            ],
-          ),
+          /// Bottom actions + price
+          _BottomBar(status: status, price: price),
         ],
+      ),
+    );
+  }
+}
+
+class _StatusChip extends StatelessWidget {
+  const _StatusChip({required this.text});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        color: AllColor.primary, // lime chip (mock-এর মতো)
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w600,
+          color: Colors.black,
+          fontFamily: "bodyFont",
+        ),
+      ),
+    );
+  }
+}
+
+class _DetailRow extends StatelessWidget {
+  const _DetailRow({
+    required this.icon,
+    required this.text,
+    this.expandable = false,
+  });
+  final IconData icon;
+  final String text;
+  final bool expandable;
+
+  @override
+  Widget build(BuildContext context) {
+    final content = Text(
+      text,
+      style: TextStyle(
+        fontSize: 13.sp,
+        color: const Color(0xFF7A6FA2),
+        fontFamily: "bodyFont",
+      ),
+      overflow: TextOverflow.ellipsis,
+    );
+    return Row(
+      children: [
+        Icon(icon, size: 18, color: const Color(0xFF7A6FA2)),
+        SizedBox(width: 6.w),
+        if (expandable) Expanded(child: content) else content,
+      ],
+    );
+  }
+}
+
+class _BottomBar extends StatelessWidget {
+  const _BottomBar({required this.status, required this.price});
+  final String status;
+  final String price;
+
+  @override
+  Widget build(BuildContext context) {
+    final showButtons = status != "Submitted";
+
+    final buttons = switch (status) {
+      "Proposal Sent" => [
+        _PillButton.purple("View Proposal", onTap: () {}),
+      ],
+      "In Progress" => [
+        _PillButton.purple("Track Project", onTap: () {}),
+      ],
+      "In Review" => [
+        _PillButton.lime("View Details", onTap: () {}),
+        SizedBox(width: 8.w),
+        _PillButton.purple("Track Project", onTap: () {}), // ← both buttons
+      ],
+      "Delivered" => [
+        _PillButton.lime("View Details", onTap: () {}),   // ← only this
+      ],
+      _ => <Widget>[],
+    };
+
+    if (!showButtons) {
+      return Row(children: [
+        const Spacer(),
+        Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700, color: Colors.black)),
+      ]);
+    }
+
+    return Row(children: [
+      Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700, color: Colors.black)),
+      const Spacer(),
+      ...buttons,
+    ]);
+  }
+}
+
+
+class _PillButton extends StatelessWidget {
+  const _PillButton._(this.label, this.bg, this.fg, {required this.onTap});
+  final String label;
+  final Color bg;
+  final Color fg;
+  final VoidCallback onTap;
+
+  factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
+      _PillButton._(
+        label,
+        const Color(0xFFA49ACF), // শেডেড পার্পল (mock vibe)
+        Colors.white,
+        onTap: onTap,
+      );
+
+  factory _PillButton.lime(String label, {required VoidCallback onTap}) =>
+      _PillButton._(
+        label,
+        AllColor.primary, // lime
+        Colors.black,
+        onTap: onTap,
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: bg,
+      borderRadius: BorderRadius.circular(22.r),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(22.r),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w700,
+              color: fg,
+              fontFamily: "bodyFont",
+            ),
+          ),
+        ),
       ),
     );
   }

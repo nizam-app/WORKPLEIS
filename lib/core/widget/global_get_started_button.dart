@@ -8,7 +8,7 @@ class GlobalGetStartedButton extends StatelessWidget {
     this.buttonName = "Get Started",
     required this.onTap,
     this.color = AllColor.white,
-     this.borderRadius = 12,  this.height = 50,
+     this.borderRadius = 12,  this.height = 50,  this.textColor = Colors.black,
   });
 
   final String buttonName;
@@ -16,6 +16,7 @@ class GlobalGetStartedButton extends StatelessWidget {
   final Color color;
   final double borderRadius;
   final double height ;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class GlobalGetStartedButton extends StatelessWidget {
             style: TextStyle(
               fontSize: 18.sp, // responsive font
               fontWeight: FontWeight.w600,
-              color: Colors.black,
+              color: textColor,
             ),
           ),
         ),
