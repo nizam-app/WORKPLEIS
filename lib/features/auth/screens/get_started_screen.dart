@@ -10,13 +10,36 @@ import 'package:workpleis/features/auth/logic/signup_screen_check.dart';
 import 'package:workpleis/features/auth/screens/enter_your_email.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
 
-class GetStartedScreen extends ConsumerWidget {
+class GetStartedScreen extends ConsumerStatefulWidget {
   const GetStartedScreen({super.key,  this.title});
   static const String routeName = '/get_started_screen';
   final String? title;
 
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<GetStartedScreen> createState() => _OnboardingVideoPageState();
+}
+
+class _OnboardingVideoPageState extends ConsumerState<GetStartedScreen> {
+  
+  @override
+  Widget build(BuildContext context,  ) {
+    // 👇 listen must be inside build()
+    ref.listen<bool>(videoSequenceCompletedProvider, (prev, next) {
+      if (next == true) {
+        // navigate after the current frame to avoid setState during build
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          final title = widget.title;
+          if (title == "login") {
+            context.push(LoginScreen.routeName);
+          } else {
+            context.push(EnterYourEmail.routeName);
+            checkForBusiness(ref, title ?? '');
+          }
+        });
+      }
+    });
+    
     final controller = ref.watch(videoPlayerControllerProvider);
 
     return Scaffold(
@@ -46,28 +69,7 @@ class GetStartedScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            /// ✅ Get Started Button
-            Positioned(
-              bottom: 50,
-              left: 0,
-              right: 0,
-              child: GlobalGetStartedButton(
-
-                onTap: () {
-                  if (title =="login") {
-                    context.push(LoginScreen.routeName);
-                  }
-                  else{
-
-                    context.push(EnterYourEmail.routeName);
-                    checkForBusiness(ref, title ?? '');
-
-                  }
-
-                 },
-                color: AllColor.primary,
-              ),
-            ),
+            
                     ],
                   ),
           )

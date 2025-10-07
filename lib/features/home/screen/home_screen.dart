@@ -1,28 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:workpleis/core/constants/image_control/image_path.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
-import 'package:workpleis/features/Payment/screen/payment_methods_screen.dart';
-import 'package:workpleis/features/account/screen/account_screen.dart';
-import 'package:workpleis/features/auth/screens/login_screen.dart';
-import 'package:workpleis/features/home/screen/post_job_screen.dart';
-import 'package:workpleis/features/message/screen/message_screen.dart';
-import 'package:workpleis/features/my_task/screen/my_task_screen.dart';
-import 'package:workpleis/features/notification/screen/notificaition_screen.dart';
-import 'package:workpleis/features/projects/screen/special_request_screen.dart';
-import 'package:workpleis/features/security/screen/security_faq_screen.dart';
-import 'package:workpleis/features/security/screen/security_screen.dart';
-import 'package:workpleis/features/verification/screen/verification_screen.dart';
-import '../../../core/constants/color_control/all_color.dart';
-import '../../../core/utils/global_role_check.dart';
-import '../widget/custom_category_type.dart';
-import '../widget/custom_filter_chips.dart';
-import '../widget/custom_job_posts.dart';
-import '../widget/custom_search_box_bottom.dart';
 
+import 'package:workpleis/features/home/screen/post_job_screen.dart';
+
+import 'package:workpleis/features/projects/screen/special_request_screen.dart';
+
+import '../../../core/constants/color_control/all_color.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 

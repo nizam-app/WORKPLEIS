@@ -18,7 +18,6 @@ import 'package:workpleis/features/home/screen/home_screen.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/home/screen/tasks_screen.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
-import 'package:workpleis/features/message/screen/message_screen.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
@@ -123,7 +122,10 @@ class AppRouter {
       ), GoRoute(
         path: OnboardingScreen02.routeName,
         name: OnboardingScreen02.routeName,
-        builder: (context, state) => const OnboardingScreen02(),
+        builder: (context, state) {
+          final screenName = state.extra is String ? state.extra as String : null;
+          return OnboardingScreen02(screenName: screenName);
+        },
       ),
       GoRoute(
         path: OnboardingScreen01.routeName,
@@ -200,11 +202,6 @@ class AppRouter {
             path: TasksScreen.routeName,
             name: TasksScreen.routeName,
             builder: (context, state) => const TasksScreen(),
-          ),
-          GoRoute(
-            path: MessageScreen.routeName,
-            name: MessageScreen.routeName,
-            builder: (context, state) => const MessageScreen(),
           ),
           GoRoute(
             path: VerificationScreen.routeName,

@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-import 'package:workpleis/features/message/screen/message_screen.dart';
+import 'package:workpleis/features/message/screen/chat_screen.dart';
+
 
 class RequestTrackerScreen extends StatelessWidget {
   const RequestTrackerScreen({super.key});
@@ -320,7 +321,7 @@ class ProjectContactSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.r),
               ),
             ),
-            onPressed: () {context.push(MessageScreen.routeName);},
+            onPressed: () {context.push(ChatScreen.routeName);},
             child: Text("Message",
                 style: TextStyle(fontSize: 12.sp, color: AllColor.white)),
           )
