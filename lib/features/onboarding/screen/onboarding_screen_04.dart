@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/features/auth/screens/enter_your_email.dart';
 import 'package:workpleis/features/auth/screens/get_started_screen.dart';
+import 'package:workpleis/features/onboarding/logic/check_individual.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
 import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_logo.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
@@ -128,11 +129,11 @@ class _Onboarding02BottonbarState
                     child: CustomPillButton(
                       label: "For Individual",
                       isSelected: selected == AuthTab.login,
-                      onPressed: () {
+                      onPressed: ()async {
                         ref.read(authTabProvider.notifier).state = AuthTab.login;
                         widget.onLogin?.call();
-                        context.push(OnboardingScreen02.routeName,
-                        extra: "individual");
+                        await saveCheckBusiness(ref, 'individual');
+                        context.push(OnboardingScreen02.routeName,);
                       },
                     ),
                   ),
@@ -141,12 +142,12 @@ class _Onboarding02BottonbarState
                     child: CustomPillButton(
                       label: "For Business",
                       isSelected: selected == AuthTab.signup,
-                      onPressed: () {
+                      onPressed: ()async {
                         ref.read(authTabProvider.notifier).state = AuthTab.signup;
                         widget.onSignup?.call();
+                        await saveCheckBusiness(ref, 'business');
                         context.push(
                           OnboardingScreen02.routeName,
-                          extra: "business",
 
                         );
                       },

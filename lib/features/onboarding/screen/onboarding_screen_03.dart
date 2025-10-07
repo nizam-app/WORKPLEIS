@@ -8,6 +8,7 @@ import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_log
 import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
 
+import '../logic/check_client.dart';
 import 'onboarding_screen_04.dart' show OnboardingScreen04;
 
 class OnboardingScreen03 extends StatelessWidget {
@@ -99,33 +100,34 @@ class Onboarding02BottomNavBar extends ConsumerWidget {
               Text("Select your role",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 20)),
               SizedBox(height: 15.h),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomPillButton(
-                      label: "I'm a Client",
-                      isSelected: selected == AuthTab.login,
-                      onPressed: () {
-                        ref.read(authTabProvider.notifier).state = AuthTab.login;
-                        onLogin?.call();
-                        context.push(OnboardingScreen04.routeName);
-                      },
-                    ),
+              Row(children: [
+                Expanded(
+                  child: CustomPillButton(
+                    label: "I'm a Client",
+                    isSelected: selected == AuthTab.login,
+                    onPressed: () async {
+                      ref.read(authTabProvider.notifier).state = AuthTab.login;
+                      await saveRole(ref, 'client');
+                      onLogin?.call();
+                      context.push(OnboardingScreen04.routeName);
+                    },
                   ),
-                  SizedBox(width: 15.w),
-                  Expanded(
-                    child: CustomPillButton(
-                      label: "I'm a Service Provider",
-                      isSelected: selected == AuthTab.signup,
-                      onPressed: () {
-                        ref.read(authTabProvider.notifier).state = AuthTab.signup;
-                        onSignup?.call();
-                        context.push(OnboardingScreen04.routeName);
-                      },
-                    ),
+                ),
+                SizedBox(width: 15.w),
+                Expanded(
+                  child: CustomPillButton(
+                    label: "I'm a Service Provider",
+                    isSelected: selected == AuthTab.signup,
+                    onPressed: () async {
+                      ref.read(authTabProvider.notifier).state = AuthTab.signup;
+                      await saveRole(ref, 'provider');
+                      onSignup?.call();
+                      context.push(OnboardingScreen04.routeName);
+                    },
                   ),
-                ],
-              ),
+                ),
+              ])
+
               // ⛔️ আর কোনো extra bottom SizedBox লাগবে না
             ],
           ),

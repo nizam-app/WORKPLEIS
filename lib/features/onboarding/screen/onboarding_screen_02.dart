@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/features/auth/logic/signup_screen_check.dart';
 import 'package:workpleis/features/auth/screens/enter_your_email.dart';
 import 'package:workpleis/features/auth/screens/get_started_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/community_guidenlines_screen.dart';
@@ -14,6 +15,8 @@ import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
 import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_logo.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
+
+import '../../auth/logic/get_started_video_reverpod.dart';
 
 class OnboardingScreen02 extends StatelessWidget {
   const OnboardingScreen02({super.key, this.screenName = "login"});
@@ -144,6 +147,7 @@ class _Onboarding02BottonbarState
                         ref.read(authTabProvider.notifier).state = AuthTab.login;
                         widget.onLogin?.call();
                         context.push(GetStartedScreen.routeName, extra: "login");
+                        ref.invalidate(loadRoleProvider);
                       },
                     ),
                   ),
@@ -155,13 +159,7 @@ class _Onboarding02BottonbarState
                       onPressed: () {
                         ref.read(authTabProvider.notifier).state = AuthTab.signup;
                         widget.onSignup?.call();
-                        if (widget.screenName == "business") {
-                          context.push(GetStartedScreen.routeName,extra: "business");
-                        }      else{
-                          context.push(EnterYourEmail.routeName,
-                          );
-                        }
-                       
+                          context.push(EnterYourEmail.routeName,);
                       },
                     ),
                   ),

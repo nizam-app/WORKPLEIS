@@ -1,101 +1,51 @@
 import 'dart:ui';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
-/// ভিডিও সিকোয়েন্স শেষ হয়েছে কি না।
-final videoSequenceCompletedProvider = StateProvider<bool>((ref) => false);
+// role
+final roleProvider = StateProvider<String?>((_) => null);
+final loadRoleProvider = FutureProvider<String?>((ref) async {
+  final p = await SharedPreferences.getInstance();
+  final r = p.getString('role');
+  ref.read(roleProvider.notifier).state = r;
+  return r;
+});
+final isClientProvider = Provider<bool>((ref) =>
+(ref.watch(roleProvider) ?? '').trim().toLowerCase() == 'client');
 
-final videoPlayerControllerProvider =
-StateNotifierProvider<VideoRotatorNotifier, VideoPlayerController?>(
-      (ref) => VideoRotatorNotifier(ref),
-);
+// video sets
+const _clientV = ['assets/videos/1.mp4','assets/videos/2.mp4','assets/videos/3.mp4','assets/videos/4.mp4'];
+const _provV   = ['assets/videos/vendor1.mp4','assets/videos/vendor2.mp4','assets/videos/vendor3.mp4','assets/videos/vendor4.mp4'];
+final videoPathsProvider = Provider<List<String>>((ref) =>
+ref.watch(isClientProvider) ? _clientV : _provV);
 
-class VideoRotatorNotifier extends StateNotifier<VideoPlayerController?> {
-  VideoRotatorNotifier(this.ref) : super(null) {
-    _initializeAndPlay(0);
-  }
+// sequence flag
+final videoSequenceCompletedProvider = StateProvider<bool>((_) => false);
 
-  final Ref ref;
+// controller rotator
+final videoCtlP = StateNotifierProvider<_Rot, VideoPlayerController?>((ref)=>_Rot(ref));
+class _Rot extends StateNotifier<VideoPlayerController?> {
+  _Rot(this.ref):super(null){ ref.listen<List<String>>(videoPathsProvider, (_, __)=>restart()); _play(0); }
+  final Ref ref; int _i=0; bool _done=false; VoidCallback? _lis;
+  List<String> get _paths => ref.read(videoPathsProvider);
 
-  final List<String> _videoPaths = const [
-    'assets/videos/1.mp4',
-    'assets/videos/2.mp4',
-    'assets/videos/3.mp4',
-    'assets/videos/4.mp4',
-  ];
-
-  int _currentIndex = 0;
-  bool _hasCompleted = false; // একবারই ট্রিগার করবে
-
-  VoidCallback? _attachedListener;
-
-  Future<void> _initializeAndPlay(int index) async {
-    // আগের কন্ট্রোলার/লিসেনার ক্লিনআপ
-    if (state != null) {
-      if (_attachedListener != null) {
-        state!.removeListener(_attachedListener!);
-      }
-      await state!.dispose();
-    }
-
-    final controller = VideoPlayerController.asset(_videoPaths[index]);
-    await controller.initialize();
-    controller.setLooping(false);
-    await controller.play();
-
-    // সঠিকভাবে remove করার জন্য listener রেফারেন্স ধরে রাখি
-    _attachedListener = () async {
-      final v = controller.value;
-      final ended = !v.isPlaying &&
-          v.position >= v.duration &&
-          v.duration != Duration.zero;
-
-      if (ended) {
-        // এই কন্ট্রোলার থেকে লিসেনার খুলে দিন
-        if (_attachedListener != null) controller.removeListener(_attachedListener!);
-
-        // লাস্ট ভিডিও কিনা দেখুন
-        final isLast = _currentIndex >= _videoPaths.length - 1;
-
-        if (isLast) {
-          if (!_hasCompleted) {
-            _hasCompleted = true;
-            // সিকোয়েন্স শেষ—স্টেট ক্লিয়ার করুন
-            await controller.dispose();
-            state = null;
-
-            // Riverpod ফ্ল্যাগ true করুন (UI থেকে ন্যাভিগেট করবে)
-            ref.read(videoSequenceCompletedProvider.notifier).state = true;
-          }
-        } else {
-          // পরের ভিডিও প্লে করুন
-          _currentIndex++;
-          _initializeAndPlay(_currentIndex);
-        }
-      }
+  Future<void> _play(int i) async {
+    if(state!=null){ if(_lis!=null) state!.removeListener(_lis!); await state!.dispose(); }
+    final c = VideoPlayerController.asset(_paths[i]);
+    await c.initialize(); c.setLooping(false); await c.play();
+    _lis = () async {
+      final v=c.value, ended=!v.isPlaying && v.position>=v.duration && v.duration!=Duration.zero;
+      if(!ended) return;
+      if(_lis!=null) c.removeListener(_lis!);
+      final last = _i>=_paths.length-1;
+      if(last){ if(_done) return; _done=true; await c.dispose(); state=null; ref.read(videoSequenceCompletedProvider.notifier).state=true; }
+      else { _i++; _play(_i); }
     };
-
-    controller.addListener(_attachedListener!);
-    state = controller;
+    c.addListener(_lis!); state=c;
   }
 
-  /// চাইলে আবার শুরু করতে পারবেন
-  Future<void> restart() async {
-    _hasCompleted = false;
-    ref.read(videoSequenceCompletedProvider.notifier).state = false;
-    _currentIndex = 0;
-    await _initializeAndPlay(_currentIndex);
-  }
-
-  @override
-  Future<void> dispose() async {
-    if (state != null) {
-      if (_attachedListener != null) {
-        state!.removeListener(_attachedListener!);
-      }
-      await state!.dispose();
-    }
-    super.dispose();
-  }
+  Future<void> restart() async { _done=false; ref.read(videoSequenceCompletedProvider.notifier).state=false; _i=0; await _play(0); }
+  @override Future<void> dispose() async { if(state!=null){ if(_lis!=null) state!.removeListener(_lis!); await state!.dispose(); } super.dispose(); }
 }

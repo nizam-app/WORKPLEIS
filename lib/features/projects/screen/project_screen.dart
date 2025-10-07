@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
+import 'package:workpleis/features/projects/screen/request_tracker.dart';
+import 'package:workpleis/features/projects/screen/view_proposal_screen.dart';
 
 class ProjectScreen extends ConsumerWidget {
   const ProjectScreen({super.key});
@@ -249,10 +252,10 @@ class _BottomBar extends StatelessWidget {
 
     final buttons = switch (status) {
       "Proposal Sent" => [
-        _PillButton.purple("View Proposal", onTap: () {}),
+        _PillButton.purple("View Proposal", onTap: () {context.push(ViewProposalScreen.routeName);}),
       ],
       "In Progress" => [
-        _PillButton.purple("Track Project", onTap: () {}),
+        _PillButton.purple("Track Project", onTap: () {context.push(RequestTrackerScreen.routeName);}),
       ],
       "In Review" => [
         _PillButton.lime("View Details", onTap: () {}),
@@ -291,7 +294,7 @@ class _PillButton extends StatelessWidget {
   factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-        const Color(0xFFA49ACF), // শেডেড পার্পল (mock vibe)
+         AllColor.borderColor, // শেডেড পার্পল (mock vibe)
         Colors.white,
         onTap: onTap,
       );

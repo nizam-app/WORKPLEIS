@@ -23,6 +23,7 @@ import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_04.dart';
 import 'package:workpleis/features/projects/screen/special_request_screen3.dart';
+import 'package:workpleis/features/projects/screen/view_proposal_screen.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
 import '../features/Payment/screen/payment_methods_screen.dart';
 import '../features/account/screen/account_screen.dart';
@@ -275,6 +276,10 @@ class AppRouter {
             path: SpecialRequestScreen2.routeName,
             name: SpecialRequestScreen2.routeName,
             builder: (context, state) => const SpecialRequestScreen2(),
+          ), GoRoute(
+            path: ViewProposalScreen.routeName,
+            name: ViewProposalScreen.routeName,
+            builder: (context, state) => const ViewProposalScreen(),
           ),
         ],
       ),
