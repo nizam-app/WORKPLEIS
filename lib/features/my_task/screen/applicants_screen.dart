@@ -62,7 +62,7 @@ class ApplicantsScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(14.w),
               decoration: BoxDecoration(
-                border: Border.all(color: AllColor.logoColor),
+                border: Border.all(color: AllColor.borderColor),
                 borderRadius: BorderRadius.circular(12.r),
                 color: AllColor.white,
               ),
@@ -180,7 +180,7 @@ class ApplicantsScreen extends StatelessWidget {
               // Avatar
               CircleAvatar(
                 radius: 24.r,
-                backgroundColor: AllColor.logoColor.withOpacity(0.3),
+                backgroundColor: AllColor.borderColor.withOpacity(0.3),
                 child: Text(applicant["name"]![0],
                     style: TextStyle(
                         fontWeight: FontWeight.bold,

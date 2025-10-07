@@ -38,9 +38,22 @@ class ChatScreen extends StatelessWidget {
         avatar: "https://i.pravatar.cc/150?img=32",
       ),
     ];
-
+    TextTheme theme = Theme.of(context).textTheme;
     return Scaffold(
-     appBar: GlobalAppbar(text: "UserName"),
+
+     //appBar: GlobalAppbar( text: "UserName"),
+      appBar: AppBar(
+        leading: Icon(Icons.arrow_back_ios),
+        title: Column(
+
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Emilly Davis", style:theme.bodySmall!.copyWith(fontSize:24 ),),
+            Text("Deep house cleaning service needed", style:theme.bodySmall!.copyWith(fontSize:16 ),),
+          ],
+        ),
+      ),
       body: Column(
         children: [
           // Chat List
@@ -50,6 +63,7 @@ class ChatScreen extends StatelessWidget {
               itemCount: messages.length,
               itemBuilder: (context, index) {
                 return ChatBubble(message: messages[index]);
+                
               },
             ),
           ),

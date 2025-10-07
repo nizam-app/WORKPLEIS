@@ -44,7 +44,7 @@ class VerificationPendingCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(Icons.verified, color: AllColor.logoColor, size: 28.sp),
+          Icon(Icons.verified, color: AllColor.borderColor, size: 28.sp),
           SizedBox(width: 12.w),
           Expanded(
             child: Column(
@@ -185,7 +185,7 @@ class VerificationStepTile extends StatelessWidget {
               ),
             ),
             if (status == "done")
-              Icon(Icons.check_circle, color: AllColor.logoColor, size: 20.sp),
+              Icon(Icons.check_circle, color: AllColor.borderColor, size: 20.sp),
             if (status == "verify")
               TextButton(
                 onPressed: () {},
@@ -306,11 +306,11 @@ class VerifyPhoneBottomSheet extends StatelessWidget {
               EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.r),
-                borderSide: BorderSide(color: AllColor.logoColor, width: 1.2),
+                borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.r),
-                borderSide: BorderSide(color: AllColor.logoColor, width: 1.5),
+                borderSide: BorderSide(color: AllColor.borderColor, width: 1.5),
               ),
             ),
           ),

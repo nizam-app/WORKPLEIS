@@ -24,15 +24,15 @@ class CustomGmailButton extends StatelessWidget {
         // ── Divider with text
         Row(
           children: [
-            Expanded(child: Container(height: 1, color: AllColor.grey.withOpacity(.2))),
+            Expanded(child: Container(height: 1, color: AllColor.black.withOpacity(.1))),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: Text(
-                'OR CONTINUW WITH',
+                'OR',
                 style: TextStyle(fontSize: 11.sp, color: AllColor.grey),
               ),
             ),
-            Expanded(child: Container(height: 1, color: AllColor.grey.withOpacity(.2))),
+            Expanded(child: Container(height: 1, color: AllColor.black.withOpacity(.1))),
           ],
         ),
         SizedBox(height: 14.h),
@@ -58,12 +58,12 @@ class CustomGmailButton extends StatelessWidget {
                   height: 18.h,
                 ),
                 SizedBox(width: 8.w),
-                Text('Continue with Google', style: TextStyle(fontSize: 14.sp)),
+                Text('Sign in with Google', style: TextStyle(fontSize: 14.sp)),
               ],
             ),
           ),
         ),
-        SizedBox(height: 22.h),
+        SizedBox(height: 30.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -71,6 +71,7 @@ class CustomGmailButton extends StatelessWidget {
               "Don't have an account? ",
               style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
             ),
+            SizedBox(width: 5.w),
             GestureDetector(
               onTap: onTop,
               child: Text(

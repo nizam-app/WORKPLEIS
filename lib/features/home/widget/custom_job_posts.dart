@@ -87,7 +87,7 @@ class JobListScreen extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 14.h), // spacing between cards
         padding: EdgeInsets.all(14.w),
         decoration: BoxDecoration(
-          border: Border.all(color: AllColor.logoColor),
+          border: Border.all(color: AllColor.borderColor),
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Column(
@@ -158,7 +158,7 @@ class JobListScreen extends StatelessWidget {
                     Text("Remote",
                         style: TextStyle(fontSize: 10.sp, color: AllColor.black87)),
                     SizedBox(width: 8.w),
-                    Icon(Icons.verified, size: 14.sp, color: AllColor.logoColor),
+                    Icon(Icons.verified, size: 14.sp, color: AllColor.borderColor),
                     SizedBox(width: 4.w),
                     Text("Payment verified",
                         style: TextStyle(fontSize: 10.sp, color: AllColor.black87)),
@@ -185,7 +185,7 @@ class JobListScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: AllColor.white,
         borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(color: AllColor.logoColor, width: 2),
+        border: Border.all(color: AllColor.borderColor, width: 2),
       ),
       child: Text(
         text,

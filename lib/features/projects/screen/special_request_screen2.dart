@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
 import 'package:workpleis/features/projects/screen/special_request_screen3.dart';
+import 'package:workpleis/features/projects/widget/custom_back_next_buttons.dart';
 
-import '../widget/custom_bottom_buttons_section.dart';
 import '../widget/custom_step_progress_section.dart';
 
 // =============== MAIN SCREEN ===============
@@ -21,20 +21,23 @@ class SpecialRequestScreen2 extends StatelessWidget {
         padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            CustomStepProgressSection(activeStep:2,),
-            SizedBox(height: 20),
-            BudgetRangeSection(),
-            SizedBox(height: 20),
-            SupportingDocumentsSection(),
-            SizedBox(height: 20),
-            DisclaimerSection(),
+          children: [
+            const CustomStepProgressSection(activeStep:2,),
+            const SizedBox(height: 20),
+            const BudgetRangeSection(),
+            const SizedBox(height: 20),
+            const SupportingDocumentsSection(),
+            const SizedBox(height: 20),
+            const DisclaimerSection(),
+            SizedBox(height: 25,),
+            CustomBackNextButtons(onBack: () {
+              context.pop();
+            }, onNext: () {
+              context.push(SpecialRequestScreen3.routeName) ;},)
           ],
         ),
       ),
-      bottomNavigationBar:  CustomBottomButtonsSection(
-        onPressed: () {context.push(
-            SpecialRequestScreen3.routeName);},),
+
     );
   }
 }
@@ -65,7 +68,7 @@ class StepCircle extends StatelessWidget {
         CircleAvatar(
           radius: 14.r,
           backgroundColor:
-          isCompleted || isActive ? AllColor.logoColor : AllColor.grey200,
+          isCompleted || isActive ? AllColor.borderColor : AllColor.grey200,
           child: isCompleted
               ? Icon(Icons.check, size: 14.sp, color: AllColor.white)
               : Text(
@@ -118,7 +121,7 @@ class _BudgetRangeSectionState extends State<BudgetRangeSection> {
           decoration: BoxDecoration(
             border: Border.all(
                 color: selectedBudget == b
-                    ? AllColor.logoColor
+                    ? AllColor.borderColor
                     : AllColor.grey300,
                 width: 1.2),
             borderRadius: BorderRadius.circular(8.r),
@@ -130,7 +133,7 @@ class _BudgetRangeSectionState extends State<BudgetRangeSection> {
                     ? Icons.radio_button_checked
                     : Icons.radio_button_off,
                 color: selectedBudget == b
-                    ? AllColor.logoColor
+                    ? AllColor.borderColor
                     : AllColor.grey,
                 size: 20.sp,
               ),

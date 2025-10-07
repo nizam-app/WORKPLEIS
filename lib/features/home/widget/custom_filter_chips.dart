@@ -25,9 +25,9 @@ class _CustomFilterChipsState extends State<CustomFilterChips> {
         margin: EdgeInsets.only(right: 8.w),
         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
         decoration: BoxDecoration(
-          color: selected ? AllColor.logoColor : AllColor.white,
+          color: selected ? AllColor.borderColor : AllColor.white,
           borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(color: AllColor.logoColor),
+          border: Border.all(color: AllColor.borderColor),
         ),
         child: Center(
           child: Text(

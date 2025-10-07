@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/core/widget/global_aleart_box.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-import 'package:workpleis/features/projects/screen/recieved_request.dart';
-import 'package:workpleis/features/projects/screen/special_request_screen2.dart';
 
-import '../widget/custom_bottom_buttons_section.dart';
+import '../widget/custom_back_next_buttons.dart';
 import '../widget/custom_step_progress_section.dart';
 
 class SpecialRequestScreen3 extends StatefulWidget {
@@ -71,14 +70,14 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
               hint: "When is the best time to reach you?",
               value: selectedTime,
               options: timeOptions,
-              onChanged: (val) => setState(() => selectedTime = val),
+              onChanged: (val) => setState(() => selectedTime = val)
             ),
+            SizedBox(height: 20.h,),
+            CustomBackNextButtons(onBack: () {}, onNext: () { globalShowAlertDialog(context: context, oneTap: () {},message: "Project request submitted successfuly"); }, buttonText: "Submit",)
           ],
         ),
       ),
-      bottomNavigationBar:  CustomBottomButtonsSection(text: "Submit Special Request",
-        onPressed: () {context.push(
-            ReceivedRequest.routeName);},),
+
     );
   }
 
@@ -101,11 +100,11 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
         contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.r),
-          borderSide: BorderSide(color: AllColor.logoColor, width: 1.2),
+          borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.r),
-          borderSide: BorderSide(color: AllColor.logoColor, width: 1.5),
+          borderSide: BorderSide(color: AllColor.borderColor, width: 1.5),
         ),
       ),
     );
@@ -120,7 +119,7 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       decoration: BoxDecoration(
-        border: Border.all(color: AllColor.logoColor, width: 1.2),
+        border: Border.all(color: AllColor.borderColor, width: 1.2),
         borderRadius: BorderRadius.circular(6.r),
       ),
       child: DropdownButtonHideUnderline(
@@ -130,14 +129,14 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
               style: TextStyle(fontSize: 13.sp, color: AllColor.grey)),
           isExpanded: true,
           icon: Icon(Icons.keyboard_arrow_down, color: AllColor.black),
-          dropdownColor: AllColor.black,
+          dropdownColor: AllColor.white,
           style: TextStyle(fontSize: 13.sp, color: AllColor.white),
           onChanged: onChanged,
           items: options
               .map((opt) => DropdownMenuItem(
             value: opt,
             child: Text(opt,
-                style: TextStyle(fontSize: 13.sp, color: AllColor.white)),
+                style: TextStyle(fontSize: 13.sp, color: AllColor.black)),
           ))
               .toList(),
         ),

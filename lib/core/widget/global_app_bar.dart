@@ -15,17 +15,20 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AllColor.black, // dark color like screenshot
+      backgroundColor: AllColor.borderColor, // dark color like screenshot
       elevation: 0,
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back_ios,
-          size: 20.sp,
-          color: AllColor.white,
+      leading: Padding(
+        padding:  EdgeInsets.only(left: 20.w),
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 20.sp,
+            color: AllColor.white,
+          ),
+          onPressed: () {
+           context.pop();
+          },
         ),
-        onPressed: () {
-         context.pop();
-        },
       ),
       centerTitle: true,
       title: Text(

@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/features/account/screen/account_screen.dart';
-import 'package:workpleis/features/home/screen/home_screen.dart';
-import 'package:workpleis/features/message/screen/message_screen.dart';
+import 'package:workpleis/features/message/screen/chat_screen.dart';
 
+import '../../home/screen/home_screen.dart';
 import '../../home/screen/tasks_screen.dart';
 import '../../projects/screen/project_screen.dart';
 import '../../verification/screen/verification_screen.dart';
@@ -22,7 +22,6 @@ class BottomNavBar extends ConsumerWidget {
 
   final List<IconData> _selectedIcons = const [
     Icons.home,
-    Icons.folder,
     Icons.business_center,
     Icons.chat_bubble,
     Icons.person,
@@ -30,7 +29,6 @@ class BottomNavBar extends ConsumerWidget {
 
   final List<IconData> _unselectedIcons = const [
     Icons.home_outlined,
-    Icons.folder_outlined,
     Icons.business_center_outlined,
     Icons.chat_bubble_outline,
     Icons.person_outline,
@@ -38,7 +36,6 @@ class BottomNavBar extends ConsumerWidget {
 
   final List<String> _labels = const [
     "Home",
-    "Task",
     "Project",
     "Messages",
     "Account",
@@ -46,9 +43,8 @@ class BottomNavBar extends ConsumerWidget {
 
   final List<String> _routes = const [
     HomeScreen.routeName,
-    TasksScreen.routeName,
     ProjectScreen.routeName,
-   MessageScreen.routeName,
+   ChatScreen.routeName,
     AccountOverviewScreen.routeName
   ];
 
@@ -67,7 +63,7 @@ class BottomNavBar extends ConsumerWidget {
             topRight: Radius.circular(20.r),
           ),
           border: Border.all(
-            color: AllColor.logoColor,
+            color: AllColor.borderColor,
             width: 1.5,
           ),
         ),
@@ -86,7 +82,7 @@ class BottomNavBar extends ConsumerWidget {
                   Icon(
                     isSelected ? _selectedIcons[index] : _unselectedIcons[index],
                     size: 30.sp,
-                    color: AllColor.black,
+                    color:isSelected ? AllColor.brand2_light: AllColor.black,
                   ),
                   SizedBox(height: 5.h),
                   Text(
@@ -95,7 +91,7 @@ class BottomNavBar extends ConsumerWidget {
                       fontSize: 12.sp,
                       fontWeight:
                       isSelected ? FontWeight.bold : FontWeight.w400,
-                      color: AllColor.black,
+                      color:isSelected ? AllColor.brand2_light: AllColor.black,
                     ),
                   ),
                 ],

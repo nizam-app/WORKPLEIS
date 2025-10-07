@@ -3,9 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/features/projects/screen/special_request_screen2.dart';
+import 'package:workpleis/features/projects/widget/custom_back_next_buttons.dart';
 
 import '../../../core/widget/global_app_bar.dart';
-import '../widget/custom_bottom_buttons_section.dart';
+
 import '../widget/custom_step_progress_section.dart';
 
 class SpecialRequestScreen1 extends StatelessWidget {
@@ -20,29 +21,30 @@ class SpecialRequestScreen1 extends StatelessWidget {
         padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            CustomStepProgressSection(activeStep: 1,),
-            SizedBox(height: 20),
-            ProjectDescriptionSection(),
-            SizedBox(height: 20),
-            UrgencySection(),
-            SizedBox(height: 20),
-            NdaSection(),
-            SizedBox(height: 40),
+          children: [
+            const CustomStepProgressSection(activeStep: 1,),
+            const SizedBox(height: 20),
+            const ProjectDescriptionSection(),
+            const SizedBox(height: 20),
+            const UrgencySection(),
+            const SizedBox(height: 20),
+            const NdaSection(),
+            const SizedBox(height: 40),
+            CustomBackNextButtons(onBack: () {
+              context.pop();
+            }, onNext: () {
+              context.push(SpecialRequestScreen2.routeName) ;},)
+
           ],
         ),
       ),
-      bottomNavigationBar:  CustomBottomButtonsSection(
-        onPressed: () {context.push(
-            SpecialRequestScreen2.routeName);},),
+
     );
   }
 }
 
 /* ============== Progress Indicator ============== */
 
-
-/* ============== Project Description ============== */
 class ProjectDescriptionSection extends StatelessWidget {
   const ProjectDescriptionSection({super.key});
 
@@ -51,24 +53,34 @@ class ProjectDescriptionSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Project Description",
-            style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w600,
-                color: AllColor.black)),
+        Text(
+          "Project Description",
+          style: TextStyle(
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w600,
+            color: AllColor.black,
+          ),
+        ),
         SizedBox(height: 8.h),
         TextField(
-          maxLines: 5,
+          maxLines: 6,
           decoration: InputDecoration(
             hintText: "Write your project details...",
-            contentPadding: EdgeInsets.all(12.w),
+            hintStyle: TextStyle(color: AllColor.grey),
+            contentPadding: EdgeInsets.all(14.w),
+            filled: true,
+            fillColor: Colors.white,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide(color: AllColor.logoColor),
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: AllColor.borderColor),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: AllColor.borderColor),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide(color: AllColor.logoColor, width: 1.5),
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: AllColor.borderColor, width: 1.6),
             ),
           ),
         ),
@@ -88,22 +100,10 @@ class UrgencySection extends StatefulWidget {
 class _UrgencySectionState extends State<UrgencySection> {
   String urgency = "1-2 weeks";
 
-  final options = [
-    {
-      "value": "Immediate",
-      "title": "Immediate",
-      "subtitle": "Start work within 24 hours",
-    },
-    {
-      "value": "1-2 weeks",
-      "title": "1-2 weeks",
-      "subtitle": "Standard timeline for complex projects",
-    },
-    {
-      "value": "Flexible",
-      "title": "Flexible",
-      "subtitle": "Timeline can be adjusted based on requirements",
-    },
+  final options = const [
+    ("Immediate", "Start work within 24 hours"),
+    ("1-2 weeks", "Standard timeline for complex projects"),
+    ("Flexible", "Timeline can be adjusted based on requirements"),
   ];
 
   @override
@@ -111,60 +111,86 @@ class _UrgencySectionState extends State<UrgencySection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Urgency",
-            style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w600,
-                color: AllColor.black)),
+        Text(
+          "Urgency",
+          style: TextStyle(
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w600,
+            color: AllColor.black,
+          ),
+        ),
         SizedBox(height: 12.h),
-        ...options.map((opt) => _urgencyOption(
-          value: opt["value"]!,
-          title: opt["title"]!,
-          subtitle: opt["subtitle"]!,
-        )),
+        ...options.map(
+              (o) => _UrgencyTile(
+            title: o.$1,
+            subtitle: o.$2,
+            selected: urgency == o.$1,
+            onTap: () => setState(() => urgency = o.$1),
+          ),
+        ),
       ],
     );
   }
+}
 
-  Widget _urgencyOption({
-    required String value,
-    required String title,
-    required String subtitle,
-  }) {
-    final isSelected = urgency == value;
+class _UrgencyTile extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _UrgencyTile({
+    required this.title,
+    required this.subtitle,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final outline = selected ? AllColor.borderColor : AllColor.grey300;
+
     return GestureDetector(
-      onTap: () => setState(() => urgency = value),
+      onTap: onTap,
       child: Container(
         margin: EdgeInsets.only(bottom: 12.h),
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
         decoration: BoxDecoration(
-          border: Border.all(
-              color: isSelected ? AllColor.logoColor : AllColor.grey300, width: 1),
-          borderRadius: BorderRadius.circular(8.r),
+          color: selected ? AllColor.brand2_light.withOpacity(0.08) : Colors.white,
+          border: Border.all(color: outline, width: 1),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Radio<String>(
-              value: value,
-              groupValue: urgency,
+              value: title,
+              groupValue: selected ? title : "",
+              onChanged: (_) => onTap(),
               activeColor: AllColor.black,
-              onChanged: (val) => setState(() => urgency = val!),
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             SizedBox(width: 6.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AllColor.black)),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w600,
+                      color: AllColor.black,
+                    ),
+                  ),
                   SizedBox(height: 4.h),
-                  Text(subtitle,
-                      style:
-                      TextStyle(fontSize: 11.sp, color: AllColor.black87)),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: 11.sp,
+                      color: AllColor.black87,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -192,12 +218,10 @@ class _NdaSectionState extends State<NdaSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Transform.scale(
-          scale: 0.9, // ছোট সুন্দর switch
+          scale: 0.9,
           child: Switch(
             value: ndaRequired,
-            onChanged: (val) {
-              setState(() => ndaRequired = val);
-            },
+            onChanged: (v) => setState(() => ndaRequired = v),
             activeColor: AllColor.white,
             activeTrackColor: AllColor.black,
             inactiveThumbColor: AllColor.white,
@@ -217,13 +241,10 @@ class _NdaSectionState extends State<NdaSection> {
                   color: AllColor.black,
                 ),
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: 4.h),
               Text(
                 "This project involves confidential information that requires a non-disclosure agreement",
-                style: TextStyle(
-                  fontSize: 11.sp,
-                  color: AllColor.grey,
-                ),
+                style: TextStyle(fontSize: 11.sp, color: AllColor.grey),
               ),
             ],
           ),
@@ -232,6 +253,3 @@ class _NdaSectionState extends State<NdaSection> {
     );
   }
 }
-
-
-/* ============== Bottom Buttons ============== */

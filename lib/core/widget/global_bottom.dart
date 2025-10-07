@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:workpleis/core/constants/color_control/all_color.dart';
 
 class GlobalButton extends StatelessWidget {
   final String text;
@@ -20,20 +21,20 @@ class GlobalButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity, // full width
+      width:100.w, // full width
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: color ?? Colors.black, // default black
+          backgroundColor: color ?? AllColor.primary, // default black
           padding: padding ?? EdgeInsets.symmetric(vertical: 12.h),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(20.r),
           ),
         ),
         onPressed: onPressed,
         child: Text(
           text,
           style: TextStyle(
-            color: Colors.white,
+            color:AllColor.borderColor,
             fontSize: fontSize ?? 13.sp,
           ),
         ),

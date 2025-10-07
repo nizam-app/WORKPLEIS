@@ -8,7 +8,7 @@ import 'package:workpleis/core/widget/global_snack_bar.dart';
 import 'package:workpleis/features/auth/logic/email_valitedor.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';
 import 'package:workpleis/features/auth/logic/textfromfield_revarpod.dart';
-import 'package:workpleis/features/auth/screens/base_gradient_scaffold.dart';
+import 'package:workpleis/core/screen/base_gradient_scaffold.dart';
 
 import '../../../core/constants/image_control/image_path.dart';
 import '../data/register_users.dart';
@@ -174,12 +174,12 @@ class RegisterScreen extends ConsumerWidget {
                             padding: EdgeInsets.symmetric(vertical: 14.h),
                             side: BorderSide(
                               color: role == "CLIENT"
-                                  ? AllColor.logoColor
+                                  ? AllColor.borderColor
                                   : Colors.grey,
                               width: 1,
                             ),
                             backgroundColor: role == "CLIENT"
-                                ? AllColor.logoColor.withOpacity(0.5)
+                                ? AllColor.borderColor.withOpacity(0.5)
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.r),
@@ -206,12 +206,12 @@ class RegisterScreen extends ConsumerWidget {
                             padding: EdgeInsets.symmetric(vertical: 14.h),
                             side: BorderSide(
                               color: role == "JOB_SEEKER"
-                                  ? AllColor.logoColor
+                                  ? AllColor.borderColor
                                   : Colors.grey,
                               width: 1,
                             ),
                             backgroundColor: role == "JOB_SEEKER"
-                                ? AllColor.logoColor.withOpacity(0.5)
+                                ? AllColor.borderColor.withOpacity(0.5)
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.r),
