@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/widget/global_aleart_box.dart';
 import 'package:workpleis/core/widget/global_bottom.dart';
+import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 class BusinessPasswordScreen extends StatelessWidget {
@@ -58,7 +59,7 @@ class BusinessPasswordScreen extends StatelessWidget {
               GlobalButton(
                 text: "Submit ",
                 onPressed: () {
-               globalShowAlertDialog(context: context, oneTap: () {context.push(OnboardingScreen01.routeName);});
+               globalShowAlertDialog(context: context, oneTap: () {context.push(LoginScreen.routeName);});
                 },
               ),
               Spacer(),

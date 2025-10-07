@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
 import 'package:workpleis/core/widget/global_logo.dart';
-import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart' ;
+
 
 class OnboardingScreen01 extends StatelessWidget {
   const OnboardingScreen01({super.key});
@@ -19,14 +20,14 @@ class OnboardingScreen01 extends StatelessWidget {
           padding:  EdgeInsets.symmetric(horizontal: 20.w),
           child: Center(
             child:Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
               children: [
                 Spacer(),
                 const GlobalLogo(image: "assets/images/workpleis1.png",),
                 Text("A SUSTAINABLE MARKETPLACE FOR BUSINESSES",style: Theme.of(context).textTheme.headlineSmall,),
                 Spacer(),
-                GlobalGetStartedButton(onTap: (){context.push(OnboardingScreen02.routeName);},),
-                SizedBox(height: 80.h,)
+                GlobalGetStartedButton(onTap: (){context.push(OnboardingScreen03.routeName);},),
+                SizedBox(height: 75.h,)
               ],
             )),
         ),

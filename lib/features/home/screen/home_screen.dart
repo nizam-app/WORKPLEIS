@@ -340,7 +340,7 @@ class _CategoryCard extends StatelessWidget {
             style: theme.bodyMedium?.copyWith(
               color: Colors.black,
               fontWeight: FontWeight.w600,
-              fontSize: 15.sp,
+              fontSize: 14.sp,
             ),
           ),
         ],
@@ -668,7 +668,7 @@ class ServiceProvidersSection extends StatelessWidget {
 
           /// 🔹 Providers horizontal list
           SizedBox(
-            height: 225.h,
+            height: 228.h,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: providers.length,

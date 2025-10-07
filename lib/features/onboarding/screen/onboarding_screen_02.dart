@@ -13,9 +13,6 @@ import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
 import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_logo.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
-import 'package:workpleis/features/security/screen/security_contact_screen.dart';
-import 'package:workpleis/features/security/screen/security_faq_screen.dart';
-import 'package:workpleis/features/security/screen/security_guide_screen.dart';
 
 class OnboardingScreen02 extends StatelessWidget {
   const OnboardingScreen02({super.key});
@@ -159,7 +156,7 @@ class _Onboarding02BottonbarState
                   onPressed: () {
                     ref.read(authTabProvider.notifier).state = AuthTab.signup;
                     widget.onSignup?.call();
-                    context.push(OnboardingScreen03.routeName);
+                    context.push(GetStartedScreen.routeName);
                     },
                 ),
               ),

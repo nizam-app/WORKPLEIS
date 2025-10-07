@@ -18,10 +18,20 @@ class VideoRotatorNotifier extends StateNotifier<VideoPlayerController?> {
     'assets/videos/3.mp4',
     'assets/videos/4.mp4',
   ];
+
+
+  // final List<String> _videoPathsVendor = [
+  //   'assets/videos/vendor1.mp4',
+  //   'assets/videos/vendor2.mp4',
+  //   'assets/videos/vendor3.mp4',
+  //   'assets/videos/vendor4.mp4',
+  // ];
   int _currentIndex = 0;
 
   Future<void> _initializeAndPlay(int index) async {
     final controller = VideoPlayerController.asset(_videoPaths[index]);
+
+    // final controller = VideoPlayerController.asset(_videoPathsVendor[index]);
     await controller.initialize();
     controller.play();
     controller.setLooping(false);
