@@ -73,7 +73,17 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
               onChanged: (val) => setState(() => selectedTime = val)
             ),
             SizedBox(height: 20.h,),
-            CustomBackNextButtons(onBack: () {}, onNext: () { globalShowAlertDialog(context: context, oneTap: () {},message: "Project request submitted successfuly"); }, buttonText: "Submit",)
+            CustomBackNextButtons(onBack: () {}, onNext:() {
+               
+                  globalShowAlertDialog(
+                    context: context,
+                    oneTap: (){
+                      context.pop();
+                    },
+                    message: "Project request submitted successfully",
+                  );
+
+                }, buttonText: "Submit",)
           ],
         ),
       ),
@@ -86,7 +96,7 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
       text,
       style: TextStyle(
         fontSize: 13.sp,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w300,
         color: AllColor.black,
       ),
     );

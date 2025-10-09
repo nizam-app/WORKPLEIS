@@ -56,8 +56,8 @@ class ProjectDescriptionSection extends StatelessWidget {
         Text(
           "Project Description",
           style: TextStyle(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w600,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w300,
             color: AllColor.black,
           ),
         ),
@@ -114,8 +114,8 @@ class _UrgencySectionState extends State<UrgencySection> {
         Text(
           "Urgency",
           style: TextStyle(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w600,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w300,
             color: AllColor.black,
           ),
         ),
@@ -178,8 +178,8 @@ class _UrgencyTile extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w300,
                       color: AllColor.black,
                     ),
                   ),
@@ -236,8 +236,8 @@ class _NdaSectionState extends State<NdaSection> {
               Text(
                 "NDA Required",
                 style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w300,
                   color: AllColor.black,
                 ),
               ),

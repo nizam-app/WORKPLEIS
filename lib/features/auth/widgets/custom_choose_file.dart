@@ -22,8 +22,8 @@ class CustomChooseFile extends StatelessWidget {
             title,
             style: TextStyle(
               color: AllColor.borderColor, // soft purple-gray
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w600,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
               fontFamily: "bodyFont",
             ),
           ),

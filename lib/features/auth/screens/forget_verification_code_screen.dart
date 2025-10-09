@@ -4,9 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_bottom.dart';
 import 'package:workpleis/features/auth/screens/email_verification.dart';
-class EnterYourEmail  extends StatelessWidget {
-  const EnterYourEmail ({super.key});
-  static final routeName = "/enterYourEmail" ;
+
+import 'new_password_screen.dart';
+class ForgetVerificationCodeScreen  extends StatelessWidget {
+  const ForgetVerificationCodeScreen ({super.key});
+  static final routeName = "/forgetVerificationCodeScreen" ;
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +20,13 @@ class EnterYourEmail  extends StatelessWidget {
         child: Column(
           children: [
             Spacer(),
-            Text("Enter Your Email",
+            Text("Enter verification Code",
                 style:theme.headlineLarge ),
             SizedBox(height: 8.h),
-            Text("We’ll send you a one time code to \n "
-                "verify your email.",textAlign: TextAlign.center,
+            Text("We have sent a code to",textAlign: TextAlign.center,
                 style: theme.titleMedium),
+            Text("We have sent a code to",textAlign: TextAlign.center,
+                style: theme.titleMedium!.copyWith(fontWeight: FontWeight.w700, fontSize:14.sp )),
             SizedBox(height: 30.h),
 
             // 🔹 Full Name
@@ -32,30 +35,28 @@ class EnterYourEmail  extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
 
-                child: Text("Email",
+                child: Text("OTP",
                     style: TextStyle(
-                        fontSize: 13.sp, fontWeight: FontWeight.w500, color: AllColor.borderColor)),
+                        fontSize: 13.sp, fontWeight: FontWeight.w600, color: AllColor.borderColor)),
               ),
             ),
             SizedBox(height: 6.h),
             TextFormField(
-              keyboardType: TextInputType.emailAddress,
               controller: _emailController,
               validator: (v) =>
-              v == null || v.isEmpty || v.contains("com") ? "Enter your Email" : null,
+              v == null || v.isEmpty || v.contains("com") ? "Enter your OTP" : null,
               decoration: const InputDecoration(
-            
-                hintText: "Your Email",
+                hintText: "Enter your OTP",
               ),
             ),
             SizedBox(height: 25.h),
-            GlobalButton(text: "Send", onPressed: () {context.push(EmailVerification.routeName);})
+            GlobalButton(text: "Verify Now", onPressed: () {context.push(NewPasswordScreen.routeName);})
             ,
             Spacer(),
           ],
         ),
       )),
-      
+
     );
   }
 }

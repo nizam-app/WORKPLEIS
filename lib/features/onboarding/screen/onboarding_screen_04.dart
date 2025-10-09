@@ -30,7 +30,7 @@ class OnboardingScreen04 extends StatelessWidget {
             width: double.infinity,),
           Center(
             child: CustomPageIndicator(
-              currentIndex: 2, // এখন কোন index active
+              currentIndex: 1, // এখন কোন index active
             ),
           ),
           SizedBox(height: 30.h,),
@@ -58,7 +58,7 @@ class OnboardingScreen04 extends StatelessWidget {
 
 // enum + provider
 enum AuthTab { login, signup }
-final authTabProvider = StateProvider<AuthTab?>((ref) => null);
+final authTabProvider = StateProvider<AuthTab?>((ref) => AuthTab.signup);
 
 class Onboarding02Bottonbar extends ConsumerStatefulWidget {
   const Onboarding02Bottonbar({

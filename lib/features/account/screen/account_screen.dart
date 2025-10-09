@@ -19,7 +19,7 @@ class AccountOverviewScreen extends StatelessWidget {
           children: [
             const ProfileHeaderSection(),
             SizedBox(height: 20.h),
-            const AccountStatsSection(),
+            //const AccountStatsSection(),
             SizedBox(height: 20.h),
             const ExtraStatsSection(),
             SizedBox(height: 20.h),
@@ -50,48 +50,108 @@ class ProfileHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+
+        CircleAvatar(
+          radius: 28.r,
+          backgroundImage: AssetImage("assets/images/profile.png"),
+          backgroundColor: AllColor.grey200, // optional fallback color
+        ),
+        SizedBox(height: 10.h),
+        Text("Jhon Doe",
+            style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w300,
+                color: AllColor.black)),
+        SizedBox(height: 6.h),
+        Container(
+          padding:
+          EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+          decoration: BoxDecoration(
+            color: AllColor.allcolor,
+            borderRadius: BorderRadius.circular(6.r),
+          ),
+          child: Text(
+            "Service Provider",
+            style: TextStyle(
+                fontSize: 16.sp,
+                color: AllColor.grey,
+                fontWeight: FontWeight.w500),
+          ),
+    ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.star, color: AllColor.parpale, size: 20),
+              Icon(Icons.star, color: AllColor.parpale, size: 20),
+              Icon(Icons.star, color: AllColor.parpale, size: 20),
+              Icon(Icons.star, color: AllColor.parpale, size: 20),
+              Icon(Icons.star_border, color: Colors.purple, size: 20),
+              const SizedBox(width: 6),
+              const Text(
+                "4.0",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(width: 4),
+              const Text("(127 reviews)", style: TextStyle(color: Colors.grey)),
+            ],
+          ),
+
+        const SizedBox(height: 10),
+
+        // Description
+        Text(
+          "Startup founder and product manager with 8+ years in tech. "
+              "Building innovative SaaS solutions and always looking for talented "
+              "designers and developers to bring ideas to life.",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 13, color: Colors.black87),
+        ),
+
+        const SizedBox(height: 20),
+
+        // Four Info Cards
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          alignment: WrapAlignment.center,
+          children: [
+            _infoBox(Icons.work, "28", "Job Completed"),
+            _infoBox(Icons.pending_actions, "10", "Job Pending"),
+            _infoBox(Icons.star, "4.8", "Rating"),
+            _infoBox(Icons.attach_money, "\$1000", "Total Spent"),
+          ],
+        ),
+    
+      ],
+    );
+  }
+  Widget _infoBox(IconData icon, String value, String label) {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      width: 140,
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AllColor.appBar, // dark header bg
-        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: Colors.greenAccent),
+        borderRadius: BorderRadius.circular(10),
       ),
-      child: Row(
+      child: Column(
         children: [
-          CircleAvatar(
-            radius: 28.r,
-            backgroundColor: AllColor.grey200,
-            child: Icon(Icons.person, size: 36.sp, color: AllColor.black),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: Colors.green, size: 24),
+              Text(value,
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold)),
+            ],
           ),
-          SizedBox(width: 12.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("jhon@example.com",
-                    style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AllColor.white)),
-                SizedBox(height: 6.h),
-                Container(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                  decoration: BoxDecoration(
-                    color: AllColor.borderColor,
-                    borderRadius: BorderRadius.circular(6.r),
-                  ),
-                  child: Text(
-                    "Job seeker",
-                    style: TextStyle(
-                        fontSize: 11.sp,
-                        color: AllColor.black,
-                        fontWeight: FontWeight.w500),
-                  ),
-                )
-              ],
-            ),
-          ),
+          const SizedBox(height: 6),
+          
+          Text(label,
+              style: const TextStyle(fontSize: 12, color: Colors.grey)),
         ],
       ),
     );
@@ -99,49 +159,49 @@ class ProfileHeaderSection extends StatelessWidget {
 }
 
 /* ================= ACCOUNT STATS ================= */
-class AccountStatsSection extends StatelessWidget {
-  const AccountStatsSection({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final stats = [
-      {"title": "28", "subtitle": "Task Completed"},
-      {"title": "⭐ 4.8", "subtitle": "Rating"},
-      {"title": "\$2390", "subtitle": "Total Earned"},
-      {"title": "100%", "subtitle": "Success Rate"},
-    ];
-
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, childAspectRatio: 2.3),
-      itemCount: stats.length,
-      itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.all(6.w),
-          padding: EdgeInsets.all(12.w),
-          decoration: BoxDecoration(
-            color: AllColor.appBar,
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(stats[index]["title"]!,
-                  style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AllColor.borderColor)),
-              Text(stats[index]["subtitle"]!,
-                  style: TextStyle(fontSize: 12.sp, color: AllColor.white)),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
+// class AccountStatsSection extends StatelessWidget {
+//   const AccountStatsSection({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final stats = [
+//       {"title": " 28", "subtitle": "Task Completed"},
+//       {"title": "⭐ 4.8", "subtitle": "Rating"},
+//       {"title": "\$2390", "subtitle": "Total Earned"},
+//       {"title": "100%", "subtitle": "Success Rate"},
+//     ];
+//
+//     return GridView.builder(
+//       shrinkWrap: true,
+//       physics: const NeverScrollableScrollPhysics(),
+//       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+//           crossAxisCount: 2, childAspectRatio: 2.3),
+//       itemCount: stats.length,
+//       itemBuilder: (context, index) {
+//         return Container(
+//           margin: EdgeInsets.all(6.w),
+//           padding: EdgeInsets.all(12.w),
+//           decoration: BoxDecoration(
+//             color: AllColor.appBar,
+//             borderRadius: BorderRadius.circular(8.r),
+//           ),
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Text(stats[index]["title"]!,
+//                   style: TextStyle(
+//                       fontSize: 16.sp,
+//                       fontWeight: FontWeight.bold,
+//                       color: AllColor.borderColor)),
+//               Text(stats[index]["subtitle"]!,
+//                   style: TextStyle(fontSize: 12.sp, color: AllColor.white)),
+//             ],
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
 
 /* ================= EXTRA STATS ================= */
 class ExtraStatsSection extends StatelessWidget {

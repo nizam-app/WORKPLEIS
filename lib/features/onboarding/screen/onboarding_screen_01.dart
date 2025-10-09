@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
 import 'package:workpleis/core/widget/global_logo.dart';
-import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart' ;
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 
 
 class OnboardingScreen01 extends StatelessWidget {

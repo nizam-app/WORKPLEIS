@@ -4,9 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_bottom.dart';
 import 'package:workpleis/features/auth/screens/email_verification.dart';
-class EnterYourEmail  extends StatelessWidget {
-  const EnterYourEmail ({super.key});
-  static final routeName = "/enterYourEmail" ;
+
+import 'forget_verification_code_screen.dart';
+class ForgetPasswordScreen  extends StatelessWidget {
+  const ForgetPasswordScreen ({super.key});
+  static final routeName = "/forgetPasswordScreen" ;
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +20,10 @@ class EnterYourEmail  extends StatelessWidget {
         child: Column(
           children: [
             Spacer(),
-            Text("Enter Your Email",
+            Text("Forgot Password",
                 style:theme.headlineLarge ),
             SizedBox(height: 8.h),
-            Text("We’ll send you a one time code to \n "
-                "verify your email.",textAlign: TextAlign.center,
+            Text("Enter your email account to \n reset password",textAlign: TextAlign.center,
                 style: theme.titleMedium),
             SizedBox(height: 30.h),
 
@@ -39,23 +40,21 @@ class EnterYourEmail  extends StatelessWidget {
             ),
             SizedBox(height: 6.h),
             TextFormField(
-              keyboardType: TextInputType.emailAddress,
               controller: _emailController,
               validator: (v) =>
               v == null || v.isEmpty || v.contains("com") ? "Enter your Email" : null,
               decoration: const InputDecoration(
-            
-                hintText: "Your Email",
+                hintText: "type your email",
               ),
             ),
             SizedBox(height: 25.h),
-            GlobalButton(text: "Send", onPressed: () {context.push(EmailVerification.routeName);})
+            GlobalButton(text: "Continue", onPressed: () {context.push(ForgetVerificationCodeScreen.routeName);})
             ,
             Spacer(),
           ],
         ),
       )),
-      
+
     );
   }
 }

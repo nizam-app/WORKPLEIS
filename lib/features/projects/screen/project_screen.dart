@@ -100,7 +100,7 @@ class JobStatusList extends ConsumerWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w600),
+                      .copyWith(fontWeight: FontWeight.w300),
                 ),
               ),
             ),
@@ -158,7 +158,7 @@ class JobCard extends StatelessWidget {
                   title,
                   style: TextStyle(
                     fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w400,
                     color: Colors.black,
                     fontFamily: "bodyFont",
                   ),
@@ -201,7 +201,7 @@ class _StatusChip extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: 12.sp,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w400,
           color: Colors.black,
           fontFamily: "bodyFont",
         ),
@@ -271,12 +271,12 @@ class _BottomBar extends StatelessWidget {
     if (!showButtons) {
       return Row(children: [
         const Spacer(),
-        Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700, color: Colors.black)),
+        Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: Colors.black)),
       ]);
     }
 
     return Row(children: [
-      Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700, color: Colors.black)),
+      Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: Colors.black)),
       const Spacer(),
       ...buttons,
     ]);
@@ -321,7 +321,7 @@ class _PillButton extends StatelessWidget {
             label,
             style: TextStyle(
               fontSize: 12.sp,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w500,
               color: fg,
               fontFamily: "bodyFont",
             ),

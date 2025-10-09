@@ -58,7 +58,7 @@ class ProjectHeaderCard extends StatelessWidget {
                   Text("Special Project Request",
                       style: TextStyle(
                           fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                           color: AllColor.white)),
                 ],
               ),
@@ -125,7 +125,7 @@ class ProjectTimelineSection extends StatelessWidget {
           Text("Project Timeline",
               style: TextStyle(
                   fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   color: AllColor.black)),
           SizedBox(height: 14.h),
           ...steps.map((s) => TimelineItem(
@@ -171,7 +171,7 @@ class TimelineItem extends StatelessWidget {
                 Text(title,
                     style: TextStyle(
                         fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w300,
                         color: AllColor.black)),
                 Text(desc,
                     style: TextStyle(fontSize: 12.sp, color: AllColor.grey)),
@@ -209,7 +209,7 @@ class RecentUpdatesSection extends StatelessWidget {
           Text("Recent Updates",
               style: TextStyle(
                   fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   color: AllColor.black)),
           SizedBox(height: 14.h),
           ...updates.map((u) => UpdateItem(
@@ -305,7 +305,7 @@ class ProjectContactSection extends StatelessWidget {
                 Text("Jhon Doe",
                     style: TextStyle(
                         fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w400,
                         color: AllColor.black)),
                 Text("Senior project Specialist",
                     style: TextStyle(fontSize: 12.sp, color: AllColor.grey)),
@@ -321,7 +321,12 @@ class ProjectContactSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.r),
               ),
             ),
-            onPressed: () {context.push(ChatScreen.routeName);},
+            onPressed: () {
+               context.pop(context);
+              //context.push("/chatScreen");
+            },
+            
+            //onPressed: () {context.push(ChatScreen.routeName,);},
             child: Text("Message",
                 style: TextStyle(fontSize: 12.sp, color: AllColor.white)),
           )

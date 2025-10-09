@@ -23,21 +23,21 @@ class AddPaymentMethodScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 60.h),
-              CustomLabelText(title: "Account Name"),
+              CustomPaymentText(title: "Account Name"),
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'type your Account Name',
                 ),
               ),
               SizedBox(height: 25.h),
-              CustomLabelText(title: "Routing number"),
+              CustomPaymentText(title: "Routing number"),
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'type your Routing number',
                 ),
               ),
               SizedBox(height: 25.h),
-              CustomLabelText(title: "Account number"),
+              CustomPaymentText(title: "Account number"),
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'type your Account number',

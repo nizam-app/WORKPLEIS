@@ -84,7 +84,7 @@ class BottomNavBar extends ConsumerWidget {
                     size: 30.sp,
                     color:isSelected ? AllColor.brand2_light: AllColor.black,
                   ),
-                  SizedBox(height: 5.h),
+                  SizedBox(height: 3.h),
                   Text(
                     _labels[index],
                     style: TextStyle(
@@ -94,6 +94,7 @@ class BottomNavBar extends ConsumerWidget {
                       color:isSelected ? AllColor.brand2_light: AllColor.black,
                     ),
                   ),
+                  SizedBox(height: 5.h),
                 ],
               ),
             );
@@ -101,5 +102,5 @@ class BottomNavBar extends ConsumerWidget {
         ),
       ),
     );
-  }
+  }                                                               
 }

@@ -121,7 +121,7 @@ class CustomCategoryDropdown extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: isSelected ? Colors.white : Colors.black87,
-                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                        fontWeight: isSelected ? FontWeight.w400 : FontWeight.w400,
                       ),
                     ),
                   ),
@@ -145,9 +145,9 @@ class CustomCategoryDropdown extends ConsumerWidget {
                     child: Text(
                       selectedCategory ?? "Select a category",
                       style: TextStyle(
-                        fontSize: 14.sp,
+                        fontSize: 13.sp,
                         color: selectedCategory == null ? AllColor.grey : Colors.black,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),

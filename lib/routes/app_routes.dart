@@ -6,6 +6,7 @@ import 'package:workpleis/features/auth/screens/address_and_password.dart';
 import 'package:workpleis/features/auth/screens/bisiness_password_screen.dart';
 import 'package:workpleis/features/auth/screens/business_verification_screen.dart';
 import 'package:workpleis/features/auth/screens/enter_your_phone_number.dart';
+import 'package:workpleis/features/auth/screens/forget_verification_code_screen.dart';
 import 'package:workpleis/features/auth/screens/get_started_screen.dart';
 import 'package:workpleis/features/auth/screens/indentity_verification_screen.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
@@ -20,7 +21,7 @@ import 'package:workpleis/features/home/screen/tasks_screen.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
-import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_04.dart';
 import 'package:workpleis/features/projects/screen/special_request_screen3.dart';
 import 'package:workpleis/features/projects/screen/view_proposal_screen.dart';
@@ -28,6 +29,7 @@ import 'package:workpleis/features/verification/screen/verification_screen.dart'
 import '../features/Payment/screen/payment_methods_screen.dart';
 import '../features/account/screen/account_screen.dart';
 import '../features/auth/screens/enter_your_email.dart';
+import '../features/auth/screens/forget_password_screen.dart';
 import '../features/auth/screens/new_password_screen.dart';
 import '../features/auth/screens/email_verification.dart';
 import '../features/home/screen/post_job_screen.dart';
@@ -74,6 +76,14 @@ class AppRouter {
         path: PrivacyPolicyScreen.routeName,
         name: PrivacyPolicyScreen.routeName,
         builder: (context, state) => const PrivacyPolicyScreen(),
+      ),GoRoute(
+        path: ForgetVerificationCodeScreen.routeName,
+        name: ForgetVerificationCodeScreen.routeName,
+        builder: (context, state) => const ForgetVerificationCodeScreen(),
+      ), GoRoute(
+        path: ForgetPasswordScreen.routeName,
+        name: ForgetPasswordScreen.routeName,
+        builder: (context, state) => const ForgetPasswordScreen(),
       ),GoRoute(
         path: CommunityGuidenlinesScreen.routeName,
         name: CommunityGuidenlinesScreen.routeName,

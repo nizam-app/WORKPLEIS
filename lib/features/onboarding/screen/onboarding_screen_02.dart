@@ -11,7 +11,7 @@ import 'package:workpleis/features/auth/screens/get_started_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/community_guidenlines_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/privacy_policy_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/terms_and_conditions_screen.dart';
-import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_logo.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
@@ -37,7 +37,7 @@ class OnboardingScreen02 extends StatelessWidget {
           width: double.infinity,),
         Center(
           child: CustomPageIndicator(
-            currentIndex: 0, // এখন কোন index active
+            currentIndex: 2, // এখন কোন index active
           ),
         ),
         SizedBox(height: 30.h,),
@@ -64,7 +64,7 @@ class OnboardingScreen02 extends StatelessWidget {
 }
 
 enum AuthTab { login, signup }
-final authTabProvider = StateProvider<AuthTab?>((ref) => null);
+final authTabProvider = StateProvider<AuthTab?>((ref) => AuthTab.login);
 
 class Onboarding02Bottonbar extends ConsumerStatefulWidget {
   const Onboarding02Bottonbar({
@@ -151,7 +151,7 @@ class _Onboarding02BottonbarState
                       },
                     ),
                   ),
-                  SizedBox(width: 16.w),
+                  SizedBox(width: 18.w),
                   Expanded(
                     child: CustomPillButton(
                       label: "Sign up",
@@ -184,8 +184,8 @@ class _Onboarding02BottonbarState
                         text: 'Terms & Conditions',
                         style: const TextStyle(
                           color: AllColor.black,
-                          fontWeight: FontWeight.w700,
-                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.w600,
+                         // decoration: TextDecoration.underline,
                           decorationThickness: 1.1,
                         ),
                         recognizer: _termsTap,
@@ -195,8 +195,8 @@ class _Onboarding02BottonbarState
                         text: 'Community Guidelines',
                         style: const TextStyle(
                           color: AllColor.black,
-                          fontWeight: FontWeight.w700,
-                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.w600,
+                         // decoration: TextDecoration.underline,
                           decorationThickness: 1.1,
                         ),
                         recognizer: _guidelinesTap,
@@ -206,8 +206,8 @@ class _Onboarding02BottonbarState
                         text: 'Privacy Policy',
                         style: const TextStyle(
                           color: AllColor.black,
-                          fontWeight: FontWeight.w700,
-                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.w600,
+                          //decoration: TextDecoration.underline,
                           decorationThickness: 1.1,
                         ),
                         recognizer: _privacyTap,

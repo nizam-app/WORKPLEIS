@@ -10,6 +10,7 @@ class AllColor {
   static const Color borderColor = Color(0xff686382);
   static const Color white24 = Colors.white24;
   static const Color white70 = Colors.white70;
+  static const Color parpale =Color(0xFFa49acf);
   static const Color orange = Colors.orange;
   static const Color lightBlue = Colors.lightBlue;
   static const Color grey = Colors.grey;

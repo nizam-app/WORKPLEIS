@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
-import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_logo.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
@@ -31,7 +31,7 @@ class OnboardingScreen03 extends StatelessWidget {
             width: double.infinity,),
           Center(
             child: CustomPageIndicator(
-              currentIndex: 1, // এখন কোন index active
+              currentIndex: 0, // এখন কোন index active
             ),
           ),
           SizedBox(height: 20.h,),
@@ -60,7 +60,7 @@ class OnboardingScreen03 extends StatelessWidget {
 
 
 enum AuthTab { login, signup }
-final authTabProvider = StateProvider<AuthTab?>((ref) => null);
+final authTabProvider = StateProvider<AuthTab?>((ref) => AuthTab.signup);
 
 
 class Onboarding02BottomNavBar extends ConsumerWidget {
@@ -100,31 +100,29 @@ class Onboarding02BottomNavBar extends ConsumerWidget {
               Text("Select your role",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 20)),
               SizedBox(height: 15.h),
-              Row(children: [
-                Expanded(
-                  child: CustomPillButton(
-                    label: "I'm a Client",
-                    isSelected: selected == AuthTab.login,
-                    onPressed: () async {
-                      ref.read(authTabProvider.notifier).state = AuthTab.login;
-                      await saveRole(ref, 'client');
-                      onLogin?.call();
-                      context.push(OnboardingScreen04.routeName);
-                    },
-                  ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                CustomPillButton(
+                  label: "I'm a Client",
+                  isSelected: selected == AuthTab.login,
+                  onPressed: () async {
+                    ref.read(authTabProvider.notifier).state = AuthTab.login;
+                    await saveRole(ref, 'client');
+                    onLogin?.call();
+                    context.push(OnboardingScreen04.routeName);
+                  },
                 ),
-                SizedBox(width: 15.w),
-                Expanded(
-                  child: CustomPillButton(
-                    label: "I'm a Service Provider",
-                    isSelected: selected == AuthTab.signup,
-                    onPressed: () async {
-                      ref.read(authTabProvider.notifier).state = AuthTab.signup;
-                      await saveRole(ref, 'provider');
-                      onSignup?.call();
-                      context.push(OnboardingScreen04.routeName);
-                    },
-                  ),
+           
+                CustomPillButton(
+                  label: "I'm a Service Provider",
+                  isSelected: selected == AuthTab.signup,
+                  onPressed: () async {
+                    ref.read(authTabProvider.notifier).state = AuthTab.signup;
+                    await saveRole(ref, 'provider');
+                    onSignup?.call();
+                    context.push(OnboardingScreen04.routeName);
+                  },
                 ),
               ])
 

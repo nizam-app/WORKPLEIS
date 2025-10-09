@@ -41,7 +41,7 @@ class ViewProposalScreen extends ConsumerWidget {
             _Seg(tab: tab, on:(i)=>ref.read(tabP.notifier).state=i),
             const Spacer(),
             Text("${list.length} ${tab==0?'pending':'rejected'}",
-                style: TextStyle(color: AllColor.black.withOpacity(.6), fontWeight: FontWeight.w600, fontSize: 13.sp)),
+                style: TextStyle(color: AllColor.black.withOpacity(.6), fontWeight: FontWeight.w300, fontSize: 13.sp)),
           ]),
           12.verticalSpace,
           Expanded(
@@ -102,8 +102,8 @@ class _Card extends StatelessWidget {
           boxShadow:[BoxShadow(color: AllColor.black.withOpacity(.06), blurRadius:16.r, offset: Offset(0,6.h))]),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children:[
         Row(crossAxisAlignment: CrossAxisAlignment.start, children:[
-          Expanded(child: Text(d.t, style: TextStyle(fontSize:20.sp,fontWeight:FontWeight.w800,color: Colors.black))),
-          Text("\$${_fmt(d.p)}", style: TextStyle(fontSize:16.sp,fontWeight:FontWeight.w800,color: Colors.black)),
+          Expanded(child: Text(d.t, style: TextStyle(fontSize:16.sp,fontWeight:FontWeight.w500,color: Colors.black))),
+          Text("\$${_fmt(d.p)}", style: TextStyle(fontSize:14.sp,fontWeight:FontWeight.w500,color: Colors.black)),
         ]),
         8.verticalSpace,
         Text(d.d, style: TextStyle(color: muted, height:1.35, fontSize: 13.sp)),
@@ -132,8 +132,8 @@ class _Card extends StatelessWidget {
   Widget _pill(String t, Color bg, Color fg, VoidCallback on)=>Material(
     color: bg, borderRadius: BorderRadius.circular(999.r),
     child: InkWell(onTap:on,borderRadius:BorderRadius.circular(999.r),
-        child: Padding(padding: EdgeInsets.symmetric(horizontal:14.w,vertical:8.h),
-            child: Text(t, style: TextStyle(color: fg,fontWeight: FontWeight.w700,fontSize:13.sp)))),
+        child: Padding(padding: EdgeInsets.symmetric(horizontal:13.w,vertical:8.h),
+            child: Text(t, style: TextStyle(color: fg,fontWeight: FontWeight.w500,fontSize:13.sp)))),
   );
   Widget _icon(IconData i, VoidCallback on)=>Container(
     decoration: BoxDecoration(
@@ -141,7 +141,7 @@ class _Card extends StatelessWidget {
         borderRadius: BorderRadius.circular(999.r),
         border: Border.all(color: AllColor.black.withOpacity(.15))),
     child: InkWell(onTap:on, borderRadius: BorderRadius.circular(999.r),
-        child: Padding(padding: EdgeInsets.all(8.r), child: Icon(i, size:18.sp,color: AllColor.black))),
+        child: Padding(padding: EdgeInsets.all(8.r), child: Icon(i, size:16.sp,color: AllColor.black))),
   );
 }
 

@@ -24,7 +24,7 @@ class CustomStepProgressSection extends StatelessWidget {
             "Project Setup Progress",
             style: TextStyle(
               fontSize: 13.sp,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w500,
               color: AllColor.black,
               fontFamily: "bodyFont",
             ),
@@ -77,7 +77,7 @@ class CustomStepProgressSection extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12.sp,
                     color: AllColor.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w300,
                     fontFamily: "bodyFont",
                   ),
                 ),
@@ -118,8 +118,8 @@ class _StepCircle extends StatelessWidget {
               : Text(
             "${index + 1}",
             style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w300,
               color: AllColor.black,
             ),
           ),

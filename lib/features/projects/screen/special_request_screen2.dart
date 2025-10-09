@@ -160,8 +160,8 @@ class SupportingDocumentsSection extends StatelessWidget {
       children: [
         Text("Supporting Documents (Optional)",
             style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w600,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w300,
                 color: AllColor.black)),
         SizedBox(height: 12.h),
         Container(
