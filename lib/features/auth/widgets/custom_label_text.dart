@@ -11,13 +11,13 @@ class CustomLabelText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(left: 10.w,bottom: 5.h),
+      padding:  EdgeInsets.only(bottom: 8.h),
       child: Align(
         alignment: Alignment.centerLeft,
 
         child: Text(title,
             style: TextStyle(
-                fontSize: 13.sp, fontWeight: FontWeight.w500, color: AllColor.borderColor)),
+                fontSize: 16.sp, fontWeight: FontWeight.w500, color: AllColor.borderColor)),
       ),
     );
   }

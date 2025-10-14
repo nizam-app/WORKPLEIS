@@ -1,6 +1,8 @@
 
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/widget/global_snack_bar.dart';
+import 'package:workpleis/features/account/screen/client_account.dart';
+import 'package:workpleis/features/account/screen/profile_edit_screen.dart';
 import 'package:workpleis/features/auth/screens/add_payment_method_screen.dart';
 import 'package:workpleis/features/auth/screens/address_and_password.dart';
 import 'package:workpleis/features/auth/screens/bisiness_password_screen.dart';
@@ -18,6 +20,7 @@ import 'package:workpleis/features/community_guidenlines/screen/terms_and_condit
 import 'package:workpleis/features/home/screen/home_screen.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/home/screen/tasks_screen.dart';
+import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
@@ -25,7 +28,9 @@ import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart'
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_04.dart';
 import 'package:workpleis/features/projects/screen/special_request_screen3.dart';
 import 'package:workpleis/features/projects/screen/view_proposal_screen.dart';
+import 'package:workpleis/features/security/screen/settings_screen.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
+import 'package:workpleis/features/wallet/screen/wallet_screen.dart';
 import '../features/Payment/screen/payment_methods_screen.dart';
 import '../features/account/screen/account_screen.dart';
 import '../features/auth/screens/enter_your_email.dart';
@@ -230,11 +235,24 @@ class AppRouter {
             path: ChatScreen.routeName,
             name: ChatScreen.routeName,
             builder: (context, state) => const ChatScreen(),
-          ), GoRoute(
+          ),
+          GoRoute(
             path: AccountOverviewScreen.routeName,
             name: AccountOverviewScreen.routeName,
             builder: (context, state) => const AccountOverviewScreen(),
-          ), GoRoute(
+          ),
+          GoRoute(
+            path: AccountOverviewClientScreen.routeName,
+            name: AccountOverviewClientScreen.routeName,
+            builder: (context, state) => const AccountOverviewClientScreen(),
+          ),
+
+          GoRoute(
+            path: EditProfileScreen.routeName,
+            name: EditProfileScreen.routeName,
+            builder: (context, state) => const EditProfileScreen(),
+          ),
+          GoRoute(
             path: ProjectScreen.routeName,
             name: ProjectScreen.routeName,
             builder: (context, state) => const ProjectScreen(),
@@ -246,7 +264,29 @@ class AppRouter {
             path: SecurityContactScreen.routeName,
             name: SecurityContactScreen.routeName,
             builder: (context, state) => const SecurityContactScreen(),
-          ),  GoRoute(
+          ),
+          GoRoute(
+            path: SettingsScreen.routeName,
+            name: SettingsScreen.routeName,
+            builder: (context, state) => const SettingsScreen(),
+          ),
+
+          GoRoute(
+            path: JobsScreen.routeName,
+            name: JobsScreen.routeName,
+            builder: (context, state) => const JobsScreen(),
+          ),
+
+          GoRoute(
+            path: WalletScreen.routeName,
+            name: WalletScreen.routeName,
+            builder: (context, state) => const WalletScreen(),
+          ),
+
+
+
+
+          GoRoute(
             path: SecurityGuideScreen.routeName,
             name: SecurityGuideScreen.routeName,
             builder: (context, state) => const SecurityGuideScreen(),

@@ -34,7 +34,7 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: GlobalAppbar(text: "Special Request"),
+     appBar: GlobalAppbar(text: "Project"),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -46,16 +46,19 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
 
             // Full Name
             _label("Full Name"),
+            SizedBox(height: 5.h,),
             _inputField(controller: nameController, hint: "Your full name"),
             SizedBox(height: 20.h),
 
             // Role / Title
             _label("Role / Title"),
+            SizedBox(height: 5.h,),
             _inputField(controller: roleController, hint: "Your role or job title"),
             SizedBox(height: 20.h),
 
             // Preferred Communication
             _label("Preferred Communication"),
+            SizedBox(height: 5.h,),
             _dropdownField(
               hint: "How should we contact you?",
               value: selectedCommunication,
@@ -66,6 +69,7 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
 
             // Best Time to Contact
             _label("Best Time to Contact"),
+            SizedBox(height: 5.h,),
             _dropdownField(
               hint: "When is the best time to reach you?",
               value: selectedTime,
@@ -73,7 +77,9 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
               onChanged: (val) => setState(() => selectedTime = val)
             ),
             SizedBox(height: 20.h,),
-            CustomBackNextButtons(onBack: () {}, onNext:() {
+            CustomBackNextButtons(onBack: () {
+              context.pop();
+            }, onNext:() {
                
                   globalShowAlertDialog(
                     context: context,
@@ -95,13 +101,12 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 13.sp,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w300,
         color: AllColor.black,
       ),
     );
   }
-
   Widget _inputField({required TextEditingController controller, required String hint}) {
     return TextField(
       controller: controller,

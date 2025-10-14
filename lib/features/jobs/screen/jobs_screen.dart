@@ -8,16 +8,16 @@ import 'package:workpleis/core/widget/global_app_bar.dart';
 import 'package:workpleis/features/projects/screen/request_tracker.dart';
 import 'package:workpleis/features/projects/screen/view_proposal_screen.dart';
 
-class ProjectScreen extends ConsumerWidget {
-  const ProjectScreen({super.key});
-  static const routeName = "/projectScreen";
+class JobsScreen extends ConsumerWidget {
+  const JobsScreen({super.key});
+  static const routeName = "/jobsScreen";
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedStatus = ref.watch(jobStatusProvider);
 
     return Scaffold(
-      appBar: GlobalAppbar(text: "My Projects"),
+      appBar: GlobalAppbar(text: "Jobs"),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -62,8 +62,8 @@ class JobStatusList extends ConsumerWidget {
     final selectedStatus = ref.watch(jobStatusProvider);
 
     final statuses = [
-      "Submitted",
-      "Proposal Sent",
+      "Open",
+      "Assigned",
       "In Progress",
       "In Review",
       "Delivered", // ← new
@@ -273,12 +273,12 @@ class _BottomBar extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.only(right: 12.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-                         Container(),
-          
-          Text(price, style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black)),
-        ]),
+              Container(),
+
+              Text(price, style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black)),
+            ]),
       );
     }
 
@@ -301,9 +301,9 @@ class _PillButton extends StatelessWidget {
   factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-         AllColor.white, // শেডেড পার্পল (mock vibe)
+        AllColor.white, // শেডেড পার্পল (mock vibe)
         AllColor.brand2_light,
-        
+
         onTap: onTap,
       );
 

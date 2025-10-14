@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -350,7 +351,7 @@ class ActiveJobsSection extends StatelessWidget {
         'title': 'Kitchen Renovation',
         'location': 'New York, NY',
         'time': '3h ago',
-        'budget': '\$300-500',
+        'budget': '\$300',
         'offers': '5',
         'status': 'In progress',
       },
@@ -358,7 +359,7 @@ class ActiveJobsSection extends StatelessWidget {
         'title': 'Kitchen Renovation',
         'location': 'New York, NY',
         'time': '3h ago',
-        'budget': '\$300-500',
+        'budget': '\$300',
         'offers': '5',
         'status': 'In progress',
       },
@@ -366,7 +367,7 @@ class ActiveJobsSection extends StatelessWidget {
         'title': 'Kitchen Renovation',
         'location': 'New York, NY',
         'time': '3h ago',
-        'budget': '\$300-500',
+        'budget': '\$300',
         'offers': '5',
         'status': 'In progress',
       },
@@ -474,22 +475,23 @@ class _JobCard extends StatelessWidget {
                 title,
                 style: theme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w500,
-                  fontSize: 16.sp,
+                  fontSize: 18.sp,
                 ),
               ),
               Container(
                 padding:
                 EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFCCFF33),
-                  borderRadius: BorderRadius.circular(30.r),
+               
+                  borderRadius: BorderRadius.circular(8.r),
+                  //border: Border.all(color: Colors.black, width: 1),
                 ),
                 child: Text(
                   status,
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
-                    color: Colors.black,
+                    color: AllColor.brand2_light,
                   ),
                 ),
               ),
@@ -502,22 +504,24 @@ class _JobCard extends StatelessWidget {
           Row(
             children: [
               const Icon(Icons.location_on_outlined,
-                  color: Colors.grey, size: 16),
+                  color: Colors.grey, size: 14),
               SizedBox(width: 4.w),
               Text(
                 location,
                 style: theme.titleMedium?.copyWith(
                   color: Colors.grey[700],
+                  fontSize: 12.sp,
                 ),
               ),
               SizedBox(width: 8.w),
               const Icon(Icons.access_time_rounded,
-                  color: Colors.grey, size: 16),
+                  color: Colors.grey, size: 14),
               SizedBox(width: 4.w),
               Text(
                 time,
                 style: theme.titleMedium?.copyWith(
                   color: Colors.grey[700],
+                  fontSize: 12.sp,  
                 ),
               ),
             ],
@@ -532,7 +536,27 @@ class _JobCard extends StatelessWidget {
               // Budget + Offers
               Row(
                 children: [
-                  Column(
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     Text(
+                  //       'Budget',
+                  //       style: theme.bodySmall?.copyWith(
+                  //         color: Colors.grey[600],
+                  //         fontSize: 12.sp,
+                  //       ),
+                  //     ),
+                  //     Text(
+                  //       budget,
+                  //       style: theme.bodyMedium?.copyWith(
+                  //         fontWeight: FontWeight.w500,
+                  //         color: Colors.black,
+                  //         fontSize: 12.sp,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -542,6 +566,7 @@ class _JobCard extends StatelessWidget {
                           fontSize: 12.sp,
                         ),
                       ),
+                      SizedBox(width: 10.w,),
                       Text(
                         budget,
                         style: theme.bodyMedium?.copyWith(
@@ -552,8 +577,31 @@ class _JobCard extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  
                   SizedBox(width: 40.w),
-                  Column(
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     Text(
+                  //       'Offers',
+                  //       style: theme.bodySmall?.copyWith(
+                  //         color: Colors.grey[600],
+                  //         fontSize: 12.sp,
+                  //       ),
+                  //     ),
+                  //     Text(
+                  //       offers,
+                  //       style: theme.bodyMedium?.copyWith(
+                  //         fontWeight: FontWeight.w500,
+                  //         color: Colors.black,
+                  //         fontSize: 12.sp,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -563,6 +611,7 @@ class _JobCard extends StatelessWidget {
                           fontSize: 12.sp,
                         ),
                       ),
+                      SizedBox(width: 10.w,),  
                       Text(
                         offers,
                         style: theme.bodyMedium?.copyWith(
@@ -579,9 +628,12 @@ class _JobCard extends StatelessWidget {
               // View button
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:  AllColor.brand2_light, // purple
+                  backgroundColor:  AllColor.white, // purple
+                  
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.r),
+                  
+                  // border:Border.all(color: AllColor.brand2_light, width: 1),
                   ),
                   padding:
                   EdgeInsets.symmetric(horizontal: 20.w, vertical: 2.h),
@@ -589,10 +641,10 @@ class _JobCard extends StatelessWidget {
                 ),
                 onPressed: () {},
                 child: Text(
-                  'View',
+                  'Open',
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14.sp,
+                    color: AllColor.brand2_light,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -782,14 +834,13 @@ class _ServiceProviderCard extends StatelessWidget {
   }
 }
 
-
 class HowItWorksSection extends StatelessWidget {
   const HowItWorksSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
 
+    final theme = Theme.of(context).textTheme;
     final steps = [
       {'icon': Icons.search_rounded, 'title': 'Post a job'},
       {'icon': Icons.group_outlined, 'title': 'Get Offers'},
@@ -798,53 +849,53 @@ class HowItWorksSection extends StatelessWidget {
       {'icon': Icons.star_border_rounded, 'title': 'Review Job'},
       {'icon': Icons.check_circle_outline_rounded, 'title': 'Accept job'},
     ];
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 12.w),
+        padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
         decoration: BoxDecoration(
-          color: Color(0xFFF6F6F6),
+          color: const Color(0xFFF6F6F6),
           borderRadius: BorderRadius.circular(16.r),
-          border: Border.all(
-            color: AllColor.borderColor.withOpacity(0.4),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 6,
-              offset: const Offset(0, 3),
-            ),
-          ],
+          border: Border.all(color: AllColor.borderColor.withOpacity(0.3)),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-
+            // 🔹 Title
             Text(
               'How it works',
               style: theme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w500,
-                color: Colors.black,
+                color: AllColor.black,
                 fontSize: 22.sp,
               ),
             ),
-            /// 🔹 2x3 Grid
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: steps.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 8.h,
-                crossAxisSpacing: 8.w,
-                childAspectRatio: 1.1,
-              ),
-              itemBuilder: (context, index) {
-                final item = steps[index];
-                return _StepCard(
-                  icon: item['icon'] as IconData,
-                  title: item['title'] as String,
+
+            SizedBox(height: 10.h),
+
+            // 🔹 Grid
+            LayoutBuilder(
+              builder: (context, constraints) {
+                return GridView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: steps.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 10.h,
+                    crossAxisSpacing: 10.w,
+                    childAspectRatio: (constraints.maxWidth / 3) / 100.h,
+                  ),
+                  itemBuilder: (context, index) {
+                    final item = steps[index];
+                    return _StepCard(
+                      icon: item['icon'] as IconData,
+                      title: item['title'] as String,
+                    );
+                  },
                 );
               },
             ),
@@ -855,36 +906,34 @@ class HowItWorksSection extends StatelessWidget {
   }
 }
 
+/// 🔹 Single Card Widget
 class _StepCard extends StatelessWidget {
-  const _StepCard({required this.icon, required this.title});
-
   final IconData icon;
   final String title;
+  const _StepCard({required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
-
     return Container(
+     
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 6.w),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: Colors.black.withOpacity(0.08)),
+        border: Border.all(color: AllColor.borderColor.withOpacity(0.3)),
       ),
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 30.sp, color: Colors.black87),
-          SizedBox(height: 8.h),
+          Icon(icon, size: 26.sp, color: AllColor.black),
+          SizedBox(height: 6.h),
           Text(
             title,
             textAlign: TextAlign.center,
-            style: theme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w400,
-              fontSize: 12.sp,
+            style: TextStyle(
+              fontSize: 11.sp,
+              fontWeight: FontWeight.w500,
               color: Colors.black,
-              height: 1.3,
             ),
           ),
         ],
@@ -892,6 +941,120 @@ class _StepCard extends StatelessWidget {
     );
   }
 }
+
+
+// class HowItWorksSection extends StatelessWidget {
+//   const HowItWorksSection({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final theme = Theme.of(context).textTheme;
+//
+//     final steps = [
+//       {'icon': Icons.search_rounded, 'title': 'Post a job'},
+//       {'icon': Icons.group_outlined, 'title': 'Get Offers'},
+//       {'icon': Icons.touch_app_outlined, 'title': 'Choose a workpeer'},
+//       {'icon': Icons.attach_money, 'title': 'Make Payment'},
+//       {'icon': Icons.star_border_rounded, 'title': 'Review Job'},
+//       {'icon': Icons.check_circle_outline_rounded, 'title': 'Accept job'},
+//     ];
+//     return Padding(
+//       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+//       child: Container(
+//         width: double.infinity,
+//         padding: EdgeInsets.symmetric(vertical: 10.h,
+//            horizontal: 12.w
+//         ),
+//         decoration: BoxDecoration(
+//           color: Color(0xFFF6F6F6),
+//           borderRadius: BorderRadius.circular(16.r),
+//           border: Border.all(
+//             color: AllColor.borderColor.withOpacity(0.4),
+//           ),
+//           boxShadow: [
+//             BoxShadow(
+//               color: Colors.black.withOpacity(0.05),
+//               blurRadius: 6,
+//               offset: const Offset(0, 3),
+//             ),
+//           ],
+//         ),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: [
+//
+//             Text(
+//               'How it works',
+//               style: TextStyle(
+//                 fontWeight: FontWeight.w500,
+//                 color: Colors.black,
+//                 fontSize: 22.sp,
+//               ),
+//             ),
+//             SizedBox(height: 10.h,) ,
+//             /// 🔹 2x3 Grid
+//             GridView.builder(
+//               shrinkWrap: true,
+//               physics: const NeverScrollableScrollPhysics(),
+//               itemCount: steps.length,
+//               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//                 crossAxisCount: 3,
+//                 mainAxisSpacing: 8.h,
+//                 crossAxisSpacing: 8.w,
+//                 childAspectRatio: 1.1,
+//               ),
+//               itemBuilder: (context, index) {
+//                 final item = steps[index];
+//                 return _StepCard(
+//                   icon: item['icon'] as IconData,
+//                   title: item['title'] as String,
+//                 );
+//               },
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// class _StepCard extends StatelessWidget {
+//   const _StepCard({required this.icon, required this.title});
+//
+//   final IconData icon;
+//   final String title;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final theme = Theme.of(context).textTheme;
+//
+//     return Container(
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         borderRadius: BorderRadius.circular(12.r),
+//         border: Border.all(color: Colors.black.withOpacity(0.08)),
+//       ),
+//       padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           Icon(icon, size: 30.sp, color: Colors.black87),
+//           SizedBox(height: 8.h),
+//           Text(
+//             title,
+//             textAlign: TextAlign.center,
+//             style: theme.bodyMedium?.copyWith(
+//               fontWeight: FontWeight.w400,
+//               fontSize: 12.sp,
+//               color: Colors.black,
+//               height: 1.3,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 
 Future<void> showChooseJobTypeBottomBar(BuildContext context) {

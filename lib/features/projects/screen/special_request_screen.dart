@@ -17,7 +17,7 @@ class ProjectSetupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppbar(text: "Special Request"),
+      appBar: GlobalAppbar(text: "Project "),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -51,7 +51,7 @@ class ProjectTitleSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const CustomLabelText(title: 'Project Title'),
-        SizedBox(height: 6.h),
+        //SizedBox(height: 6.h),
         TextField(
           controller: TextEditingController(),
           decoration: InputDecoration(
@@ -89,7 +89,7 @@ class CustomCategoryDropdown extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const CustomLabelText(title: "Category"),
-        SizedBox(height: 6.h),
+        //SizedBox(height: 6.h),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           decoration: BoxDecoration(

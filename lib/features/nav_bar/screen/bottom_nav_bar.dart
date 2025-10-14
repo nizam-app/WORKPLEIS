@@ -6,6 +6,7 @@ import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/features/account/screen/account_screen.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
 
+import '../../account/screen/client_account.dart';
 import '../../home/screen/home_screen.dart';
 import '../../home/screen/tasks_screen.dart';
 import '../../projects/screen/project_screen.dart';
@@ -45,7 +46,7 @@ class BottomNavBar extends ConsumerWidget {
     HomeScreen.routeName,
     ProjectScreen.routeName,
    ChatScreen.routeName,
-    AccountOverviewScreen.routeName
+    AccountOverviewClientScreen.routeName
   ];
 
   @override
