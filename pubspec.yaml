@@ -105,7 +105,7 @@ flutter:
            weight: 300
          - asset: assets/fonts/OpenSauceOne-Medium.ttf
            weight: 500
-           
+
   #         style: italic
      - family: headFont
        fonts:
