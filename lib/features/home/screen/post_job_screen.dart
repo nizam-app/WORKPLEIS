@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/core/widget/global_aleart_box.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
 import 'package:workpleis/core/widget/global_bottom.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
@@ -118,7 +120,9 @@ class _PostJobScreenState extends State<PostJobScreen> {
 
               ],
             ),
+            SizedBox(height: 16.h),
             CustomLabelText(title: "Date"),
+      
             _datePickerField(),
             SizedBox(height: 16.h),
 
@@ -137,7 +141,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
                 SizedBox(width: 10.w),
                 InkWell(
                   borderRadius: BorderRadius.circular(12.r),
-                  onTap: () {},
+                  onTap: () { showSearchLocationBottomBar(context);},
                   child: Container(
                     width: 45.w,
                     height: 45.w,
@@ -166,7 +170,9 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   hintText: "Total amount",
                 )),
             SizedBox(height: 30.h),
-            GlobalGetStartedButton(onTap: () { showSearchLocationBottomBar(context);}, buttonName: "Post a Job", color: AllColor.primary,),
+            GlobalGetStartedButton(onTap: () {globalShowAlertDialog(context: context, oneTap: (){
+             Navigator.pop(context); 
+            },message:"Post create success" );}, buttonName: "Post a Job", color: AllColor.primary,),
           SizedBox(height: 20.h,)
           ],
         ),
@@ -195,12 +201,12 @@ class _PostJobScreenState extends State<PostJobScreen> {
           value: value,
           hint: Text(
             hint,
-            style: TextStyle(fontSize: 13.sp, color: AllColor.grey),
+            style: TextStyle(fontSize: 13.sp, color: AllColor.borderColor),
           ),
           isExpanded: true,
           icon: Icon(Icons.keyboard_arrow_down, color: AllColor.black),
-          dropdownColor: AllColor.black,
-          style: TextStyle(fontSize: 13.sp, color: AllColor.white),
+          dropdownColor: AllColor.white,
+          style: TextStyle(fontSize: 13.sp, color: AllColor.black),
           onChanged: onChanged,
           items: options
               .map(
@@ -208,7 +214,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   value: opt,
                   child: Text(
                     opt,
-                    style: TextStyle(fontSize: 13.sp, color: AllColor.white),
+                    style: TextStyle(fontSize: 13.sp, color: AllColor.black),
                   ),
                 ),
               )

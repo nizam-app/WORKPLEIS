@@ -114,7 +114,6 @@
 				DA3BD3EE13BC18AAF1C7BF0C /* Pods-RunnerTests.release.xcconfig */,
 				0C918E0163A18FF3917951E6 /* Pods-RunnerTests.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -490,6 +489,7 @@
 			baseConfigurationReference = 1E08F689D67AC33C66B77899 /* Pods-RunnerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

@@ -34,15 +34,17 @@ class EnterYourEmail  extends StatelessWidget {
 
                 child: Text("Email",
                     style: TextStyle(
-                        fontSize: 13.sp, fontWeight: FontWeight.w600, color: AllColor.borderColor)),
+                        fontSize: 13.sp, fontWeight: FontWeight.w500, color: AllColor.borderColor)),
               ),
             ),
             SizedBox(height: 6.h),
             TextFormField(
+              keyboardType: TextInputType.emailAddress,
               controller: _emailController,
               validator: (v) =>
               v == null || v.isEmpty || v.contains("com") ? "Enter your Email" : null,
               decoration: const InputDecoration(
+            
                 hintText: "Your Email",
               ),
             ),

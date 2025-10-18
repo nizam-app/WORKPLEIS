@@ -7,6 +7,7 @@ import 'package:workpleis/core/widget/global_bottom.dart';
 import 'package:workpleis/features/auth/logic/signup_screen_check.dart';
 import 'package:workpleis/features/auth/screens/enter_your_phone_number.dart';
 import 'package:workpleis/features/auth/screens/indentity_verification_screen.dart';
+import 'package:workpleis/features/onboarding/logic/check_individual.dart';
 
 import 'business_verification_screen.dart';
 
@@ -65,14 +66,15 @@ class PhoneNumberVerification extends StatelessWidget {
                   final isActive = ref.watch(boolControllerProvider);
                   return GlobalButton(
                     text: "Verify Phone",
-                    onPressed: () {
-
-                      if (isActive) {
-                        context.push(BusinessVerificationScreen.routeName);
-                      } else {
-                        context.push(IndentityVerificationScreen.routeName);
+                      onPressed: () {
+                        final role = ref.read(checkBusinessP);              // 'business' | 'individual'
+                        final isActive = role == 'business';
+                        if (isActive) {
+                          context.push(BusinessVerificationScreen.routeName);
+                        } else {
+                          context.push(IndentityVerificationScreen.routeName);
+                        }
                       }
-                    },
                   );
                 },
               ),

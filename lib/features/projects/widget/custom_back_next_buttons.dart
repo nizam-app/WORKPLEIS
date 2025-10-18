@@ -33,7 +33,7 @@ final String buttonText;
               style: TextStyle(
                 fontSize: 14.sp,
                 color: Colors.black,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w300,
               ),
             ),
           ),
@@ -45,15 +45,15 @@ final String buttonText;
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
             decoration: BoxDecoration(
-              color: AllColor.primary, // Neon green
+              color: AllColor.brand2_light, // Neon green
               borderRadius: BorderRadius.circular(30.r),
             ),
             child: Text(
               buttonText,
               style: TextStyle(
                 fontSize: 14.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
+                color: Colors.white,
+                fontWeight: FontWeight.w300,
               ),
             ),
           ),

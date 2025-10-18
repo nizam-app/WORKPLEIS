@@ -34,13 +34,13 @@ class GlobalAleartBox extends StatelessWidget {
         children: [
           // ✅ Lime check circle
           Container(
-            height: 60.w,
+            height: 60.h,
             width: 60.w,
             decoration: const BoxDecoration(
               color: AllColor.primary,
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.check, color: Colors.white, size: 32),
+            child: const Icon(Icons.check, color: Colors.white, size: 40),
           ),
           SizedBox(height: 20.h),
 
