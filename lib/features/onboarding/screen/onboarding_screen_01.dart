@@ -17,10 +17,11 @@ class OnboardingScreen01 extends StatelessWidget {
       backgroundColor: AllColor.primary,
       body: SafeArea(
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 20.w),
+          padding:  EdgeInsets.symmetric(horizontal: 20.w, ),
           child: Center(
             child:Column(
-                mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Spacer(),
                 const GlobalLogo(image: "assets/images/workpleis1.png",),

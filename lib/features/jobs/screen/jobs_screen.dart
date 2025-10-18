@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-import 'package:workpleis/features/projects/screen/request_tracker.dart';
-import 'package:workpleis/features/projects/screen/view_proposal_screen.dart';
+import 'package:workpleis/features/jobs/screen/jobs_offers.dart';
+import 'package:workpleis/features/jobs/screen/jobs_tracking.dart';
 
 class JobsScreen extends ConsumerWidget {
   const JobsScreen({super.key});
@@ -23,6 +23,20 @@ class JobsScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+               ///search bar 
+                TextFormField(
+                   decoration:
+                   InputDecoration(
+                     hintText: 'What do you need done today ?',)!.copyWith(
+                     fillColor: AllColor.white,
+                     prefixIcon: Icon(Icons.search, color: AllColor.grey,),
+                     border: OutlineInputBorder(
+                       borderRadius: BorderRadius.circular(10.r),
+                     ),
+                   ),
+                ),
+               SizedBox(height: 16.h,),
+
             /// 🔹 Filter tabs
             const JobStatusList(),
             SizedBox(height: 16.h),
@@ -30,14 +44,14 @@ class JobsScreen extends ConsumerWidget {
             /// 🔹 Job list
             Expanded(
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: 6,
                 itemBuilder: (context, index) {
                   return JobCard(
                     title: "Deliver something for me",
                     status: selectedStatus,
-                    time: "Immediate",
-                    budget: "\$5,000–\$20,000",
-                    period: "Afternoon (12PM–5PM)",
+                    locations: "Topasham Me 04",
+                    calender: "Today",
+                    time: "Any Time",
                     price: "\$50",
                   );
                 },
@@ -118,17 +132,17 @@ class JobCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.status,
+    required this.locations,
+    required this.calender,
     required this.time,
-    required this.budget,
-    required this.period,
     required this.price,
   });
 
   final String title;
   final String status;
+  final String locations;
+  final String calender;
   final String time;
-  final String budget;
-  final String period;
   final String price;
 
   @override
@@ -170,11 +184,11 @@ class JobCard extends StatelessWidget {
           SizedBox(height: 8.h),
 
           /// Details
-          _DetailRow(icon: Icons.timer, text: time),
+          _DetailRow(icon: Icons.location_on, text: locations),
           SizedBox(height: 6.h),
-          _DetailRow(icon: Icons.request_quote_outlined, text: budget),
+          _DetailRow(icon: Icons.calendar_today, text: calender, ),
           SizedBox(height: 6.h),
-          _DetailRow(icon: Icons.call_outlined, text: period, expandable: true),
+          _DetailRow(icon: Icons.schedule, text: time, ),
           // SizedBox(height: 10.h),
 
           /// Bottom actions + price
@@ -234,6 +248,7 @@ class _DetailRow extends StatelessWidget {
     );
     return Row(
       children: [
+       
         Icon(icon, size: 18, color: const Color(0xFF7A6FA2)),
         SizedBox(width: 6.w),
         if (expandable) Expanded(child: content) else content,
@@ -242,6 +257,8 @@ class _DetailRow extends StatelessWidget {
   }
 }
 
+
+
 class _BottomBar extends StatelessWidget {
   const _BottomBar({required this.status, required this.price});
   final String status;
@@ -249,50 +266,53 @@ class _BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final showButtons = status != "Submitted";
+    // show button if not submitted
+    final showButtons = status != "Submitted ";
 
-    final buttons = switch (status) {
-      "Proposal Sent" => [
-        _PillButton.purple("View Proposal", onTap: () {context.push(ViewProposalScreen.routeName);}),
-      ],
-      "In Progress" => [
-        _PillButton.purple("Track Project", onTap: () {context.push(RequestTrackerScreen.routeName);}),
-      ],
-      "In Review" => [
-        _PillButton.lime("View Details", onTap: () {}),
-        SizedBox(width: 8.w),
-        _PillButton.purple("Track Project", onTap: () {}), // ← both buttons
-      ],
-      "Delivered" => [
-        _PillButton.lime("View Details", onTap: () {}),   // ← only this
-      ],
-      _ => <Widget>[],
+    // Track Job button depending on status
+    final Widget? trackButton = switch (status) {
+      "Open" => _PillButton.purple("View Offers", onTap: () {
+        context.push(JobsOffers.routeName);
+      }),
+      "Assigned" => _PillButton.purple("Track Job", onTap: () {
+        context.push(JobsTracking.routeName) ;
+      }),
+      "In Progress" => _PillButton.purple("Track Job", onTap: () {
+        // TODO: Add your navigation or logic here
+      }),
+      "In Review" => _PillButton.lime("Track Job", onTap: () {
+        // TODO: Add your navigation or logic here
+      }),
+      "Delivered" => _PillButton.lime("Track Job", onTap: () {
+        // TODO: Add your navigation or logic here
+      }),
+      _ => null,
     };
 
-    if (!showButtons) {
-      return Padding(
-        padding: const EdgeInsets.only(right: 12.0),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(),
-
-              Text(price, style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black)),
-            ]),
-      );
-    }
-
-    return Row(children: [
-      Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: AllColor.black)),
-      const Spacer(),
-      ...buttons,
-    ]);
+    return Padding(
+      padding: EdgeInsets.symmetric(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Price text
+          Text(
+            price,
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
+              color: AllColor.black,
+            ),
+          ),
+          if (showButtons && trackButton != null) trackButton,
+        ],
+      ),
+    );
   }
 }
 
 
 class _PillButton extends StatelessWidget {
-  const _PillButton._(this.label, this.bg, this.fg, {required this.onTap});
+  const _PillButton._(this.label, this.bg, this.fg, { required this.onTap});
   final String label;
   final Color bg;
   final Color fg;
@@ -328,7 +348,7 @@ class _PillButton extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 12.sp,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: fg,
               fontFamily: "bodyFont",
@@ -338,4 +358,4 @@ class _PillButton extends StatelessWidget {
       ),
     );
   }
-}
+ }

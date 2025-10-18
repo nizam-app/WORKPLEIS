@@ -89,7 +89,6 @@ class CustomCategoryDropdown extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const CustomLabelText(title: "Category"),
-        //SizedBox(height: 6.h),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           decoration: BoxDecoration(
@@ -100,63 +99,94 @@ class CustomCategoryDropdown extends ConsumerWidget {
             ),
             borderRadius: BorderRadius.circular(12.r),
           ),
-          child: PopupMenuButton<String>(
-            onSelected: (value) {
-              ref.read(selectedCategoryProvider.notifier).state = value;
-            },
-            itemBuilder: (BuildContext context) {
-              return categories.map((String value) {
-                final isSelected = value == selectedCategory;
-                return PopupMenuItem<String>(
-                  value: value,
+          child: LayoutBuilder(
+            builder: (context, box) {
+              return PopupMenuButton<String>(
+                // ✅ নির্বাচিত আইটেম হাইলাইট হবে
+                initialValue: selectedCategory,
+
+                // ✅ মেনু ফিল্ডের ঠিক নিচে ওপেন হবে
+                position: PopupMenuPosition.under,
+
+                // ✅ সামান্য গ্যাপ
+                offset: Offset(0, 4.h),
+
+                // ✅ মেনুর চওড়া = ফিল্ডের চওড়া
+                constraints: BoxConstraints(
+                  minWidth: box.maxWidth,
+                ),
+
+                onSelected: (value) {
+                  ref.read(selectedCategoryProvider.notifier).state = value;
+                },
+
+                itemBuilder: (BuildContext context) {
+                  return categories.map((String value) {
+                    final isSelected = value == selectedCategory;
+                    return PopupMenuItem<String>(
+                      value: value,
+                      height: 48.h,
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.h,
+                          horizontal: 8.w,
+                        ),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? AllColor.brand2_light
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(6.r),
+                        ),
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: isSelected ? Colors.white : Colors.black87,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList();
+                },
+
+                // ⛔ পুরনো negative offset মুছে দেওয়া হলো
+
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6.r),
+                  side: BorderSide(
+                    color: AllColor.brand2_light,
+                    width: 1.0,
+                  ),
+                ),
+
+                // ট্রিগার (আগের মতোই)
+                child: SizedBox(
                   height: 48.h,
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
-                    decoration: BoxDecoration(
-                      color: isSelected ? const Color(0xFF4C4470) : Colors.white,
-                    ),
-                    child: Text(
-                      value,
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: isSelected ? Colors.white : Colors.black87,
-                        fontWeight: isSelected ? FontWeight.w400 : FontWeight.w400,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          selectedCategory ?? "Select a category",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            color: selectedCategory == null
+                                ? AllColor.grey
+                                : Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    ),
+                      Icon(Icons.keyboard_arrow_down_rounded,
+                          color: AllColor.borderColor),
+                    ],
                   ),
-                );
-              }).toList();
+                ),
+              );
             },
-            offset: const Offset(0, -310), // Opens upward
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6.r),
-              side: BorderSide(
-                color: AllColor.borderColor.withOpacity(0.6),
-                width: 1.0,
-              ),
-            ),
-            child: SizedBox(
-              height: 48.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      selectedCategory ?? "Select a category",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        color: selectedCategory == null ? AllColor.grey : Colors.black,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Icon(Icons.keyboard_arrow_down_rounded,
-                      color: AllColor.borderColor),
-                ],
-              ),
-            ),
           ),
         ),
       ],

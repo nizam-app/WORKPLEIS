@@ -1,5 +1,6 @@
-import 'dart:ui';
 
+
+import 'dart:ui';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
@@ -16,8 +17,13 @@ final isClientProvider = Provider<bool>((ref) =>
 (ref.watch(roleProvider) ?? '').trim().toLowerCase() == 'client');
 
 // video sets
-const _clientV = ['assets/videos/1.mp4','assets/videos/2.mp4','assets/videos/3.mp4','assets/videos/4.mp4'];
-const _provV   = ['assets/videos/vendor1.mp4','assets/videos/vendor2.mp4','assets/videos/vendor3.mp4','assets/videos/vendor4.mp4'];
+const _clientV = ['assets/videos/client1.mp4'];
+const _provV   = ['assets/videos/service1.mp4'];
+
+// const _clientV = ['assets/videos/1.mp4','assets/videos/2.mp4','assets/videos/3.mp4','assets/videos/4.mp4'];
+// const _provV   = ['assets/videos/vendor1.mp4','assets/videos/vendor2.mp4','assets/videos/vendor3.mp4','assets/videos/vendor4.mp4'];
+
+
 final videoPathsProvider = Provider<List<String>>((ref) =>
 ref.watch(isClientProvider) ? _clientV : _provV);
 

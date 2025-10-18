@@ -17,11 +17,16 @@ import 'package:workpleis/features/auth/screens/register_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/community_guidenlines_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/privacy_policy_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/terms_and_conditions_screen.dart';
+import 'package:workpleis/features/home/screen/Service_home_screen.dart';
 import 'package:workpleis/features/home/screen/home_screen.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/home/screen/tasks_screen.dart';
+import 'package:workpleis/features/jobs/screen/jobs_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
+import 'package:workpleis/features/jobs/screen/jobs_tracking.dart';
+import 'package:workpleis/features/jobs/screen/service_jobs.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
+import 'package:workpleis/features/nav_bar/screen/service_bottom_nav_bar.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
@@ -208,6 +213,7 @@ class AppRouter {
         builder: (context, state, child) {
           return BottomNavBar(child: child); // ✅ pass child
         },
+
         routes: [
           GoRoute(
             path: HomeScreen.routeName,
@@ -231,6 +237,8 @@ class AppRouter {
             name: JobDetailScreen.routeName,
             builder: (context, state) => const JobDetailScreen(),
           ),
+         
+          
           GoRoute(
             path: ChatScreen.routeName,
             name: ChatScreen.routeName,
@@ -278,14 +286,31 @@ class AppRouter {
           ),
 
           GoRoute(
+            path: JobsOffers.routeName,
+            name: JobsOffers.routeName,
+            builder: (context, state) => const JobsOffers(),
+          ),
+
+
+          GoRoute(
             path: WalletScreen.routeName,
             name: WalletScreen.routeName,
             builder: (context, state) => const WalletScreen(),
           ),
 
 
+          GoRoute(
+            path: JobsTracking.routeName,
+            name: JobsTracking.routeName,
+            builder: (context, state) =>  const JobsTracking(status: " "),
+          ),
 
-
+          GoRoute(
+            path: ServiceJobs.routeName,
+            name: ServiceJobs.routeName,
+            builder: (context, state) =>  const ServiceJobs(),
+         ),
+    
           GoRoute(
             path: SecurityGuideScreen.routeName,
             name: SecurityGuideScreen.routeName,
@@ -333,6 +358,41 @@ class AppRouter {
           ),
         ],
       ),
+
+
+
+      /// 🚀 ShellRoute with ServiceBottomNavBar
+      ShellRoute(
+        builder: (context, state, child) => ServiceBottomNavBar(child: child),
+        routes: [
+          GoRoute(
+            path: ServiceHomeScreen.routeName,
+            name: ServiceHomeScreen.routeName,
+            builder: (context, state) =>  ServiceHomeScreen(),
+          ),
+          // GoRoute(
+          //   path: ServiceJobs.routeName,
+          //   name: ServiceJobs.routeName,
+          //   builder: (context, state) => const ServiceJobs(),
+          // ),
+          // GoRoute(
+          //   path: ProjectScreen.routeName,
+          //   name: ProjectScreen.routeName,
+          //   builder: (context, state) => const ProjectScreen(),
+          // ),
+          // GoRoute(
+          //   path: ChatScreen.routeName,
+          //   name: ChatScreen.routeName,
+          //   builder: (context, state) => const ChatScreen(),
+          // ),
+          // GoRoute(
+          //   path: AccountOverviewClientScreen.routeName,
+          //   name: AccountOverviewClientScreen.routeName,
+          //   builder: (context, state) => const AccountOverviewClientScreen(),
+          // ),
+        ],
+      ),
     ],
   );
+  
 }
