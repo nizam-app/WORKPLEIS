@@ -7,6 +7,7 @@ import 'package:workpleis/core/constants/color_control/all_color.dart';
 
 // Screens
 import '../../home/screen/home_screen.dart';
+import '../../jobs/screen/jobs_offers.dart';
 import '../../projects/screen/project_screen.dart';
 import '../../message/screen/chat_screen.dart';
 import '../../account/screen/client_account.dart';
@@ -85,7 +86,7 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
     final providerRoutes = [
       HomeScreen.routeName,
       SeeAllJobsScreen.routeName,
-      ProjectScreen.routeName, // You can replace with your offers screen
+      JobsOffers.routeName, // You can replace with your offers screen
       ChatScreen.routeName,
       AccountOverviewClientScreen.routeName,
     ];
