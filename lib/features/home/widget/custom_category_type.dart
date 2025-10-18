@@ -16,8 +16,9 @@ class CustomCategoryType extends StatelessWidget {
           "Job Posts",
           style: TextStyle(
             fontSize: 16.sp,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.w500,
             color: AllColor.black87,
+              fontFamily: "bodyFont"
           ),
         ),
 
@@ -30,6 +31,7 @@ if (checkSeeButton == false)
               fontSize: 16.sp,
               fontWeight: FontWeight.w800,
               color: AllColor.black87,
+              fontFamily: "bodyFont"
             ),
             textAlign: TextAlign.center,
           ),

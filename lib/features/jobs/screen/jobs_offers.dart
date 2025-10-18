@@ -1,44 +1,37 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-import 'package:workpleis/features/message/screen/chat_screen.dart';
 
-final tabP = StateProvider<int>((_) => 0);
+final tabProvider = StateProvider<int>((_) => 0);
 
-class P {
-  P(this.t, this.p, this.d, this.eta, {this.rej = false});
-  String t, d, eta;
-  int p;
-  bool rej;
+class JobData {
+  JobData(this.title, this.price, this.desc, this.eta, {this.status = "pending"});
+
+  final String title;
+  final int price;
+  final String desc;
+  final String eta;
+  final String status;
 }
 
-final jobsP = StateNotifierProvider<_S, List<P>>((_) => _S());
+final jobsProvider = StateNotifierProvider<_JobState, List<JobData>>((_) => _JobState());
 
-class _S extends StateNotifier<List<P>> {
-  _S()
+class _JobState extends StateNotifier<List<JobData>> {
+  _JobState()
       : super([
-    P("Deliver something for me", 3500, "Modern e-commerce React/Node.js.", "3–5 days"),
-    P("Marketing site revamp", 1200, "LP redesign, blog, CMS.", "5–7 days"),
-    P("iOS MVP polish", 800, "Bug-fix, TestFlight, analytics.", "2–4 days"),
-    P("Admin dashboard", 2100, "RBAC, charts, CSV.", "6–10 days"),
-    P("Stripe integration", 600, "Checkout, webhooks.", "1–2 days"),
+    JobData("Full-stack Developer", 3500, "Seeking experienced full-stack developer to build modern e-commerce platform with React/Node.js.", "3–5 days"),
+    JobData("UI Designer", 1800, "Redesign dashboard UI with new theme and components.", "5–7 days", status: "accepted"),
+    JobData("API Integration", 900, "Integrate Stripe & Firebase Authentication to existing app.", "2–4 days", status: "rejected"),
   ]);
 
-  void accept(int i) {
-    // Accept logic placeholder
-  }
-
-  void reject(int i) {
+  void updateStatus(int index, String newStatus) {
     state = [
-      for (int k = 0; k < state.length; k++)
-        k == i
-            ? P(state[k].t, state[k].p, state[k].d, state[k].eta, rej: true)
-            : state[k]
+      for (int i = 0; i < state.length; i++)
+        i == index
+            ? JobData(state[i].title, state[i].price, state[i].desc, state[i].eta, status: newStatus)
+            : state[i]
     ];
   }
 }
@@ -48,70 +41,63 @@ class JobsOffers extends ConsumerWidget {
   static const routeName = "/jobsOffers";
 
   @override
-  Widget build(BuildContext c, WidgetRef ref) {
-    final tab = ref.watch(tabP);
-    final items = ref.watch(jobsP);
-    final list = tab == 0
-        ? items.where((e) => !e.rej).toList()
-        : items.where((e) => e.rej).toList();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tab = ref.watch(tabProvider);
+    final jobs = ref.watch(jobsProvider);
+
+    final filtered = jobs.where((job) {
+      switch (tab) {
+        case 0:
+          return job.status == "pending";
+        case 1:
+          return job.status == "accepted";
+        case 2:
+          return job.status == "rejected";
+        default:
+          return false;
+      }
+    }).toList();
 
     return Scaffold(
-      appBar: GlobalAppbar(text: 'Offers'),
+      appBar: const GlobalAppbar(text: "My Offers"),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
-            ///search bar
-            TextFormField(
-              decoration:
-              InputDecoration(
-                hintText: 'What do you need done today ?',
-              )!.copyWith(
-                fillColor: AllColor.white,
-                prefixIcon: Icon(Icons.search, color: AllColor.grey,),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
+            _buildSearchBar(),
+            14.verticalSpace,
+        Row(
+          children: [
+            Expanded(
+              child: _TabBar(
+                tab: tab,
+                onSelect: (i) => ref.read(tabProvider.notifier).state = i,
               ),
             ),
-            SizedBox(height: 16.h,),
-            Row(
-              children: [
-                _Seg(tab: tab, on: (i) => ref.read(tabP.notifier).state = i),
-                const Spacer(),
-                Text(
-                  "${list.length} ${tab == 0 ? 'pending' : 'rejected'}",
-                  style: TextStyle(
-                    color: AllColor.black.withOpacity(.6),
-                    fontWeight: FontWeight.w300,
-                    fontSize: 13.sp,
-                  ),
-                ),
-              ],
+            SizedBox(width:40.w,),
+            Text(
+              "${filtered.length} ${["Pending", "Accepted", "Rejected"][tab]}",
+              style: TextStyle(
+                color: Colors.black.withOpacity(.6),
+                fontWeight: FontWeight.w500,
+                fontSize: 13.sp,
+              ),
             ),
+          ],
+        ),
             12.verticalSpace,
-
-            
             Expanded(
-              child: list.isEmpty
-                  ? _Empty(
-                  msg: tab == 0
-                      ? "No pending jobs"
-                      : "No rejected jobs")
+              child: filtered.isEmpty
+                  ? Center(
+                child: Text(
+                  "No ${["Pending", "Accepted", "Rejected"][tab]} jobs",
+                  style: TextStyle(color: AllColor.brand2_light, fontSize: 14.sp),
+                ),
+              )
                   : ListView.separated(
-                itemCount: list.length,
+                itemCount: filtered.length,
                 separatorBuilder: (_, __) => 12.verticalSpace,
-                itemBuilder: (_, i) {
-                  final idx = items.indexOf(list[i]);
-                  return _Card(
-                    d: list[i],
-                    showActions: tab == 0, // ✅ only show buttons in Pending tab
-                    onAccept: () =>
-                        ref.read(jobsP.notifier).accept(idx),
-                    onReject: () =>
-                        ref.read(jobsP.notifier).reject(idx),
-                  );
-                },
+                itemBuilder: (_, i) => _JobCard(data: filtered[i]),
               ),
             ),
           ],
@@ -119,208 +105,112 @@ class JobsOffers extends ConsumerWidget {
       ),
     );
   }
-}
 
-class _Seg extends StatelessWidget {
-  const _Seg({required this.tab, required this.on});
-  final int tab;
-  final ValueChanged<int> on;
-
-  @override
-  Widget build(BuildContext c) => Container(
-    padding: EdgeInsets.all(3.r),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      border: Border.all(color: AllColor.black.withOpacity(.1)),
-      borderRadius: BorderRadius.circular(999.r),
-    ),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        _chip("Pending", tab == 0, () => on(0)),
-        _chip("Rejected", tab == 1, () => on(1)),
-      ],
-    ),
-  );
-
-  Widget _chip(String t, bool s, VoidCallback onTap) => GestureDetector(
-    onTap: onTap,
-    child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
-      decoration: BoxDecoration(
-        color: s ? AllColor.brand2_light : Colors.transparent,
-        borderRadius: BorderRadius.circular(999.r),
-      ),
-      child: Text(
-        t,
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 13.sp,
-          color: s ? AllColor.white : AllColor.black,
+  Widget _buildSearchBar() {
+    return TextField(
+      decoration: InputDecoration(
+        hintText: "What do you need done today?",
+        prefixIcon: Icon(Icons.search, color: AllColor.grey),
+        fillColor: AllColor.white,
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
-class _Card extends StatelessWidget {
-  const _Card({
-    required this.d,
-    required this.showActions,
-    required this.onAccept,
-    required this.onReject,
-  });
+class _TabBar extends StatelessWidget {
+  const _TabBar({required this.tab, required this.onSelect});
 
-  final P d;
-  final bool showActions;
-  final VoidCallback onAccept, onReject;
+  final int tab;
+  final ValueChanged<int> onSelect;
 
   @override
-  Widget build(BuildContext c) {
+  Widget build(BuildContext context) {
+    final items = ["Pending", "Accepted", "Rejected"];
+    return Container(
+      padding: EdgeInsets.all(2.r),
+      decoration: BoxDecoration(
+        color: AllColor.white,
+        borderRadius: BorderRadius.circular(30.r),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(items.length, (i) {
+          final selected = tab == i;
+          return GestureDetector(
+            onTap: () => onSelect(i),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+              decoration: BoxDecoration(
+                color: selected ? AllColor.primary : AllColor.white,
+                border: Border.all(
+                  color: const Color(0xFF154E7B).withOpacity(0.2),
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(25.r),
+              ),
+              child: Text(
+                items[i],
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                  fontFamily: "bodyFont"
+
+                ),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}
+
+
+class _JobCard extends StatelessWidget {
+  const _JobCard({required this.data});
+
+  final JobData data;
+
+  @override
+  Widget build(BuildContext context) {
+    final status = data.status;
 
     return Container(
       padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14.r),
-        border: Border.all(color: AllColor.grey, width: 1.w),
+        color: AllColor.white,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: AllColor.borderColor.withOpacity(.4)),
         boxShadow: [
-          BoxShadow(
-            color: Colors.white,
-            blurRadius: 12.r,
-            offset: Offset(0, 6.h),
-          ),
+          BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8, offset: const Offset(0, 3)),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // --- Header: avatar + name/rating ... price ---
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Avatar (soft purple bg)
-              Container(
-                width: 30.w,
-                height: 30.w,
-                decoration: const BoxDecoration(
-                  color: AllColor.brand2_light,
-                  shape: BoxShape.circle,
-                ),
-                alignment: Alignment.center,
-                child: Icon(Icons.person, size: 16.sp, color: AllColor.white),
-              ),
-              10.horizontalSpace,
-
-              // Name + rating (ইমেজের মতো স্ট্যাটিক রাখা হলো—ডাটা মডেল না বদলিয়ে)
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "John Due",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: AllColor.black,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w700,
-                        height: 1.1,
-                      ),
-                    ),
-                    2.verticalSpace,
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.star_rounded, size: 16.sp, color: AllColor.brand2_light),
-                        4.horizontalSpace,
-                        Text(
-                          "4.9",
-                          style: TextStyle(
-                            color: AllColor.black,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              // Price (top-right)
-              Text(
-                "\$${_fmt(d.p)}",
-                style: TextStyle(
-                  color: AllColor.brand2_light,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 14.sp,
-                ),
-              ),
-            ],
-          ),
-
+          _buildHeader(),
           10.verticalSpace,
-
-          // --- Body text (তোমার ডাটা) ---
           Text(
-            d.d,
-            style: TextStyle(
-              color: AllColor.black87,
-              height: 1,
-              fontSize: 12.sp,
-            ),
+            data.desc,
+            style: TextStyle(color: AllColor.black87, fontSize: 13.sp, height: 1.3),
           ),
-
-          12.verticalSpace,
-
-          // --- Footer: Est ... chat + buttons/rejected ---
+          10.verticalSpace,
           Row(
             children: [
               Text(
-                "Est: ${d.eta}",
-                style: TextStyle(
-                  color: AllColor.black87,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12.sp,
-                ),
+                "Est: ${data.eta}",
+                style: TextStyle(color: AllColor.black.withOpacity(.8), fontSize: 12.sp, fontWeight: FontWeight.w500),
               ),
               const Spacer(),
-
-              // Chat (ghost icon style)
-              _ghostIcon(
-                icon: Icons.message_outlined,
-                onTap: () {
-                  c.push(ChatScreen.routeName);
-                },
-              ),
-
-              if (showActions) ...[
-                8.horizontalSpace,
-                // Accept = neon-lime filled
-                _pillFilled(
-                  "Accept",
-                  AllColor.white,
-                  AllColor.brand2_light,
-                  onAccept,
-                ),
-                8.horizontalSpace,
-                // Reject = soft gray ghost
-                _pillGhost(
-                  "Reject",
-                  AllColor.white,
-                  AllColor.brand2_light,
-                  onReject,
-                ),
-              ] else ...[
-                8.horizontalSpace,
-                // Rejected = soft purple filled (disabled look)
-                _pillDisabled(
-                  "Rejected",
-                  AllColor.white,
-                  AllColor.brand2_light,
-                ),
-              ],
+              if (status == "pending") _pill("Pending")
+              else if (status == "accepted") _pill("Update Job")
+              else _pill("Reason"),
             ],
           ),
         ],
@@ -328,105 +218,48 @@ class _Card extends StatelessWidget {
     );
   }
 
-  // ----- Helpers (same signature, inside class) -----
-  static String _fmt(int v) {
-    final s = "$v";
-    final b = StringBuffer();
-    for (int i = 0; i < s.length; i++) {
-      b.write(s[i]);
-      final r = s.length - i;
-      if (r > 1 && r % 3 == 1) b.write(',');
-    }
-    return b.toString();
-  }
-
-  Widget _ghostIcon({required IconData icon, required VoidCallback onTap}) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(10.r),
-      child: Padding(
-        padding: EdgeInsets.all(8.r),
-        child: Icon(icon, size: 16.sp, color: const Color(0xFF8E7CFF)),
-      ),
+  Widget _buildHeader() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CircleAvatar(
+          radius: 18.r,
+          backgroundColor: AllColor.primary.withOpacity(0.4),
+          child: const Icon(Icons.person, color: AllColor.brand2_light),
+        ),
+        10.horizontalSpace,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("John Due", style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w700, color: AllColor.black)),
+              4.verticalSpace,
+              Row(
+                children: [
+                  Icon(Icons.star, size: 14.sp, color: AllColor.brand2_light),
+                  4.horizontalSpace,
+                  Text("4.9", style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontWeight: FontWeight.w600)),
+                ],
+              ),
+            ],
+          ),
+        ),
+        Text("\$${data.price}", style: TextStyle(color: AllColor.black, fontWeight: FontWeight.w700, fontSize: 14.sp)),
+      ],
     );
   }
 
-  Widget _pillFilled(String t, Color bg, Color fg, VoidCallback on) => Material(
-    color: bg,
-    borderRadius: BorderRadius.circular(999.r),
-    child: InkWell(
-      onTap: on,
-      borderRadius: BorderRadius.circular(999.r),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 7.h),
-        child: Text(
-          t,
-          style: TextStyle(
-            color: fg,
-            fontWeight: FontWeight.w700,
-            fontSize: 12.sp,
-            letterSpacing: .1,
-          ),
-        ),
-      ),
-    ),
-  );
-
-  Widget _pillGhost(String t, Color bg, Color fg, VoidCallback on) => Container(
-    decoration: BoxDecoration(
-      color: bg,
-      borderRadius: BorderRadius.circular(999.r),
-    ),
-    child: Material(
-      type: MaterialType.transparency,
-      child: InkWell(
-        onTap: on,
+  Widget _pill(String label) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
+      decoration: BoxDecoration(
+        color: AllColor.white,
         borderRadius: BorderRadius.circular(999.r),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 7.h),
-          child: Text(
-            t,
-            style: TextStyle(
-              color: fg,
-              fontWeight: FontWeight.w600,
-              fontSize: 12.sp,
-            ),
-          ),
-        ),
       ),
-    ),
-  );
-
-  Widget _pillDisabled(String t, Color bg, Color fg) => Container(
-    decoration: BoxDecoration(
-      color: bg,
-      borderRadius: BorderRadius.circular(999.r),
-    ),
-    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 7.h),
-    child: Text(
-      t,
-      style: TextStyle(
-        color: fg,
-        fontWeight: FontWeight.w700,
-        fontSize: 12.5.sp,
+      child: Text(
+        label,
+        style: TextStyle(color: AllColor.brand2_light, fontWeight: FontWeight.w600, fontSize: 12.5.sp),
       ),
-    ),
-  );
-}
-
-
-class _Empty extends StatelessWidget {
-  const _Empty({required this.msg});
-  final String msg;
-
-  @override
-  Widget build(BuildContext c) => Center(
-    child: Text(
-      msg,
-      style: TextStyle(
-        color: AllColor.brand2_light,
-        fontSize: 14.sp,
-      ),
-    ),
-  );
+    );
+  }
 }
