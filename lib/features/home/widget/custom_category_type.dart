@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/color_control/all_color.dart';
 
 class CustomCategoryType extends StatelessWidget {
-  const CustomCategoryType({super.key});
+  const CustomCategoryType({super.key, this.checkSeeButton = false});
+  final bool? checkSeeButton;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class CustomCategoryType extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "Recent Job Posts",
+          "Job Posts",
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w900,
@@ -20,6 +21,7 @@ class CustomCategoryType extends StatelessWidget {
           ),
         ),
 
+if (checkSeeButton == false)
         InkWell(
           onTap: () {},
           child: Text(

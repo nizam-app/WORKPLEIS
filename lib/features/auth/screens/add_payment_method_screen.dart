@@ -94,6 +94,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_aleart_box.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
@@ -140,7 +141,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
               Spacer(),
               GlobalGetStartedButton(
                 onTap: () {
-                  globalShowAlertDialog(context: context, oneTap: () {context.push( ServiceHomeScreen.routeName );});
+                  globalShowAlertDialog(context: context, oneTap: () {loginDone(context);});
                 },
                 color: AllColor.primary,
                 buttonName: "Add",
@@ -151,5 +152,21 @@ class AddPaymentMethodScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  void loginDone(BuildContext context) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    String? _checkClient = _prefs.getString("role");
+
+    if (_checkClient == null) {
+      throw Exception("Role not found");
+    } else {
+      if (_checkClient == "client") {
+        context.push(HomeScreen.routeName);
+      } else if (_checkClient == "provider") {
+        context.push(ServiceHomeScreen.routeName);
+      } else {
+        context.push(HomeScreen.routeName);
+      }
+    }
   }
 }

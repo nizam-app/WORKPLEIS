@@ -39,6 +39,7 @@ class AllColor {
 
 
   static const Color red = Colors.red;
+  static const Color warmDarkGrey = Color(0xFF4B4646);
 
 
 }

@@ -1,22 +1,24 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workpleis/core/widget/global_bottom.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
 
 import 'package:workpleis/features/home/screen/post_job_screen.dart';
+import 'package:workpleis/features/home/screen/see_all_jobs_screen.dart';
 
 import 'package:workpleis/features/projects/screen/special_request_screen.dart';
 
 import '../../../core/constants/color_control/all_color.dart';
-class ServiceHomeScreen  extends StatelessWidget {
-   ServiceHomeScreen  ({super.key});
+
+class ServiceHomeScreen extends StatelessWidget {
+  ServiceHomeScreen({super.key});
 
   static const routeName = '/service_home';
 
-
   @override
   Widget build(BuildContext context) {
+    TextTheme theme = Theme.of(context).textTheme;
     return Scaffold(
       backgroundColor: Color(0xFFF6F6F6),
       body: SingleChildScrollView(
@@ -25,18 +27,25 @@ class ServiceHomeScreen  extends StatelessWidget {
             HomeHeaderSection(),
 
             CategoriesSection(),
-            SizedBox(height: 16.h), 
-            SizedBox(
-                height: 800.h,
-                child: JobListScreen()),
+            SizedBox(height: 15.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text("Recent Jobs", style: theme.headlineLarge),
+              ),
+            ),
+            JobListScreen(),
             const SizedBox(height: 6),
-
-          
-
-            // RecentJobsSection(),
-           
-            ServiceProvidersSection(),
-            HowItWorksSection()
+            GlobalButton(
+              text: "See All",
+              onPressed: () {
+                context.push(SeeAllJobsScreen.routeName);
+              },
+              textColor: AllColor.black,
+              padding: EdgeInsets.symmetric(vertical: 8.h),
+            ),
+            HowItWorksSection(),
           ],
         ),
       ),
@@ -52,19 +61,21 @@ class ServiceHomeScreen  extends StatelessWidget {
             height: 40.h,
             child: TextFormField(
               decoration:
-              InputDecoration(
-                hintText: 'What do you need done today ?',
-              )!.copyWith(
-                fillColor: AllColor.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25.r),
-                ),
-              ),
+                  InputDecoration(
+                    hintText: 'What do you need done today ?',
+                  )!.copyWith(
+                    fillColor: AllColor.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.r),
+                    ),
+                  ),
             ),
           ),
           SizedBox(height: 20.h),
           GlobalGetStartedButton(
-            onTap: () {showChooseJobTypeBottomBar(context);},
+            onTap: () {
+              showChooseJobTypeBottomBar(context);
+            },
             color: AllColor.primary,
             buttonName: "Next",
             borderRadius: 25,
@@ -122,18 +133,16 @@ class HomeHeaderSection extends StatelessWidget {
                   Text(
                     'Hello,',
                     style: theme.bodyMedium?.copyWith(
-                      color:  AllColor.brand2_light,
+                      color: AllColor.brand2_light,
                       fontFamily: "headFont",
                       fontWeight: FontWeight.w600,
                       fontSize: 18.sp,
-
-
                     ),
                   ),
                   Text(
                     'Jhone Doe',
                     style: theme.titleMedium?.copyWith(
-                      color:  AllColor.brand2_light,
+                      color: AllColor.brand2_light,
                       fontWeight: FontWeight.w600,
                       fontFamily: "headFont",
                       fontSize: 26.sp,
@@ -155,7 +164,7 @@ class HomeHeaderSection extends StatelessWidget {
                   _buildCircleIcon(
                     icon: Icons.notifications_none_rounded,
                     onTap: () {
-                      context.push("/notificationScreen") ;
+                      context.push("/notificationScreen");
                     },
                   ),
                   // green dot
@@ -215,7 +224,7 @@ class CategoriesSection extends StatelessWidget {
         'title': 'Everyday Tasks',
       },
       {
-        'icon': Icons.business_center ,
+        'icon': Icons.business_center,
         'bgColor': const Color(0xFFCEC8E3),
         'iconColor': const Color(0xFF3B2F73),
         'jobs': '12 Jobs posted',
@@ -346,8 +355,6 @@ class _CategoryCard extends StatelessWidget {
   }
 }
 
-
-
 class JobModel {
   final String title;
   final String poster;
@@ -384,7 +391,7 @@ class JobListScreen extends StatelessWidget {
         timeAgo: "3h ago",
         category: "Plumbing",
         description:
-        "Need urgent plumbing repair for bathroom sink and shower drain issues.",
+            "Need urgent plumbing repair for bathroom sink and shower drain issues.",
         budget: "\$300 - \$500",
         location: "Boston, USA",
         offers: 5,
@@ -396,7 +403,7 @@ class JobListScreen extends StatelessWidget {
         timeAgo: "5h ago",
         category: "Plumbing",
         description:
-        "Replace leaking kitchen pipe and ensure water flow is stable.",
+            "Replace leaking kitchen pipe and ensure water flow is stable.",
         budget: "\$250 - \$400",
         location: "New York, USA",
         offers: 3,
@@ -408,7 +415,43 @@ class JobListScreen extends StatelessWidget {
         timeAgo: "1d ago",
         category: "Maintenance",
         description:
-        "Drain clogged with hair and soap residue, need thorough cleaning.",
+            "Drain clogged with hair and soap residue, need thorough cleaning.",
+        budget: "\$100 - \$200",
+        location: "Chicago, USA",
+        offers: 8,
+        status: "Closed",
+      ),
+      JobModel(
+        title: "Shower Drain Cleaning",
+        poster: "John Martin",
+        timeAgo: "1d ago",
+        category: "Maintenance",
+        description:
+            "Drain clogged with hair and soap residue, need thorough cleaning.",
+        budget: "\$100 - \$200",
+        location: "Chicago, USA",
+        offers: 8,
+        status: "Closed",
+      ),
+      JobModel(
+        title: "Shower Drain Cleaning",
+        poster: "John Martin",
+        timeAgo: "1d ago",
+        category: "Maintenance",
+        description:
+            "Drain clogged with hair and soap residue, need thorough cleaning.",
+        budget: "\$100 - \$200",
+        location: "Chicago, USA",
+        offers: 8,
+        status: "Closed",
+      ),
+      JobModel(
+        title: "Shower Drain Cleaning",
+        poster: "John Martin",
+        timeAgo: "1d ago",
+        category: "Maintenance",
+        description:
+            "Drain clogged with hair and soap residue, need thorough cleaning.",
         budget: "\$100 - \$200",
         location: "Chicago, USA",
         offers: 8,
@@ -417,92 +460,122 @@ class JobListScreen extends StatelessWidget {
     ];
 
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.w,),
-        child: ListView.builder(
-          // physics: NeverScrollableScrollPhysics(),
-          itemCount: jobs.length,
-          itemBuilder: (context, index) => JobCard(job: jobs[index]),
-        ),
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: jobs.length,
+        itemBuilder: (context, index) => JobCard(job: jobs[index]),
+      ),
     );
   }
 }
 
-// --------------------------- CARD WIDGET ---------------------------
-
 class JobCard extends StatelessWidget {
   final JobModel job;
+
   const JobCard({super.key, required this.job});
 
   Color get statusColor {
     switch (job.status.toLowerCase()) {
       case "open":
-        return const Color(0xFF5DC983);
+        return Color(0xff686382); // light lime green
       case "closed":
-        return Colors.redAccent;
+        return Color(0xff686382);
       default:
-        return Colors.grey;
+        return AllColor.grey;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+
     return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
+      margin: EdgeInsets.only(bottom: 14.h),
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
+        color: AllColor.white,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: AllColor.borderColor.withOpacity(0.4)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
+            color: Colors.black12.withOpacity(0.03),
+            blurRadius: 5,
+            offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // --- HEADER ---
+          /// --- Header Section ---
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CircleAvatar(
-                radius: 26,
-                backgroundImage: AssetImage('assets/profile.jpg'),
+              CircleAvatar(
+                radius: 24.r,
+                backgroundImage: const NetworkImage(
+                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
+                ),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: 10.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       job.title,
-                      style: TextStyle(
-                        fontSize: 16.sp,
+                      style: theme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w700,
-                        color: Colors.black87,
+                        color: AllColor.black,
+                        fontSize: 16.sp,
                       ),
                     ),
                     SizedBox(height: 4.h),
+                    Text(
+                      job.poster,
+                      style: theme.titleMedium?.copyWith(
+                        color: AllColor.warmDarkGrey,
+                        fontSize: 13.sp,
+                      ),
+                    ),
+                    SizedBox(height: 6.h),
+
+                    /// Category & Time
                     Row(
                       children: [
-                        Text(
-                          job.poster,
-                          style: TextStyle(
-                            fontSize: 13.sp,
-                            color: Colors.grey.shade600,
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8.w,
+                            vertical: 2.5.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AllColor.white,
+                            borderRadius: BorderRadius.circular(20.r),
+                            border: Border.all(color: Color(0xff686382)),
+                          ),
+                          child: Text(
+                            job.category,
+                            style: theme.headlineSmall?.copyWith(
+                              fontSize: 11.sp,
+                              color: AllColor.black,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
-                        SizedBox(width: 6.w),
-                        const Icon(Icons.access_time,
-                            size: 14, color: Colors.grey),
+                        SizedBox(width: 8.w),
+                        Icon(
+                          Icons.access_time,
+                          size: 14.sp,
+                          color: AllColor.warmDarkGrey,
+                        ),
                         SizedBox(width: 3.w),
                         Text(
                           job.timeAgo,
-                          style: TextStyle(
+                          style: theme.headlineSmall?.copyWith(
                             fontSize: 12.sp,
-                            color: Colors.grey.shade600,
+                            color: AllColor.warmDarkGrey,
                           ),
                         ),
                       ],
@@ -510,103 +583,105 @@ class JobCard extends StatelessWidget {
                   ],
                 ),
               ),
+
+              /// Status badge
               Container(
-                padding:
-                EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: statusColor.withOpacity(0.15),
+                  color: AllColor.primary,
                   borderRadius: BorderRadius.circular(20.r),
                 ),
                 child: Text(
                   job.status,
-                  style: TextStyle(
+                  style: theme.headlineSmall?.copyWith(
+                    color: statusColor,
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
-                    color: statusColor,
                   ),
                 ),
               ),
             ],
           ),
 
-          SizedBox(height: 12.h),
-          Divider(color: Colors.grey.shade300, height: 1),
+          SizedBox(height: 10.h),
 
-          SizedBox(height: 12.h),
+          /// Description
           Text(
             job.description,
-            style: TextStyle(
-              fontSize: 13.5.sp,
-              color: Colors.grey.shade800,
-              height: 1.5,
+            style: theme.bodyMedium?.copyWith(
+              fontSize: 13.sp,
+              color: AllColor.black.withOpacity(0.7),
+              height: 1.4,
             ),
           ),
-          SizedBox(height: 14.h),
 
-          // --- INFO ROW ---
+          SizedBox(height: 10.h),
+          Divider(color: const Color(0xffE3E3E3), height: 1),
+
+          SizedBox(height: 10.h),
+
+          /// Info Row + Apply Button
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              _infoBox(Icons.attach_money, job.budget, "Budget"),
-              _infoBox(Icons.location_on_outlined, job.location, "Location"),
-              _infoBox(Icons.people_alt_outlined, "${job.offers}", "Offers"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _infoBox("Budget", job.budget, theme),
+                  SizedBox(width: 16.w),
+                  _infoBox("Location", job.location, theme),
+                  SizedBox(width: 16.w),
+                  _infoBox("Offers", "${job.offers}", theme),
+                ],
+              ),
+              SizedBox(
+                height: 32.h,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AllColor.brand2_light,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.r),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  ),
+                  child: Text(
+                    "Apply",
+                    style: theme.headlineSmall?.copyWith(
+                      fontSize: 13.sp,
+                      color: AllColor.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
             ],
-          ),
-          SizedBox(height: 14.h),
-
-          // --- BUTTON ---
-          Align(
-            alignment: Alignment.centerRight,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF7C6FF6),
-                padding:
-                EdgeInsets.symmetric(horizontal: 26.w, vertical: 10.h),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.r),
-                ),
-                elevation: 0,
-              ),
-              child: Text(
-                "Apply Now",
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
-            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _infoBox(IconData icon, String value, String label) {
+  Widget _infoBox(String label, String value, TextTheme theme) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Icon(icon, size: 15.sp, color: Colors.grey.shade600),
-            SizedBox(width: 4.w),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12.sp,
-                color: Colors.grey.shade600,
-              ),
-            ),
-          ],
+        Text(
+          label,
+          style: theme.headlineSmall?.copyWith(
+            fontSize: 12.sp,
+            color: AllColor.warmDarkGrey,
+          ),
         ),
         SizedBox(height: 4.h),
         Text(
           value,
-          style: TextStyle(
-            fontSize: 13.5.sp,
-            fontWeight: FontWeight.w700,
-            color: Colors.black87,
+          style: theme.titleSmall?.copyWith(
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w600,
+            color: AllColor.black,
           ),
         ),
       ],
@@ -614,82 +689,8 @@ class JobCard extends StatelessWidget {
   }
 }
 
-
-class ServiceProvidersSection extends StatelessWidget {
-  const ServiceProvidersSection({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
-
-    // 🔹 Sample providers data
-    final providers = [
-      {
-        'name': 'John Smith',
-        'role': 'Contractor',
-        'rating': 4.9,
-        'reviews': 212,
-        'image': 'https://images.unsplash.com/photo-1580894908361-967195033215?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      },
-      {
-        'name': 'Alina Williams',
-        'role': 'Plumber',
-        'rating': 4.8,
-        'reviews': 156,
-        'image': 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-      },
-      {
-        'name': 'David Miller',
-        'role': 'Electrician',
-        'rating': 4.7,
-        'reviews': 98,
-        'image': 'https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80',
-      },
-    ];
-
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// 🔹 Section Title
-          Text(
-            'Top Service Providers',
-            style: theme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-              fontSize: 18.sp,
-              color: Colors.black,
-            ),
-          ),
-          SizedBox(height: 16.h),
-
-          /// 🔹 Providers horizontal list
-          SizedBox(
-            height: 228.h,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: providers.length,
-              separatorBuilder: (_, __) => SizedBox(width: 14.w),
-              itemBuilder: (context, index) {
-                final provider = providers[index];
-                return _ServiceProviderCard(
-                  name: provider['name'] as String,
-                  role: provider['role'] as String,
-                  rating: provider['rating'] as double,
-                  reviews: provider['reviews'] as int,
-                  image: provider['image'] as String,
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _ServiceProviderCard extends StatelessWidget {
- _ServiceProviderCard({
+  _ServiceProviderCard({
     required this.name,
     required this.role,
     required this.rating,
@@ -712,9 +713,7 @@ class _ServiceProviderCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AllColor.white,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(
-          color: AllColor.borderColor.withOpacity(0.4),
-        ),
+        border: Border.all(color: AllColor.borderColor.withOpacity(0.4)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -764,8 +763,11 @@ class _ServiceProviderCard extends StatelessWidget {
                 /// 🔹 Rating row
                 Row(
                   children: [
-                    Icon(Icons.star_rounded,
-                        color: AllColor.brand2_light, size: 18),
+                    Icon(
+                      Icons.star_rounded,
+                      color: AllColor.brand2_light,
+                      size: 18,
+                    ),
                     SizedBox(width: 4.w),
                     Text(
                       '$rating ',
@@ -792,11 +794,11 @@ class _ServiceProviderCard extends StatelessWidget {
   }
 }
 
-class HowItWorksSection extends StatelessWidget {HowItWorksSection({super.key});
+class HowItWorksSection extends StatelessWidget {
+  HowItWorksSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     final theme = Theme.of(context).textTheme;
     final steps = [
       {'icon': Icons.search_rounded, 'title': 'Post a job'},
@@ -838,7 +840,7 @@ class HowItWorksSection extends StatelessWidget {HowItWorksSection({super.key});
                 return GridView.builder(
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,
-                  physics:  NeverScrollableScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: steps.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
@@ -867,12 +869,12 @@ class HowItWorksSection extends StatelessWidget {HowItWorksSection({super.key});
 class _StepCard extends StatelessWidget {
   final IconData icon;
   final String title;
- _StepCard({required this.icon, required this.title});
+
+  _StepCard({required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 6.w),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -899,8 +901,6 @@ class _StepCard extends StatelessWidget {
   }
 }
 
-
-
 Future<void> showChooseJobTypeBottomBar(BuildContext context) {
   return showModalBottomSheet(
     context: context,
@@ -913,11 +913,10 @@ Future<void> showChooseJobTypeBottomBar(BuildContext context) {
 }
 
 class ChooseJobTypeBottomBar extends StatefulWidget {
- ChooseJobTypeBottomBar({super.key});
+  ChooseJobTypeBottomBar({super.key});
 
   @override
-  State<ChooseJobTypeBottomBar> createState() =>
-      _ChooseJobTypeBottomBarState();
+  State<ChooseJobTypeBottomBar> createState() => _ChooseJobTypeBottomBarState();
 }
 
 class _ChooseJobTypeBottomBarState extends State<ChooseJobTypeBottomBar> {
@@ -949,7 +948,6 @@ class _ChooseJobTypeBottomBarState extends State<ChooseJobTypeBottomBar> {
                   onTap: () {
                     setState(() => selectedType = "Single Job");
                     context.push(PostJobScreen.routeName);
-
                   },
                 ),
               ),
@@ -974,7 +972,7 @@ class _ChooseJobTypeBottomBarState extends State<ChooseJobTypeBottomBar> {
 }
 
 class _PillButton extends StatelessWidget {
- _PillButton({
+  _PillButton({
     required this.label,
     required this.isSelected,
     required this.onTap,

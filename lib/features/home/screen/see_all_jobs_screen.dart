@@ -6,14 +6,14 @@ import '../widget/custom_category_type.dart';
 import '../widget/custom_filter_chips.dart';
 import '../widget/custom_job_posts.dart';
 import '../widget/custom_search_box_bottom.dart';
-class TasksScreen extends StatelessWidget {
-  const TasksScreen({super.key});
+class SeeAllJobsScreen extends StatelessWidget {
+  const SeeAllJobsScreen({super.key});
   static const routeName = '/tasksScreen';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppbar(text: "Browse Tasks"),
+      appBar: GlobalAppbar(text: "Browse Jobs"),
       body: SingleChildScrollView(
         child: Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.w),
@@ -22,7 +22,7 @@ class TasksScreen extends StatelessWidget {
               SizedBox(height: 20.h),
               CustomSearchBoxBottom(),
               SizedBox(height: 10.h),
-              CustomCategoryType(),
+              CustomCategoryType(checkSeeButton: true,),
               SizedBox(height: 10.h),
               CustomFilterChips(),
               SizedBox(height: 15.h),
