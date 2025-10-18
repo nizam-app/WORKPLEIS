@@ -20,7 +20,7 @@ import 'package:workpleis/features/community_guidenlines/screen/terms_and_condit
 import 'package:workpleis/features/home/screen/Service_home_screen.dart';
 import 'package:workpleis/features/home/screen/home_screen.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
-import 'package:workpleis/features/home/screen/tasks_screen.dart';
+import 'package:workpleis/features/home/screen/see_all_jobs_screen.dart';
 import 'package:workpleis/features/jobs/screen/jobs_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/jobs/screen/jobs_tracking.dart';
@@ -221,9 +221,9 @@ class AppRouter {
             builder: (context, state) => const HomeScreen(),
           ),
           GoRoute(
-            path: TasksScreen.routeName,
-            name: TasksScreen.routeName,
-            builder: (context, state) => const TasksScreen(),
+            path: SeeAllJobsScreen.routeName,
+            name: SeeAllJobsScreen.routeName,
+            builder: (context, state) => const SeeAllJobsScreen(),
           ),
           GoRoute(
             path: VerificationScreen.routeName,
@@ -356,40 +356,11 @@ class AppRouter {
             name: ViewProposalScreen.routeName,
             builder: (context, state) => const ViewProposalScreen(),
           ),
-        ],
-      ),
-
-
-
-      /// 🚀 ShellRoute with ServiceBottomNavBar
-      ShellRoute(
-        builder: (context, state, child) => ServiceBottomNavBar(child: child),
-        routes: [
           GoRoute(
             path: ServiceHomeScreen.routeName,
             name: ServiceHomeScreen.routeName,
             builder: (context, state) =>  ServiceHomeScreen(),
           ),
-          // GoRoute(
-          //   path: ServiceJobs.routeName,
-          //   name: ServiceJobs.routeName,
-          //   builder: (context, state) => const ServiceJobs(),
-          // ),
-          // GoRoute(
-          //   path: ProjectScreen.routeName,
-          //   name: ProjectScreen.routeName,
-          //   builder: (context, state) => const ProjectScreen(),
-          // ),
-          // GoRoute(
-          //   path: ChatScreen.routeName,
-          //   name: ChatScreen.routeName,
-          //   builder: (context, state) => const ChatScreen(),
-          // ),
-          // GoRoute(
-          //   path: AccountOverviewClientScreen.routeName,
-          //   name: AccountOverviewClientScreen.routeName,
-          //   builder: (context, state) => const AccountOverviewClientScreen(),
-          // ),
         ],
       ),
     ],

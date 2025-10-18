@@ -8,6 +8,7 @@ class GlobalButton extends StatelessWidget {
   final Color? color;
   final double? fontSize;
   final EdgeInsetsGeometry? padding;
+  final Color? textColor;
 
   const GlobalButton({
     super.key,
@@ -16,6 +17,7 @@ class GlobalButton extends StatelessWidget {
     this.color,
     this.fontSize,
     this.padding,
+    this.textColor = AllColor.borderColor,
   });
 
   @override
@@ -34,8 +36,10 @@ class GlobalButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            color:AllColor.borderColor,
+            color:textColor,
             fontSize: fontSize ?? 13.sp,
+            fontWeight: FontWeight.w500,
+            fontFamily: "bodyFont"
           ),
         ),
       ),
