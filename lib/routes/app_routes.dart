@@ -1,11 +1,14 @@
 
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/widget/global_snack_bar.dart';
+import 'package:workpleis/features/account/screen/client_account.dart';
+import 'package:workpleis/features/account/screen/profile_edit_screen.dart';
 import 'package:workpleis/features/auth/screens/add_payment_method_screen.dart';
 import 'package:workpleis/features/auth/screens/address_and_password.dart';
 import 'package:workpleis/features/auth/screens/bisiness_password_screen.dart';
 import 'package:workpleis/features/auth/screens/business_verification_screen.dart';
 import 'package:workpleis/features/auth/screens/enter_your_phone_number.dart';
+import 'package:workpleis/features/auth/screens/forget_verification_code_screen.dart';
 import 'package:workpleis/features/auth/screens/get_started_screen.dart';
 import 'package:workpleis/features/auth/screens/indentity_verification_screen.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
@@ -14,20 +17,29 @@ import 'package:workpleis/features/auth/screens/register_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/community_guidenlines_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/privacy_policy_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/terms_and_conditions_screen.dart';
+import 'package:workpleis/features/home/screen/Service_home_screen.dart';
 import 'package:workpleis/features/home/screen/home_screen.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/home/screen/tasks_screen.dart';
+import 'package:workpleis/features/jobs/screen/jobs_offers.dart';
+import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
+import 'package:workpleis/features/jobs/screen/jobs_tracking.dart';
+import 'package:workpleis/features/jobs/screen/service_jobs.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
-import 'package:workpleis/features/message/screen/message_screen.dart';
+import 'package:workpleis/features/nav_bar/screen/service_bottom_nav_bar.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
-import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_04.dart';
 import 'package:workpleis/features/projects/screen/special_request_screen3.dart';
+import 'package:workpleis/features/projects/screen/view_proposal_screen.dart';
+import 'package:workpleis/features/security/screen/settings_screen.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
+import 'package:workpleis/features/wallet/screen/wallet_screen.dart';
 import '../features/Payment/screen/payment_methods_screen.dart';
 import '../features/account/screen/account_screen.dart';
 import '../features/auth/screens/enter_your_email.dart';
+import '../features/auth/screens/forget_password_screen.dart';
 import '../features/auth/screens/new_password_screen.dart';
 import '../features/auth/screens/email_verification.dart';
 import '../features/home/screen/post_job_screen.dart';
@@ -74,6 +86,14 @@ class AppRouter {
         path: PrivacyPolicyScreen.routeName,
         name: PrivacyPolicyScreen.routeName,
         builder: (context, state) => const PrivacyPolicyScreen(),
+      ),GoRoute(
+        path: ForgetVerificationCodeScreen.routeName,
+        name: ForgetVerificationCodeScreen.routeName,
+        builder: (context, state) => const ForgetVerificationCodeScreen(),
+      ), GoRoute(
+        path: ForgetPasswordScreen.routeName,
+        name: ForgetPasswordScreen.routeName,
+        builder: (context, state) => const ForgetPasswordScreen(),
       ),GoRoute(
         path: CommunityGuidenlinesScreen.routeName,
         name: CommunityGuidenlinesScreen.routeName,
@@ -123,7 +143,10 @@ class AppRouter {
       ), GoRoute(
         path: OnboardingScreen02.routeName,
         name: OnboardingScreen02.routeName,
-        builder: (context, state) => const OnboardingScreen02(),
+        builder: (context, state) {
+          final screenName = state.extra is String ? state.extra as String : null;
+          return OnboardingScreen02(screenName: screenName);
+        },
       ),
       GoRoute(
         path: OnboardingScreen01.routeName,
@@ -190,6 +213,7 @@ class AppRouter {
         builder: (context, state, child) {
           return BottomNavBar(child: child); // ✅ pass child
         },
+
         routes: [
           GoRoute(
             path: HomeScreen.routeName,
@@ -200,11 +224,6 @@ class AppRouter {
             path: TasksScreen.routeName,
             name: TasksScreen.routeName,
             builder: (context, state) => const TasksScreen(),
-          ),
-          GoRoute(
-            path: MessageScreen.routeName,
-            name: MessageScreen.routeName,
-            builder: (context, state) => const MessageScreen(),
           ),
           GoRoute(
             path: VerificationScreen.routeName,
@@ -218,15 +237,30 @@ class AppRouter {
             name: JobDetailScreen.routeName,
             builder: (context, state) => const JobDetailScreen(),
           ),
+         
+          
           GoRoute(
             path: ChatScreen.routeName,
             name: ChatScreen.routeName,
             builder: (context, state) => const ChatScreen(),
-          ), GoRoute(
+          ),
+          GoRoute(
             path: AccountOverviewScreen.routeName,
             name: AccountOverviewScreen.routeName,
             builder: (context, state) => const AccountOverviewScreen(),
-          ), GoRoute(
+          ),
+          GoRoute(
+            path: AccountOverviewClientScreen.routeName,
+            name: AccountOverviewClientScreen.routeName,
+            builder: (context, state) => const AccountOverviewClientScreen(),
+          ),
+
+          GoRoute(
+            path: EditProfileScreen.routeName,
+            name: EditProfileScreen.routeName,
+            builder: (context, state) => const EditProfileScreen(),
+          ),
+          GoRoute(
             path: ProjectScreen.routeName,
             name: ProjectScreen.routeName,
             builder: (context, state) => const ProjectScreen(),
@@ -238,7 +272,46 @@ class AppRouter {
             path: SecurityContactScreen.routeName,
             name: SecurityContactScreen.routeName,
             builder: (context, state) => const SecurityContactScreen(),
-          ),  GoRoute(
+          ),
+          GoRoute(
+            path: SettingsScreen.routeName,
+            name: SettingsScreen.routeName,
+            builder: (context, state) => const SettingsScreen(),
+          ),
+
+          GoRoute(
+            path: JobsScreen.routeName,
+            name: JobsScreen.routeName,
+            builder: (context, state) => const JobsScreen(),
+          ),
+
+          GoRoute(
+            path: JobsOffers.routeName,
+            name: JobsOffers.routeName,
+            builder: (context, state) => const JobsOffers(),
+          ),
+
+
+          GoRoute(
+            path: WalletScreen.routeName,
+            name: WalletScreen.routeName,
+            builder: (context, state) => const WalletScreen(),
+          ),
+
+
+          GoRoute(
+            path: JobsTracking.routeName,
+            name: JobsTracking.routeName,
+            builder: (context, state) =>  const JobsTracking(status: " "),
+          ),
+
+          GoRoute(
+            path: ServiceJobs.routeName,
+            name: ServiceJobs.routeName,
+            builder: (context, state) =>  const ServiceJobs(),
+         ),
+    
+          GoRoute(
             path: SecurityGuideScreen.routeName,
             name: SecurityGuideScreen.routeName,
             builder: (context, state) => const SecurityGuideScreen(),
@@ -278,9 +351,48 @@ class AppRouter {
             path: SpecialRequestScreen2.routeName,
             name: SpecialRequestScreen2.routeName,
             builder: (context, state) => const SpecialRequestScreen2(),
+          ), GoRoute(
+            path: ViewProposalScreen.routeName,
+            name: ViewProposalScreen.routeName,
+            builder: (context, state) => const ViewProposalScreen(),
           ),
+        ],
+      ),
+
+
+
+      /// 🚀 ShellRoute with ServiceBottomNavBar
+      ShellRoute(
+        builder: (context, state, child) => ServiceBottomNavBar(child: child),
+        routes: [
+          GoRoute(
+            path: ServiceHomeScreen.routeName,
+            name: ServiceHomeScreen.routeName,
+            builder: (context, state) =>  ServiceHomeScreen(),
+          ),
+          // GoRoute(
+          //   path: ServiceJobs.routeName,
+          //   name: ServiceJobs.routeName,
+          //   builder: (context, state) => const ServiceJobs(),
+          // ),
+          // GoRoute(
+          //   path: ProjectScreen.routeName,
+          //   name: ProjectScreen.routeName,
+          //   builder: (context, state) => const ProjectScreen(),
+          // ),
+          // GoRoute(
+          //   path: ChatScreen.routeName,
+          //   name: ChatScreen.routeName,
+          //   builder: (context, state) => const ChatScreen(),
+          // ),
+          // GoRoute(
+          //   path: AccountOverviewClientScreen.routeName,
+          //   name: AccountOverviewClientScreen.routeName,
+          //   builder: (context, state) => const AccountOverviewClientScreen(),
+          // ),
         ],
       ),
     ],
   );
+  
 }

@@ -49,8 +49,8 @@ class ChatScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Emilly Davis", style:theme.bodySmall!.copyWith(fontSize:24 ),),
-            Text("Deep house cleaning service needed", style:theme.bodySmall!.copyWith(fontSize:16 ),),
+            Text("Emilly Davis", style:theme.bodySmall!.copyWith(fontSize:20 ),),
+            Text("Deep house cleaning service needed", style:theme.bodySmall!.copyWith(fontSize:14 ),),
           ],
         ),
       ),

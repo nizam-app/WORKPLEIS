@@ -1,110 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/core/widget/global_aleart_box.dart';
 import 'package:workpleis/core/widget/global_bottom.dart';
-import '../../../core/constants/image_control/image_path.dart';
-import 'email_verification.dart';
-
-class NewPasswordScreen extends StatefulWidget {
+import 'package:workpleis/features/auth/screens/login_screen.dart';
+import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
+class NewPasswordScreen extends StatelessWidget {
   const NewPasswordScreen({super.key});
   static final routeName = "/newPasswordScreen";
 
   @override
-  State<NewPasswordScreen> createState() => _NewPasswordScreenState();
-}
-
-class _NewPasswordScreenState extends State<NewPasswordScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmController = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
+    TextEditingController _passwordController = TextEditingController();
+    TextEditingController _confirmPasswordController = TextEditingController();
+    TextTheme theme = Theme.of(context).textTheme;
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20.r),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                SizedBox(height: 20.h),
-                Image.asset(ImagePath.logoText, height: 40.h),
-                SizedBox(height: 16.h),
-
-                Text(
-                  "New Password",
-                  style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+          child: Column(
+            children: [
+              Spacer(),
+              Text(
+                "Reset your password",
+                style:theme.headlineLarge,
+              ),
+              SizedBox(height: 8.h),
+              Text(
+                "The password must be \n different then before",
+                textAlign: TextAlign.center,
+                style:theme.titleMedium,
+              ),
+              SizedBox(height: 30.h),
+              // 🔹 Full Name
+              CustomLabelText(title: "New Password"),
+              SizedBox(height: 6.h),
+              TextFormField(
+                controller: _passwordController,
+                validator: (v) =>
+                v == null || v.isEmpty ? "Enter your New Password" : null,
+                decoration: const InputDecoration(
+                  hintText: "Enter Your Password",
                 ),
-                SizedBox(height: 4.h),
-                Text(
-                  "Please Enter your New Password",
-                  style: TextStyle(fontSize: 16.sp, color: Colors.grey),
+              ),
+              SizedBox(height: 25.h),
+              CustomLabelText(title: "Confirm Password"),
+              TextFormField(
+                controller: _confirmPasswordController,
+                validator: (v) =>
+                v == null || v.isEmpty ? "Enter your Confirm Password" : null,
+                decoration: const InputDecoration(
+                  hintText: "Enter Your Confirm Password",
                 ),
-                SizedBox(height: 30.h),
-
-                // Password
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text("Password",
-                      style: TextStyle(
-                          fontSize: 13.sp, fontWeight: FontWeight.w600)),
-                ),
-                SizedBox(height: 6.h),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  validator: (v) {
-                    if (v == null || v.isEmpty) {
-                      return "Enter your password";
-                    } else if (v.length < 6) {
-                      return "Password must be at least 6 characters";
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: "Enter Password",
-                  ),
-                ),
-                SizedBox(height: 10.h),
-
-                // Confirm Password
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text("Confirm Password",
-                      style: TextStyle(
-                          fontSize: 13.sp, fontWeight: FontWeight.w600)),
-                ),
-                SizedBox(height: 6.h),
-                TextFormField(
-                  controller: _confirmController,
-                  obscureText: true,
-                  validator: (v) {
-                    if (v == null || v.isEmpty) {
-                      return "Confirm your password";
-                    } else if (v != _passwordController.text) {
-                      return "Passwords do not match";
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: "Re-enter Password",
-                  ),
-                ),
-
-                SizedBox(height: 25.h),
-
-                GlobalButton(
-                  text: "Send OTP",
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      context.push(EmailVerification.routeName);
-                    }
-                  },
-                )
-              ],
-            ),
+              ),
+              SizedBox(height: 25.h),
+              GlobalButton(
+                text: "Continue ",
+                onPressed: () {
+                 globalShowAlertDialog(context: context, oneTap: (){context.push(LoginScreen.routeName);
+                   },message: "Your password has been changed successfully");
+                },
+              ),
+              Spacer(),
+            ],
           ),
         ),
       ),

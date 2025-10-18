@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
+import 'package:workpleis/features/projects/screen/request_tracker.dart';
+import 'package:workpleis/features/projects/screen/view_proposal_screen.dart';
 
 class ProjectScreen extends ConsumerWidget {
   const ProjectScreen({super.key});
@@ -84,7 +88,7 @@ class JobStatusList extends ConsumerWidget {
               duration: const Duration(milliseconds: 200),
               padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
               decoration: BoxDecoration(
-                color: isSelected ? AllColor.primary : Colors.transparent,
+                color: isSelected ? AllColor.brand2_light  : Colors.transparent,
                 borderRadius: BorderRadius.circular(30.r),
                 border: Border.all(
                   color: const Color(0xff154E7B).withOpacity(0.2),
@@ -97,7 +101,7 @@ class JobStatusList extends ConsumerWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w600),
+                      .copyWith(fontWeight: FontWeight.w300, color: isSelected? AllColor.white: AllColor.black ),
                 ),
               ),
             ),
@@ -155,8 +159,7 @@ class JobCard extends StatelessWidget {
                   title,
                   style: TextStyle(
                     fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
                     fontFamily: "bodyFont",
                   ),
                 ),
@@ -172,7 +175,7 @@ class JobCard extends StatelessWidget {
           _DetailRow(icon: Icons.request_quote_outlined, text: budget),
           SizedBox(height: 6.h),
           _DetailRow(icon: Icons.call_outlined, text: period, expandable: true),
-          SizedBox(height: 10.h),
+          // SizedBox(height: 10.h),
 
           /// Bottom actions + price
           _BottomBar(status: status, price: price),
@@ -191,15 +194,16 @@ class _StatusChip extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: AllColor.primary, // lime chip (mock-এর মতো)
-        borderRadius: BorderRadius.circular(20.r),
+        color: AllColor.white, // lime chip (mock-এর মতো)
+        borderRadius: BorderRadius.circular(8.r),
+        //border: Border.all(color:Colors.black, width: 1)
       ),
       child: Text(
         text,
         style: TextStyle(
           fontSize: 12.sp,
           fontWeight: FontWeight.w600,
-          color: Colors.black,
+          color:AllColor.brand2_light,
           fontFamily: "bodyFont",
         ),
       ),
@@ -249,10 +253,10 @@ class _BottomBar extends StatelessWidget {
 
     final buttons = switch (status) {
       "Proposal Sent" => [
-        _PillButton.purple("View Proposal", onTap: () {}),
+        _PillButton.purple("View Proposal", onTap: () {context.push(ViewProposalScreen.routeName);}),
       ],
       "In Progress" => [
-        _PillButton.purple("Track Project", onTap: () {}),
+        _PillButton.purple("Track Project", onTap: () {context.push(RequestTrackerScreen.routeName);}),
       ],
       "In Review" => [
         _PillButton.lime("View Details", onTap: () {}),
@@ -266,14 +270,20 @@ class _BottomBar extends StatelessWidget {
     };
 
     if (!showButtons) {
-      return Row(children: [
-        const Spacer(),
-        Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700, color: Colors.black)),
-      ]);
+      return Padding(
+        padding: const EdgeInsets.only(right: 12.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+                         Container(),
+          
+          Text(price, style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black)),
+        ]),
+      );
     }
 
     return Row(children: [
-      Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700, color: Colors.black)),
+      Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: AllColor.black)),
       const Spacer(),
       ...buttons,
     ]);
@@ -291,16 +301,17 @@ class _PillButton extends StatelessWidget {
   factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-        const Color(0xFFA49ACF), // শেডেড পার্পল (mock vibe)
-        Colors.white,
+         AllColor.white, // শেডেড পার্পল (mock vibe)
+        AllColor.brand2_light,
+        
         onTap: onTap,
       );
 
   factory _PillButton.lime(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-        AllColor.primary, // lime
-        Colors.black,
+        AllColor.white , // lime
+        AllColor.brand2_light,
         onTap: onTap,
       );
 
@@ -318,7 +329,7 @@ class _PillButton extends StatelessWidget {
             label,
             style: TextStyle(
               fontSize: 12.sp,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w600,
               color: fg,
               fontFamily: "bodyFont",
             ),

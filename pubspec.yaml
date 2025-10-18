@@ -46,6 +46,9 @@ dependencies:
   flutter_otp_text_field: ^1.5.1+1
   video_player: ^2.10.0
   tabler_icons: ^2.5.0+1
+  flutter_rating_bar: ^4.0.1
+  image_picker: ^1.0.7
+  country_picker: ^2.0.27
 
 flutter_launcher_icons:
   android: true
@@ -100,6 +103,9 @@ flutter:
            weight: 900
          - asset: assets/fonts/OpenSauceOne-Light.ttf
            weight: 300
+         - asset: assets/fonts/OpenSauceOne-Medium.ttf
+           weight: 500
+           
   #         style: italic
      - family: headFont
        fonts:
