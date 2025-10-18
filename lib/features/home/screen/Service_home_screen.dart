@@ -35,7 +35,7 @@ class ServiceHomeScreen extends StatelessWidget {
                 child: Text("Recent Jobs", style: theme.headlineLarge),
               ),
             ),
-            JobListScreen(),
+            CustomJobListScreen(),
             const SizedBox(height: 6),
             GlobalButton(
               text: "See All",
@@ -379,8 +379,8 @@ class JobModel {
   });
 }
 
-class JobListScreen extends StatelessWidget {
-  const JobListScreen({super.key});
+class CustomJobListScreen extends StatelessWidget {
+  const CustomJobListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
