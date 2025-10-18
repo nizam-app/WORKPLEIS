@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-import 'package:workpleis/features/message/screen/message_screen.dart';
+import 'package:workpleis/features/message/screen/chat_screen.dart';
+
 
 class RequestTrackerScreen extends StatelessWidget {
   const RequestTrackerScreen({super.key});
@@ -41,8 +42,10 @@ class ProjectHeaderCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: AllColor.black,
+        color: AllColor.white,
         borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: AllColor.grey300, width: 1.w),
+        
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,42 +55,42 @@ class ProjectHeaderCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(Icons.assignment, color: AllColor.white, size: 22.sp),
+                  Icon(Icons.assignment, color: AllColor.black, size: 22.sp),
                   SizedBox(width: 8.w),
                   Text("Special Project Request",
                       style: TextStyle(
                           fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AllColor.white)),
+                          fontWeight: FontWeight.w500,
+                          color: AllColor.black)),
                 ],
               ),
               Container(
                 padding:
                 EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: AllColor.green,
+                  color: AllColor.brand2_light ,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text("Under Review",
                     style: TextStyle(
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w500,
-                        color: AllColor.black)),
+                        color: AllColor.white)),
               ),
             ],
           ),
           SizedBox(height: 12.h),
           Text("Request ID: #30-AE-87",
-              style: TextStyle(fontSize: 12.sp, color: AllColor.white70)),
+              style: TextStyle(fontSize: 12.sp, color: AllColor.black)),
           SizedBox(height: 14.h),
           Text("Progress",
-              style: TextStyle(fontSize: 11.sp, color: AllColor.white70)),
+              style: TextStyle(fontSize: 11.sp, color: AllColor.black)),
           SizedBox(height: 6.h),
           ClipRRect(
             borderRadius: BorderRadius.circular(6.r),
             child: LinearProgressIndicator(
               value: 0.5,
-              backgroundColor: AllColor.white24,
+              backgroundColor: AllColor.grey300,
               color: AllColor.borderColor,
               minHeight: 8.h,
             ),
@@ -107,8 +110,8 @@ class ProjectTimelineSection extends StatelessWidget {
     final steps = [
       {"title": "Submitted", "desc": "Request received and logged in our system", "done": true},
       {"title": "Submitted", "desc": "Request received and logged in our system", "done": true},
-      {"title": "Proposal Sent", "desc": "Request received and logged in our system", "done": false},
-      {"title": "In Progress", "desc": "Request received and logged in our system", "done": false},
+      {"title": "Proposal Sent", "desc": "Request received and logged in our system", "done": true},
+      {"title": "In Progress", "desc": "Request received and logged in our system", "done": true},
       {"title": "Completed", "desc": "Request received and logged in our system", "done": false},
     ];
 
@@ -124,7 +127,7 @@ class ProjectTimelineSection extends StatelessWidget {
           Text("Project Timeline",
               style: TextStyle(
                   fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   color: AllColor.black)),
           SizedBox(height: 14.h),
           ...steps.map((s) => TimelineItem(
@@ -170,7 +173,7 @@ class TimelineItem extends StatelessWidget {
                 Text(title,
                     style: TextStyle(
                         fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w300,
                         color: AllColor.black)),
                 Text(desc,
                     style: TextStyle(fontSize: 12.sp, color: AllColor.grey)),
@@ -208,7 +211,7 @@ class RecentUpdatesSection extends StatelessWidget {
           Text("Recent Updates",
               style: TextStyle(
                   fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   color: AllColor.black)),
           SizedBox(height: 14.h),
           ...updates.map((u) => UpdateItem(
@@ -304,7 +307,7 @@ class ProjectContactSection extends StatelessWidget {
                 Text("Jhon Doe",
                     style: TextStyle(
                         fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w400,
                         color: AllColor.black)),
                 Text("Senior project Specialist",
                     style: TextStyle(fontSize: 12.sp, color: AllColor.grey)),
@@ -313,14 +316,19 @@ class ProjectContactSection extends StatelessWidget {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: AllColor.black,
+              backgroundColor: AllColor.brand2_light ,
               padding:
               EdgeInsets.symmetric(horizontal: 18.w, vertical: 10.h),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.r),
               ),
             ),
-            onPressed: () {context.push(MessageScreen.routeName);},
+            onPressed: () {
+               context.pop(context);
+             context.push(ChatScreen.routeName);
+            },
+            
+            //onPressed: () {context.push(ChatScreen.routeName,);},
             child: Text("Message",
                 style: TextStyle(fontSize: 12.sp, color: AllColor.white)),
           )

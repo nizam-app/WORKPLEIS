@@ -15,9 +15,10 @@ class CustomSearchBoxBottom extends StatelessWidget {
           child: TextFormField(
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(vertical: 2.h,),
-                      suffixIcon: Icon(Icons.tune, color: AllColor.grey),
+                      // suffixIcon: Icon(Icons.tune, color: AllColor.grey),
                       prefixIcon: Icon(Icons.search, color: AllColor.grey),
-                      hintText: "What do you need done today",
+                      hintText: "What do you need done today?",
+
                     ),
             ),
         ),
@@ -29,14 +30,14 @@ class CustomSearchBoxBottom extends StatelessWidget {
             builder: (_) => const CustomDialog(),
           );},
           child: Container(
-            height: 36.h,
-            width: 36.w,
+            height: 37.h,
+            width: 37.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: AllColor.black,
+              color: AllColor.brand2_light,
             ),
             child: Center(
-              child: Icon(Icons.filter_alt, size: 25, color: AllColor.white),
+              child: Icon(Icons.filter_alt_outlined, size: 25, color: AllColor.white),
             ),
           ),
         ),

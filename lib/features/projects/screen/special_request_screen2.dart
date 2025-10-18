@@ -16,7 +16,7 @@ class SpecialRequestScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppbar(text: "Special Request"),
+      appBar: GlobalAppbar(text: "Project"),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -160,10 +160,10 @@ class SupportingDocumentsSection extends StatelessWidget {
       children: [
         Text("Supporting Documents (Optional)",
             style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w600,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w300,
                 color: AllColor.black)),
-        SizedBox(height: 12.h),
+        SizedBox(height: 5.h),
         Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(vertical: 30.h),

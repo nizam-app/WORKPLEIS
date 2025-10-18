@@ -1,17 +1,20 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_bottom.dart';
 import 'package:workpleis/features/auth/screens/phone_number_verification.dart';
+import 'package:workpleis/features/onboarding/logic/check_individual.dart';
 
 import 'email_verification.dart';
-class EnterYourPhoneNumber  extends StatelessWidget {
+class EnterYourPhoneNumber  extends ConsumerWidget {
   const EnterYourPhoneNumber ({super.key});
   static final routeName = "/enterYourPhoneNumber" ;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController _emailController = TextEditingController();
     TextTheme theme = Theme.of(context).textTheme;
     return Scaffold(
@@ -48,7 +51,11 @@ class EnterYourPhoneNumber  extends StatelessWidget {
               ),
             ),
             SizedBox(height: 25.h),
-            GlobalButton(text: "Send", onPressed: () {context.push(PhoneNumberVerification.routeName);})
+            GlobalButton(text: "Send", onPressed: () {
+              context.push(PhoneNumberVerification.routeName);
+              // ref.invalidate(checkBusinessP) ;
+              
+            })
             ,
             Spacer(),
           ],

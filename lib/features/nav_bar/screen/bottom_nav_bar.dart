@@ -2,58 +2,102 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
-import 'package:workpleis/features/account/screen/account_screen.dart';
-import 'package:workpleis/features/message/screen/chat_screen.dart';
 
+// Screens
 import '../../home/screen/home_screen.dart';
-import '../../home/screen/tasks_screen.dart';
 import '../../projects/screen/project_screen.dart';
-import '../../verification/screen/verification_screen.dart';
+import '../../message/screen/chat_screen.dart';
+import '../../account/screen/client_account.dart';
+import '../../home/screen/see_all_jobs_screen.dart';
 import '../logic/botton_nav_bar_controller.dart';
 
-
-
-class BottomNavBar extends ConsumerWidget {
-   BottomNavBar({super.key, required this.child});
+class BottomNavBar extends ConsumerStatefulWidget {
+  const BottomNavBar({super.key, required this.child});
   final Widget child;
 
   static const String routeName = '/BottomNavBar';
 
-  final List<IconData> _selectedIcons = const [
-    Icons.home,
-    Icons.business_center,
-    Icons.chat_bubble,
-    Icons.person,
-  ];
+  @override
+  ConsumerState<BottomNavBar> createState() => _BottomNavBarState();
+}
 
-  final List<IconData> _unselectedIcons = const [
-    Icons.home_outlined,
-    Icons.business_center_outlined,
-    Icons.chat_bubble_outline,
-    Icons.person_outline,
-  ];
-
-  final List<String> _labels = const [
-    "Home",
-    "Project",
-    "Messages",
-    "Account",
-  ];
-
-  final List<String> _routes = const [
-    HomeScreen.routeName,
-    ProjectScreen.routeName,
-   ChatScreen.routeName,
-    AccountOverviewScreen.routeName
-  ];
+class _BottomNavBarState extends ConsumerState<BottomNavBar> {
+  String _role = "client"; // default
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    _loadRole();
+  }
+
+  Future<void> _loadRole() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _role = prefs.getString("role") ?? "client";
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final selectedIndex = ref.watch(selectedIndexProvider);
 
+    /// CLIENT NAVIGATION
+    final clientIcons = [
+      [Icons.home, Icons.home_outlined],
+      [Icons.folder_copy, Icons.folder_copy_outlined],
+      [Icons.chat_bubble, Icons.chat_bubble_outline],
+      [Icons.person, Icons.person_outline],
+    ];
+
+    final clientLabels = [
+      "Home",
+      "Projects",
+      "Messages",
+      "Account",
+    ];
+
+    final clientRoutes = [
+      HomeScreen.routeName,
+      ProjectScreen.routeName,
+      ChatScreen.routeName,
+      AccountOverviewClientScreen.routeName,
+    ];
+
+    /// PROVIDER NAVIGATION
+    final providerIcons = [
+      [Icons.home, Icons.home_outlined],
+      [Icons.work, Icons.work_outline],
+      [Icons.business_center, Icons.business_center_outlined],
+      [Icons.chat_bubble, Icons.chat_bubble_outline],
+      [Icons.person, Icons.person_outline],
+    ];
+
+    final providerLabels = [
+      "Home",
+      "Job",
+      "My Offers",
+      "Messages",
+      "Account",
+    ];
+
+    final providerRoutes = [
+      HomeScreen.routeName,
+      SeeAllJobsScreen.routeName,
+      ProjectScreen.routeName, // You can replace with your offers screen
+      ChatScreen.routeName,
+      AccountOverviewClientScreen.routeName,
+    ];
+
+    /// Determine which set to use
+    final isClient = _role.toLowerCase() == "client";
+    final icons = isClient ? clientIcons : providerIcons;
+    final labels = isClient ? clientLabels : providerLabels;
+    final routes = isClient ? clientRoutes : providerRoutes;
+
     return Scaffold(
-      body: child, // ✅ Router theke asha child render hobe
+      body: widget.child,
       bottomNavigationBar: Container(
         padding: EdgeInsets.symmetric(vertical: 12.h),
         decoration: BoxDecoration(
@@ -64,34 +108,38 @@ class BottomNavBar extends ConsumerWidget {
           ),
           border: Border.all(
             color: AllColor.borderColor,
-            width: 1.5,
+            width: 1.2,
           ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(_labels.length, (index) {
+          children: List.generate(labels.length, (index) {
             final isSelected = selectedIndex == index;
             return InkWell(
               onTap: () {
                 ref.read(selectedIndexProvider.notifier).state = index;
-                context.go(_routes[index]); // ✅ route change via go_router
+                context.go(routes[index]);
               },
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
-                    isSelected ? _selectedIcons[index] : _unselectedIcons[index],
-                    size: 30.sp,
-                    color:isSelected ? AllColor.brand2_light: AllColor.black,
+                    isSelected ? icons[index][0] : icons[index][1],
+                    size: 26.sp,
+                    color: isSelected
+                        ? AllColor.brand2_light
+                        : AllColor.black,
                   ),
-                  SizedBox(height: 5.h),
+                  SizedBox(height: 4.h),
                   Text(
-                    _labels[index],
+                    labels[index],
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight:
-                      isSelected ? FontWeight.bold : FontWeight.w400,
-                      color:isSelected ? AllColor.brand2_light: AllColor.black,
+                      isSelected ? FontWeight.w600 : FontWeight.w400,
+                      color: isSelected
+                          ? AllColor.brand2_light
+                          : AllColor.black,
                     ),
                   ),
                 ],

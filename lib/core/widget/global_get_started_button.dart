@@ -34,7 +34,7 @@ class GlobalGetStartedButton extends StatelessWidget {
             buttonName,
             style: TextStyle(
               fontSize: 18.sp, // responsive font
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
               color: textColor,
             ),
           ),

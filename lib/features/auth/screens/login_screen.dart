@@ -10,10 +10,11 @@ import 'package:workpleis/features/auth/logic/email_valitedor.dart';
 import 'package:workpleis/core/constants/image_control/image_path.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';
 import 'package:workpleis/features/auth/screens/enter_your_email.dart';
+import 'package:workpleis/features/auth/screens/forget_password_screen.dart';
 import 'package:workpleis/features/auth/screens/register_screen.dart';
 import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
 import 'package:workpleis/features/home/screen/home_screen.dart';
-import 'package:workpleis/features/onboarding/screen/onboarding_screen_03.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 
 import '../../nav_bar/screen/bottom_nav_bar.dart';
 import '../logic/login_reverpod.dart';
@@ -85,12 +86,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               Row(
                 children: [
                   Spacer(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w),
-
-                    child: Text(
-                      'Forgot password?',
-                      style: TextStyle(fontSize: 12.sp, color: AllColor.borderColor),
+                  GestureDetector(
+                    onTap: () {context.push(ForgetPasswordScreen.routeName);},
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    
+                      child: Text(
+                        'Forgot password?',
+                        style: TextStyle(fontSize: 12.sp, color: AllColor.borderColor),
+                      ),
                     ),
                   ),]
                 ),

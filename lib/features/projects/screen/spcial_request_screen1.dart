@@ -16,7 +16,7 @@ class SpecialRequestScreen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppbar(text: "Special Request"),
+      appBar: GlobalAppbar(text: "Project"),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -56,8 +56,8 @@ class ProjectDescriptionSection extends StatelessWidget {
         Text(
           "Project Description",
           style: TextStyle(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w600,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w300,
             color: AllColor.black,
           ),
         ),
@@ -114,12 +114,12 @@ class _UrgencySectionState extends State<UrgencySection> {
         Text(
           "Urgency",
           style: TextStyle(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w600,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w300,
             color: AllColor.black,
           ),
         ),
-        SizedBox(height: 12.h),
+        SizedBox(height: 5.h),
         ...options.map(
               (o) => _UrgencyTile(
             title: o.$1,
@@ -178,8 +178,8 @@ class _UrgencyTile extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w300,
                       color: AllColor.black,
                     ),
                   ),
@@ -236,8 +236,8 @@ class _NdaSectionState extends State<NdaSection> {
               Text(
                 "NDA Required",
                 style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w300,
                   color: AllColor.black,
                 ),
               ),
