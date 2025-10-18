@@ -4,27 +4,39 @@ import 'package:workpleis/core/constants/color_control/all_color.dart';
 
 InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   filled: true,
-  fillColor: AllColor.grey200,
-  contentPadding: EdgeInsets.symmetric(vertical: 16.h,horizontal: 20.w),
-  // prefixIconColor: Colors.grey,
-  hintStyle: TextStyle(color: AllColor.grey, fontSize: 14.sp,fontWeight: FontWeight.w400,),
-  suffixIconColor: Colors.grey,
-  focusedBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(50),
-    borderSide: BorderSide(color: AllColor.lightBlue, width: 0.5.sp),
-  ),
-  enabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(50),
-    borderSide: BorderSide(color: AllColor.grey, width: 0.5.sp),
-  ),
-  errorBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(50),
-    borderSide: BorderSide(color: AllColor.red200, width: 0.5.sp),
-  ),
-  focusedErrorBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(50),
-    borderSide: BorderSide(color: AllColor.red200, width: 0.5.sp),
-  ),
-  errorStyle: TextStyle(fontSize: 12.sp, color: Colors.red),
+  fillColor: Color(0xffA49ACF).withOpacity(0.05), // Background same like screenshot
+  contentPadding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
 
+  hintStyle: TextStyle(
+    color: AllColor.grey,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+  ),
+
+  suffixIconColor: Colors.grey,
+
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10.r),
+    borderSide: BorderSide(color: AllColor.borderColor, width: 1),
+  ),
+
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10.r),
+    borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
+  ),
+
+  errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10.r),
+    borderSide: BorderSide(color: AllColor.red200, width: 1),
+  ),
+
+  focusedErrorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10.r),
+    borderSide: BorderSide(color: AllColor.red200, width: 1.2),
+  ),
+
+  errorStyle: TextStyle(
+    fontSize: 12.sp,
+    color: AllColor.red200,
+  ),
 );
