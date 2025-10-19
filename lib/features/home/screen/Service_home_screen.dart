@@ -6,6 +6,7 @@ import 'package:workpleis/core/widget/global_get_started_button.dart';
 
 import 'package:workpleis/features/home/screen/post_job_screen.dart';
 import 'package:workpleis/features/home/screen/see_all_jobs_screen.dart';
+import 'package:workpleis/features/jobs/screen/Service_jobs_details.dart';
 
 import 'package:workpleis/features/projects/screen/special_request_screen.dart';
 
@@ -585,18 +586,23 @@ class JobCard extends StatelessWidget {
               ),
 
               /// Status badge
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: AllColor.white,
-                  borderRadius: BorderRadius.circular(20.r),
-                ),
-                child: Text(
-                  job.status,
-                  style: theme.headlineSmall?.copyWith(
-                    color: AllColor.brand2_light,
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
+              GestureDetector(
+                onTap: (){
+                  context.push(ServiceJobDetails.routeName);
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  decoration: BoxDecoration(
+                    color: AllColor.white,
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                  child: Text(
+                    job.status,
+                    style: theme.headlineSmall?.copyWith(
+                      color: AllColor.brand2_light,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),

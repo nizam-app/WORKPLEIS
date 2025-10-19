@@ -15,7 +15,7 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AllColor.borderColor, // dark color like screenshot
+      backgroundColor: Color(0xff686382) , // dark color like screenshot
       elevation: 0,
       scrolledUnderElevation: 0,
       leading: Padding(
