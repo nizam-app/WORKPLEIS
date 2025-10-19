@@ -588,13 +588,13 @@ class JobCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: AllColor.primary,
+                  color: AllColor.white,
                   borderRadius: BorderRadius.circular(20.r),
                 ),
                 child: Text(
                   job.status,
                   style: theme.headlineSmall?.copyWith(
-                    color: statusColor,
+                    color: AllColor.brand2_light,
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
                   ),
@@ -640,7 +640,7 @@ class JobCard extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AllColor.brand2_light,
+                    backgroundColor: AllColor.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.r),
@@ -650,8 +650,8 @@ class JobCard extends StatelessWidget {
                   child: Text(
                     "Apply",
                     style: theme.headlineSmall?.copyWith(
-                      fontSize: 13.sp,
-                      color: AllColor.white,
+                      fontSize: 14.sp,
+                      color: AllColor.brand2_light,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

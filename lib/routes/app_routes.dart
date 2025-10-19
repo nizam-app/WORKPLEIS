@@ -21,6 +21,7 @@ import 'package:workpleis/features/home/screen/Service_home_screen.dart';
 import 'package:workpleis/features/home/screen/home_screen.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/home/screen/see_all_jobs_screen.dart';
+import 'package:workpleis/features/jobs/screen/Service_jobs_details.dart';
 import 'package:workpleis/features/jobs/screen/jobs_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/jobs/screen/jobs_tracking.dart';
@@ -237,7 +238,12 @@ class AppRouter {
             name: JobDetailScreen.routeName,
             builder: (context, state) => const JobDetailScreen(),
           ),
-         
+
+          GoRoute(
+            path: ServiceJobDetails.routeName,
+            name: ServiceJobDetails.routeName,
+            builder: (context, state) =>  ServiceJobDetails(),
+          ),
           
           GoRoute(
             path: ChatScreen.routeName,
