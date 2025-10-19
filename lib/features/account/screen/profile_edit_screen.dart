@@ -37,7 +37,7 @@ class EditProfileScreen extends StatelessWidget {
                   Center(
                     child: Text(
                       "Tap to change photo",
-                      style: TextStyle(fontSize: 12.sp, color: AllColor.black87),
+                      style: TextStyle(fontSize: 12.sp, color: AllColor.black87,fontFamily: "bodyFont"),
                     ),
                   ),
                 
@@ -110,16 +110,15 @@ class EditProfileScreen extends StatelessWidget {
             CountryCityPicker(), 
 
             SizedBox(height: 14.h),
-            LanguageField(), 
-            SizedBox(height: 14.h),
-            
 
             // Bio
             _label("Bio"),
             _inputField(
                 controller: bioController,
                 hint: "Write something about yourself...",
-                maxLines: 3),
+                maxLines: 2),
+            SizedBox(height: 14.h),
+            LanguageField(),
             SizedBox(height: 30.h),
 
             // Save Changes
@@ -127,7 +126,7 @@ class EditProfileScreen extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AllColor.borderColor,
+                  backgroundColor: AllColor.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.r),
                   ),
@@ -139,7 +138,7 @@ class EditProfileScreen extends StatelessWidget {
                 child: Text(
                   "Save Changes",
                   style: TextStyle(
-                      color: AllColor.white,
+                      color: AllColor.border01,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w600),
                 ),
@@ -158,8 +157,9 @@ class EditProfileScreen extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: 13.sp,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           color: AllColor.black,
+          fontFamily: "bodyFont"
         ),
       ),
     );
@@ -178,11 +178,11 @@ class EditProfileScreen extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
+          borderSide: BorderSide(color: AllColor.border01, width: 1.2),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: AllColor.borderColor, width: 1.5),
+          borderSide: BorderSide(color: AllColor.border01, width: 1.5),
         ),
       ),
     );
@@ -224,12 +224,12 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
               // Edit profile
             },
             child: CircleAvatar(
-              radius: 45.r,
-              backgroundColor: AllColor.grey200,
+              radius: 30.r,
+              backgroundColor: AllColor.grey300,
               backgroundImage:
               _imageFile != null ? FileImage(_imageFile!) : null,
               child: _imageFile == null
-                  ? Icon(Icons.person, size: 40.sp, color: AllColor.grey)
+                  ? Icon(Icons.person, size: 40.sp, color: AllColor.white)
                   : null,
             ),
           ),
@@ -239,13 +239,14 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
             child: GestureDetector(
               onTap: _pickImage,
               child: Container(
-                height: 25.h,
-                width: 25.h,
+                height: 15.h,
+                width: 15.h,
+                padding: EdgeInsets.all(2.r),
                 decoration: BoxDecoration(
-                  color: AllColor.borderColor,
+                  color: AllColor.white,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.camera_alt, color: Colors.white, size: 18.sp),
+                child: Icon(Icons.camera_alt_outlined, color: Colors.black, size: 12.sp),
               ),
             ),
           ),
@@ -343,7 +344,7 @@ class _CountryCityPickerState extends State<CountryCityPicker> {
     padding: EdgeInsets.only(bottom: 6.h),
     child: Text(
       text,
-      style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w600),
+      style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500,fontFamily: "bodyFont"),
     ),
   );
 
@@ -458,7 +459,7 @@ class _LanguageFieldState extends State<LanguageField> {
     padding: EdgeInsets.only(bottom: 6.h),
     child: Text(
       text,
-      style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w600),
+      style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500,fontFamily: "bodyFont"),
     ),
   );
 

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workpleis/features/Payment/screen/payment_methods_screen.dart';
 import 'package:workpleis/features/account/screen/profile_edit_screen.dart';
 import 'package:workpleis/features/account/widget/custom_buttom.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
+import 'package:workpleis/features/jobs/screen/jobs_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/security/screen/settings_screen.dart';
 import 'package:workpleis/features/wallet/screen/wallet_screen.dart';
@@ -30,13 +32,22 @@ class _AccountOverviewClientScreenState
   Map<String, dynamic> profileData = {};
   Map<String, dynamic> stats = {};
   String memberSince = "";
-
+  String? userRole = "";
   @override
   void initState() {
     super.initState();
     _fetchData();
+    getUserRole();
   }
 
+
+  Future<void> getUserRole() async {
+    final prefs = await SharedPreferences.getInstance();
+    final role = prefs.getString('role');
+    setState(() {
+      userRole = role;
+    });
+  }
   Future<void> _fetchData() async {
     await Future.delayed(const Duration(seconds: 1));
     setState(() {
@@ -57,6 +68,7 @@ class _AccountOverviewClientScreenState
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +87,7 @@ class _AccountOverviewClientScreenState
             SizedBox(height: 20.h),
             _paymentMethodSection(),
             SizedBox(height: 20.h),
-            _specialProjectsSection(),
+            if (userRole == "client")  _specialProjectsSection(),
             SizedBox(height: 20.h),
             InkWell(
               onTap: (){
@@ -84,9 +96,10 @@ class _AccountOverviewClientScreenState
                 child: _menuTile(Icons.account_balance_wallet_outlined, "Wallet")),
             InkWell(
                 onTap: (){
-                  context.push(JobsScreen.routeName);
+                  userRole == "client" ?
+                  context.push(JobsScreen.routeName): context.push(JobsOffers.routeName);
                 },
-                child: _menuTile(Icons.work_outline, "Jobs")),
+                child: _menuTile(Icons.work_outline, userRole == "client" ?"Jobs": "Offers")),
             InkWell(
                 onTap: (){
                   context.push(SettingsScreen.routeName);
@@ -117,7 +130,7 @@ class _AccountOverviewClientScreenState
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: AllColor.borderColor, width: 1),
+        border: Border.all(color: AllColor.brand2_light, width: 1),
         boxShadow: [
           BoxShadow(
               color: Colors.black12, blurRadius: 5, offset: const Offset(0, 2))
@@ -204,13 +217,13 @@ class _AccountOverviewClientScreenState
           alignment: WrapAlignment.center,
           children: [
             _infoBox(Icons.work_outline, "${stats["posted"]}", "Posted Jobs",
-                AllColor.white, AllColor.black),
+                AllColor.white, AllColor.brand2_light),
             _infoBox(Icons.pending_actions_outlined, "${stats["pending"]}",
-                "Pending Jobs", AllColor.white, AllColor.black),
+                "Pending Jobs", AllColor.white, AllColor.brand2_light),
             _infoBox(Icons.star_border, "${stats["rating"]}", "Rating",
-                AllColor.white, AllColor.black),
+                AllColor.white, AllColor.brand2_light),
             _infoBox(Icons.attach_money, "\$${stats["spent"]}", "Total Spent",
-                AllColor.white, AllColor.black),
+                AllColor.white, AllColor.brand2_light),
           ],
         ),
       ],
