@@ -267,11 +267,12 @@ class _AccountOverviewClientScreenState
       padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [AllColor.parpale, AllColor.allcolor],
+          colors: [AllColor.white, AllColor.allcolor],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(10.r),
+        border: Border.all(color:AllColor.brand2_light, width: 1)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -309,11 +310,12 @@ class _AccountOverviewClientScreenState
       padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [AllColor.parpale, AllColor.allcolor],
+          colors: [AllColor.white, AllColor.parpale],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(10.r),
+          border: Border.all(color:AllColor.borderColor, width: 1)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

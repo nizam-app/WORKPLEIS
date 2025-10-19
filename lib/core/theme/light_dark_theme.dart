@@ -44,15 +44,15 @@ ThemeData themeMood() {
       ),
 
       suffixIconColor: Colors.grey,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
-      ),
-
-      // enabledBorder: OutlineInputBorder(
+      // border: OutlineInputBorder(
       //   borderRadius: BorderRadius.circular(10.r),
-      //   borderSide: BorderSide(color: AllColor.borderColor, width: 1),
+      //   borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
       // ),
+
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.r),
+        borderSide: BorderSide(color: AllColor.borderColor, width: 1),
+      ),
       //
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.r),

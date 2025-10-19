@@ -3,15 +3,37 @@ import 'dart:io';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/core/widget/global_get_started_button.dart';
 
 import '../../../core/widget/global_app_bar.dart';
 
-class EditProfileScreen extends StatelessWidget {
+class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
   static const routeName = '/editProfileScreen';
 
+  @override
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
+}
+String? user_role;
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  Future<String?> getUserRole() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? role = prefs.getString('role');
+    return user_role = role ;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getUserRole();
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final nameController = TextEditingController(text: "John Doe");
@@ -31,8 +53,8 @@ class EditProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Profile Photo
-            ProfileImagePicker(),  
-                 
+            ProfileImagePicker(),
+
                   SizedBox(height: 6.h),
                   Center(
                     child: Text(
@@ -40,9 +62,9 @@ class EditProfileScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 12.sp, color: AllColor.black87,fontFamily: "bodyFont"),
                     ),
                   ),
-                
-              
-            
+
+
+
             SizedBox(height: 20.h),
 
             // Full Name
@@ -107,7 +129,7 @@ class EditProfileScreen extends StatelessWidget {
             //   ],
             // ),
 
-            CountryCityPicker(), 
+            CountryCityPicker(),
 
             SizedBox(height: 14.h),
 
@@ -118,32 +140,41 @@ class EditProfileScreen extends StatelessWidget {
                 hint: "Write something about yourself...",
                 maxLines: 2),
             SizedBox(height: 14.h),
-            LanguageField(),
+         if(user_role == "provider")   TagInputField(
+              title: "Skills",
+              options: ["Web Development", "UI/UX Design", "Mobile App Design"],
+            ),
+            24.verticalSpace,
+            TagInputField(
+              title: "Language",
+              options: ["English", "Bengli", "বাংলা", "Français", "Arabic"],
+            ),
             SizedBox(height: 30.h),
 
             // Save Changes
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AllColor.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 14.h),
-                ),
-                onPressed: () {
-                  // TODO: save changes logic
-                },
-                child: Text(
-                  "Save Changes",
-                  style: TextStyle(
-                      color: AllColor.border01,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
+            GlobalGetStartedButton(onTap: () {context.pop();},color: AllColor.primary,height: 35.h,buttonName: "Save Changes",textColor:AllColor.borderColor)
+            // SizedBox(
+            //   width: double.infinity,
+            //   child: ElevatedButton(
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: AllColor.primary,
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(8.r),
+            //       ),
+            //       padding: EdgeInsets.symmetric(vertical: 14.h),
+            //     ),
+            //     onPressed: () {
+            //       // TODO: save changes logic
+            //     },
+            //     child: Text(
+            //       "Save Changes",
+            //       style: TextStyle(
+            //           color: AllColor.borderColor,
+            //           fontSize: 14.sp,
+            //           fontWeight: FontWeight.w600),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -178,11 +209,11 @@ class EditProfileScreen extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: AllColor.border01, width: 1.2),
+          borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: AllColor.border01, width: 1.5),
+          borderSide: BorderSide(color: AllColor.borderColor, width: 1.5),
         ),
       ),
     );
@@ -445,59 +476,143 @@ class _CountryCityPickerState extends State<CountryCityPicker> {
   }
 }
 
-class LanguageField extends StatefulWidget {
-  const LanguageField({super.key});
+class TagInputField extends StatefulWidget {
+  final String title;
+  final List<String> options;
+
+  const TagInputField({
+    super.key,
+    required this.title,
+    required this.options,
+  });
 
   @override
-  State<LanguageField> createState() => _LanguageFieldState();
+  State<TagInputField> createState() => _TagInputFieldState();
 }
 
-class _LanguageFieldState extends State<LanguageField> {
-  String selectedLanguage = "English";
+class _TagInputFieldState extends State<TagInputField> {
+  late String _dropdownValue;
+  final List<String> _selectedItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _dropdownValue = widget.options.first;
+  }
+
+  void _addItem() {
+    if (!_selectedItems.contains(_dropdownValue)) {
+      setState(() => _selectedItems.add(_dropdownValue));
+    }
+  }
+
+  void _removeItem(String value) {
+    setState(() => _selectedItems.remove(value));
+  }
+
+  Widget _tag(String label) {
+    return Container(
+      margin: EdgeInsets.only(right: 8.w, bottom: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+      decoration: BoxDecoration(
+        color: AllColor.grey200.withOpacity(0.6),
+        borderRadius: BorderRadius.circular(999.r),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(label, style: TextStyle(fontSize: 12.sp, fontFamily: "bodyFond")),
+          6.horizontalSpace,
+          GestureDetector(
+            onTap: () => _removeItem(label),
+            child: Icon(Icons.close, size: 14.sp),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _label(String text) => Padding(
     padding: EdgeInsets.only(bottom: 6.h),
     child: Text(
       text,
-      style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500,fontFamily: "bodyFont"),
+      style: TextStyle(
+        fontSize: 13.sp,
+        fontWeight: FontWeight.w500,
+        fontFamily: "bodyFont",
+      ),
     ),
   );
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /// Label
-    
+        _label(widget.title),
 
-
-        SizedBox(height: 12.h),
-
-        /// ✅ Language Dropdown (only name)
-        _label("Language"),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          decoration: BoxDecoration(
-            border: Border.all(color: AllColor.borderColor, width: 1.2),
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: selectedLanguage,
-              isExpanded: true,
-              items: const [
-                DropdownMenuItem(value: "English", child: Text("English")),
-                DropdownMenuItem(value: "বাংলা", child: Text("বাংলা")),
-                DropdownMenuItem(value: "हिन्दी", child: Text("हिन्दी")),
-                DropdownMenuItem(value: "Français", child: Text("Français")),
-                DropdownMenuItem(value: "Arabic", child: Text("Arabic")),
-              ],
-              onChanged: (val) {
-                setState(() => selectedLanguage = val!);
-              },
+        Row(
+          children: [
+            /// Dropdown
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                decoration: BoxDecoration(
+                  color: AllColor.grey100,
+                  border: Border.all(color: AllColor.borderColor, width: 1.2),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: _dropdownValue,
+                    isExpanded: true,
+                    icon: Icon(Icons.arrow_drop_down),
+                    items: widget.options.map((opt) {
+                      return DropdownMenuItem(
+                        value: opt,
+                        child: Text(opt),
+                      );
+                    }).toList(),
+                    onChanged: (val) {
+                      if (val != null) {
+                        setState(() => _dropdownValue = val);
+                      }
+                    },
+                  ),
+                ),
+              ),
             ),
-          ),
+
+            12.horizontalSpace,
+
+            /// Add Button
+            ElevatedButton(
+              onPressed: _addItem,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AllColor.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 10.h),
+                elevation: 0,
+              ),
+              child: Text(
+                "Add",
+                style: theme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: AllColor. borderColor,
+                ),
+              ),
+            ),
+          ],
+        ),
+
+        12.verticalSpace,
+
+        Wrap(
+          children: _selectedItems.map((val) => _tag(val)).toList(),
         ),
       ],
     );

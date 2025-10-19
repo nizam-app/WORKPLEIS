@@ -13,7 +13,7 @@ import 'package:workpleis/features/auth/screens/enter_your_email.dart';
 import 'package:workpleis/features/auth/screens/forget_password_screen.dart';
 import 'package:workpleis/features/auth/screens/register_screen.dart';
 import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
-import 'package:workpleis/features/home/screen/home_screen.dart';
+import 'package:workpleis/features/home/screen/client_home_screen.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 
 import '../../nav_bar/screen/bottom_nav_bar.dart';
