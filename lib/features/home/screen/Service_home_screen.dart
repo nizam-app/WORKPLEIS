@@ -117,9 +117,9 @@ class HomeHeaderSection extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AllColor.brand2_light,
                   shape: BoxShape.circle,
-                  image: const DecorationImage(
-                    image: NetworkImage(
-                      'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
+                  image:  DecorationImage(
+                    image: AssetImage(
+                      "assets/images/profile.png"
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -516,8 +516,8 @@ class JobCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 24.r,
-                backgroundImage: const NetworkImage(
-                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
+                backgroundImage: AssetImage(
+                  "assets/images/profile.png",
                 ),
               ),
               SizedBox(width: 10.w),
