@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/features/home/screen/Service_home_screen.dart';
 
 // Screens
 import '../../home/screen/home_screen.dart';
@@ -84,7 +85,7 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
     ];
 
     final providerRoutes = [
-      HomeScreen.routeName,
+      ServiceHomeScreen.routeName,
       SeeAllJobsScreen.routeName,
       JobsOffers.routeName, // You can replace with your offers screen
       ChatScreen.routeName,

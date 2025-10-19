@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
+
+import 'Service_jobs_details.dart';
 
 final tabProvider = StateProvider<int>((_) => 0);
 
@@ -78,7 +81,7 @@ class JobsOffers extends ConsumerWidget {
             Text(
               "${filtered.length} ${["Pending", "Accepted", "Rejected"][tab]}",
               style: TextStyle(
-                color: Colors.black.withOpacity(.6),
+                color: AllColor.brand2_light,
                 fontWeight: FontWeight.w500,
                 fontSize: 13.sp,
               ),
@@ -91,7 +94,7 @@ class JobsOffers extends ConsumerWidget {
                   ? Center(
                 child: Text(
                   "No ${["Pending", "Accepted", "Rejected"][tab]} jobs",
-                  style: TextStyle(color: AllColor.brand2_light, fontSize: 14.sp),
+                  style: TextStyle(color:AllColor.black, fontSize: 14.sp),
                 ),
               )
                   : ListView.separated(
@@ -146,7 +149,7 @@ class _TabBar extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
               decoration: BoxDecoration(
-                color: selected ? AllColor.primary : AllColor.white,
+                color: selected ? AllColor.brand2_light : AllColor.white,
                 border: Border.all(
                   color: const Color(0xFF154E7B).withOpacity(0.2),
                   width: 1,
@@ -158,7 +161,7 @@ class _TabBar extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black,
+                  color:selected? AllColor.white: AllColor.black,
                   fontFamily: "bodyFont"
 
                 ),
@@ -210,7 +213,11 @@ class _JobCard extends StatelessWidget {
               const Spacer(),
               if (status == "pending") _pill("Pending")
               else if (status == "accepted") _pill("Update Job")
-              else _pill("Reason"),
+              else InkWell(
+                    onTap: (){
+                      context.push(ServiceJobDetails.routeName);
+                    },
+                    child: _pill("Reason")),
             ],
           ),
         ],
