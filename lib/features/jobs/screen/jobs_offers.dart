@@ -215,7 +215,7 @@ class _JobCard extends StatelessWidget {
               else if (status == "accepted") _pill("Update Job")
               else InkWell(
                     onTap: (){
-                      context.push(ServiceJobDetails.routeName);
+                     context.pop();
                     },
                     child: _pill("Reason")),
             ],
