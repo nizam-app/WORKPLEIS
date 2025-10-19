@@ -3,14 +3,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
+import 'package:workpleis/core/widget/global_get_started_button.dart';
 import 'package:workpleis/core/widget/global_snack_bar.dart';
+import 'package:workpleis/features/auth/screens/add_payment_method_screen.dart';
 import 'package:workpleis/features/auth/logic/email_valitedor.dart';
 import 'package:workpleis/core/constants/image_control/image_path.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';
+import 'package:workpleis/features/auth/screens/enter_your_email.dart';
+import 'package:workpleis/features/auth/screens/forget_password_screen.dart';
 import 'package:workpleis/features/auth/screens/register_screen.dart';
+import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
+import 'package:workpleis/features/home/screen/home_screen.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 
 import '../../nav_bar/screen/bottom_nav_bar.dart';
 import '../logic/login_reverpod.dart';
+import '../widgets/custom_google_button.dart';
+import '../widgets/outline_border.dart';
+import '../../../core/screen/base_gradient_scaffold.dart';
 
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -45,20 +55,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(height: 130.h),
                 upper_text(),
 
                 // ── Email
-                _fieldLabel('Email'),
+                CustomLabelText(title: "Email"),
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   validator: emailValidator,
-                  decoration: const InputDecoration(hintText: 'Enter your Email'),
-                ),
+                  decoration: const InputDecoration(hintText: 'Enter your Email')),
                 SizedBox(height: 16.h),
-
-                // ── Password
-                _fieldLabel('Password'),
+                CustomLabelText(title: "Password"),
                 TextFormField(
                   controller: _passController,
                   obscureText: _obscure,
@@ -71,196 +79,83 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         _obscure ? Icons.visibility_off : Icons.visibility,
                       ),
                     ),
-                  ),
-                ),
+                  )),
+              SizedBox(height: 5.h),
 
-                // ── Forgot password
-                SizedBox(height: 8.h),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      foregroundColor: AllColor.grey,
-                      padding: EdgeInsets.symmetric(horizontal: 6.w),
-                      minimumSize: Size(10.w, 28.h),
+              // ── Divider with text
+              Row(
+                children: [
+                  Spacer(),
+                  GestureDetector(
+                    onTap: () {context.push(ForgetPasswordScreen.routeName);},
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    
+                      child: Text(
+                        'Forgot password?',
+                        style: TextStyle(fontSize: 12.sp, color: AllColor.borderColor),
+                      ),
                     ),
-                    child: Text(
-                      'Forgot password?',
-                      style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
-                    ),
-                  ),
+                  ),]
                 ),
-                SizedBox(height: 6.h),
+                SizedBox(height: 30.h),
 
                 // ── Sign In button
-              SizedBox(
-                width: double.infinity,
-                height: 46.h,
-                child: ElevatedButton(
-                  onPressed: ref.watch(loginLoadingProvider) ? null : _submit, // disable হলে null
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AllColor.black,
-                    foregroundColor: AllColor.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: ref.watch(loginLoadingProvider)
-                      ? SizedBox(
-                    width: 20.w,
-                    height: 20.h,
-                    child: const CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Colors.white,
-                    ),
-                  )
-                      : Text('Sign In', style: TextStyle(fontSize: 14.sp)),
-                ),
-              ),
-                SizedBox(height: 18.h),
+            GlobalGetStartedButton(onTap: (){context.push(AddPaymentMethodScreen.routeName);},color: AllColor.primary,buttonName: "Sign In",),
+            CustomGmailButton(onTop: () { context.push(OnboardingScreen03.routeName);}, taxt: 'Sign up',),
 
-                // ── Divider with text
-                Row(
-                  children: [
-                    Expanded(child: Container(height: 1, color: AllColor.grey.withOpacity(.2))),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Text(
-                        'OR CONTINUW WITH',
-                        style: TextStyle(fontSize: 11.sp, color: AllColor.grey),
-                      ),
-                    ),
-                    Expanded(child: Container(height: 1, color: AllColor.grey.withOpacity(.2))),
-                  ],
-                ),
-                SizedBox(height: 14.h),
 
-                // ── Google button
-                SizedBox(
-                  width: double.infinity,
-                  height: 46.h,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AllColor.black,
-                      foregroundColor: AllColor.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      elevation: 0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          ImagePath.google,
-                          height: 18.h,
-                        ),
-                        SizedBox(width: 8.w),
-                        Text('Continue with Google', style: TextStyle(fontSize: 14.sp)),
-                      ],
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: 22.h),
 
                 // ── Sign up link
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account? ",
-                      style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
-                    ),
-                    GestureDetector(
-                      onTap: () => context.push(RegisterScreen.routeName),
-                      child: Text(
-                        'Sign up',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: AllColor.green,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 18.h),
+
               ],
             ),
           ),
         ),
       ),
-    );
+    )
+    ;
   }
 
   Column upper_text() {
     return Column(
       children: [
-        SizedBox(height: 20.h),
-        Image.asset(ImagePath.logoText, height: 34.h),
-        SizedBox(height: 18.h),
         Text(
-          'Welcome back',
-          style: TextStyle(
-            fontSize: 24.sp,
-            fontWeight: FontWeight.w700,
-            color: AllColor.black,
-            letterSpacing: -0.2,
-          ),
-        ),
-        SizedBox(height: 6.h),
-        Text(
-          'Sign in to your account',
-          style: TextStyle(fontSize: 16.sp, color: AllColor.grey.withOpacity(0.9)),
+          "     Sign in to your \n Workpleis account",
+          style: TextStyle(fontSize: 20.sp, color:Color(0xff45454C)),
         ),
         SizedBox(height: 28.h),
       ],
     );
   }
 
-  Widget _fieldLabel(String text) => Align(
-    alignment: Alignment.centerLeft,
-    child: Padding(
-      padding: EdgeInsets.only(bottom: 6.h),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 12.sp,
-          fontWeight: FontWeight.w600,
-          color: AllColor.black,
-        ),
-      ),
-    ),
-  );
+
 
   // lib/features/auth/login_screen.dart
 
   Future<void> _submit() async {
-    if (!(_formKey.currentState?.validate() ?? false)) return;
-
-    ref.read(loginLoadingProvider.notifier).state = true;
-
-    final loginService = ref.read(loginProvider);
-    final result = await loginService.login(
-      _emailController.text.trim(),
-      _passController.text.trim(),
-    );
-
-    ref.read(loginLoadingProvider.notifier).state = false;
-
-    if (result["success"]) {
-      GlobalSnackBar.show(context,
-          title: "Success", message: result["message"], type: CustomSnackType.success);
-
-      context.go(BottomNavBar.routeName); // ✅ Next page এ যাবে
-    } else {
-      GlobalSnackBar.show(context,
-          title: "Error", message: result["message"], type: CustomSnackType.error);
-    }
+    context.push(AddPaymentMethodScreen.routeName);
+    // if (!(_formKey.currentState?.validate() ?? false)) return;
+    //
+    // ref.read(loginLoadingProvider.notifier).state = true;
+    //
+    // final loginService = ref.read(loginProvider);
+    // final result = await loginService.login(
+    //   _emailController.text.trim(),
+    //   _passController.text.trim(),
+    // );
+    //
+    // ref.read(loginLoadingProvider.notifier).state = false;
+    //
+    // if (result["success"]) {
+    //   GlobalSnackBar.show(context,
+    //       title: "Success", message: result["message"], type: CustomSnackType.success);
+    //
+    //   context.go(HomeScreen.routeName); // ✅ Next page এ যাবে
+    // } else {
+    //   GlobalSnackBar.show(context,
+    //       title: "Error", message: result["message"], type: CustomSnackType.error);
+    // }
   }
 
 
