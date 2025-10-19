@@ -16,15 +16,31 @@ class LoginService {
 
     final data = jsonDecode(response.body);
 
-    if (response.statusCode == 200){
+    if (response.statusCode == 200 && data["status"] == "Success") {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("token", data["data"]["token"] ?? "");
-      await prefs.setString("email", email);
-      Logger().d(data['message']);
 
-      return {"success": true, "message": data['message']};
+      // 🔹 Save token, email, role, id
+      await prefs.setString("token", data["data"]["token"] ?? "");
+      await prefs.setString("email", data["data"]["user"]["email"] ?? "");
+      await prefs.setString("role", data["data"]["user"]["role"] ?? "");
+      await prefs.setString("userId", data["data"]["user"]["_id"] ?? "");
+      
+
+
+      return {
+        "success": true,
+        "message": data['message'] ?? "Login success",
+        "token": data["data"]["token"],
+        "email": data["data"]["user"]["email"],
+        "role": data["data"]["user"]["role"],
+        "id": data["data"]["user"]["_id"],
+        "user": data["data"]["user"],
+      };
     } else {
-      return {"success": false, "message": data["message"] ?? "Login failed"};
+      return {
+        "success": false,
+        "message": data["message"] ?? "Login failed",
+      };
     }
   }
 }
