@@ -18,15 +18,17 @@ class EditProfileScreen extends StatefulWidget {
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
-String? user_role;
+String? user_role ="client";
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   Future<String?> getUserRole() async {
     final prefs = await SharedPreferences.getInstance();
     String? role = prefs.getString('role');
-    return user_role = role ;
+    setState(() {
+   role =  user_role = role ;
+    });
+    return   role ;
   }
-
   @override
   void initState() {
     // TODO: implement initState

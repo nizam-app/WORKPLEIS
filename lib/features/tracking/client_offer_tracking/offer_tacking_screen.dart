@@ -14,8 +14,8 @@ import '../../projects/widget/custom_back_next_buttons.dart';
 import '../../projects/widget/custom_step_progress_section.dart';
 import 'offer_tacking_screen1.dart';
 
-class OfferTacking extends StatelessWidget {
-  const OfferTacking({super.key});
+class OfferTackingScreen extends StatelessWidget {
+  const OfferTackingScreen({super.key});
   static const routeName = "/offerTacking";
 
   @override
@@ -44,13 +44,14 @@ class OfferTacking extends StatelessWidget {
               location: "Suburban Area",
               date: "Jan 10, 2024",
               description: "Complete garden makeover with new plants, pathway, and irrigation system.",
+              onTap: () {context.push(OfferTackingScreen1.routeName);},
             ),
 
             SizedBox(height: 20.h),
-            CustomBackNextButtons(onBack: () {
-              context.pop();
-            }, onNext: () {
-              context.push(OfferTackingScreen1.routeName) ;},)
+            // CustomBackNextButtons(onBack: () {
+            //   context.pop();
+            // }, onNext: () {
+            //   context.push(OfferTackingScreen1.routeName) ;},)
           ],
         ),
       ),
