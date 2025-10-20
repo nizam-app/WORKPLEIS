@@ -5,13 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-import 'package:workpleis/features/jobs/screen/service_jobs_offers.dart';
-import 'package:workpleis/features/jobs/screen/jobs_tracking.dart';
-
-import '../../projects/screen/request_tracker.dart';
-import '../../projects/screen/spcial_request_screen1.dart';
-import '../../projects/screen/special_request_screen.dart';
-import '../../projects/screen/view_proposal_screen.dart';
+import '../../tracking/client_offer_tracking/offer_tacking_screen.dart';
+import '../../proposal/screen/view_proposal_screen.dart';
 
 class JobsScreen extends ConsumerWidget {
   const JobsScreen({super.key});
@@ -32,7 +27,6 @@ class JobsScreen extends ConsumerWidget {
             const JobStatusList(),
             SizedBox(height: 16.h),
 
-            /// 🔹 Job list
             Expanded(
               child: ListView.builder(
                 itemCount: 6,
@@ -266,7 +260,7 @@ class _BottomBar extends StatelessWidget {
         context.push(ViewProposalScreen.routeName);
       }),
       "Assigned" => _PillButton.purple("Track Job", onTap: () {
-        context.push(ProjectSetupScreen.routeName) ;
+        context.push(OfferTacking.routeName) ;
       }),
       "In Progress" => _PillButton.purple("Track Job", onTap: () {
         // TODO: Add your navigation or logic here

@@ -18,6 +18,7 @@ class AccountOverviewScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(height: 10.h,),
             const ProfileHeaderSection(),
             SizedBox(height: 20.h),
             ProfileTabsSection(),
@@ -70,13 +71,13 @@ class _ProfileHeaderSectionState extends State<ProfileHeaderSection> {
         ),
         10.h.verticalSpace,
         Text("Jhon Doe",
-            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w300, color: AllColor.black)),
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w300, color: AllColor.black,fontFamily: "bodyFont")),
         6.h.verticalSpace,
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
           decoration: BoxDecoration(color: AllColor.allcolor, borderRadius: BorderRadius.circular(6.r)),
           child: Text("Client",
-              style: TextStyle(fontSize: 16.sp, color: AllColor.grey, fontWeight: FontWeight.w500)),
+              style: TextStyle(fontSize: 16.sp, color: AllColor.grey, fontWeight: FontWeight.w500,fontFamily: "bodyFont")),
         ),
         10.h.verticalSpace,
 
@@ -106,12 +107,15 @@ class _ProfileHeaderSectionState extends State<ProfileHeaderSection> {
         10.h.verticalSpace,
 
         // Description
-        Text(
-          "Startup founder and product manager with 8+ years in tech. "
-              "Building innovative SaaS solutions and always looking for talented "
-              "designers and developers to bring ideas to life.",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14.sp, color: Colors.black87, height: 1.35),
+        Padding(
+          padding:  EdgeInsets.symmetric(horizontal: 10.w),
+          child: Text(
+            "Startup founder and product manager with 8+ years in tech. "
+                "Building innovative SaaS solutions and always looking for talented "
+                "designers and developers to bring ideas to life.",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14.sp, color: Colors.black87, height: 1.35),
+          ),
         ),
 
         20.h.verticalSpace,
@@ -230,7 +234,7 @@ class _Segmented extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Center(child: Text(labels[i],
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16.sp, color: AllColor.black))),
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16.sp, color:sel? AllColor.white:AllColor.black,fontFamily: "bodyFond"))),
           ),
         ),
       );
