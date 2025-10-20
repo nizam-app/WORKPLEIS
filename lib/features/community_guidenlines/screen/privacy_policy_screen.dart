@@ -11,24 +11,30 @@ class PrivacyPolicyScreen extends StatelessWidget {
     TextTheme theme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: GlobalAppbar(text: "Privacy Policy"),
-      body:SafeArea(child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 30.h,),
-          Text(
-            'Privacy Policy',
-            style: theme.bodySmall
-          ),
+      body:SafeArea(
+        child: Padding(
+            padding: EdgeInsets.only(right: 15.h,left: 15.h, top: 15.h),
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
 
-          SizedBox(height: 8.h),
+            Text(
+              'Privacy Policy',
+                style: theme.bodyMedium?.copyWith(
+                    fontFamily: "bodyFont",fontSize: 24
+                )
+            ),
 
-          // 🔹 Subtitle
-          Text(
-            "We’ll send you a one time code to verify your email.",
-            style: theme.bodyMedium
-          ),
-        ],
-      )) ,
+            SizedBox(height: 8.h),
+
+            // 🔹 Subtitle
+            Text(
+              "We’ll send you a one time code to verify your email.",
+              style: theme.bodyMedium
+            ),
+          ],
+        )),
+      ) ,
     );
   }
 }
