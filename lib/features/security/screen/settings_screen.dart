@@ -362,6 +362,7 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
           subtitle: "Receive updates via email",
           value: emailNotification,
           onChanged: (val) => setState(() => emailNotification = val),
+          swtchCheck: true
         ),
         SizedBox(height: 12.h),
 
@@ -370,6 +371,7 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
           subtitle: "Get updates about your ",
           value: taskUpdates,
           onChanged: (val) => setState(() => taskUpdates = val),
+          swtchCheck: true
         ),
         SizedBox(height: 12.h),
 
@@ -400,6 +402,7 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
     required String subtitle,
     required bool value,
     required Function(bool) onChanged,
+    bool swtchCheck = false,
   }) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
@@ -435,7 +438,7 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
           ),
 
           // Switch
-          Transform.scale(
+        if(swtchCheck)  Transform.scale(
             scale: 0.9,
             child: Switch(
               value: value,
