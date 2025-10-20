@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
 
 import 'package:workpleis/features/home/screen/post_job_screen.dart';
+import 'package:workpleis/features/projects/screen/project_screen.dart';
 
 import 'package:workpleis/features/projects/screen/special_request_screen.dart';
 
 import '../../../core/constants/color_control/all_color.dart';
+import '../../jobs/screen/jobs_screen.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -45,11 +47,12 @@ class HomeScreen extends StatelessWidget {
                   decoration:
                       InputDecoration(
                         hintText: 'What do you need done today ?',
-                      )!.copyWith(
-                        fillColor: AllColor.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.r),
-                        ),
+                      )!.copyWith(enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.r),
+                          )
                       ),
                 ),
               ),
@@ -390,12 +393,18 @@ class ActiveJobsSection extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              Text(
-                'See All >',
-                style: theme.bodyMedium?.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14.sp,
+              GestureDetector(
+                onTap: () {
+                  context.push(JobsScreen.routeName);
+
+                },
+                child: Text(
+                  'See All >',
+                  style: theme.bodyMedium?.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14.sp,
+                  ),
                 ),
               ),
             ],

@@ -7,7 +7,7 @@
 // import 'package:workpleis/core/widget/global_app_bar.dart';
 // import 'package:workpleis/core/widget/global_get_started_button.dart';
 // import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
-// import 'package:workpleis/features/home/screen/home_screen.dart';
+// import 'package:workpleis/features/home/screen/client_home_screen.dart';
 // import 'package:workpleis/features/home/screen/service_home_screen.dart';
 //
 // class AddPaymentMethodScreen extends StatelessWidget {
@@ -101,7 +101,7 @@ import 'package:workpleis/core/widget/global_app_bar.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
 import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
 import 'package:workpleis/features/home/screen/Service_home_screen.dart';
-import 'package:workpleis/features/home/screen/home_screen.dart';
+import 'package:workpleis/features/home/screen/client_home_screen.dart';
 
 class AddPaymentMethodScreen extends StatelessWidget {
   const AddPaymentMethodScreen({super.key});

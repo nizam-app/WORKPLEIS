@@ -7,8 +7,8 @@ import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/features/home/screen/Service_home_screen.dart';
 
 // Screens
-import '../../home/screen/home_screen.dart';
-import '../../jobs/screen/jobs_offers.dart';
+import '../../home/screen/client_home_screen.dart';
+import '../../jobs/screen/service_jobs_offers.dart';
 import '../../projects/screen/project_screen.dart';
 import '../../message/screen/chat_screen.dart';
 import '../../account/screen/client_account.dart';

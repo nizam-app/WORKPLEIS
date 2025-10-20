@@ -6,7 +6,7 @@ class CustomStepProgressSection extends StatelessWidget {
   final int activeStep; // 0 = Basics, 1 = Scope, 2 = Budget, 3 = Contact
   const CustomStepProgressSection({super.key, required this.activeStep});
 
-  static const _labels = ["Basics", "Scope", "Budget", "Contact"];
+  static const _labels = ["Assigned", "Progress", "In Review", "Delivered"];
 
   @override
   Widget build(BuildContext context) {

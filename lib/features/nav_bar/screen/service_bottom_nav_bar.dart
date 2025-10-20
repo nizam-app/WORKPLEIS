@@ -9,7 +9,7 @@
 // import 'package:workpleis/features/message/screen/chat_screen.dart';
 //
 // import '../../account/screen/client_account.dart';
-// import '../../home/screen/home_screen.dart';
+// import '../../home/screen/client_home_screen.dart';
 // import '../../home/screen/see_all_jobs_screen.dart';
 // import '../../jobs/screen/service_jobs.dart';
 // import '../../projects/screen/project_screen.dart';

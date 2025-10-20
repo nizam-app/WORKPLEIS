@@ -18,11 +18,11 @@ import 'package:workpleis/features/community_guidenlines/screen/community_guiden
 import 'package:workpleis/features/community_guidenlines/screen/privacy_policy_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/terms_and_conditions_screen.dart';
 import 'package:workpleis/features/home/screen/Service_home_screen.dart';
-import 'package:workpleis/features/home/screen/home_screen.dart';
+import 'package:workpleis/features/home/screen/client_home_screen.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/home/screen/see_all_jobs_screen.dart';
 import 'package:workpleis/features/jobs/screen/Service_jobs_details.dart';
-import 'package:workpleis/features/jobs/screen/jobs_offers.dart';
+import 'package:workpleis/features/jobs/screen/service_jobs_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/jobs/screen/jobs_tracking.dart';
 import 'package:workpleis/features/jobs/screen/service_jobs.dart';
