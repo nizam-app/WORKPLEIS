@@ -347,7 +347,7 @@ class _ReviewFormState extends State<ReviewForm> {
         ElevatedButton(
           onPressed: widget.onSubmit, // ✅ প্যারেন্টের ফাংশন কল হবে
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFD8FF3F),
+            backgroundColor: AllColor.brand2_light,
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(999.r),
@@ -356,7 +356,7 @@ class _ReviewFormState extends State<ReviewForm> {
           child: Text(
             "Submit Review",
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontWeight: FontWeight.w500,
               fontSize: 13.sp,
             ),

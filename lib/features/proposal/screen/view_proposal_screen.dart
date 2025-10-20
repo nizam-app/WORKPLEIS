@@ -334,14 +334,17 @@ class CustomRejectBottomSheet extends StatefulWidget {
   final String text2;
 
 
+
   const CustomRejectBottomSheet({required this.onSubmit, super.key,this.text1 = "Rejection Message", this.text2 = "Tell something for rejection"});
 
   @override
   State<CustomRejectBottomSheet> createState() => _CustomRejectBottomSheetState();
+
 }
 
 class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
   final TextEditingController _controller = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -424,7 +427,7 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                     child: Text(
                       "Cancel",
                       style: theme.titleMedium?.copyWith(
-                        color: AllColor.black,
+                        color:  AllColor.black,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -441,7 +444,7 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                       widget.onSubmit(text);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AllColor.primary,
+                      backgroundColor: AllColor.brand2_light,
                       foregroundColor: AllColor.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(999.r),
@@ -453,7 +456,7 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                     child: Text(
                       "Submit",
                       style: theme.titleMedium?.copyWith(
-                        color: AllColor.borderColor
+                        color:  AllColor.white
                         ,
                         fontWeight: FontWeight.w600,
                       ),

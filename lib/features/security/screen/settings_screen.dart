@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 
 import '../../../core/widget/global_app_bar.dart';
@@ -9,7 +11,10 @@ class SettingsScreen extends StatelessWidget {
   static const routeName = '/settingsScreen';
   @override
   Widget build(BuildContext context) {
-    
+    final theme = Theme
+        .of(context)
+        .textTheme;
+
     return Scaffold(
       backgroundColor: Colors.white70,
       appBar:GlobalAppbar(text: "Settings") ,
@@ -19,20 +24,20 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(" Security Settings",
-                style: TextStyle(
+                style: theme.bodyMedium?.copyWith(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                     color: AllColor.black)),
             SizedBox(height: 12.h),
-            const SecuritySettingsList(),
-            SizedBox(height: 20.h),
+             const SecuritySettingsList(),
+            SizedBox(height: 10.h),
             Text("Notifications Settings ",
-                style: TextStyle(
+                style: theme.bodyMedium?.copyWith(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                     color: AllColor.black)),
             SizedBox(height: 12.h),
-            ViaNotificationWidget(), 
+            ViaNotificationWidget(),
           ],
         ),
       ),
@@ -55,12 +60,12 @@ class SecuritySettingsList extends StatelessWidget {
         "subtitle": "Last changed 3 month ago",
         "action": "Change"
       },
-      {
-        "icon": Icons.security,
-        "title": "Two-Factor Authentication",
-        "subtitle": "Add extra security to your account",
-        "action": "Verify"
-      },
+      // {
+      //   "icon": Icons.security,
+      //   "title": "Two-Factor Authentication",
+      //   "subtitle": "Add extra security to your account",
+      //   "action": "Verify"
+      // },
     ];
 
     return Column(
@@ -100,7 +105,7 @@ class SecuritySettingsList extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AllColor.white,
+                backgroundColor: AllColor.brand2_light,
                 padding: EdgeInsets.symmetric(
                     horizontal: 14.w, vertical: 8.h),
                 shape: RoundedRectangleBorder(
@@ -115,8 +120,8 @@ class SecuritySettingsList extends StatelessWidget {
                 }
               },
               child: Text(s["action"] as String,
-                  style: TextStyle(
-                      fontSize: 12.sp, color: AllColor.black)),
+                  style:TextStyle(
+                      fontSize: 12.sp, color: AllColor.white)),
             )
           ],
         ),
@@ -162,6 +167,10 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme
+        .of(context)
+        .textTheme;
+
     return Padding(
       padding: EdgeInsets.only(
         left: 16.w,
@@ -179,7 +188,7 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
             children: [
               Text(
                 "Change Password",
-                style: TextStyle(
+                style: theme.bodyMedium?.copyWith(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: AllColor.black,
@@ -195,10 +204,18 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
 
           Text(
             "Enter your current password and choose a new secure password",
-            style: TextStyle(fontSize: 11.sp, color: AllColor.black87),
+            style: theme.bodyMedium?.copyWith(fontSize: 11.sp, color: AllColor.black87),
           ),
           SizedBox(height: 16.h),
-
+          Text(
+            "Current Password",
+            style: theme.bodyMedium?.copyWith(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: AllColor.grey,
+            ),
+          ),
+          SizedBox(height: 10.h),
           // Current Password
           _passwordField(
             controller: currentController,
@@ -207,6 +224,15 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
             onToggle: () => setState(() => currentVisible = !currentVisible),
           ),
           SizedBox(height: 14.h),
+          Text(
+            "New Password",
+            style: theme.bodyMedium?.copyWith(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: AllColor.grey,
+            ),
+          ),
+          SizedBox(height: 10.h),
 
           // New Password
           _passwordField(
@@ -216,6 +242,15 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
             onToggle: () => setState(() => newVisible = !newVisible),
           ),
           SizedBox(height: 14.h),
+          Text(
+            "Confirm New password",
+            style: theme.bodyMedium?.copyWith(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: AllColor.grey,
+            ),
+          ),
+          SizedBox(height: 10.h),
 
           // Confirm Password
           _passwordField(
@@ -231,19 +266,19 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AllColor.black,
+                backgroundColor: AllColor.brand2_light,
                 padding: EdgeInsets.symmetric(vertical: 14.h),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.r),
                 ),
               ),
               onPressed: () {
-                // TODO: password update logic
+                context.pop();
               },
               child: Text(
                 "Change Password",
-                style: TextStyle(
-                  fontSize: 13.sp,
+                style: theme.bodyMedium?.copyWith(
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: AllColor.white,
                 ),
@@ -253,15 +288,15 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
           SizedBox(height: 12.h),
 
           // Cancel
-          Center(
-            child: TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(
-                "Cancel",
-                style: TextStyle(fontSize: 12.sp, color: AllColor.black),
-              ),
-            ),
-          )
+          // Center(
+          //   child: TextButton(
+          //     onPressed: () => Navigator.pop(context),
+          //     child: Text(
+          //       "Cancel",
+          //       style: TextStyle(fontSize: 12.sp, color: AllColor.black),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
@@ -278,15 +313,15 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
       obscureText: !visible,
       decoration: InputDecoration(
         hintText: hint,
-        contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AllColor.green, width: 1.2),
-          borderRadius: BorderRadius.circular(6.r),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AllColor.green, width: 1.5),
-          borderRadius: BorderRadius.circular(6.r),
-        ),
+      //  contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
+      //  enabledBorder: OutlineInputBorder(
+      //     borderSide: BorderSide(color: AllColor.green, width: 1.2),
+      //     borderRadius: BorderRadius.circular(6.r),
+      //   ),
+      //   focusedBorder: OutlineInputBorder(
+      //     borderSide: BorderSide(color: AllColor.green, width: 1.5),
+      //     borderRadius: BorderRadius.circular(6.r),
+      //   ),
         suffixIcon: IconButton(
           icon: Icon(
             visible ? Icons.visibility_off : Icons.visibility,
@@ -318,7 +353,8 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        
+
+
 
         // Notification Tiles
         _notificationTile(
@@ -326,6 +362,7 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
           subtitle: "Receive updates via email",
           value: emailNotification,
           onChanged: (val) => setState(() => emailNotification = val),
+          swtchCheck: true
         ),
         SizedBox(height: 12.h),
 
@@ -334,6 +371,7 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
           subtitle: "Get updates about your ",
           value: taskUpdates,
           onChanged: (val) => setState(() => taskUpdates = val),
+          swtchCheck: true
         ),
         SizedBox(height: 12.h),
 
@@ -364,13 +402,14 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
     required String subtitle,
     required bool value,
     required Function(bool) onChanged,
+    bool swtchCheck = false,
   }) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
       decoration: BoxDecoration(
         color: AllColor.white,
         borderRadius: BorderRadius.circular(10.r),
-        border: Border.all(color: AllColor.grey, width: 1.w), 
+        border: Border.all(color: AllColor.grey, width: 1.w),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -399,7 +438,7 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
           ),
 
           // Switch
-          Transform.scale(
+        if(swtchCheck)  Transform.scale(
             scale: 0.9,
             child: Switch(
               value: value,
