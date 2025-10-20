@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_aleart_box.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
+import 'package:workpleis/features/account/screen/account_screen.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
 
 final tabProvider = StateProvider<int>((ref) => 0);
@@ -32,14 +33,14 @@ class _ProposalNotifier extends StateNotifier<List<Proposal>> {
   _ProposalNotifier()
       : super([
     Proposal(
-        "Deliver something for me", 3500, "Modern e-commerce React/Node.js.",
+        "Shahed ali", 3500, "Modern e-commerce React/Node.js.",
         "3–5 days"),
     Proposal(
-        "Marketing site revamp", 1200, "LP redesign, blog, CMS.", "5–7 days"),
+        "Palash", 1200, "LP redesign, blog, CMS.", "5–7 days"),
     Proposal(
-        "iOS MVP polish", 800, "Bug-fix, TestFlight, analytics.", "2–4 days"),
-    Proposal("Admin dashboard", 2100, "RBAC, charts, CSV.", "6–10 days"),
-    Proposal("Stripe integration", 600, "Checkout, webhooks.", "1–2 days"),
+        "iOS Palash", 800, "Bug-fix, TestFlight, analytics.", "2–4 days"),
+    Proposal("Admin Palash", 2100, "RBAC, charts, CSV.", "6–10 days"),
+    Proposal("Stripe Palash", 600, "Checkout, webhooks.", "1–2 days"),
   ]);
 
   void accept(int index) {
@@ -220,9 +221,12 @@ class ProposalCard extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Text(data.title,
-                    style: TextStyle(
-                        fontSize: 16.sp, fontWeight: FontWeight.w500)),
+                child: InkWell(
+                  onTap: () {context.push(AccountOverviewScreen.routeName);},
+                  child: Text(data.title,
+                      style: TextStyle(
+                          fontSize: 16.sp, fontWeight: FontWeight.w500)),
+                ),
               ),
               Text("\$${_formatPrice(data.price)}",
                   style: TextStyle(
