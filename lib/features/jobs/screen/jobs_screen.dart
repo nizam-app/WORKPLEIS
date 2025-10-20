@@ -262,7 +262,7 @@ class _BottomBar extends StatelessWidget {
         context.push(ViewProposalScreen.routeName);
       }),
       "Assigned" => _PillButton.purple("Track Job", onTap: () {
-        context.push(OfferTacking.routeName) ;
+        context.push(OfferTackingScreen.routeName) ;
       }),
       "In Progress" => _PillButton.purple("Track Job", onTap: () {
         // TODO: Add your navigation or logic here

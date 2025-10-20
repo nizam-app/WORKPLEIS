@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
+import 'package:workpleis/features/tracking/client_offer_tracking/offer_tacking_screen.dart';
 
 import 'Service_jobs_details.dart';
 
@@ -67,8 +68,8 @@ class JobsOffers extends ConsumerWidget {
         padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
-            _buildSearchBar(),
-            14.verticalSpace,
+            // _buildSearchBar(),
+            10.verticalSpace,
         Row(
           children: [
             Expanded(
@@ -109,20 +110,20 @@ class JobsOffers extends ConsumerWidget {
     );
   }
 
-  Widget _buildSearchBar() {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: "What do you need done today?",
-        prefixIcon: Icon(Icons.search, color: AllColor.grey),
-        fillColor: AllColor.white,
-        filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
-        ),
-      ),
-    );
-  }
+  // Widget _buildSearchBar() {
+  //   return TextField(
+  //     decoration: InputDecoration(
+  //       hintText: "What do you need done today?",
+  //       prefixIcon: Icon(Icons.search, color: AllColor.grey),
+  //       fillColor: AllColor.white,
+  //       filled: true,
+  //       border: OutlineInputBorder(
+  //         borderRadius: BorderRadius.circular(12.r),
+  //         borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
 class _TabBar extends StatelessWidget {
@@ -211,8 +212,8 @@ class _JobCard extends StatelessWidget {
                 style: TextStyle(color: AllColor.black.withOpacity(.8), fontSize: 12.sp, fontWeight: FontWeight.w500),
               ),
               const Spacer(),
-              if (status == "pending") _pill("Pending")
-              else if (status == "accepted") _pill("Update Job")
+              if (status == "pending") _pill("")
+              else if (status == "accepted") _pill("Update Job",onTop: (){context.push(OfferTackingScreen.routeName);})
               else InkWell(
                     onTap: (){
                      context.pop();
@@ -256,16 +257,12 @@ class _JobCard extends StatelessWidget {
     );
   }
 
-  Widget _pill(String label) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
-      decoration: BoxDecoration(
-        color: AllColor.white,
-        borderRadius: BorderRadius.circular(999.r),
-      ),
+  Widget _pill(String? label, {VoidCallback? onTop}) {
+    return InkWell(
+      onTap:onTop,
       child: Text(
-        label,
-        style: TextStyle(color: AllColor.brand2_light, fontWeight: FontWeight.w600, fontSize: 12.5.sp),
+        label ??"",
+        style: TextStyle(color: AllColor.brand2_light, fontWeight: FontWeight.w600, fontSize: 12.5.sp, fontFamily: "bodyFont"),
       ),
     );
   }

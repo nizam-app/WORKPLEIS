@@ -86,6 +86,7 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
                   context: context,
                   oneTap: () {
                     context.push(HomeScreen.routeName);
+                    context.pop();
                   },
                   message: "Project request submitted successfully",
                 );

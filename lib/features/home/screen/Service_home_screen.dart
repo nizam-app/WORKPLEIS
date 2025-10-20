@@ -682,7 +682,7 @@ class JobCard extends StatelessWidget {
         ),
         SizedBox(height: 4.h),
         Text(
-          value,
+          value.length > 11 ? value.substring(0, 10) + ".." : value,
           style: theme.titleSmall?.copyWith(
             fontSize: 13.sp,
             fontWeight: FontWeight.w600,

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:workpleis/core/widget/global_get_started_button.dart';
+import 'package:workpleis/features/tracking/client_offer_tracking/offer_tacking_screen1.dart';
 
 import '../../../../core/constants/color_control/all_color.dart';
 import '../../../projects/screen/project_screen.dart';
@@ -14,6 +18,8 @@ class CustomServiceCard extends StatefulWidget {
   final String date;
   final String description;
   final int trakingID;
+  final VoidCallback? onTap;
+  final String? buttonText;
 
   const CustomServiceCard({
     super.key,
@@ -25,6 +31,8 @@ class CustomServiceCard extends StatefulWidget {
     required this.date,
     required this.description,
     this.trakingID = 0,
+    this.onTap,
+    this.buttonText = "Get Started",
   });
 
   @override
@@ -32,8 +40,27 @@ class CustomServiceCard extends StatefulWidget {
 }
 
 class _CustomServiceCardState extends State<CustomServiceCard> {
-  bool reviewDone = false; // ✅ এখানে স্টেট রাখা হয়েছে
+  String? checkRole = "client";
+  bool reviewDone = false;
 
+
+                                                                                         
+
+
+  void checkUserRole()async {
+    SharedPreferences _prefs =await SharedPreferences.getInstance();
+    String? role = _prefs.getString("role");
+    setState(() {
+      checkRole = role;
+    });
+  }
+
+  @override
+  void initState() {
+    checkUserRole();
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
@@ -48,7 +75,7 @@ class _CustomServiceCardState extends State<CustomServiceCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // উপরের অংশ (টাইটেল + ব্যাজ)
+    
           Row(
             children: [
               Expanded(
@@ -133,7 +160,7 @@ class _CustomServiceCardState extends State<CustomServiceCard> {
                   borderRadius:
                   BorderRadius.vertical(top: Radius.circular(20.r)),
                 ),
-                builder: (_) => const CustomProjectCompletionBottomSheet(),
+                builder: (_) => const CustomProjectCompletionBottomSheet(check: true,),
               );
             }),
           12.verticalSpace,
@@ -170,6 +197,7 @@ class _CustomServiceCardState extends State<CustomServiceCard> {
                 ),
               ],
             ),
+            GlobalGetStartedButton(onTap:widget.onTap ?? (){}, color: AllColor.brand2_light,height: 40,borderRadius: 20.r,textColor: AllColor.white,buttonName: widget.buttonText ??"Get Started",)
         ],
       ),
     );
