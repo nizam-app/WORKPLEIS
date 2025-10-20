@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:workpleis/features/home/screen/home_screen.dart';
+import 'package:workpleis/features/home/screen/client_home_screen.dart';
 
 import '../../nav_bar/screen/bottom_nav_bar.dart';
 

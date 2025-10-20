@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating/flutter_rating.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +11,7 @@ import 'package:workpleis/features/projects/screen/view_proposal_screen.dart';
 
 class ProjectScreen extends ConsumerWidget {
   const ProjectScreen({super.key});
+
   static const routeName = "/projectScreen";
 
   @override
@@ -88,7 +90,7 @@ class JobStatusList extends ConsumerWidget {
               duration: const Duration(milliseconds: 200),
               padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
               decoration: BoxDecoration(
-                color: isSelected ? AllColor.brand2_light  : Colors.transparent,
+                color: isSelected ? AllColor.brand2_light : Colors.transparent,
                 borderRadius: BorderRadius.circular(30.r),
                 border: Border.all(
                   color: const Color(0xff154E7B).withOpacity(0.2),
@@ -98,10 +100,10 @@ class JobStatusList extends ConsumerWidget {
               child: Center(
                 child: Text(
                   label,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w300, color: isSelected? AllColor.white: AllColor.black ),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w300,
+                    color: isSelected ? AllColor.white : AllColor.black,
+                  ),
                 ),
               ),
             ),
@@ -187,6 +189,7 @@ class JobCard extends StatelessWidget {
 
 class _StatusChip extends StatelessWidget {
   const _StatusChip({required this.text});
+
   final String text;
 
   @override
@@ -203,7 +206,7 @@ class _StatusChip extends StatelessWidget {
         style: TextStyle(
           fontSize: 12.sp,
           fontWeight: FontWeight.w600,
-          color:AllColor.brand2_light,
+          color: AllColor.brand2_light,
           fontFamily: "bodyFont",
         ),
       ),
@@ -217,6 +220,7 @@ class _DetailRow extends StatelessWidget {
     required this.text,
     this.expandable = false,
   });
+
   final IconData icon;
   final String text;
   final bool expandable;
@@ -244,6 +248,7 @@ class _DetailRow extends StatelessWidget {
 
 class _BottomBar extends StatelessWidget {
   const _BottomBar({required this.status, required this.price});
+
   final String status;
   final String price;
 
@@ -253,18 +258,72 @@ class _BottomBar extends StatelessWidget {
 
     final buttons = switch (status) {
       "Proposal Sent" => [
-        _PillButton.purple("View Proposal", onTap: () {context.push(ViewProposalScreen.routeName);}),
+        _PillButton.purple(
+          "View Proposal",
+          onTap: () {
+            context.push(ViewProposalScreen.routeName);
+          },
+        ),
       ],
       "In Progress" => [
-        _PillButton.purple("Track Project", onTap: () {context.push(RequestTrackerScreen.routeName);}),
+        _PillButton.purple(
+          "Track Project",
+          onTap: () {
+            context.push(RequestTrackerScreen.routeName);
+          },
+        ),
       ],
       "In Review" => [
-        _PillButton.lime("View Details", onTap: () {}),
+        _PillButton.lime(
+          "View Details",
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+              ),
+              builder: (_) => const CustomProjectCompletionBottomSheet(),
+            );
+          },
+        ),
         SizedBox(width: 8.w),
-        _PillButton.purple("Track Project", onTap: () {}), // ← both buttons
+        _PillButton.purple(
+          "Track Project",
+          onTap: () {
+            context.push(RequestTrackerScreen.routeName);
+          },
+        ), // ← both buttons
       ],
       "Delivered" => [
-        _PillButton.lime("View Details", onTap: () {}),   // ← only this
+        _PillButton.purple(
+          "Leave us a review",
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+              ),
+              builder: (_) => const ReviewBottomSheet(),
+            );
+          },
+        ),
+        SizedBox(width: 8.w),
+        _PillButton.lime(
+          "View Details",
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+              ),
+              builder: (_) =>
+                  const CustomProjectCompletionBottomSheet(check: true),
+            );
+          },
+        ), // ← only this
       ],
       _ => <Widget>[],
     };
@@ -274,25 +333,42 @@ class _BottomBar extends StatelessWidget {
         padding: const EdgeInsets.only(right: 12.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-                         Container(),
-          
-          Text(price, style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black)),
-        ]),
+          children: [
+            Container(),
+
+            Text(
+              price,
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
       );
     }
 
-    return Row(children: [
-      Text(price, style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: AllColor.black)),
-      const Spacer(),
-      ...buttons,
-    ]);
+    return Row(
+      children: [
+        Text(
+          price,
+          style: TextStyle(
+            fontSize: 15.sp,
+            fontWeight: FontWeight.w500,
+            color: AllColor.black,
+          ),
+        ),
+        const Spacer(),
+        ...buttons,
+      ],
+    );
   }
 }
 
-
 class _PillButton extends StatelessWidget {
   const _PillButton._(this.label, this.bg, this.fg, {required this.onTap});
+
   final String label;
   final Color bg;
   final Color fg;
@@ -301,16 +377,16 @@ class _PillButton extends StatelessWidget {
   factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-         AllColor.white, // শেডেড পার্পল (mock vibe)
+        AllColor.white, // শেডেড পার্পল (mock vibe)
         AllColor.brand2_light,
-        
+
         onTap: onTap,
       );
 
   factory _PillButton.lime(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-        AllColor.white , // lime
+        AllColor.white, // lime
         AllColor.brand2_light,
         onTap: onTap,
       );
@@ -336,6 +412,510 @@ class _PillButton extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CustomProjectCompletionBottomSheet extends StatelessWidget {
+  const CustomProjectCompletionBottomSheet({super.key, this.check = false});
+
+  final bool check;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: Container(
+        padding: EdgeInsets.all(20.r),
+        decoration: BoxDecoration(
+          color: AllColor.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// Header Row
+            Row(
+              children: [
+                Text(
+                  "Project Completion",
+                  style: theme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AllColor.black,
+                  ),
+                ),
+                const Spacer(),
+                IconButton(
+                  icon: Icon(Icons.close, color: AllColor.black),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+
+            6.verticalSpace,
+
+            /// Subtitle
+            Text(
+              "The team has completed this order.",
+              style: theme.titleMedium?.copyWith(
+                fontSize: 13.sp,
+                color: AllColor.black.withOpacity(0.6),
+              ),
+            ),
+
+            16.verticalSpace,
+
+            /// Message Label
+            Text(
+              "Message",
+              style: theme.titleSmall?.copyWith(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+
+            8.verticalSpace,
+
+            /// Message Box
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(12.r),
+              decoration: BoxDecoration(
+                color: AllColor.black.withOpacity(.05),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Text(
+                "All plumbing issues have been resolved. Replaced the faulty pipes and installed new faucets as requested. System tested and working perfectly.",
+                style: theme.titleMedium?.copyWith(
+                  fontSize: 12.sp,
+                  height: 1.4,
+                ),
+              ),
+            ),
+
+            16.verticalSpace,
+
+            /// Attachments Label
+            Text(
+              "Attachments",
+              style: theme.titleSmall?.copyWith(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+
+            8.verticalSpace,
+
+            /// Attachments List
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _attachment("photos.pdf"),
+                6.verticalSpace,
+                _attachment("projects.zip"),
+              ],
+            ),
+
+            24.verticalSpace,
+
+            if (check == false)
+              Row(
+                children: [
+                  /// Approve
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AllColor.primary,
+                        foregroundColor: AllColor.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.r),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 8.h,
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Text(
+                        "Approve",
+                        style: theme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: AllColor.borderColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                  12.horizontalSpace,
+
+                  /// Needs Modification
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20.r),
+                            ),
+                          ),
+                          builder: (context) => CustomRejectBottomSheet(
+                            onSubmit: (reason) {
+                              context.pop();
+                              Navigator.pop(context);
+                            },
+                            text1: "Modification Message",
+                            text2: "Tell something for modification",
+                          ),
+                        );
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(
+                          color: AllColor.black.withOpacity(0.4),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.r),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 8.h,
+                        ),
+                      ),
+                      child: Text(
+                        "Needs Modification",
+                        style: theme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: AllColor.borderColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// 🔗 Attachment item widget
+  Widget _attachment(String fileName) {
+    return Row(
+      children: [
+        Icon(
+          Icons.attach_file_rounded,
+          size: 16.sp,
+          color: AllColor.black.withOpacity(.7),
+        ),
+        6.horizontalSpace,
+        Text(
+          fileName,
+          style: TextStyle(
+            color: AllColor.brand2_light,
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ReviewBottomSheet extends StatefulWidget {
+  const ReviewBottomSheet({super.key});
+
+  @override
+  State<ReviewBottomSheet> createState() => _ReviewBottomSheetState();
+}
+
+class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
+  int selectedRating = 4;
+  final TextEditingController _controller = TextEditingController(
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: Container(
+        padding: EdgeInsets.all(20.r),
+        decoration: BoxDecoration(
+          color: AllColor.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// Top Row: Ratings + Close
+            Row(
+              children: [
+                Text(
+                  "Ratings",
+                  style: theme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: AllColor.black,
+                  ),
+                ),
+                SizedBox(width: 18.w,),
+                StarRating(rating: 3.5, color: AllColor.borderColor,),
+                const Spacer(),
+                IconButton(
+                  icon: Icon(Icons.close, color: AllColor.black),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+            6.verticalSpace,
+
+            16.verticalSpace,
+
+            /// Message label
+            Text(
+              "Message",
+              style: theme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w500,
+                fontSize: 13.sp,
+              ),
+            ),
+
+            8.verticalSpace,
+
+            /// Message Box
+            TextField(
+              controller: _controller,
+              maxLines: 4,
+              style: theme.titleMedium?.copyWith(color: AllColor.black),
+              decoration: const InputDecoration(
+                  // border: InputBorder.none,
+              hintText: "Write your review here..."),
+            ),
+
+            20.verticalSpace,
+
+            /// Submit Button
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  final rating = selectedRating;
+                  final message = _controller.text.trim();
+                  // TODO: handle submission
+                  showDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    builder: (context) => Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.r),
+                      ),
+                      child: const ProjectReviewCard(),
+                    ),
+                  );
+
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AllColor.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(999.r),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 12.h),
+                  elevation: 0,
+                ),
+                child: Text(
+                  "Submit Review",
+                  style: theme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: AllColor.borderColor,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class ProjectReviewCard extends StatelessWidget {
+  const ProjectReviewCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.r),
+      decoration: BoxDecoration(
+        color: AllColor.white,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: AllColor.grey300),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          /// Title + Badge
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  "Deliver something for me",
+                  style: theme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14.sp,
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                decoration: BoxDecoration(
+                  color: AllColor.primary,
+                  borderRadius: BorderRadius.circular(999.r),
+                ),
+                child: Text(
+                  "Delivered",
+                  style: theme.titleMedium?.copyWith(
+                    color: AllColor.borderColor,
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          12.verticalSpace,
+
+          /// Info rows
+          _infoRow(Icons.watch_later_outlined, "Immediate"),
+          4.verticalSpace,
+          _infoRow(Icons.attach_money_sharp, "\$5,000–\$20,000"),
+          4.verticalSpace,
+          _infoRow(Icons.phone_in_talk_rounded, "Afternoon ( 12PM–5PM)"),
+
+          16.verticalSpace,
+
+          /// Reviews
+          _reviewRow("Jhon", 4, "nizam is working great. thanks"),
+          12.verticalSpace,
+          _reviewRow("You", 5, "great work experience. thanks"),
+
+          16.verticalSpace,
+
+          /// Bottom Row: Price & View Details
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "\$50",
+                style: theme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14.sp,
+                  color: AllColor.black,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+                    ),
+                    builder: (_) => const CustomProjectCompletionBottomSheet(check: true,),
+                  );
+                },
+                child: Text(
+                  "View Details",
+                  style: theme.titleMedium?.copyWith(
+                    color: AllColor.brand2_light,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  /// Info row with icon + text
+  Widget _infoRow(IconData icon, String text) {
+    return Row(
+      children: [
+        Icon(icon, size: 16.sp, color: AllColor.brand2_light),
+        6.horizontalSpace,
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 13.sp,
+            color: AllColor.borderColor,
+            fontWeight: FontWeight.w500,
+            fontFamily: "bodyFond"
+          ),
+        )
+      ],
+    );
+  }
+
+  /// Reviewer block
+  Widget _reviewRow(String user, int stars, String comment) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        /// Name + Stars
+        Row(
+          children: [
+            Icon(Icons.person_outline_rounded,
+                size: 18.sp, color: AllColor.black),
+            6.horizontalSpace,
+            Text(
+              user,
+              style: TextStyle(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500,
+                color: AllColor.black,
+                fontFamily: "bodyFont"
+              ),
+            ),
+            4.horizontalSpace,
+            StarRating(rating: 3.5, color: AllColor.borderColor,size: 16.r,),
+            6.horizontalSpace,
+            Text(
+              stars.toString(),
+              style: TextStyle(fontSize: 12.sp, color: AllColor.black),
+            ),
+          ],
+        ),
+
+        6.verticalSpace,
+
+        /// Comment
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(10.r),
+          decoration: BoxDecoration(
+            color: AllColor.grey200.withOpacity(0.4),
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          child: Text(
+            comment,
+            style: TextStyle(
+              fontSize: 12.sp,
+              color: AllColor.black.withOpacity(0.85),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
