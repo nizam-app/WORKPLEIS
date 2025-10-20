@@ -10,14 +10,16 @@ class TermsAndConditionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TextTheme theme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: GlobalAppbar(text: "Term and conditions"),
-      body:SafeArea(child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 30.h,),
+      appBar: GlobalAppbar(text: "Team and conditions"),
+      body:SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(right: 15.h,left: 15.h, top: 15.h),
+          child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
           Text(
               'Terms and Conditions',
-              style: theme.bodySmall
+              style: theme.bodyMedium?.copyWith(fontFamily: "bodyFont",fontSize: 28),
           ),
 
           SizedBox(height: 8.h),
@@ -27,8 +29,10 @@ class TermsAndConditionsScreen extends StatelessWidget {
               "We’ll send you a one time code to verify your email.",
               style: theme.bodyMedium
           ),
-        ],
-      )) ,
+                    ],
+                  ),
+        ),
+      ) ,
     );
   }
 }

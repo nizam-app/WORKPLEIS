@@ -438,7 +438,7 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
           ),
 
           // Switch
-        if(swtchCheck)  Transform.scale(
+        if(swtchCheck==false)  Transform.scale(
             scale: 0.9,
             child: Switch(
               value: value,

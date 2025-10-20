@@ -648,7 +648,9 @@ class _JobCard extends StatelessWidget {
                   EdgeInsets.symmetric(horizontal: 20.w, vertical: 2.h),
                   elevation: 0,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  context.push(JobsScreen.routeName);
+                },
                 child: Text(
                   'Open',
                   style: TextStyle(
@@ -1151,6 +1153,9 @@ class _PillButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme
+        .of(context)
+        .textTheme;
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(

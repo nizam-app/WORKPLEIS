@@ -15,7 +15,9 @@ class JobsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedStatus = ref.watch(jobStatusProvider);
-
+    final theme = Theme
+        .of(context)
+        .textTheme;
     return Scaffold(
       appBar: GlobalAppbar(text: "Jobs"),
       body: Padding(
