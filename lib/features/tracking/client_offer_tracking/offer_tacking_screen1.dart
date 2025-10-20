@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
-import 'package:workpleis/features/projects/screen/special_request_screen.dart';
-import 'package:workpleis/features/projects/screen/special_request_screen2.dart';
 import 'package:workpleis/features/projects/widget/custom_back_next_buttons.dart';
+import 'package:workpleis/features/tracking/client_offer_tracking/widget/custom_service_card.dart';
+import 'package:workpleis/features/tracking/client_project_tracking/special_request_screen.dart';
+import 'package:workpleis/features/tracking/client_project_tracking/special_request_screen2.dart';
 
 import '../../../core/widget/global_app_bar.dart';
 
-import '../widget/custom_step_progress_section.dart';
+import '../../projects/widget/custom_step_progress_section.dart';
+import 'offer_tacking_screen.dart';
+import 'offer_tacking_screen2.dart';
 
-class SpecialRequestScreen1 extends StatelessWidget {
-  const SpecialRequestScreen1({super.key});
-  static const routeName = "/specialRequestScreen1";
+class OfferTackingScreen1 extends StatelessWidget {
+  const OfferTackingScreen1({super.key});
+  static const routeName = "/offerTackingScreen1";
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class SpecialRequestScreen1 extends StatelessWidget {
             CustomBackNextButtons(onBack: () {
               context.pop();
             }, onNext: () {
-              context.push(SpecialRequestScreen2.routeName) ;},)
+              context.push(OfferTackingScreen2.routeName) ;},)
 
           ],
         ),

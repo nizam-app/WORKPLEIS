@@ -4,21 +4,22 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_aleart_box.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-import 'package:workpleis/features/projects/screen/special_request_screen.dart';
+import 'package:workpleis/features/tracking/client_offer_tracking/widget/custom_service_card.dart';
+import 'package:workpleis/features/tracking/client_project_tracking/special_request_screen.dart';
 
-import '../widget/custom_back_next_buttons.dart';
-import '../widget/custom_step_progress_section.dart';
+import '../../projects/widget/custom_back_next_buttons.dart';
+import '../../projects/widget/custom_step_progress_section.dart';
 
-class SpecialRequestScreen3 extends StatefulWidget {
-  const SpecialRequestScreen3({super.key});
+class OfferTackingScreen3 extends StatefulWidget {
+  const OfferTackingScreen3({super.key});
 
-  static const routeName = "/specialRequestScreen3";
+  static const routeName = "/offerTackingScreen3";
 
   @override
-  State<SpecialRequestScreen3> createState() => _SpecialRequestScreen3State();
+  State<OfferTackingScreen3> createState() => _OfferTackingScreen3State();
 }
 
-class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
+class _OfferTackingScreen3State extends State<OfferTackingScreen3> {
   final nameController = TextEditingController();
   final roleController = TextEditingController();
 
@@ -52,7 +53,7 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
               location: "Suburban Area",
               date: "Jan 10, 2024",
               description:
-                  "Complete garden makeover with new plants, pathway, and irrigation system.",
+              "Complete garden makeover with new plants, pathway, and irrigation system.",
               trakingID: 4,
             ),
 
@@ -110,68 +111,68 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
     );
   }
 
-  //
-  // Widget _label(String text) {
-  //   return Text(
-  //     text,
-  //     style: TextStyle(
-  //       fontSize: 16.sp,
-  //       fontWeight: FontWeight.w300,
-  //       color: AllColor.black,
-  //     ),
-  //   );
-  // }
-  // Widget _inputField({required TextEditingController controller, required String hint}) {
-  //   return TextField(
-  //     controller: controller,
-  //     decoration: InputDecoration(
-  //       hintText: hint,
-  //       contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
-  //       enabledBorder: OutlineInputBorder(
-  //         borderRadius: BorderRadius.circular(6.r),
-  //         borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
-  //       ),
-  //       focusedBorder: OutlineInputBorder(
-  //         borderRadius: BorderRadius.circular(6.r),
-  //         borderSide: BorderSide(color: AllColor.borderColor, width: 1.5),
-  //       ),
-  //     ),
-  //   );
-  // }
-  //
-  // Widget _dropdownField({
-  //   required String hint,
-  //   required String? value,
-  //   required List<String> options,
-  //   required Function(String?) onChanged,
-  // }) {
-  //   return Container(
-  //     padding: EdgeInsets.symmetric(horizontal: 12.w),
-  //     decoration: BoxDecoration(
-  //       border: Border.all(color: AllColor.borderColor, width: 1.2),
-  //       borderRadius: BorderRadius.circular(6.r),
-  //     ),
-  //     child: DropdownButtonHideUnderline(
-  //       child: DropdownButton<String>(
-  //         value: value,
-  //         hint: Text(hint,
-  //             style: TextStyle(fontSize: 13.sp, color: AllColor.grey)),
-  //         isExpanded: true,
-  //         icon: Icon(Icons.keyboard_arrow_down, color: AllColor.black),
-  //         dropdownColor: AllColor.white,
-  //         style: TextStyle(fontSize: 13.sp, color: AllColor.white),
-  //         onChanged: onChanged,
-  //         items: options
-  //             .map((opt) => DropdownMenuItem(
-  //           value: opt,
-  //           child: Text(opt,
-  //               style: TextStyle(fontSize: 13.sp, color: AllColor.black)),
-  //         ))
-  //             .toList(),
-  //       ),
-  //     ),
-  //   );
-  // }
+//
+// Widget _label(String text) {
+//   return Text(
+//     text,
+//     style: TextStyle(
+//       fontSize: 16.sp,
+//       fontWeight: FontWeight.w300,
+//       color: AllColor.black,
+//     ),
+//   );
+// }
+// Widget _inputField({required TextEditingController controller, required String hint}) {
+//   return TextField(
+//     controller: controller,
+//     decoration: InputDecoration(
+//       hintText: hint,
+//       contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
+//       enabledBorder: OutlineInputBorder(
+//         borderRadius: BorderRadius.circular(6.r),
+//         borderSide: BorderSide(color: AllColor.borderColor, width: 1.2),
+//       ),
+//       focusedBorder: OutlineInputBorder(
+//         borderRadius: BorderRadius.circular(6.r),
+//         borderSide: BorderSide(color: AllColor.borderColor, width: 1.5),
+//       ),
+//     ),
+//   );
+// }
+//
+// Widget _dropdownField({
+//   required String hint,
+//   required String? value,
+//   required List<String> options,
+//   required Function(String?) onChanged,
+// }) {
+//   return Container(
+//     padding: EdgeInsets.symmetric(horizontal: 12.w),
+//     decoration: BoxDecoration(
+//       border: Border.all(color: AllColor.borderColor, width: 1.2),
+//       borderRadius: BorderRadius.circular(6.r),
+//     ),
+//     child: DropdownButtonHideUnderline(
+//       child: DropdownButton<String>(
+//         value: value,
+//         hint: Text(hint,
+//             style: TextStyle(fontSize: 13.sp, color: AllColor.grey)),
+//         isExpanded: true,
+//         icon: Icon(Icons.keyboard_arrow_down, color: AllColor.black),
+//         dropdownColor: AllColor.white,
+//         style: TextStyle(fontSize: 13.sp, color: AllColor.white),
+//         onChanged: onChanged,
+//         items: options
+//             .map((opt) => DropdownMenuItem(
+//           value: opt,
+//           child: Text(opt,
+//               style: TextStyle(fontSize: 13.sp, color: AllColor.black)),
+//         ))
+//             .toList(),
+//       ),
+//     ),
+//   );
+// }
 }
 
 /* ============== Progress Indicator ============== */
