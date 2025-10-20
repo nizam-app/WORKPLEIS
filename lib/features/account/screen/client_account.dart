@@ -6,7 +6,7 @@ import 'package:workpleis/features/Payment/screen/payment_methods_screen.dart';
 import 'package:workpleis/features/account/screen/profile_edit_screen.dart';
 import 'package:workpleis/features/account/widget/custom_buttom.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
-import 'package:workpleis/features/jobs/screen/jobs_offers.dart';
+import 'package:workpleis/features/jobs/screen/service_jobs_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/security/screen/settings_screen.dart';
 import 'package:workpleis/features/wallet/screen/wallet_screen.dart';

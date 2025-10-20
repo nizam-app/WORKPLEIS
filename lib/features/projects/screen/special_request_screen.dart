@@ -206,7 +206,7 @@ class ProjectSetupScreen extends StatelessWidget {
 //   }
 // }
 
-class CustomServiceCard extends StatelessWidget {
+class CustomServiceCard extends StatefulWidget {
   final String title;
   final String status;
   final String providerName;
@@ -225,8 +225,15 @@ class CustomServiceCard extends StatelessWidget {
     required this.location,
     required this.date,
     required this.description,
-    this.trakingID = 0
+    this.trakingID = 0,
   });
+
+  @override
+  State<CustomServiceCard> createState() => _CustomServiceCardState();
+}
+
+class _CustomServiceCardState extends State<CustomServiceCard> {
+  bool reviewDone = false; // ✅ এখানে স্টেট রাখা হয়েছে
 
   @override
   Widget build(BuildContext context) {
@@ -242,12 +249,12 @@ class CustomServiceCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title + Status badge
+          // উপরের অংশ (টাইটেল + ব্যাজ)
           Row(
             children: [
               Expanded(
                 child: Text(
-                  title,
+                  widget.title,
                   style: theme.titleSmall?.copyWith(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
@@ -262,7 +269,7 @@ class CustomServiceCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
-                  status,
+                  widget.status,
                   style: theme.titleMedium?.copyWith(
                     fontSize: 11.sp,
                     fontWeight: FontWeight.w500,
@@ -274,9 +281,8 @@ class CustomServiceCard extends StatelessWidget {
           ),
           8.verticalSpace,
 
-          // Provider / Client name
           Text(
-            providerName,
+            widget.providerName,
             style: theme.titleMedium?.copyWith(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
@@ -285,11 +291,10 @@ class CustomServiceCard extends StatelessWidget {
           ),
           8.verticalSpace,
 
-          // Price + Location + Date
           Row(
             children: [
               Text(
-                "\$${price}",
+                "\$${widget.price}",
                 style: theme.titleSmall?.copyWith(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w700,
@@ -297,11 +302,12 @@ class CustomServiceCard extends StatelessWidget {
                 ),
               ),
               16.horizontalSpace,
-              Icon(Icons.location_on_outlined, size: 14.sp, color: AllColor.black.withOpacity(.6)),
+              Icon(Icons.location_on_outlined,
+                  size: 14.sp, color: AllColor.black.withOpacity(.6)),
               4.horizontalSpace,
               Expanded(
                 child: Text(
-                  location,
+                  widget.location,
                   style: theme.titleMedium?.copyWith(
                     fontSize: 12.sp,
                     color: AllColor.black.withOpacity(.6),
@@ -309,7 +315,7 @@ class CustomServiceCard extends StatelessWidget {
                 ),
               ),
               Text(
-                date,
+                widget.date,
                 style: theme.titleMedium?.copyWith(
                   fontSize: 12.sp,
                   color: AllColor.black.withOpacity(.6),
@@ -318,32 +324,59 @@ class CustomServiceCard extends StatelessWidget {
             ],
           ),
           12.verticalSpace,
-        if (trakingID >= 2)  ReviewNoticeCard(onTap: () {showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-          ),
-          builder: (_) => const CustomProjectCompletionBottomSheet(),
-        );},),
+
+          if (widget.trakingID >= 2)
+            ReviewNoticeCard(onTap: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                  BorderRadius.vertical(top: Radius.circular(20.r)),
+                ),
+                builder: (_) => const CustomProjectCompletionBottomSheet(),
+              );
+            }),
           12.verticalSpace,
 
-          // Description
           Text(
-            description,
+            widget.description,
             style: theme.bodyMedium?.copyWith(
               fontSize: 13.sp,
               color: AllColor.black87,
               height: 1.3,
             ),
           ),
-          SizedBox(height: 12.h),
-          if (trakingID == 4)  ReviewForm()
+          12.verticalSpace,
+
+          if (widget.trakingID == 4)
+            reviewDone == false
+                ? ReviewForm(
+              onSubmit: () {
+                setState(() => reviewDone = true);
+              },
+            )
+                : Column(
+              children: const [
+                ReviewCard(
+                  name: "provider name",
+                  rating: 4,
+                  comment: "nizam is working great. thanks",
+                ),
+                ReviewCard(
+                  name: "You",
+                  rating: 5,
+                  comment: "great work experience. thanks",
+                  isYou: true,
+                ),
+              ],
+            ),
         ],
       ),
     );
   }
 }
+
 
 class ReviewNoticeCard extends StatelessWidget {
   final VoidCallback onTap;
@@ -412,7 +445,8 @@ class ReviewNoticeCard extends StatelessWidget {
   }
 }
 class ReviewForm extends StatefulWidget {
-  const ReviewForm({super.key});
+  final VoidCallback onSubmit;
+  const ReviewForm({super.key, required this.onSubmit});
 
   @override
   State<ReviewForm> createState() => _ReviewFormState();
@@ -427,7 +461,6 @@ class _ReviewFormState extends State<ReviewForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /// 🔶 Ratings Label
         Row(
           children: [
             Text(
@@ -436,18 +469,18 @@ class _ReviewFormState extends State<ReviewForm> {
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w500,
                 color: Colors.black,
-                fontFamily: "bodyFond"
-
               ),
             ),
-            SizedBox(width: 10.w,),
-            StarRating(rating: 3.5, color: AllColor.borderColor,size: 18.r,),
+            10.horizontalSpace,
+            StarRating(
+              rating: rating.toDouble(),
+              color: AllColor.brand2_light,
+              size: 20.r,
+              onRatingChanged: (r) => setState(() => rating = r.toInt()),
+            ),
           ],
         ),
-        6.verticalSpace,
-        12.verticalSpace,
-
-        /// 🔶 Message Label
+        16.verticalSpace,
         Text(
           "Message",
           style: TextStyle(
@@ -457,8 +490,6 @@ class _ReviewFormState extends State<ReviewForm> {
           ),
         ),
         6.verticalSpace,
-
-        /// 📝 Text Field
         TextField(
           controller: _controller,
           maxLines: 4,
@@ -476,14 +507,10 @@ class _ReviewFormState extends State<ReviewForm> {
           ),
         ),
         16.verticalSpace,
-
-        /// ✅ Submit Button
         ElevatedButton(
-          onPressed: () {
-
-          },
+          onPressed: widget.onSubmit, // ✅ প্যারেন্টের ফাংশন কল হবে
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFFD8FF3F), // Light lime green
+            backgroundColor: const Color(0xFFD8FF3F),
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(999.r),
@@ -499,6 +526,94 @@ class _ReviewFormState extends State<ReviewForm> {
           ),
         ),
       ],
+    );
+  }
+}
+
+
+class ReviewCard extends StatelessWidget {
+  final String name;
+  final double rating;
+  final String comment;
+  final bool isYou;
+
+  const ReviewCard({
+    super.key,
+    required this.name,
+    required this.rating,
+    required this.comment,
+    this.isYou = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 12.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+         10.verticalSpace,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Icon(Icons.person_outline,
+                  size: 20, color: Colors.black54),
+              6.horizontalSpace,
+              Text(
+                isYou ? "You" : name,
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
+                  fontFamily: "bodyFont"
+                ),
+              ),
+              6.horizontalSpace,
+
+              /// --- Stars ---
+              Row(
+                children: List.generate(5, (i) {
+                  final filled = i < rating;
+                  return Icon(
+                    filled ? Icons.star : Icons.star_border,
+                    size: 16.sp,
+                    color: const Color(0xFFB8A9F5),
+                  );
+                }),
+              ),
+              4.horizontalSpace,
+              Text(
+                rating.toStringAsFixed(0),
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+
+          10.verticalSpace,
+
+          /// --- Comment box ---
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF5F5F5),
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            child: Text(
+              comment,
+              style: TextStyle(
+                fontSize: 13.sp,
+                color: Colors.black87,
+                height: 1.3,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

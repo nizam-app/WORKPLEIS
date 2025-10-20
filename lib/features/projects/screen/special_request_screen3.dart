@@ -11,11 +11,11 @@ import '../widget/custom_step_progress_section.dart';
 
 class SpecialRequestScreen3 extends StatefulWidget {
   const SpecialRequestScreen3({super.key});
+
   static const routeName = "/specialRequestScreen3";
 
   @override
-  State<SpecialRequestScreen3> createState() =>
-      _SpecialRequestScreen3State();
+  State<SpecialRequestScreen3> createState() => _SpecialRequestScreen3State();
 }
 
 class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
@@ -29,19 +29,19 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
   final timeOptions = [
     "Morning (9AM-12PM)",
     "Afternoon (12PM-5PM)",
-    "Evening (5PM-8PM)"
+    "Evening (5PM-8PM)",
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: GlobalAppbar(text: "Project"),
+      appBar: GlobalAppbar(text: "Project"),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomStepProgressSection(activeStep: 3,),
+            CustomStepProgressSection(activeStep: 3),
 
             SizedBox(height: 20.h),
             CustomServiceCard(
@@ -51,7 +51,8 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
               price: 50,
               location: "Suburban Area",
               date: "Jan 10, 2024",
-              description: "Complete garden makeover with new plants, pathway, and irrigation system.",
+              description:
+                  "Complete garden makeover with new plants, pathway, and irrigation system.",
               trakingID: 4,
             ),
 
@@ -87,26 +88,28 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
             //   options: timeOptions,
             //   onChanged: (val) => setState(() => selectedTime = val)
             // ),
-            SizedBox(height: 20.h,),
-            CustomBackNextButtons(onBack: () {
-              context.pop();
-            }, onNext:() {
-               
-                  globalShowAlertDialog(
-                    context: context,
-                    oneTap: (){
-                      context.pop();
-                    },
-                    message: "Project request submitted successfully",
-                  );
-
-                }, buttonText: "Submit",)
+            SizedBox(height: 20.h),
+            // CustomBackNextButtons(
+            //   onBack: () {
+            //     context.pop();
+            //   },
+            //   onNext: () {
+            //     globalShowAlertDialog(
+            //       context: context,
+            //       oneTap: () {
+            //         context.pop();
+            //       },
+            //       message: "Project request submitted successfully",
+            //     );
+            //   },
+            //   buttonText: "Submit",
+            // ),
           ],
         ),
       ),
-
     );
   }
+
   //
   // Widget _label(String text) {
   //   return Text(

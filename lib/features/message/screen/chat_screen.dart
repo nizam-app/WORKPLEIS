@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
-import 'package:workpleis/core/widget/global_app_bar.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -43,13 +43,15 @@ class ChatScreen extends StatelessWidget {
 
      //appBar: GlobalAppbar( text: "UserName"),
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios),
+        backgroundColor: AllColor.borderColor,
+        leading: InkWell(
+          onTap: () {context.pop();},
+            child: Icon(Icons.arrow_back_ios)),
         title: Column(
-
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Emilly Davis", style:theme.bodySmall!.copyWith(fontSize:20 ),),
+            Text("Emilly Davis", style:theme.bodySmall!.copyWith(fontSize:22 ),),
             Text("Deep house cleaning service needed", style:theme.bodySmall!.copyWith(fontSize:14 ),),
           ],
         ),
