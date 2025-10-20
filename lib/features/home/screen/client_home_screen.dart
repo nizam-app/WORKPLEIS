@@ -1157,9 +1157,9 @@ class _PillButton extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         height: 45.h,
         decoration: BoxDecoration(
-          color: isSelected ? AllColor.primary : Colors.white,
+          color: isSelected ? AllColor.brand2_light : Colors.white,
           borderRadius: BorderRadius.circular(40.r),
-          border: Border.all(color: Colors.black, width: 1),
+          border: Border.all(color: AllColor.brand2_light, width: 1),
         ),
         child: Center(
           child: Text(
@@ -1167,7 +1167,7 @@ class _PillButton extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14.sp,
-              color: Colors.black,
+              color: isSelected? AllColor.white: Colors.black,
             ),
           ),
         ),
