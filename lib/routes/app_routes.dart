@@ -172,6 +172,8 @@ class AppRouter {
         name: LoginScreen.routeName,
         builder: (context, state) => const LoginScreen(),
       ),
+
+
       GoRoute(
         path: RegisterScreen.routeName,
         name: RegisterScreen.routeName,
@@ -381,6 +383,8 @@ class AppRouter {
             name: OfferTackingScreen3.routeName,
             builder: (context, state) =>  OfferTackingScreen3(),
           ),
+
+
         ],
       ),
     ],
