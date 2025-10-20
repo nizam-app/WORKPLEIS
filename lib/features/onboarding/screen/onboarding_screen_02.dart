@@ -181,6 +181,7 @@ class _Onboarding02BottonbarState
                         text: 'By signing up, I agree to Workpleis ',
                       ),
                       TextSpan(
+
                         text: 'Terms & Conditions',
                         style: const TextStyle(
                           color: AllColor.black,
