@@ -18,12 +18,12 @@ import 'package:workpleis/features/community_guidenlines/screen/community_guiden
 import 'package:workpleis/features/community_guidenlines/screen/privacy_policy_screen.dart';
 import 'package:workpleis/features/community_guidenlines/screen/terms_and_conditions_screen.dart';
 import 'package:workpleis/features/home/screen/Service_home_screen.dart';
-import 'package:workpleis/features/home/screen/home_screen.dart';
+import 'package:workpleis/features/home/screen/client_home_screen.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/home/screen/see_all_jobs_screen.dart';
-import 'package:workpleis/features/jobs/screen/jobs_offers.dart';
+import 'package:workpleis/features/jobs/screen/Service_jobs_details.dart';
+import 'package:workpleis/features/jobs/screen/service_jobs_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
-import 'package:workpleis/features/jobs/screen/jobs_tracking.dart';
 import 'package:workpleis/features/jobs/screen/service_jobs.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
 import 'package:workpleis/features/nav_bar/screen/service_bottom_nav_bar.dart';
@@ -31,8 +31,8 @@ import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_04.dart';
-import 'package:workpleis/features/projects/screen/special_request_screen3.dart';
-import 'package:workpleis/features/projects/screen/view_proposal_screen.dart';
+
+import 'package:workpleis/features/proposal/screen/view_proposal_screen.dart';
 import 'package:workpleis/features/security/screen/settings_screen.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
 import 'package:workpleis/features/wallet/screen/wallet_screen.dart';
@@ -51,13 +51,19 @@ import '../features/notification/screen/notification_setting_screen.dart';
 import '../features/projects/screen/project_screen.dart';
 import '../features/projects/screen/recieved_request.dart';
 import '../features/projects/screen/request_tracker.dart';
-import '../features/projects/screen/spcial_request_screen1.dart';
-import '../features/projects/screen/special_request_screen.dart';
-import '../features/projects/screen/special_request_screen2.dart';
+
 import '../features/security/screen/security_contact_screen.dart';
 import '../features/security/screen/security_faq_screen.dart';
 import '../features/security/screen/security_guide_screen.dart';
 import '../features/security/screen/security_screen.dart';
+import '../features/tracking/client_offer_tracking/offer_tacking_screen.dart';
+import '../features/tracking/client_offer_tracking/offer_tacking_screen1.dart';
+import '../features/tracking/client_offer_tracking/offer_tacking_screen2.dart';
+import '../features/tracking/client_offer_tracking/offer_tacking_screen3.dart';
+import '../features/tracking/client_project_tracking/spcial_request_screen1.dart';
+import '../features/tracking/client_project_tracking/special_request_screen.dart';
+import '../features/tracking/client_project_tracking/special_request_screen2.dart';
+import '../features/tracking/client_project_tracking/special_request_screen3.dart';
 import 'error_screen.dart';
 
 class AppRouter {
@@ -237,7 +243,12 @@ class AppRouter {
             name: JobDetailScreen.routeName,
             builder: (context, state) => const JobDetailScreen(),
           ),
-         
+
+          GoRoute(
+            path: ServiceJobDetails.routeName,
+            name: ServiceJobDetails.routeName,
+            builder: (context, state) =>  ServiceJobDetails(),
+          ),
           
           GoRoute(
             path: ChatScreen.routeName,
@@ -298,13 +309,6 @@ class AppRouter {
             builder: (context, state) => const WalletScreen(),
           ),
 
-
-          GoRoute(
-            path: JobsTracking.routeName,
-            name: JobsTracking.routeName,
-            builder: (context, state) =>  const JobsTracking(status: " "),
-          ),
-
           GoRoute(
             path: ServiceJobs.routeName,
             name: ServiceJobs.routeName,
@@ -360,6 +364,22 @@ class AppRouter {
             path: ServiceHomeScreen.routeName,
             name: ServiceHomeScreen.routeName,
             builder: (context, state) =>  ServiceHomeScreen(),
+          ), GoRoute(
+            path: OfferTacking.routeName,
+            name: OfferTacking.routeName,
+            builder: (context, state) =>  OfferTacking(),
+          ), GoRoute(
+            path: OfferTackingScreen1.routeName,
+            name: OfferTackingScreen1.routeName,
+            builder: (context, state) =>  OfferTackingScreen1(),
+          ),GoRoute(
+            path: OfferTackingScreen2.routeName,
+            name: OfferTackingScreen2.routeName,
+            builder: (context, state) =>  OfferTackingScreen2()),
+            GoRoute(
+            path: OfferTackingScreen3.routeName,
+            name: OfferTackingScreen3.routeName,
+            builder: (context, state) =>  OfferTackingScreen3(),
           ),
         ],
       ),

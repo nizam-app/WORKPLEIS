@@ -4,17 +4,17 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_aleart_box.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-
-import '../widget/custom_back_next_buttons.dart';
-import '../widget/custom_step_progress_section.dart';
+import 'package:workpleis/features/home/screen/client_home_screen.dart';
+import '../../projects/widget/custom_back_next_buttons.dart';
+import '../../projects/widget/custom_step_progress_section.dart';
 
 class SpecialRequestScreen3 extends StatefulWidget {
   const SpecialRequestScreen3({super.key});
+
   static const routeName = "/specialRequestScreen3";
 
   @override
-  State<SpecialRequestScreen3> createState() =>
-      _SpecialRequestScreen3State();
+  State<SpecialRequestScreen3> createState() => _SpecialRequestScreen3State();
 }
 
 class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
@@ -28,19 +28,19 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
   final timeOptions = [
     "Morning (9AM-12PM)",
     "Afternoon (12PM-5PM)",
-    "Evening (5PM-8PM)"
+    "Evening (5PM-8PM)",
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: GlobalAppbar(text: "Project"),
+      appBar: GlobalAppbar(text: "Project"),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomStepProgressSection(activeStep: 3,),
+            CustomStepProgressSection(activeStep: 3),
 
             SizedBox(height: 20.h),
 
@@ -76,26 +76,28 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
               options: timeOptions,
               onChanged: (val) => setState(() => selectedTime = val)
             ),
-            SizedBox(height: 20.h,),
-            CustomBackNextButtons(onBack: () {
-              context.pop();
-            }, onNext:() {
-               
-                  globalShowAlertDialog(
-                    context: context,
-                    oneTap: (){
-                      context.pop();
-                    },
-                    message: "Project request submitted successfully",
-                  );
-
-                }, buttonText: "Submit",)
+            SizedBox(height: 20.h),
+            CustomBackNextButtons(
+              onBack: () {
+                context.pop();
+              },
+              onNext: () {
+                globalShowAlertDialog(
+                  context: context,
+                  oneTap: () {
+                    context.push(HomeScreen.routeName);
+                  },
+                  message: "Project request submitted successfully",
+                );
+              },
+              buttonText: "Submit",
+            ),
           ],
         ),
       ),
-
     );
   }
+
 
   Widget _label(String text) {
     return Text(
@@ -159,5 +161,3 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
     );
   }
 }
-
-/* ============== Progress Indicator ============== */

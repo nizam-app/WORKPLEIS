@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
-import 'package:workpleis/features/projects/screen/special_request_screen2.dart';
 import 'package:workpleis/features/projects/widget/custom_back_next_buttons.dart';
+import 'package:workpleis/features/tracking/client_project_tracking/special_request_screen2.dart';
 
 import '../../../core/widget/global_app_bar.dart';
 
-import '../widget/custom_step_progress_section.dart';
+import '../../projects/widget/custom_step_progress_section.dart';
 
 class SpecialRequestScreen1 extends StatelessWidget {
   const SpecialRequestScreen1({super.key});

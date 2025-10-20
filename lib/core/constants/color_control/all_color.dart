@@ -7,8 +7,8 @@ class AllColor {
   static const Color brand2_light = Color(0xFFA49ACF);
   static const Color white = Colors.white;
   static const Color allcolor = Color(0xFFCAFF45);
-  static const Color borderColor = Color(0xff154E7B);
-  static const Color offer_logo = Color(0xff686382);
+  static const Color borderColor = Color(0xff686382);
+  // static const Color border01 = Color(0xff686382);
   static const Color white24 = Colors.white24;
   static const Color white70 = Colors.white70;
   static const Color parpale =Color(0xFFa49acf);

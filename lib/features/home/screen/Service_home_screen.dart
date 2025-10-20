@@ -6,10 +6,10 @@ import 'package:workpleis/core/widget/global_get_started_button.dart';
 
 import 'package:workpleis/features/home/screen/post_job_screen.dart';
 import 'package:workpleis/features/home/screen/see_all_jobs_screen.dart';
-
-import 'package:workpleis/features/projects/screen/special_request_screen.dart';
+import 'package:workpleis/features/jobs/screen/Service_jobs_details.dart';
 
 import '../../../core/constants/color_control/all_color.dart';
+import '../../tracking/client_project_tracking/special_request_screen.dart';
 
 class ServiceHomeScreen extends StatelessWidget {
   ServiceHomeScreen({super.key});
@@ -116,9 +116,9 @@ class HomeHeaderSection extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AllColor.brand2_light,
                   shape: BoxShape.circle,
-                  image: const DecorationImage(
-                    image: NetworkImage(
-                      'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
+                  image:  DecorationImage(
+                    image: AssetImage(
+                      "assets/images/profile.png"
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -515,8 +515,8 @@ class JobCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 24.r,
-                backgroundImage: const NetworkImage(
-                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
+                backgroundImage: AssetImage(
+                  "assets/images/profile.png",
                 ),
               ),
               SizedBox(width: 10.w),
@@ -585,18 +585,23 @@ class JobCard extends StatelessWidget {
               ),
 
               /// Status badge
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: AllColor.primary,
-                  borderRadius: BorderRadius.circular(20.r),
-                ),
-                child: Text(
-                  job.status,
-                  style: theme.headlineSmall?.copyWith(
-                    color: statusColor,
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
+              GestureDetector(
+                onTap: (){
+                  context.push(ServiceJobDetails.routeName);
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  decoration: BoxDecoration(
+                    color: AllColor.white,
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                  child: Text(
+                    job.status,
+                    style: theme.headlineSmall?.copyWith(
+                      color: AllColor.brand2_light,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
@@ -640,7 +645,7 @@ class JobCard extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AllColor.brand2_light,
+                    backgroundColor: AllColor.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.r),
@@ -650,8 +655,8 @@ class JobCard extends StatelessWidget {
                   child: Text(
                     "Apply",
                     style: theme.headlineSmall?.copyWith(
-                      fontSize: 13.sp,
-                      color: AllColor.white,
+                      fontSize: 14.sp,
+                      color: AllColor.brand2_light,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-import 'package:workpleis/features/jobs/screen/jobs_offers.dart';
-import 'package:workpleis/features/jobs/screen/jobs_tracking.dart';
+import '../../tracking/client_offer_tracking/offer_tacking_screen.dart';
+import '../../proposal/screen/view_proposal_screen.dart';
 
 class JobsScreen extends ConsumerWidget {
   const JobsScreen({super.key});
@@ -23,25 +23,10 @@ class JobsScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-               ///search bar 
-                TextFormField(
-                   decoration:
-                   InputDecoration(
-                     hintText: 'What do you need done today ?',)!.copyWith(
-                     fillColor: AllColor.white,
-                     prefixIcon: Icon(Icons.search, color: AllColor.grey,),
-                     border: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(10.r),
-                     ),
-                   ),
-                ),
-               SizedBox(height: 16.h,),
 
-            /// 🔹 Filter tabs
             const JobStatusList(),
             SizedBox(height: 16.h),
 
-            /// 🔹 Job list
             Expanded(
               child: ListView.builder(
                 itemCount: 6,
@@ -100,7 +85,7 @@ class JobStatusList extends ConsumerWidget {
             },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
+              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 4.h),
               decoration: BoxDecoration(
                 color: isSelected ? AllColor.brand2_light  : Colors.transparent,
                 borderRadius: BorderRadius.circular(30.r),
@@ -272,10 +257,10 @@ class _BottomBar extends StatelessWidget {
     // Track Job button depending on status
     final Widget? trackButton = switch (status) {
       "Open" => _PillButton.purple("View Offers", onTap: () {
-        context.push(JobsOffers.routeName);
+        context.push(ViewProposalScreen.routeName);
       }),
       "Assigned" => _PillButton.purple("Track Job", onTap: () {
-        context.push(JobsTracking.routeName) ;
+        context.push(OfferTacking.routeName) ;
       }),
       "In Progress" => _PillButton.purple("Track Job", onTap: () {
         // TODO: Add your navigation or logic here
