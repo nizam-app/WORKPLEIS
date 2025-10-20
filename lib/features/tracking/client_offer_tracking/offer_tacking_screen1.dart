@@ -36,6 +36,8 @@ class OfferTackingScreen1 extends StatelessWidget {
               location: "Suburban Area",
               date: "Jan 10, 2024",
               description: "Complete garden makeover with new plants, pathway, and irrigation system.",
+              onTap: () {context.push(OfferTackingScreen2.routeName);},
+              buttonText: "Job Completed",
             ),
             const SizedBox(height: 20),
             // const ProjectDescriptionSection(),
@@ -44,10 +46,10 @@ class OfferTackingScreen1 extends StatelessWidget {
             // const SizedBox(height: 20),
             // const NdaSection(),
             // const SizedBox(height: 40),
-            CustomBackNextButtons(onBack: () {
-              context.pop();
-            }, onNext: () {
-              context.push(OfferTackingScreen2.routeName) ;},)
+            // CustomBackNextButtons(onBack: () {
+            //   context.pop();
+            // }, onNext: () {
+            //   context.push(OfferTackingScreen2.routeName) ;},)
 
           ],
         ),
