@@ -1,151 +1,271 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
-import 'package:workpleis/core/widget/global_snack_bar.dart';
 
-import '../../../core/widget/global_bottom.dart';
+final filterProvider = StateNotifierProvider<FilterNotifier, FilterState>(
+      (ref) => FilterNotifier(),
+);
 
-class CustomDialog extends StatefulWidget {
-  const CustomDialog({super.key});
+class FilterState {
+  final String? category;
+  final String jobType;
+  final String location;
+  final double distance;
+  final double budget;
 
-  @override
-  State<CustomDialog> createState() => _CustomDialogState();
+  const FilterState({
+    this.category,
+    this.jobType = 'Onsite',
+    this.location = '',
+    this.distance = 50,
+    this.budget = 150,
+  });
+
+  FilterState copyWith({
+    String? category,
+    String? jobType,
+    String? location,
+    double? distance,
+    double? budget,
+  }) {
+    return FilterState(
+      category: category ?? this.category,
+      jobType: jobType ?? this.jobType,
+      location: location ?? this.location,
+      distance: distance ?? this.distance,
+      budget: budget ?? this.budget,
+    );
+  }
+
+  static const initial = FilterState();
 }
 
-class _CustomDialogState extends State<CustomDialog> {
-  // Category selection
-  String selectedCategory = "Home Services";
+class FilterNotifier extends StateNotifier<FilterState> {
+  FilterNotifier() : super(FilterState.initial);
 
-  // Budget range
-  RangeValues _budgetRange = const RangeValues(0, 3000);
+  void updateCategory(String? value) => state = state.copyWith(category: value);
+  void updateJobType(String value) => state = state.copyWith(jobType: value);
+  void updateLocation(String value) => state = state.copyWith(location: value);
+  void updateDistance(double value) => state = state.copyWith(distance: value);
+  void updateBudget(double value) => state = state.copyWith(budget: value);
+  void reset() => state = FilterState.initial;
+}
 
-  final List<String> categories = [
-    "Home Services",
-    "Delivery",
-    "Tech Support",
-    "Business",
-    "Web Development",
-  ];
+class FilterJobsBottomSheet extends ConsumerWidget {
+  const FilterJobsBottomSheet({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      insetPadding: EdgeInsets.all(16.w),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
-      child: Padding(
-        padding: EdgeInsets.all(16.w),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(filterProvider);
+    final notifier = ref.read(filterProvider.notifier);
+
+    final theme = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w,
+          16.h + MediaQuery.of(context).viewInsets.bottom),
+      child: SingleChildScrollView(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header
+            /// Header
+            Row(
+              children: [
+                Text("Filter Jobs",
+                    style:
+                    theme.bodyMedium?.copyWith(fontSize: 18.sp, fontWeight:FontWeight.w600 )),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+
+            12.verticalSpace,
+
+            /// Category Dropdown
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Categories",
+                  style: theme.bodyMedium?.copyWith (fontSize: 16.sp, fontWeight: FontWeight.w500)),
+            ),
+            6.verticalSpace,
+            Container(
+              // padding: EdgeInsets.symmetric(horizontal: 12.w),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.r),
+                //border: Border.all(color: AllColor.grey),
+              ),
+              child: DropdownButtonFormField<String>(
+                value: state.category,
+                isExpanded: true,
+                hint: const Text("Select categories", style: TextStyle(color: AllColor.black87),),
+                decoration: const InputDecoration(border: InputBorder.none),
+                items: ["Design", "Development", "Marketing"]
+                    .map((e) => DropdownMenuItem(value: e, child: Text(e, style: TextStyle(color: Colors.black),)))
+                    .toList(),
+                iconEnabledColor: AllColor.brand2_light, // <- your color here
+                iconDisabledColor: AllColor.grey,        // <- optional
+                onChanged: notifier.updateCategory,
+              ),
+            ),
+
+            16.verticalSpace,
+
+            /// Job Type Segment
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text("To be done",
+                  style:
+                  theme.bodyMedium?.copyWith(fontSize: 16.sp, fontWeight: FontWeight.w500)),
+            ),
+            8.verticalSpace,
+            Row(
+              children: [
+                _pillButton(ref, "Onsite", state.jobType),
+                8.horizontalSpace,
+                _pillButton(ref, "Remote", state.jobType),
+                8.horizontalSpace,
+                _pillButton(ref, "All", state.jobType),
+              ],
+            ),
+
+            16.verticalSpace,
+
+            /// Location
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Location",
+                  style:
+                  TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500)),
+            ),
+            6.verticalSpace,
+            TextFormField(
+              initialValue: state.location,
+              onChanged: notifier.updateLocation,
+              decoration: InputDecoration(
+                hintText: "Mckinnery tx 75071, USA",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.r)),
+                contentPadding:
+                EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+              ),
+            ),
+
+            16.verticalSpace,
+
+            /// Distance
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Filter Jobs",
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                    color: AllColor.black,
+                Text("Distance", style: TextStyle(fontSize: 16.sp)),
+                Text("${state.distance.toInt()} mi",
+                    style: TextStyle(fontSize: 14.sp)),
+              ],
+            ),
+            Slider(
+              value: state.distance,
+              min: 0,
+              max: 100,
+              onChanged: notifier.updateDistance,
+              activeColor: AllColor.brand2_light,
+              inactiveColor: AllColor.grey,
+            ),
+
+            8.verticalSpace,
+
+            /// Budget
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Budget Range", style: TextStyle(fontSize: 16.sp)),
+                Text("\$${state.budget.toInt()}",
+                    style: TextStyle(fontSize: 14.sp ,color: AllColor.black87)),
+              ],
+            ),
+            Slider(
+              value: state.budget,
+              min: 0,
+              max: 300,
+              onChanged: notifier.updateBudget,
+              activeColor: AllColor.brand2_light,
+              inactiveColor: AllColor.grey,
+            ),
+
+            20.verticalSpace,
+
+            /// Action Buttons
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: ()=> context.pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AllColor.brand2_light,
+                      foregroundColor: AllColor.white,
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.r)),
+                    ),
+                    child:
+                    Text("Reset", style: TextStyle(fontSize: 18.sp)),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.close, size: 22.sp, color: AllColor.black),
-                  onPressed: () => Navigator.pop(context),
-                )
-              ],
-            ),
-            SizedBox(height: 12.h),
+                16.horizontalSpace,
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => context.pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AllColor.grey300,
+                      foregroundColor: AllColor.black,
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
+                      shape: RoundedRectangleBorder(
 
-            // Categories
-            Text(
-              "Category",
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                color: AllColor.black,
-              ),
-            ),
-            SizedBox(height: 10.h),
-            Wrap(
-              spacing: 10.w,
-              runSpacing: 10.h,
-              children: categories.map((cat) {
-                final isSelected = selectedCategory == cat;
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedCategory = cat;
-                    });
-                  },
-                  child: Container(
-                    padding:
-                    EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
-                    decoration: BoxDecoration(
-                      color: isSelected ? AllColor.borderColor : AllColor.white,
-                      border: Border.all(color: AllColor.borderColor),
-                      borderRadius: BorderRadius.circular(8.r),
+                          borderRadius: BorderRadius.circular(30.r)),
+                      disabledBackgroundColor: AllColor.red ,
                     ),
-                    child: Text(
-                      cat,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                        color: AllColor.black,
-                      ),
-                    ),
+                    child: Text("Apply",
+                        style: TextStyle(
+                            fontSize: 18.sp, fontWeight: FontWeight.w600)),
                   ),
-                );
-              }).toList(),
+                ),
+              ],
             ),
-            SizedBox(height: 20.h),
 
-            // Budget Range
-            Text(
-              "Budget Range",
+            SizedBox(height: 10.h,),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _pillButton(WidgetRef ref, String label, String selected) {
+    final selectedBool = label == selected;
+    final notifier = ref.read(filterProvider.notifier);
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => notifier.updateJobType(label),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          decoration: BoxDecoration(
+            color: selectedBool ? AllColor.brand2_light : AllColor.white,
+            borderRadius: BorderRadius.circular(10.r, ),
+            border: Border.all(color: AllColor.brand2_light, width: 1.w),
+          ),
+          child: Center(
+            child: Text(
+              label,
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
-                color: AllColor.black,
+                color: selectedBool ? AllColor.white :AllColor.black,
               ),
             ),
-            RangeSlider(
-              values: _budgetRange,
-              min: 0,
-              max: 3000,
-              activeColor: AllColor.borderColor,
-              inactiveColor: AllColor.borderColor.withOpacity(0.3),
-              labels: RangeLabels(
-                "\$${_budgetRange.start.round()}",
-                "\$${_budgetRange.end.round()}",
-              ),
-              onChanged: (RangeValues values) {
-                setState(() {
-                  _budgetRange = values;
-                });
-              },
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("\$0",
-                    style: TextStyle(fontSize: 12.sp, color: AllColor.black)),
-                Text("\$3000",
-                    style: TextStyle(fontSize: 12.sp, color: AllColor.black)),
-              ],
-            ),
-            SizedBox(height: 20.h),
-
-            // Apply Button
-            GlobalButton(
-              text: "Apply Filter",
-              onPressed: () {
-                Navigator.pop(context);
-               GlobalSnackBar.show(context, title: "success", message: "filter applied");
-              },
-            ),
-          ],
+          ),
         ),
       ),
     );
