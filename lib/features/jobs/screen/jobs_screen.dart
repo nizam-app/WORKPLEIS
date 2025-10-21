@@ -52,7 +52,7 @@ class JobsScreen extends ConsumerWidget {
 }
 
 /// 🔹 Riverpod provider to track selected status
-final jobStatusProvider = StateProvider<String>((ref) => "Submitted");
+final jobStatusProvider = StateProvider<String>((ref) => "Open");
 
 /// 🔹 Horizontal status selector
 class JobStatusList extends ConsumerWidget {
@@ -254,7 +254,7 @@ class _BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // show button if not submitted
-    final showButtons = status != "Submitted ";
+    final showButtons = true;
 
     // Track Job button depending on status
     final Widget? trackButton = switch (status) {
@@ -290,7 +290,7 @@ class _BottomBar extends StatelessWidget {
               color: AllColor.black,
             ),
           ),
-          if (showButtons && trackButton != null) trackButton,
+          if ( trackButton != null) trackButton,
         ],
       ),
     );
