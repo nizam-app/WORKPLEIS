@@ -9,7 +9,7 @@ import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
 
 import '../logic/check_client.dart';
-import 'onboarding_screen_04.dart' show OnboardingScreen04;
+import 'onboarding_screen_002.dart' show OnboardingScreen04;
 
 class OnboardingScreen03 extends StatelessWidget {
   const OnboardingScreen03({super.key});
@@ -28,7 +28,9 @@ class OnboardingScreen03 extends StatelessWidget {
           CustomOnboardingUpperLogo(),
           SizedBox(height: 30.h,),
           Image.asset("assets/images/Onboarding03.png",
-            width: double.infinity,),
+            width: double.infinity,
+            height: 350.h,
+          ),
           Center(
             child: CustomPageIndicator(
               currentIndex: 0, // এখন কোন index active
@@ -81,7 +83,7 @@ class Onboarding02BottomNavBar extends ConsumerWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.08),
-            blurRadius: 16,
+            blurRadius: 16.r,
             offset: const Offset(0, -4),
           ),
         ],
@@ -95,10 +97,10 @@ class Onboarding02BottomNavBar extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("A SUNTAINABLE MARKETPLACE FOR BUSINESSES",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12)),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.sp)),
               SizedBox(height: 5.h),
               Text("Select your role",
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 20)),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 20.sp)),
               SizedBox(height: 15.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

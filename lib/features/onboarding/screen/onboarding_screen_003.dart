@@ -17,6 +17,7 @@ import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
 
 import '../../auth/logic/get_started_video_reverpod.dart';
+import '../../auth/screens/login_screen.dart';
 
 class OnboardingScreen02 extends StatelessWidget {
   const OnboardingScreen02({super.key, this.screenName = "login"});
@@ -34,7 +35,8 @@ class OnboardingScreen02 extends StatelessWidget {
         CustomOnboardingUpperLogo(),
         SizedBox(height: 80.h,),
         Image.asset("assets/images/Onboardin02.png",
-          width: double.infinity,),
+          width: double.infinity,
+        height: 300.h,),
         Center(
           child: CustomPageIndicator(
             currentIndex: 2, // এখন কোন index active
@@ -54,7 +56,7 @@ class OnboardingScreen02 extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
         children: [
-          Center(child: Text("Team up For Success",style: theme.bodySmall,)),
+          Center(child: Text("Team up For Success",style: theme.bodySmall!.copyWith(fontSize:24 ))),
           SizedBox(height: 5.h,),
           Text("Get ready to unleash your potential and \n"
               " witness the power of teamwork",textAlign: TextAlign.center,style: TextStyle(fontFamily: "bodyFont",),)
@@ -159,7 +161,7 @@ class _Onboarding02BottonbarState
                       onPressed: () {
                         ref.read(authTabProvider.notifier).state = AuthTab.login;
                         widget.onLogin?.call();
-                        context.push(GetStartedScreen.routeName, extra: "login");
+                        context.push(LoginScreen.routeName,);
                         ref.invalidate(loadRoleProvider);
                       },
                     ),
@@ -190,39 +192,47 @@ class _Onboarding02BottonbarState
                       fontWeight: FontWeight.w400,
                     ),
                     children: [
-                      const TextSpan(
-                        text: 'By signing up, I agree to Workpleis ',
+                       TextSpan(
+                        text: 'By signing up, I agree to Workpleis ',style:  Theme.of(context)
+                           .textTheme
+                           .bodyMedium!
+                           .copyWith(fontSize: 13.sp),
                       ),
                       TextSpan(
 
                         text: 'Terms & Conditions',
-                        style: const TextStyle(
+                        style:  TextStyle(
                           color: AllColor.black,
                           fontWeight: FontWeight.w600,
-                         // decoration: TextDecoration.underline,
                           decorationThickness: 1.1,
+                          fontFamily: "bodyFond",
+                          fontSize: 14.sp
                         ),
                         recognizer: _termsTap,
                       ),
-                      const TextSpan(text: ', & '),
+                       TextSpan(text: ', & ',style: TextStyle( fontFamily: "bodyFond",
+                           fontSize: 14.sp,fontWeight: FontWeight.w400)),
                       TextSpan(
                         text: 'Community Guidelines',
-                        style: const TextStyle(
+                        style:  TextStyle(
                           color: AllColor.black,
                           fontWeight: FontWeight.w600,
-                         // decoration: TextDecoration.underline,
                           decorationThickness: 1.1,
+                            fontFamily: "bodyFond",
+                            fontSize: 14.sp
                         ),
                         recognizer: _guidelinesTap,
                       ),
-                      const TextSpan(text: '. '),
+                       TextSpan(text: '. ', style: TextStyle( fontFamily: "bodyFond",
+                           fontSize: 14.sp)),
                       TextSpan(
                         text: 'Privacy Policy',
-                        style: const TextStyle(
+                        style:  TextStyle(
                           color: AllColor.black,
                           fontWeight: FontWeight.w600,
-                          //decoration: TextDecoration.underline,
                           decorationThickness: 1.1,
+                            fontFamily: "bodyFond",
+                            fontSize: 14.sp
                         ),
                         recognizer: _privacyTap,
                       ),

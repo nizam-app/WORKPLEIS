@@ -66,7 +66,7 @@ class JobStatusList extends ConsumerWidget {
     final statuses = [
       "Submitted",
       "Proposal Sent",
-      "In Progress",
+      "In progress",
       "In Review",
       "Delivered", // ← new
     ];
