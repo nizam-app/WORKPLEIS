@@ -22,7 +22,7 @@ import 'package:workpleis/features/home/screen/client_home_screen.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/home/screen/see_all_jobs_screen.dart';
 import 'package:workpleis/features/jobs/screen/Service_jobs_details.dart';
-import 'package:workpleis/features/jobs/screen/service_jobs_offers.dart';
+import 'package:workpleis/features/jobs/screen/service_my_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/jobs/screen/service_jobs.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
@@ -172,6 +172,8 @@ class AppRouter {
         name: LoginScreen.routeName,
         builder: (context, state) => const LoginScreen(),
       ),
+
+
       GoRoute(
         path: RegisterScreen.routeName,
         name: RegisterScreen.routeName,
@@ -365,9 +367,9 @@ class AppRouter {
             name: ServiceHomeScreen.routeName,
             builder: (context, state) =>  ServiceHomeScreen(),
           ), GoRoute(
-            path: OfferTacking.routeName,
-            name: OfferTacking.routeName,
-            builder: (context, state) =>  OfferTacking(),
+            path: OfferTackingScreen.routeName,
+            name: OfferTackingScreen.routeName,
+            builder: (context, state) =>  OfferTackingScreen(),
           ), GoRoute(
             path: OfferTackingScreen1.routeName,
             name: OfferTackingScreen1.routeName,
@@ -381,6 +383,8 @@ class AppRouter {
             name: OfferTackingScreen3.routeName,
             builder: (context, state) =>  OfferTackingScreen3(),
           ),
+
+
         ],
       ),
     ],

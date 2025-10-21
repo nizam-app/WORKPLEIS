@@ -15,7 +15,9 @@ class JobsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedStatus = ref.watch(jobStatusProvider);
-
+    final theme = Theme
+        .of(context)
+        .textTheme;
     return Scaffold(
       appBar: GlobalAppbar(text: "Jobs"),
       body: Padding(
@@ -260,7 +262,7 @@ class _BottomBar extends StatelessWidget {
         context.push(ViewProposalScreen.routeName);
       }),
       "Assigned" => _PillButton.purple("Track Job", onTap: () {
-        context.push(OfferTacking.routeName) ;
+        context.push(OfferTackingScreen.routeName) ;
       }),
       "In Progress" => _PillButton.purple("Track Job", onTap: () {
         // TODO: Add your navigation or logic here

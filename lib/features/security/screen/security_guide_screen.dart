@@ -59,6 +59,10 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme
+        .of(context)
+        .textTheme;
+
     return Scaffold(
       backgroundColor: AllColor.white,
       appBar: GlobalAppbar(text: "Help & Support"),
@@ -167,7 +171,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
             decoration: BoxDecoration(
               color: AllColor.white,
               borderRadius: BorderRadius.circular(10.r),
-              border: Border.all(color:  AllColor.grey300, width: 1.w), 
+              border: Border.all(color:  AllColor.grey300, width: 1.w),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -194,7 +198,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                     ),
                   ],
                 ),
-                const Icon(Icons.keyboard_arrow_right_rounded,
+                const Icon(Icons.keyboard_arrow_down_sharp,
                     color: AllColor.black),
               ],
             ),
@@ -371,7 +375,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                     ),
                   ],
                 ),
-                const Icon(Icons.keyboard_arrow_right_rounded,
+                const Icon(Icons.keyboard_arrow_down,
                     color: AllColor.black),
               ],
             ),
@@ -384,29 +388,45 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
 
   /* 🔹 Search Field Common */
   Widget _searchField() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
-      decoration: BoxDecoration(
-        border: Border.all(color: AllColor.grey300),
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-      child: Row(
-        children: [
-          Icon(Icons.search, color: AllColor.grey, size: 20.sp),
-          SizedBox(width: 8.w),
-          Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Search frequently asked questions..",
-                hintStyle: TextStyle(fontSize: 12.sp, color: AllColor.grey),
-              ),
-            ),
-          ),
-        ],
+    return TextField(
+      style: TextStyle(fontSize: 13.sp, color: AllColor.black),
+      decoration: InputDecoration(
+        isDense: true,
+        prefixIcon: Icon(Icons.search, color: AllColor.grey),
+        hintText: "Search frequently asked questions..",
+        hintStyle: TextStyle(fontSize: 12.sp, color: AllColor.grey),
+        border: InputBorder.none, // No underline or box
+        contentPadding: EdgeInsets.symmetric(vertical: 10.h),
       ),
     );
   }
+
+
+
+  // Widget _searchField() {
+  //   return
+  //    //  Container(
+  //    // // padding: EdgeInsets.symmetric(horizontal: 12.w),
+  //    //  decoration: BoxDecoration(
+  //    //    border: Border.all(color: AllColor.grey300),
+  //    //    borderRadius: BorderRadius.circular(8.r),
+  //    //  ),
+  //    //  child:
+  //
+  //         // SizedBox(width: 8.w),
+  //         TextField(
+  //
+  //           decoration: InputDecoration(
+  //
+  //             prefix: Icon(Icons.search ,color: AllColor.grey,),
+  //             border: InputBorder.none,
+  //             hintText: "Search frequently asked questions..",
+  //             hintStyle: TextStyle(fontSize: 12.sp, color: AllColor.grey),
+  //           ),
+  //
+  //
+  //   );
+  // }
 
   /* 🔹 Category Bottom Sheet */
   void _showCategoryDialog() {

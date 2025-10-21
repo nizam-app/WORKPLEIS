@@ -98,9 +98,22 @@ class _Onboarding02BottonbarState
   @override
   void initState() {
     super.initState();
-    _termsTap = TapGestureRecognizer()..onTap = widget.onTapTerms;
-    _guidelinesTap = TapGestureRecognizer()..onTap = widget.onTapGuidelines;
-    _privacyTap = TapGestureRecognizer()..onTap = widget.onTapPrivacy;
+    _termsTap = TapGestureRecognizer()
+      ..onTap = () {
+        context.push(TermsAndConditionsScreen.routeName);
+      };
+
+    _guidelinesTap = TapGestureRecognizer()..onTap=(){
+      context.push(CommunityGuidenlinesScreen.routeName);
+    };
+
+    _privacyTap = TapGestureRecognizer()..onTap =(){
+      context.push(PrivacyPolicyScreen.routeName);
+    };
+
+    //_termsTap = TapGestureRecognizer()..onTap = widget.onTapTerms;
+    // _guidelinesTap = TapGestureRecognizer()..onTap = widget.onTapGuidelines;
+    // _privacyTap = TapGestureRecognizer()..onTap = widget.onTapPrivacy;
   }
 
   @override
