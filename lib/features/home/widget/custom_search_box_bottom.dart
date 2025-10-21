@@ -25,10 +25,16 @@ class CustomSearchBoxBottom extends StatelessWidget {
         SizedBox(width: 10.w),
         GestureDetector(
           onTap: () {
-            showDialog(
-            context: context,
-            builder: (_) => const CustomDialog(),
-          );},
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              builder: (_) => const FilterJobsBottomSheet(),
+            );
+
+            },
           child: Container(
             height: 37.h,
             width: 37.w,

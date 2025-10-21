@@ -24,7 +24,6 @@ import 'package:workpleis/features/home/screen/see_all_jobs_screen.dart';
 import 'package:workpleis/features/jobs/screen/Service_jobs_details.dart';
 import 'package:workpleis/features/jobs/screen/service_my_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
-import 'package:workpleis/features/jobs/screen/service_jobs.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
 import 'package:workpleis/features/nav_bar/screen/service_bottom_nav_bar.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
@@ -312,11 +311,11 @@ class AppRouter {
             builder: (context, state) => const WalletScreen(),
           ),
 
-          GoRoute(
-            path: ServiceJobs.routeName,
-            name: ServiceJobs.routeName,
-            builder: (context, state) =>  const ServiceJobs(),
-         ),
+         //  GoRoute(
+         //    path: ServiceJobs.routeName,
+         //    name: ServiceJobs.routeName,
+         //    builder: (context, state) =>  const ServiceJobs(),
+         // ),
     
           GoRoute(
             path: SecurityGuideScreen.routeName,
