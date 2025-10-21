@@ -6,7 +6,7 @@ import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/features/auth/screens/enter_your_email.dart';
 import 'package:workpleis/features/auth/screens/get_started_screen.dart';
 import 'package:workpleis/features/onboarding/logic/check_individual.dart';
-import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_003.dart';
 import 'package:workpleis/features/onboarding/widget/custom_onboarding_upper_logo.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pageIndicator.dart';
 import 'package:workpleis/features/onboarding/widget/custom_pill_button.dart';
@@ -27,7 +27,8 @@ class OnboardingScreen04 extends StatelessWidget {
           CustomOnboardingUpperLogo(),
           SizedBox(height: 40.h,),
           Image.asset("assets/images/Onboarding04.png",
-            width: double.infinity,),
+            width: double.infinity,
+          height: 350.h,),
           Center(
             child: CustomPageIndicator(
               currentIndex: 1, // এখন কোন index active
@@ -111,7 +112,7 @@ class _Onboarding02BottonbarState
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
-                    .copyWith(fontSize: 12),
+                    .copyWith(fontSize: 12.sp),
               ),
               SizedBox(height: 5.h),
               Text(
@@ -119,7 +120,7 @@ class _Onboarding02BottonbarState
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!
-                    .copyWith(fontSize: 20),
+                    .copyWith(fontSize: 20.sp),
               ),
               SizedBox(height: 15.h),
 

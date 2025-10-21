@@ -102,7 +102,7 @@ class JobStatusList extends ConsumerWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w300, color: isSelected? AllColor.white: AllColor.black ),
+                      .copyWith(fontWeight: FontWeight.w500, color: isSelected? AllColor.white: AllColor.black ,fontSize: 12.sp),
                 ),
               ),
             ),

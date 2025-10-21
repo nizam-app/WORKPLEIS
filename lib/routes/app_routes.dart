@@ -28,9 +28,9 @@ import 'package:workpleis/features/jobs/screen/service_jobs.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
 import 'package:workpleis/features/nav_bar/screen/service_bottom_nav_bar.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
-import 'package:workpleis/features/onboarding/screen/onboarding_screen_02.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_003.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
-import 'package:workpleis/features/onboarding/screen/onboarding_screen_04.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_002.dart';
 
 import 'package:workpleis/features/proposal/screen/view_proposal_screen.dart';
 import 'package:workpleis/features/security/screen/settings_screen.dart';
@@ -124,15 +124,16 @@ class AppRouter {
         path: IndentityVerificationScreen.routeName,
         name: IndentityVerificationScreen.routeName,
         builder: (context, state) => const IndentityVerificationScreen(),
-      ),  GoRoute(
-        path: GetStartedScreen.routeName, // 👈 no :param in path
-        name: GetStartedScreen.routeName,
-        builder: (context, state) {
-          // 👇 safely read optional value
-          final title = state.extra is String ? state.extra as String : null;
-          return GetStartedScreen(title: title);
-        },
       ),
+  // GoRoute(
+      //   path: GetStartedScreen.routeName, // 👈 no :param in path
+      //   name: GetStartedScreen.routeName,
+      //   builder: (context, state) {
+      //     // 👇 safely read optional value
+      //     final title = state.extra is String ? state.extra as String : null;
+      //     return GetStartedScreen(title: title);
+      //   },
+      // ),
 
       GoRoute(
         path: AddressAndPassword.routeName,

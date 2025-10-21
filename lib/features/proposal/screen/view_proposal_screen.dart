@@ -16,41 +16,53 @@ class Proposal {
   final String eta;
   final int price;
   final bool rejected;
+  final bool accepted;
 
   Proposal(this.title, this.price, this.details, this.eta,
-      {this.rejected = false});
+      {this.rejected = false, this.accepted = false});
 
-  Proposal copyWith({bool? rejected}) =>
-      Proposal(title, price, details, eta, rejected: rejected ?? this.rejected);
+  Proposal copyWith({bool? rejected, bool? accepted}) =>
+      Proposal(title, price, details, eta,
+          rejected: rejected ?? this.rejected,
+          accepted: accepted ?? this.accepted);
 }
 
-final proposalProvider = StateNotifierProvider<_ProposalNotifier,
-    List<Proposal>>(
+final proposalProvider =
+StateNotifierProvider<_ProposalNotifier, List<Proposal>>(
       (_) => _ProposalNotifier(),
 );
 
 class _ProposalNotifier extends StateNotifier<List<Proposal>> {
   _ProposalNotifier()
       : super([
+    Proposal("Deliver something for me", 3500,
+        "Modern e-commerce React/Node.js.", "3–5 days"),
+    Proposal("Deliver something for me", 1200, "LP redesign, blog, CMS.",
+        "5–7 days"),
+    Proposal("Deliver something for me", 800,
+        "Bug-fix, TestFlight, analytics.", "2–4 days"),
+    Proposal("Deliver something for me", 2100, "RBAC, charts, CSV.",
+        "6–10 days"),
     Proposal(
-        "Shahed ali", 3500, "Modern e-commerce React/Node.js.",
-        "3–5 days"),
-    Proposal(
-        "Palash", 1200, "LP redesign, blog, CMS.", "5–7 days"),
-    Proposal(
-        "iOS Palash", 800, "Bug-fix, TestFlight, analytics.", "2–4 days"),
-    Proposal("Admin Palash", 2100, "RBAC, charts, CSV.", "6–10 days"),
-    Proposal("Stripe Palash", 600, "Checkout, webhooks.", "1–2 days"),
+        "Deliver something for me", 600, "Checkout, webhooks.", "1–2 days"),
   ]);
 
   void accept(int index) {
-    GlobalAleartBox(message: "Proposal Accepted", oneTap: () {});
+    state = [
+      for (int i = 0; i < state.length; i++)
+        if (i == index)
+          state[i].copyWith(accepted: true)
+        else
+          state[i]
+    ];
   }
 
   void reject(int index) {
     state = [
       for (int i = 0; i < state.length; i++)
-        if (i == index) state[i].copyWith(rejected: true) else
+        if (i == index)
+          state[i].copyWith(rejected: true)
+        else
           state[i]
     ];
   }
@@ -65,8 +77,11 @@ class ViewProposalScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tabIndex = ref.watch(tabProvider);
     final proposals = ref.watch(proposalProvider);
-    final filtered = proposals.where((p) =>
-    tabIndex == 0 ? !p.rejected : p.rejected).toList();
+    final filtered = proposals.where((p) {
+      if (tabIndex == 0) return !p.rejected && !p.accepted;
+      if (tabIndex == 1) return p.accepted;
+      return p.rejected;
+    }).toList();
 
     return Scaffold(
       appBar: GlobalAppbar(text: 'Proposals'),
@@ -79,15 +94,11 @@ class ViewProposalScreen extends ConsumerWidget {
                 SegmentControl(
                   selected: tabIndex,
                   onChanged: (i) =>
-                  ref
-                      .read(tabProvider.notifier)
-                      .state = i,
+                  ref.read(tabProvider.notifier).state = i,
                 ),
                 const Spacer(),
                 Text(
-                  "${filtered.length} ${tabIndex == 0
-                      ? 'pending'
-                      : 'rejected'}",
+                  "${filtered.length} ${tabIndex == 0 ? 'pending' : tabIndex == 1 ? 'approved' : 'rejected'}",
                   style: TextStyle(
                     color: AllColor.black.withOpacity(.6),
                     fontSize: 13.sp,
@@ -99,36 +110,50 @@ class ViewProposalScreen extends ConsumerWidget {
             12.verticalSpace,
             Expanded(
               child: filtered.isEmpty
-                  ? EmptyState(msg: tabIndex == 0
-                  ? "No pending proposals"
-                  : "No rejected proposals")
+                  ? EmptyState(
+                  msg: tabIndex == 0
+                      ? "No pending proposals"
+                      : tabIndex == 1
+                      ? "No approved proposals"
+                      : "No rejected proposals")
                   : ListView.separated(
                 itemCount: filtered.length,
                 separatorBuilder: (_, __) => 12.verticalSpace,
                 itemBuilder: (_, i) {
                   final index = proposals.indexOf(filtered[i]);
                   return ProposalCard(
-                      data: filtered[i],
-                      showActions: tabIndex == 0,
-                      onAccept: () {
-                        globalShowAlertDialog(context: context,
-                            oneTap: () {context.pop();}, message: "Proposal is accepted");
-                      },
-                  onReject: () {
-                  showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-                  ),
-                  builder: (context) => CustomRejectBottomSheet(
-                  onSubmit: (reason) {
-                  ref.read(proposalProvider.notifier).reject(index);
-                  Navigator.pop(context);
-                  },
-                  ),
-                  );
-                  },
+                    data: filtered[i],
+                    showActions: tabIndex == 0,
+                    onAccept: () {
+                      ref
+                          .read(proposalProvider.notifier)
+                          .accept(index);
+                      globalShowAlertDialog(
+                        context: context,
+                        oneTap: () {
+                          context.pop();
+                        },
+                        message: "Proposal is accepted",
+                      );
+                    },
+                    onReject: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20.r)),
+                        ),
+                        builder: (context) => CustomRejectBottomSheet(
+                          onSubmit: (reason) {
+                            ref
+                                .read(proposalProvider.notifier)
+                                .reject(index);
+                            Navigator.pop(context);
+                          },
+                        ),
+                      );
+                    },
                   );
                 },
               ),
@@ -159,31 +184,31 @@ class SegmentControl extends StatelessWidget {
       child: Row(
         children: [
           _tab("Pending", selected == 0, () => onChanged(0)),
-          _tab("Rejected", selected == 1, () => onChanged(1)),
+          _tab("Approved", selected == 1, () => onChanged(1)),
+          _tab("Rejected", selected == 2, () => onChanged(2)),
         ],
       ),
     );
   }
 
-  Widget _tab(String title, bool active, VoidCallback onTap) =>
-      GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
-          decoration: BoxDecoration(
-            color: active ? AllColor.brand2_light : Colors.transparent,
-            borderRadius: BorderRadius.circular(999.r),
-          ),
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 13.sp,
-              fontWeight: FontWeight.w500,
-              color: active ? AllColor.white : AllColor.black,
-            ),
-          ),
+  Widget _tab(String title, bool active, VoidCallback onTap) => GestureDetector(
+    onTap: onTap,
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
+      decoration: BoxDecoration(
+        color: active ? AllColor.brand2_light : Colors.transparent,
+        borderRadius: BorderRadius.circular(999.r),
+      ),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 13.sp,
+          fontWeight: FontWeight.w500,
+          color: active ? AllColor.white : AllColor.black,
         ),
-      );
+      ),
+    ),
+  );
 }
 
 class ProposalCard extends StatelessWidget {
@@ -222,7 +247,9 @@ class ProposalCard extends StatelessWidget {
             children: [
               Expanded(
                 child: InkWell(
-                  onTap: () {context.push(AccountOverviewScreen.routeName);},
+                  onTap: () {
+                    context.push(AccountOverviewScreen.routeName);
+                  },
                   child: Text(data.title,
                       style: TextStyle(
                           fontSize: 16.sp, fontWeight: FontWeight.w500)),
@@ -269,46 +296,49 @@ class ProposalCard extends StatelessWidget {
     return b.toString();
   }
 
-  Widget _eta(String label) =>
-      Row(
-        children: [
-          Text(label, style: TextStyle(fontSize: 12.sp,
+  Widget _eta(String label) => Row(
+    children: [
+      Text(label,
+          style: TextStyle(
+              fontSize: 12.sp,
               fontWeight: FontWeight.w600,
               fontFamily: "bodyFont",
               color: AllColor.grey)),
-        ],
-      );
+    ],
+  );
 
-  Widget _actionButton(String label, VoidCallback onPressed) =>
-      Material(
-        color: AllColor.white,
-        borderRadius: BorderRadius.circular(999.r),
-        child: InkWell(
-          onTap: onPressed,
-          borderRadius: BorderRadius.circular(999.r),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 8.h),
-            child: Text(
-              label,
-              style: TextStyle(
-                color: AllColor.brand2_light,
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+  Widget _actionButton(String label, VoidCallback onPressed) => Material(
+    color: AllColor.white,
+    borderRadius: BorderRadius.circular(999.r),
+    child: InkWell(
+      onTap: onPressed,
+      borderRadius: BorderRadius.circular(999.r),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 8.h),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: AllColor.brand2_light,
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w500,
           ),
         ),
-      );
+      ),
+    ),
+  );
 
-  Widget _icon(IconData icon, VoidCallback onPressed) =>
-      InkWell(
-        onTap: onPressed,
-        borderRadius: BorderRadius.circular(999.r),
-        child: Padding(
-          padding: EdgeInsets.all(8.r),
-          child: Icon(icon, size: 16.sp, color: AllColor.grey,),
-        ),
-      );
+  Widget _icon(IconData icon, VoidCallback onPressed) => InkWell(
+    onTap: onPressed,
+    borderRadius: BorderRadius.circular(999.r),
+    child: Padding(
+      padding: EdgeInsets.all(8.r),
+      child: Icon(
+        icon,
+        size: 16.sp,
+        color: AllColor.grey,
+      ),
+    ),
+  );
 }
 
 class EmptyState extends StatelessWidget {
@@ -317,45 +347,40 @@ class EmptyState extends StatelessWidget {
   const EmptyState({required this.msg, super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      Center(
-        child: Text(
-          msg,
-          style: TextStyle(
-              color: AllColor.black.withOpacity(.6), fontSize: 13.sp),
-        ),
-      );
+  Widget build(BuildContext context) => Center(
+    child: Text(
+      msg,
+      style:
+      TextStyle(color: AllColor.black.withOpacity(.6), fontSize: 13.sp),
+    ),
+  );
 }
-
 
 class CustomRejectBottomSheet extends StatefulWidget {
   final ValueChanged<String> onSubmit;
   final String text1;
   final String text2;
 
-
-
-  const CustomRejectBottomSheet({required this.onSubmit, super.key,this.text1 = "Rejection Message", this.text2 = "Tell something for rejection"});
+  const CustomRejectBottomSheet(
+      {required this.onSubmit,
+        super.key,
+        this.text1 = "Rejection Message",
+        this.text2 = "Tell something for rejection"});
 
   @override
-  State<CustomRejectBottomSheet> createState() => _CustomRejectBottomSheetState();
-
+  State<CustomRejectBottomSheet> createState() =>
+      _CustomRejectBottomSheetState();
 }
 
 class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
   final TextEditingController _controller = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
-    final theme = Theme
-        .of(context)
-        .textTheme;
+    final theme = Theme.of(context).textTheme;
 
     return Padding(
-      padding: MediaQuery
-          .of(context)
-          .viewInsets, // Keyboard-aware padding
+      padding: MediaQuery.of(context).viewInsets,
       child: Container(
         padding: EdgeInsets.all(20.r),
         decoration: BoxDecoration(
@@ -366,11 +391,10 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            /// Title & Close Button
             Row(
               children: [
-                Text(widget.text1,
+                Text(
+                  widget.text1,
                   style: theme.titleSmall?.copyWith(
                     color: AllColor.black,
                     fontWeight: FontWeight.w600,
@@ -383,10 +407,7 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                 )
               ],
             ),
-
             12.verticalSpace,
-
-            /// Text Input Field
             TextField(
               controller: _controller,
               maxLines: 4,
@@ -404,14 +425,9 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                 ),
               ),
             ),
-
             20.verticalSpace,
-
-            /// Buttons
             Row(
               children: [
-
-                /// Cancel Button
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () => Navigator.pop(context),
@@ -421,22 +437,19 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(999.r),
                       ),
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 10.h),
                     ),
                     child: Text(
                       "Cancel",
                       style: theme.titleMedium?.copyWith(
-                        color:  AllColor.black,
+                        color: AllColor.black,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ),
-
                 12.horizontalSpace,
-
-                /// Submit Button
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
@@ -449,15 +462,14 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(999.r),
                       ),
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 10.h),
                       elevation: 0,
                     ),
                     child: Text(
                       "Submit",
                       style: theme.titleMedium?.copyWith(
-                        color:  AllColor.white
-                        ,
+                        color: AllColor.white,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

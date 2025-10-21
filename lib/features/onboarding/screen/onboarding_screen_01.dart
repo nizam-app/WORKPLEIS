@@ -6,9 +6,9 @@ import 'package:workpleis/core/widget/global_get_started_button.dart';
 import 'package:workpleis/core/widget/global_logo.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 
-
 class OnboardingScreen01 extends StatelessWidget {
   const OnboardingScreen01({super.key});
+
   static const String routeName = '/onboarding_screen_01';
 
   @override
@@ -17,22 +17,33 @@ class OnboardingScreen01 extends StatelessWidget {
       backgroundColor: AllColor.primary,
       body: SafeArea(
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 20.w, ),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Center(
-            child:Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Spacer(),
-                const GlobalLogo(image: "assets/images/workpleis1.png",),
-                Text("A SUSTAINABLE MARKETPLACE FOR BUSINESSES",style: Theme.of(context).textTheme.headlineSmall,),
+                const GlobalLogo(image: "assets/images/workpleis1.png"),
+                SizedBox(height: 5.h),
+                Text(
+                  "A SUSTAINABLE MARKETPLACE FOR BUSINESSES",
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontSize: 9.sp
+                  ),
+                ),
                 Spacer(),
-                GlobalGetStartedButton(onTap: (){context.push(OnboardingScreen03.routeName);},),
-                SizedBox(height: 75.h,)
+                GlobalGetStartedButton(
+                  onTap: () {
+                    context.push(OnboardingScreen03.routeName);
+                  },
+                ),
+                SizedBox(height: 75.h),
               ],
-            )),
+            ),
+          ),
         ),
-      )
+      ),
     );
   }
 }
