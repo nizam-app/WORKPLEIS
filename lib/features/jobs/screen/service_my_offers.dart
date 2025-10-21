@@ -216,7 +216,7 @@ class _JobCard extends StatelessWidget {
               else if (status == "accepted") _pill("Update Job",onTop: (){context.push(OfferTackingScreen.routeName);})
               else InkWell(
                     onTap: (){
-                     context.pop();
+                      showRejectionMessageSheet(context);
                     },
                     child: _pill("Reason")),
             ],
@@ -266,4 +266,70 @@ class _JobCard extends StatelessWidget {
       ),
     );
   }
+}
+
+
+//Show RejecttionMessageSheet
+
+void showRejectionMessageSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    // shape: RoundedRectangleBorder(
+    //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    // ),
+    builder: (context) {
+      return Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Rejection Message",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AllColor.black,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: const Icon(Icons.close, color: Colors.black, size: 20),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+
+            // Message box
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color(0xFFF4F4F4), // Light grey background
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: const EdgeInsets.all(12),
+              child: const Text(
+                "All plumbing issues have been resolved. Replaced the faulty pipes and installed new faucets as requested. System tested and working perfectly.",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black87,
+                  height: 1.4,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      );
+    },
+  );
 }
