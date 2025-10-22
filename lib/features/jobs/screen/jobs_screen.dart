@@ -235,7 +235,7 @@ class _DetailRow extends StatelessWidget {
     );
     return Row(
       children: [
-       
+
         Icon(icon, size: 18, color: const Color(0xFF7A6FA2)),
         SizedBox(width: 6.w),
         if (expandable) Expanded(child: content) else content,
