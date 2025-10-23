@@ -9,6 +9,7 @@ import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/jobs/screen/service_my_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/security/screen/settings_screen.dart';
+import 'package:workpleis/features/wallet/screen/service_wallet_screen.dart';
 import 'package:workpleis/features/wallet/screen/wallet_screen.dart';
 import '../../../core/constants/color_control/all_color.dart';
 import '../../../core/widget/global_app_bar.dart';
@@ -91,7 +92,11 @@ class _AccountOverviewClientScreenState
             SizedBox(height: 20.h),
             InkWell(
               onTap: (){
-                    context.push(WalletScreen.routeName);
+                if(userRole == "client"){
+                    context.push(WalletScreen.routeName);}
+                else{
+                  context.push(ProviderWalletScreen.routeName);
+                }
               },
                 child: _menuTile(Icons.account_balance_wallet_outlined, "Wallet")),
             InkWell(
@@ -152,7 +157,7 @@ class _AccountOverviewClientScreenState
                   children: [
                     Text(profileData["name"],
                         style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.w500)),
+                            fontSize: 16.sp, fontWeight: FontWeight.w300)),
                     SizedBox(width: 6.w),
                     
                   ],

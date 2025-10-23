@@ -35,9 +35,10 @@ class GlobalAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         text,
         style: TextStyle(
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
+          fontSize: 22.sp,
+          fontWeight: FontWeight.w800,
           color: AllColor.white,
+          fontFamily: "headFont",
         ),
       ),
     );

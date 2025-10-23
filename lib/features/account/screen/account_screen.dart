@@ -71,7 +71,7 @@ class _ProfileHeaderSectionState extends State<ProfileHeaderSection> {
         ),
         10.h.verticalSpace,
         Text("Jhon Doe",
-            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w300, color: AllColor.black,fontFamily: "bodyFont")),
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, color: AllColor.black,fontFamily: "bodyFont")),
         6.h.verticalSpace,
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),

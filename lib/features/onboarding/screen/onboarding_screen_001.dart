@@ -49,11 +49,11 @@ class OnboardingScreen03 extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Center(child: Text("User Friendly at its Core",style: theme.bodySmall!.copyWith(fontSize:24 ))),
+        Center(child: Text("User Friendly at its Core",style: TextStyle(fontSize:24,fontWeight: FontWeight.w800, fontFamily: "headFont" ))),
         SizedBox(height: 5.h,),
         Text("Our Interface empowers you with \n"
             " intuitive controls and effortless \n"
-            " interactions",textAlign: TextAlign.center,style: TextStyle(fontFamily: "bodyFont",),)
+            " interactions",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenText",),)
       ],
     );
   }
@@ -97,10 +97,10 @@ class Onboarding02BottomNavBar extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("A SUNTAINABLE MARKETPLACE FOR BUSINESSES",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.sp)),
+                  style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, fontFamily: "OpenText")),
               SizedBox(height: 5.h),
               Text("Select your role",
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 20.sp)),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 20.sp, fontWeight: FontWeight.w700, fontFamily: "OpenText")),
               SizedBox(height: 15.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

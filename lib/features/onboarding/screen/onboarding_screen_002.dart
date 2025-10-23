@@ -48,10 +48,10 @@ class OnboardingScreen04 extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Center(child: Text("Easy Task Creation",style: theme.bodySmall!.copyWith(fontSize:24 ))),
+        Center(child: Text("Easy Task Creation",style:TextStyle(fontSize:24, fontFamily: "headFont",fontWeight: FontWeight.w800))),
         SizedBox(height: 5.h,),
-        Text("Quickly add tasks, add due date, add \n "
-            "description with ease",textAlign: TextAlign.center,style: TextStyle(fontFamily: "bodyFont",),)
+        Text("Quickly add tasks, add due date, add \n"
+            "description with ease",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12.sp, fontFamily: "OpenText",),)
       ],
     );
   }
@@ -109,18 +109,12 @@ class _Onboarding02BottonbarState
             children: [
               Text(
                 "A SUNTAINABLE MARKETPLACE FOR BUSINESSES",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(fontSize: 12.sp),
+                style:TextStyle(fontSize: 12.sp,),
               ),
               SizedBox(height: 5.h),
               Text(
                 "Select your type",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(fontSize: 20.sp),
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700, fontFamily: "OpenText"),
               ),
               SizedBox(height: 15.h),
 

@@ -122,8 +122,11 @@ class AddPaymentMethodSheet extends StatelessWidget {
               decoration: const InputDecoration(
                 labelText: "Card Number",
                 hintText: "1223344556778544",
+                hintStyle:  TextStyle(color: Colors.grey),
+                labelStyle: const TextStyle(color: Colors.grey),
               ),
               keyboardType: TextInputType.number,
+
             ),
             SizedBox(height: 12.h),
 
@@ -136,6 +139,8 @@ class AddPaymentMethodSheet extends StatelessWidget {
                     decoration: const InputDecoration(
                       labelText: "MM/YY",
                       hintText: "12/24",
+                      hintStyle:  TextStyle(color: Colors.grey),
+                      labelStyle: const TextStyle(color: Colors.grey),
                     ),
                     keyboardType: TextInputType.datetime,
                   ),
@@ -147,6 +152,8 @@ class AddPaymentMethodSheet extends StatelessWidget {
                     decoration: const InputDecoration(
                       labelText: "CVC",
                       hintText: "123",
+                      hintStyle:  TextStyle(color: Colors.grey),
+                      labelStyle:  TextStyle(color: Colors.grey),
                     ),
                     keyboardType: TextInputType.number,
                   ),
@@ -154,13 +161,14 @@ class AddPaymentMethodSheet extends StatelessWidget {
               ],
             ),
             SizedBox(height: 12.h),
-
             // Cardholder Name
             TextFormField(
               controller: nameController,
               decoration: const InputDecoration(
                 labelText: "Cardholder Name",
                 hintText: "John Doe",
+                hintStyle:  TextStyle(color: Colors.grey),
+                labelStyle:  TextStyle(color: Colors.grey),
               ),
             ),
             SizedBox(height: 20.h),

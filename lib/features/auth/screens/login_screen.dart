@@ -122,7 +122,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       children: [
         Text(
           "     Sign in to your \n Workpleis account",
-          style: TextStyle(fontSize: 20.sp, color:Color(0xff45454C)),
+          style: TextStyle(fontSize: 20.sp, color:Color(0xff45454C), fontFamily: "OpenText", fontWeight: FontWeight.w400 ),
         ),
         SizedBox(height: 28.h),
       ],

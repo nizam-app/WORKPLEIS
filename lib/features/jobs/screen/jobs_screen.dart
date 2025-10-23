@@ -102,7 +102,7 @@ class JobStatusList extends ConsumerWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w500, color: isSelected? AllColor.white: AllColor.black ,fontSize: 12.sp),
+                      .copyWith(fontWeight: FontWeight.w500, color: isSelected? AllColor.white: AllColor.black ,fontSize: 12.sp,),
                 ),
               ),
             ),
@@ -149,26 +149,43 @@ class JobCard extends StatelessWidget {
         ],
         border: Border.all(color: Colors.black.withOpacity(0.1)),
       ),
-      child: Column(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
-          /// Header (title + status chip)
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "bodyFont",
-                  ),
-                ),
-              ),
-              _StatusChip(text: status),
-            ],
-          ),
-          SizedBox(height: 8.h),
+              /// Header (title + status chip)
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: Text(
+              //         title,
+              //         style: TextStyle(
+              //           fontSize: 16.sp,
+              //           fontWeight: FontWeight.w400,
+              //           fontFamily: "bodyFont",
+              //         ),
+              //       ),
+              //     ),
+              //     _StatusChip(text: status),
+              //   ],
+              // ),
+
+              Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "bodyFont",
+                      ),
+                    ),
+
+             // _StatusChip(text: status),
+
+           SizedBox(height: 8.h),
 
           /// Details
           _DetailRow(icon: Icons.location_on, text: locations),
@@ -176,12 +193,26 @@ class JobCard extends StatelessWidget {
           _DetailRow(icon: Icons.calendar_today, text: calender, ),
           SizedBox(height: 6.h),
           _DetailRow(icon: Icons.schedule, text: time, ),
-          // SizedBox(height: 10.h),
+           SizedBox(height: 10.h),
+              JobPriceText(price: price),
 
           /// Bottom actions + price
-          _BottomBar(status: status, price: price),
         ],
-      ),
+          ),
+          SizedBox(width: 38.w,),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              _StatusChip(text: status),
+              SizedBox(height: 100.h,),
+              JobStatusAction(status: status),
+              //_BottomBar(status: status, price: price),
+            ],
+          )
+
+        ]
+      )
     );
   }
 }
@@ -193,7 +224,7 @@ class _StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+      //padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       decoration: BoxDecoration(
         color: AllColor.white, // lime chip (mock-এর মতো)
         borderRadius: BorderRadius.circular(8.r),
@@ -227,7 +258,7 @@ class _DetailRow extends StatelessWidget {
     final content = Text(
       text,
       style: TextStyle(
-        fontSize: 13.sp,
+        fontSize: 12.sp,
         color: const Color(0xFF7A6FA2),
         fontFamily: "bodyFont",
       ),
@@ -246,60 +277,60 @@ class _DetailRow extends StatelessWidget {
 
 
 
-class _BottomBar extends StatelessWidget {
-  const _BottomBar({required this.status, required this.price});
-  final String status;
+/// 🔹 Custom price widget
+class JobPriceText extends StatelessWidget {
   final String price;
+  const JobPriceText({super.key, required this.price});
 
   @override
   Widget build(BuildContext context) {
-    // show button if not submitted
-    final showButtons = true;
+    return Text(
+      price,
+      style: TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w600,
+        color: AllColor.black87,
+        fontFamily: "bodyFont",
+      ),
+    );
+  }
+}
 
+/// 🔹 Custom status action button widget
+class JobStatusAction extends StatelessWidget {
+  final String status;
+  const JobStatusAction({super.key, required this.status});
+
+  @override
+  Widget build(BuildContext context) {
     // Track Job button depending on status
     final Widget? trackButton = switch (status) {
       "Open" => _PillButton.purple("View Offers", onTap: () {
         context.push(ViewProposalScreen.routeName);
       }),
       "Assigned" => _PillButton.purple("Track Job", onTap: () {
-        context.push(OfferTackingScreen.routeName) ;
+        context.push(OfferTackingScreen.routeName);
       }),
       "In Progress" => _PillButton.purple("Track Job", onTap: () {
-        // TODO: Add your navigation or logic here
+        context.push(OfferTackingScreen.routeName);
       }),
       "In Review" => _PillButton.lime("Track Job", onTap: () {
-        // TODO: Add your navigation or logic here
+        context.push(OfferTackingScreen.routeName);
       }),
       "Delivered" => _PillButton.lime("Track Job", onTap: () {
-        // TODO: Add your navigation or logic here
+        context.push(OfferTackingScreen.routeName);
       }),
       _ => null,
     };
 
-    return Padding(
-      padding: EdgeInsets.symmetric(),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Price text
-          Text(
-            price,
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              color: AllColor.black,
-            ),
-          ),
-          if ( trackButton != null) trackButton,
-        ],
-      ),
-    );
+    return trackButton ?? const SizedBox.shrink();
   }
 }
 
-
+/// 🔹 Reusable pill button
 class _PillButton extends StatelessWidget {
-  const _PillButton._(this.label, this.bg, this.fg, { required this.onTap});
+  const _PillButton._(this.label, this.bg, this.fg, {required this.onTap});
+
   final String label;
   final Color bg;
   final Color fg;
@@ -308,41 +339,135 @@ class _PillButton extends StatelessWidget {
   factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-        AllColor.white, // শেডেড পার্পল (mock vibe)
+        AllColor.white,
         AllColor.brand2_light,
-
         onTap: onTap,
       );
 
   factory _PillButton.lime(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-        AllColor.white , // lime
+        AllColor.white,
         AllColor.brand2_light,
         onTap: onTap,
       );
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: bg,
-      borderRadius: BorderRadius.circular(22.r),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(22.r),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: fg,
-              fontFamily: "bodyFont",
-            ),
-          ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w600,
+          color: fg,
+          fontFamily: "bodyFont",
         ),
       ),
     );
   }
- }
+}
+
+
+//
+// class _BottomBar extends StatelessWidget {
+//   const _BottomBar({required this.status, required this.price});
+//   final String status;
+//   final String price;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // show button if not submitted
+//     final showButtons = true;
+//
+//     // Track Job button depending on status
+//     final Widget? trackButton = switch (status) {
+//       "Open" => _PillButton.purple("View Offers", onTap: () {
+//         context.push(ViewProposalScreen.routeName);
+//       }),
+//       "Assigned" => _PillButton.purple("Track Job", onTap: () {
+//         context.push(OfferTackingScreen.routeName) ;
+//       }),
+//       "In Progress" => _PillButton.purple("Track Job", onTap: () {
+//         // TODO: Add your navigation or logic here
+//       }),
+//       "In Review" => _PillButton.lime("Track Job", onTap: () {
+//         // TODO: Add your navigation or logic here
+//       }),
+//       "Delivered" => _PillButton.lime("Track Job", onTap: () {
+//         // TODO: Add your navigation or logic here
+//       }),
+//       _ => null,
+//     };
+//
+//     return Padding(
+//       padding: EdgeInsets.symmetric(),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: [
+//           // Price text
+//           // Text(
+//           //   price,
+//           //   style: TextStyle(
+//           //     fontSize: 16.sp,
+//           //     fontWeight: FontWeight.w500,
+//           //     color: AllColor.black,
+//           //   ),
+//           // ),
+//           if ( trackButton != null) trackButton,
+//         ],
+//       ),
+//     );
+//   }
+// }
+//
+//
+// class _PillButton extends StatelessWidget {
+//   const _PillButton._(this.label, this.bg, this.fg, { required this.onTap});
+//   final String label;
+//   final Color bg;
+//   final Color fg;
+//   final VoidCallback onTap;
+//
+//   factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
+//       _PillButton._(
+//         label,
+//         AllColor.white, // শেডেড পার্পল (mock vibe)
+//         AllColor.brand2_light,
+//
+//         onTap: onTap,
+//       );
+//
+//   factory _PillButton.lime(String label, {required VoidCallback onTap}) =>
+//       _PillButton._(
+//         label,
+//         AllColor.white , // lime
+//         AllColor.brand2_light,
+//         onTap: onTap,
+//       );
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Material(
+//       color: bg,
+//       borderRadius: BorderRadius.circular(22.r),
+//       child: InkWell(
+//         onTap: onTap,
+//         borderRadius: BorderRadius.circular(22.r),
+//         child: Padding(
+//           padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
+//           child: Text(
+//             label,
+//             style: TextStyle(
+//               fontSize: 14.sp,
+//               fontWeight: FontWeight.w600,
+//               color: fg,
+//               fontFamily: "bodyFont",
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+//  }

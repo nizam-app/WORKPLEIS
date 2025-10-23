@@ -56,10 +56,10 @@ class OnboardingScreen02 extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
         children: [
-          Center(child: Text("Team up For Success",style: theme.bodySmall!.copyWith(fontSize:24 ))),
+          Center(child: Text("Team up For Success",style: TextStyle(fontSize:24, fontWeight:FontWeight.w700, fontFamily: "OpenText" ))),
           SizedBox(height: 5.h,),
           Text("Get ready to unleash your potential and \n"
-              " witness the power of teamwork",textAlign: TextAlign.center,style: TextStyle(fontFamily: "bodyFont",),)
+              " witness the power of teamwork",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenText", fontWeight: FontWeight.w400, fontSize: 12.sp),)
         ],
       );
   }
@@ -193,46 +193,43 @@ class _Onboarding02BottonbarState
                     ),
                     children: [
                        TextSpan(
-                        text: 'By signing up, I agree to Workpleis ',style:  Theme.of(context)
-                           .textTheme
-                           .bodyMedium!
-                           .copyWith(fontSize: 13.sp),
+                        text: 'By signing up, I agree to Workpleis ',style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, fontFamily: "OpenText"),
                       ),
                       TextSpan(
 
                         text: 'Terms & Conditions',
                         style:  TextStyle(
                           color: AllColor.black,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
                           decorationThickness: 1.1,
-                          fontFamily: "bodyFond",
-                          fontSize: 14.sp
+                          fontFamily: "OpenText",
+                          fontSize: 12.sp
                         ),
                         recognizer: _termsTap,
                       ),
-                       TextSpan(text: ', & ',style: TextStyle( fontFamily: "bodyFond",
-                           fontSize: 14.sp,fontWeight: FontWeight.w400)),
+                       TextSpan(text: ', & ',style: TextStyle( fontFamily: "OpenText",
+                           fontSize: 12.sp,fontWeight: FontWeight.w700)),
                       TextSpan(
                         text: 'Community Guidelines',
                         style:  TextStyle(
                           color: AllColor.black,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
                           decorationThickness: 1.1,
-                            fontFamily: "bodyFond",
-                            fontSize: 14.sp
+                            fontFamily: "OpenText",
+                            fontSize: 12.sp
                         ),
                         recognizer: _guidelinesTap,
                       ),
-                       TextSpan(text: '. ', style: TextStyle( fontFamily: "bodyFond",
+                       TextSpan(text: '. ', style: TextStyle( fontFamily: "OpenText",
                            fontSize: 14.sp)),
                       TextSpan(
                         text: 'Privacy Policy',
                         style:  TextStyle(
                           color: AllColor.black,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
                           decorationThickness: 1.1,
-                            fontFamily: "bodyFond",
-                            fontSize: 14.sp
+                            fontFamily: "OpenText",
+                            fontSize: 12.sp
                         ),
                         recognizer: _privacyTap,
                       ),
