@@ -34,6 +34,7 @@ import 'package:workpleis/features/onboarding/screen/onboarding_screen_002.dart'
 import 'package:workpleis/features/proposal/screen/view_proposal_screen.dart';
 import 'package:workpleis/features/security/screen/settings_screen.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
+import 'package:workpleis/features/wallet/screen/service_wallet_screen.dart';
 import 'package:workpleis/features/wallet/screen/wallet_screen.dart';
 import '../features/Payment/screen/payment_methods_screen.dart';
 import '../features/account/screen/account_screen.dart';
@@ -311,11 +312,11 @@ class AppRouter {
             builder: (context, state) => const WalletScreen(),
           ),
 
-         //  GoRoute(
-         //    path: ServiceJobs.routeName,
-         //    name: ServiceJobs.routeName,
-         //    builder: (context, state) =>  const ServiceJobs(),
-         // ),
+          GoRoute(
+            path: ProviderWalletScreen.routeName,
+            name: ProviderWalletScreen.routeName,
+            builder: (context, state) =>  const ProviderWalletScreen(),
+         ),
     
           GoRoute(
             path: SecurityGuideScreen.routeName,

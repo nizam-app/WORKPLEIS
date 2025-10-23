@@ -51,8 +51,8 @@ class ProjectScreen extends ConsumerWidget {
     );
   }
 }
-
-/// 🔹 Riverpod provider to track selected status
+//
+// /// 🔹 Riverpod provider to track selected status
 final jobStatusProvider = StateProvider<String>((ref) => "Submitted");
 
 /// 🔹 Horizontal status selector
@@ -66,7 +66,7 @@ class JobStatusList extends ConsumerWidget {
     final statuses = [
       "Submitted",
       "Proposal Sent",
-      "In progress",
+      "In Progress",
       "In Review",
       "Delivered", // ← new
     ];
@@ -114,7 +114,8 @@ class JobStatusList extends ConsumerWidget {
   }
 }
 
-/// 🔹 Single job card widget
+
+// 🔹 Single job card widget
 class JobCard extends StatelessWidget {
   const JobCard({
     super.key,
@@ -160,9 +161,9 @@ class JobCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w400,
-                    fontFamily: "bodyFont",
+                    fontFamily: "openText",
                   ),
                 ),
               ),
@@ -204,10 +205,10 @@ class _StatusChip extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 12.sp,
-          fontWeight: FontWeight.w600,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
           color: AllColor.brand2_light,
-          fontFamily: "bodyFont",
+          fontFamily: "OpenText",
         ),
       ),
     );
@@ -230,9 +231,9 @@ class _DetailRow extends StatelessWidget {
     final content = Text(
       text,
       style: TextStyle(
-        fontSize: 13.sp,
+        fontSize: 14.sp,
         color: const Color(0xFF7A6FA2),
-        fontFamily: "bodyFont",
+        fontFamily: "OpenText",
       ),
       overflow: TextOverflow.ellipsis,
     );
@@ -320,7 +321,7 @@ class _BottomBar extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
               ),
               builder: (_) =>
-                  const CustomProjectCompletionBottomSheet(check: true),
+              const CustomProjectCompletionBottomSheet(check: true),
             );
           },
         ), // ← only this
@@ -340,8 +341,9 @@ class _BottomBar extends StatelessWidget {
               price,
               style: TextStyle(
                 fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
+                fontWeight: FontWeight.w700,
+                color: AllColor.black,
+                fontFamily: "OpenText"
               ),
             ),
           ],
@@ -355,8 +357,9 @@ class _BottomBar extends StatelessWidget {
           price,
           style: TextStyle(
             fontSize: 15.sp,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w700,
             color: AllColor.black,
+            fontFamily: "OpenText"
           ),
         ),
         const Spacer(),
@@ -404,10 +407,10 @@ class _PillButton extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w600,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w400,
               color: fg,
-              fontFamily: "bodyFont",
+              fontFamily: "OpenText",
             ),
           ),
         ),
@@ -415,6 +418,301 @@ class _PillButton extends StatelessWidget {
     );
   }
 }
+
+// class JobCard extends StatelessWidget {
+//   const JobCard({
+//     super.key,
+//     required this.title,
+//     required this.status,
+//     required this.time,
+//     required this.budget,
+//     required this.period,
+//     required this.price,
+//   });
+//
+//   final String title;
+//   final String status;
+//   final String time;
+//   final String budget;
+//   final String period;
+//   final String price;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: EdgeInsets.only(bottom: 10.h),
+//       padding: EdgeInsets.all(10.w),
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         borderRadius: BorderRadius.circular(12.r),
+//         boxShadow: [
+//           BoxShadow(
+//             color: Colors.black.withOpacity(0.05),
+//             blurRadius: 6,
+//             offset: const Offset(0, 3),
+//           ),
+//         ],
+//         border: Border.all(color: Colors.black.withOpacity(0.1)),
+//       ),
+//       child: Row(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           /// Left Column: Job details
+//           Expanded(
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 /// Title + Status Chip
+//                 Row(
+//                   crossAxisAlignment: CrossAxisAlignment.center,
+//                   children: [
+//                     Expanded(
+//                       child: Text(
+//                         title,
+//                         style: TextStyle(
+//                           fontSize: 16.sp,
+//                           fontWeight: FontWeight.w400,
+//                           fontFamily: "bodyFont",
+//                         ),
+//                       ),
+//                     ),
+//                     // JobPrice(price: price),
+//                   ],
+//                 ),
+//                 SizedBox(height: 8.h),
+//
+//                 /// Details
+//                 _DetailRow(icon: Icons.timer, text: time),
+//                 SizedBox(height: 6.h),
+//                 _DetailRow(icon: Icons.request_quote_outlined, text: budget),
+//                 SizedBox(height: 6.h),
+//                 _DetailRow(icon: Icons.call_outlined, text: period, expandable: true),
+//                 SizedBox(height: 8.h),
+//                 JobPrice(price: price),
+//               ],
+//             ),
+//           ),
+//
+//           SizedBox(width: 35.w), // spacing
+//
+//           /// Right Column: Status & Actions
+//           Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               JobActions(status: status),
+//               SizedBox(height: 10.h),
+//               _StatusChip(text: status),
+//
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+//
+// /// Price widget
+// class JobPrice extends StatelessWidget {
+//   const JobPrice({super.key, required this.price});
+//   final String price;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Text(
+//       price,
+//       style: TextStyle(
+//         fontSize: 16.sp,
+//         fontWeight: FontWeight.w500,
+//         color: Colors.black,
+//       ),
+//     );
+//   }
+// }
+//
+// /// Action buttons based on status
+// class JobActions extends StatelessWidget {
+//   const JobActions({super.key, required this.status});
+//   final String status;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final showButtons = status != "Submitted";
+//
+//     if (!showButtons) return Container();
+//
+//     final buttons = switch (status) {
+//       "Proposal Sent" => [
+//         _PillButton.purple(
+//           "View Proposal",
+//           onTap: () => context.push(ViewProposalScreen.routeName),
+//         ),
+//       ],
+//       "In Progress" => [
+//         _PillButton.purple(
+//           "Track Project",
+//           onTap: () => context.push(RequestTrackerScreen.routeName),
+//         ),
+//       ],
+//       "In Review" => [
+//         _PillButton.lime(
+//           "View Details",
+//           onTap: () {
+//             showModalBottomSheet(
+//               context: context,
+//               isScrollControlled: true,
+//               shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.vertical(top: Radius.circular(20.r))),
+//               builder: (_) => const CustomProjectCompletionBottomSheet(),
+//             );
+//           },
+//         ),
+//         SizedBox(width: 8.w),
+//         _PillButton.purple(
+//           "Track Project",
+//           onTap: () => context.push(RequestTrackerScreen.routeName),
+//         ),
+//       ],
+//       "Delivered" => [
+//         _PillButton.purple(
+//           "Leave us a review",
+//           onTap: () {
+//             showModalBottomSheet(
+//               context: context,
+//               isScrollControlled: true,
+//               shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.vertical(top: Radius.circular(20.r))),
+//               builder: (_) => const ReviewBottomSheet(),
+//             );
+//           },
+//         ),
+//         SizedBox(width: 8.w),
+//         _PillButton.lime(
+//           "View Details",
+//           onTap: () {
+//             showModalBottomSheet(
+//               context: context,
+//               isScrollControlled: true,
+//               shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.vertical(top: Radius.circular(20.r))),
+//               builder: (_) =>
+//               const CustomProjectCompletionBottomSheet(check: true),
+//             );
+//           },
+//         ),
+//       ],
+//       _ => <Widget>[],
+//     };
+//
+//     return Row(
+//       mainAxisSize: MainAxisSize.min,
+//       children: buttons,
+//     );
+//   }
+// }
+//
+// /// Status Chip
+// class _StatusChip extends StatelessWidget {
+//   const _StatusChip({required this.text});
+//   final String text;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+//       decoration: BoxDecoration(
+//         color: AllColor.white,
+//         borderRadius: BorderRadius.circular(8.r),
+//       ),
+//       child: Text(
+//         text,
+//         style: TextStyle(
+//           fontSize: 12.sp,
+//           fontWeight: FontWeight.w600,
+//           color: AllColor.brand2_light,
+//           fontFamily: "bodyFont",
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// /// Detail Row with icon + text
+// class _DetailRow extends StatelessWidget {
+//   const _DetailRow({
+//     required this.icon,
+//     required this.text,
+//     this.expandable = false,
+//   });
+//
+//   final IconData icon;
+//   final String text;
+//   final bool expandable;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final content = Text(
+//       text,
+//       style: TextStyle(
+//         fontSize: 13.sp,
+//         color: const Color(0xFF7A6FA2),
+//         fontFamily: "bodyFont",
+//       ),
+//       overflow: TextOverflow.ellipsis,
+//     );
+//     return Row(
+//       children: [
+//         Icon(icon, size: 18, color: const Color(0xFF7A6FA2)),
+//         SizedBox(width: 6.w),
+//         if (expandable) Expanded(child: content) else content,
+//       ],
+//     );
+//   }
+// }
+//
+// /// Pill button
+// class _PillButton extends StatelessWidget {
+//   const _PillButton._(this.label, this.bg, this.fg, {required this.onTap});
+//
+//   final String label;
+//   final Color bg;
+//   final Color fg;
+//   final VoidCallback onTap;
+//
+//   factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
+//       _PillButton._(label, AllColor.white, AllColor.brand2_light, onTap: onTap);
+//
+//   factory _PillButton.lime(String label, {required VoidCallback onTap}) =>
+//       _PillButton._(label, AllColor.white, AllColor.brand2_light, onTap: onTap);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Material(
+//       color: bg,
+//       borderRadius: BorderRadius.circular(22.r),
+//       child: InkWell(
+//         onTap: onTap,
+//         borderRadius: BorderRadius.circular(22.r),
+//         child: Padding(
+//           padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
+//           child: Text(
+//             label,
+//             style: TextStyle(
+//               fontSize: 12.sp,
+//               fontWeight: FontWeight.w600,
+//               color: fg,
+//               fontFamily: "bodyFont",
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+//
+
+
+
 
 class CustomProjectCompletionBottomSheet extends StatelessWidget {
   const CustomProjectCompletionBottomSheet({super.key, this.check = false});
@@ -857,10 +1155,10 @@ class ProjectReviewCard extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-            fontSize: 13.sp,
+            fontSize: 14.sp,
             color: AllColor.borderColor,
             fontWeight: FontWeight.w500,
-            fontFamily: "bodyFond"
+            fontFamily: "OpenText"
           ),
         )
       ],
@@ -884,7 +1182,7 @@ class ProjectReviewCard extends StatelessWidget {
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w500,
                 color: AllColor.black,
-                fontFamily: "bodyFont"
+                fontFamily: "OpenText"
               ),
             ),
             4.horizontalSpace,

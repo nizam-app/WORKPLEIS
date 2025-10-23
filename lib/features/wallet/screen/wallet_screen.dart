@@ -4,6 +4,8 @@ import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
 import 'package:workpleis/features/account/widget/custom_buttom.dart';
 
+import '../widget/custom_available_balance_card.dart';
+
 class WalletScreen extends StatefulWidget {
   const WalletScreen({super.key});
   static const routeName = "/walletScreen";
@@ -48,39 +50,7 @@ class _WalletScreenState extends State<WalletScreen> {
         child: Column(
           children: [
             // 🔹 Balance Card
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 20.h),
-              decoration: BoxDecoration(
-                color: AllColor.brand2_light,
-                borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(color: AllColor.grey, width: 1.w),  
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    "Available Balance",
-                    style: TextStyle(
-                        color: AllColor.black54,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18.sp),
-                  ),
-                  SizedBox(height: 6.h),
-                  Text(
-                    "\$1,250.00",
-                    style: TextStyle(
-                        fontSize: 26.sp, fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(height: 10.h),
-                  
-                  Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: CustomButtom(text: "Add Funds", color: AllColor.white, ),
-                  ),
-                
-                ],
-              ),
-            ),
+            CustomAavailableBalanceCard(buttonText: 'Add Funds',),
             SizedBox(height: 16.h),
 
             // 🔹 Stats Row
@@ -259,3 +229,4 @@ class _WalletScreenState extends State<WalletScreen> {
     );
   }
 }
+

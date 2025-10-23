@@ -317,7 +317,7 @@ class _CategoryCard extends StatelessWidget {
             ),
             child: Icon(icon, color: iconColor, size: 22.sp),
           ),
-   Spacer(),
+            Spacer(),
           Text(
             jobs,
             style: theme.bodySmall?.copyWith(
