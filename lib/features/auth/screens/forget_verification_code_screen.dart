@@ -21,23 +21,24 @@ class ForgetVerificationCodeScreen  extends StatelessWidget {
           children: [
             Spacer(),
             Text("Enter verification Code",
-                style:theme.headlineLarge ),
+                style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black) ),
             SizedBox(height: 8.h),
             Text("We have sent a code to",textAlign: TextAlign.center,
-                style: theme.titleMedium),
-            Text("We have sent a code to",textAlign: TextAlign.center,
-                style: theme.titleMedium!.copyWith(fontWeight: FontWeight.w700, fontSize:14.sp )),
+                style: TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText)),
+            // Text("We have sent a code to",textAlign: TextAlign.center,
+            //     style: TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText)),
             SizedBox(height: 30.h),
 
             // 🔹 Full Name
             Padding(
-              padding:  EdgeInsets.only(left: 10.w),
+              padding:  EdgeInsets.only(left: 2.w),
               child: Align(
                 alignment: Alignment.centerLeft,
 
                 child: Text("OTP",
                     style: TextStyle(
-                        fontSize: 13.sp, fontWeight: FontWeight.w600, color: AllColor.borderColor)),
+                        fontSize: 12.sp, fontWeight: FontWeight.w400, color: AllColor.borderColor, fontFamily:"OpenText")
+                ),
               ),
             ),
             SizedBox(height: 6.h),

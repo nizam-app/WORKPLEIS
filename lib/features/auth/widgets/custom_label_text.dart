@@ -17,7 +17,7 @@ class CustomLabelText extends StatelessWidget {
 
         child: Text(title,
             style: TextStyle(
-                fontSize: 16.sp, fontWeight: FontWeight.w500, color: AllColor.borderColor)),
+                fontSize: 16.sp, fontWeight: FontWeight.w600, color: AllColor.borderColor, fontFamily: "OpenText")),
       ),
     );
   }
@@ -39,7 +39,7 @@ class CustomPaymentText extends StatelessWidget {
 
         child: Text(title,
             style: TextStyle(
-                fontSize: 18.sp, fontWeight: FontWeight.w500, color: AllColor.borderColor)),
+                fontSize: 18.sp, fontWeight: FontWeight.w600, color: AllColor.borderColor, fontFamily: "OpenText")),
       ),
     );
   }

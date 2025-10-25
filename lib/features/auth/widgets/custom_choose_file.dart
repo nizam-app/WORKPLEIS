@@ -23,8 +23,8 @@ class CustomChooseFile extends StatelessWidget {
             style: TextStyle(
               color: AllColor.borderColor, // soft purple-gray
               fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              fontFamily: "bodyFont",
+              fontWeight: FontWeight.w400,
+              fontFamily: "OpenText",
             ),
           ),
         ),
@@ -57,20 +57,20 @@ class CustomChooseFile extends StatelessWidget {
                   Text(
                     'Choose files or drag and drop',
                     style: TextStyle(
-                      color: AllColor.borderColor.withOpacity(0.6),
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "bodyFont",
+                      color: AllColor.borderColor,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: "OpenText",
                     ),
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     'Only jpg or png file type accepted',
                     style: TextStyle(
-                      color: AllColor.borderColor.withOpacity(0.6),
+                      color: AllColor.borderColor,
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
-                      fontFamily: "bodyFont",
+                      fontFamily: "OpenText",
                     ),
                   ),
                 ],

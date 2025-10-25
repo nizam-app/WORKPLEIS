@@ -29,7 +29,7 @@ class CustomGmailButton extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: Text(
                 'OR',
-                style: TextStyle(fontSize: 11.sp, color: AllColor.grey),
+                style: TextStyle(fontSize: 12.sp, color: AllColor.grey, fontFamily:"OpenText", fontWeight: FontWeight.w400),
               ),
             ),
             Expanded(child: Container(height: 1, color: AllColor.black.withOpacity(.1))),
@@ -58,7 +58,7 @@ class CustomGmailButton extends StatelessWidget {
                   height: 18.h,
                 ),
                 SizedBox(width: 8.w),
-                Text('Sign in with Google', style: TextStyle(fontSize: 14.sp)),
+                Text('Sign in with Google', style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400, fontFamily:"OpenText")),
               ],
             ),
           ),
@@ -69,7 +69,7 @@ class CustomGmailButton extends StatelessWidget {
           children: [
             Text(
               "Don't have an account? ",
-              style: TextStyle(fontSize: 12.sp, color: AllColor.grey),
+              style: TextStyle(fontSize: 14.sp, color: AllColor.grey, fontFamily:"OpenText", fontWeight: FontWeight.w400),
             ),
             SizedBox(width: 5.w),
             GestureDetector(
@@ -77,9 +77,10 @@ class CustomGmailButton extends StatelessWidget {
               child: Text(
                 taxt,
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 14.sp,
                   color: AllColor.black,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w700,
+                  fontFamily:"OpenText"
                 ),
               ),
             )

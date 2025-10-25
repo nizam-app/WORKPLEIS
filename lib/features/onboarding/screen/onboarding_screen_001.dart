@@ -53,7 +53,7 @@ class OnboardingScreen03 extends StatelessWidget {
         SizedBox(height: 5.h,),
         Text("Our Interface empowers you with \n"
             " intuitive controls and effortless \n"
-            " interactions",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenText",),)
+            " interactions",textAlign: TextAlign.center,style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400, fontFamily: "OpenText",),)
       ],
     );
   }
@@ -100,7 +100,7 @@ class Onboarding02BottomNavBar extends ConsumerWidget {
                   style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, fontFamily: "OpenText")),
               SizedBox(height: 5.h),
               Text("Select your role",
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 20.sp, fontWeight: FontWeight.w700, fontFamily: "OpenText")),
+                  style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700, fontFamily: "OpenText")),
               SizedBox(height: 15.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

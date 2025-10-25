@@ -28,8 +28,8 @@ class OnboardingScreen01 extends StatelessWidget {
                 SizedBox(height: 5.h),
                 Text(
                   "A SUSTAINABLE MARKETPLACE FOR BUSINESSES",
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    fontSize: 9.sp
+                  style: TextStyle(
+                    fontSize: 9.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400,
                   ),
                 ),
                 Spacer(),

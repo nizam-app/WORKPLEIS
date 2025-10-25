@@ -143,7 +143,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
                 onTap: () {
                   globalShowAlertDialog(context: context, oneTap: () {loginDone(context);});
                 },
-                color: AllColor.primary,
+                color: AllColor.bgcolor,
                 buttonName: "Add",
               ),
               SizedBox(height: 40.h),

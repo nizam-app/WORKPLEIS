@@ -6,6 +6,8 @@ import 'package:workpleis/core/widget/global_bottom.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
+
+import '../../../core/constants/color_control/all_color.dart';
 class BusinessPasswordScreen extends StatelessWidget {
   const BusinessPasswordScreen({super.key});
   static final routeName = "/businessPasswordScreen";
@@ -24,13 +26,13 @@ class BusinessPasswordScreen extends StatelessWidget {
               Spacer(),
               Text(
                 "Set Up Password",
-                style:theme.headlineLarge,
+                style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black),
               ),
               SizedBox(height: 8.h),
               Text(
                 "Complete these steps to finish setting up \n your account.",
                 textAlign: TextAlign.center,
-                style:theme.titleMedium,
+                style:TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
               ),
               SizedBox(height: 30.h),
 

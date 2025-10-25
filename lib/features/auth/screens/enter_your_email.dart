@@ -19,22 +19,22 @@ class EnterYourEmail  extends StatelessWidget {
           children: [
             Spacer(),
             Text("Enter Your Email",
-                style:theme.headlineLarge ),
+                style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black) ),
             SizedBox(height: 8.h),
             Text("We’ll send you a one time code to \n "
                 "verify your email.",textAlign: TextAlign.center,
-                style: theme.titleMedium),
+                style:TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText)),
             SizedBox(height: 30.h),
 
-            // 🔹 Full Name
+            //🔹 Full Name
             Padding(
-              padding:  EdgeInsets.only(left: 10.w),
+              padding:  EdgeInsets.only(left: 2.w),
               child: Align(
                 alignment: Alignment.centerLeft,
 
                 child: Text("Email",
                     style: TextStyle(
-                        fontSize: 13.sp, fontWeight: FontWeight.w500, color: AllColor.borderColor)),
+                        fontSize: 12.sp, fontWeight: FontWeight.w400, color: AllColor.borderColor, fontFamily:"OpenText")),
               ),
             ),
             SizedBox(height: 6.h),

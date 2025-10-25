@@ -63,7 +63,7 @@ class GlobalAleartBox extends StatelessWidget {
             height: 40.h,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AllColor.primary,
+                backgroundColor: AllColor.bgcolor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.r),
                 ),

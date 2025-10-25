@@ -21,30 +21,33 @@ class ForgetPasswordScreen  extends StatelessWidget {
           children: [
             Spacer(),
             Text("Forgot Password",
-                style:theme.headlineLarge ),
+                style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black)),
             SizedBox(height: 8.h),
             Text("Enter your email account to \n reset password",textAlign: TextAlign.center,
-                style: theme.titleMedium),
+                style: TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText)),
             SizedBox(height: 30.h),
 
             // 🔹 Full Name
             Padding(
-              padding:  EdgeInsets.only(left: 10.w),
+              padding:  EdgeInsets.only(left: 2.w),
               child: Align(
                 alignment: Alignment.centerLeft,
 
                 child: Text("Email",
-                    style: TextStyle(
-                        fontSize: 13.sp, fontWeight: FontWeight.w500, color: AllColor.borderColor)),
+                    style:TextStyle(
+                        fontSize: 12.sp, fontWeight: FontWeight.w400, color: AllColor.borderColor, fontFamily:"OpenText"
+                    ),),
               ),
             ),
             SizedBox(height: 6.h),
             TextFormField(
+
               controller: _emailController,
               validator: (v) =>
               v == null || v.isEmpty || v.contains("com") ? "Enter your Email" : null,
               decoration: const InputDecoration(
                 hintText: "type your email",
+
               ),
             ),
             SizedBox(height: 25.h),

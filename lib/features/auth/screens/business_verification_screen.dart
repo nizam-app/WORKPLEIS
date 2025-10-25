@@ -6,6 +6,8 @@ import 'package:workpleis/features/auth/screens/address_and_password.dart';
 import 'package:workpleis/features/auth/screens/bisiness_password_screen.dart';
 import 'package:workpleis/features/auth/widgets/custom_choose_file.dart';
 
+import '../../../core/constants/color_control/all_color.dart';
+
 class BusinessVerificationScreen extends StatelessWidget {
   const BusinessVerificationScreen({super.key});
 
@@ -22,13 +24,13 @@ class BusinessVerificationScreen extends StatelessWidget {
             child: Column(
               children: [
                 Spacer(),
-                Text("Verify Your Business", style: theme.headlineLarge),
+                Text("Verify Your Business", style: TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black)),
                 SizedBox(height: 8.h),
                 Text(
                   "Upload a clear photo of any of your business \n"
                   " documents listed below.",
                   textAlign: TextAlign.center,
-                  style: theme.titleMedium,
+                  style: TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
                 ),
                 SizedBox(height: 30.h),
                 BusinessDocumentsList(),
@@ -152,9 +154,9 @@ class BusinessDocumentsList extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+           Text(
             '• ',
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18.sp),
           ),
           Expanded(
             child: Text(

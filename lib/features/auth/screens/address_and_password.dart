@@ -27,10 +27,10 @@ class AddressAndPassword extends StatelessWidget {
           children: [
             Spacer(),
             Text("Set Up Address & Password",
-                style:theme.headlineLarge ),
+                style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black) ),
             SizedBox(height: 8.h),
             Text("Complete these steps to finish setting up \n your account.",textAlign: TextAlign.center,
-                style: theme.titleMedium),
+                style:TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText)),
             SizedBox(height: 30.h),
 
             // 🔹 Full Name
