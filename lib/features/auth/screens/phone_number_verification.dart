@@ -27,26 +27,25 @@ class PhoneNumberVerification extends StatelessWidget {
           child: Column(
             children: [
               Spacer(),
-              Text("Verify Your Phone Number", style: theme.headlineLarge),
+              Text("Verify Your Phone Number", style: TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black)),
               SizedBox(height: 8.h),
               Text(
                 "Enter the 6-digit code we just sent to \n your mobile number.",
                 textAlign: TextAlign.center,
-                style: theme.titleMedium,
+                style: TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
               ),
               SizedBox(height: 30.h),
 
               // 🔹 Full Name
               Padding(
-                padding: EdgeInsets.only(left: 10.w),
+                padding: EdgeInsets.only(left: 2.w),
                 child: Align(
                   alignment: Alignment.centerLeft,
 
                   child: Text(
                     "Verification Code",
                     style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w600,
+                        fontSize: 12.sp, fontWeight: FontWeight.w400, color: AllColor.borderColor, fontFamily:"OpenText"
                     ),
                   ),
                 ),

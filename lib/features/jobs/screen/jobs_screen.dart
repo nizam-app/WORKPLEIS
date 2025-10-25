@@ -179,7 +179,7 @@ class JobCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w400,
-                        fontFamily: "bodyFont",
+                        fontFamily: "OpenText",
                       ),
                     ),
 
@@ -201,8 +201,8 @@ class JobCard extends StatelessWidget {
           ),
           SizedBox(width: 38.w,),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+
             children: [
               _StatusChip(text: status),
               SizedBox(height: 100.h,),
@@ -234,9 +234,9 @@ class _StatusChip extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: 12.sp,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w400,
           color:AllColor.brand2_light,
-          fontFamily: "bodyFont",
+          fontFamily: "OpenText",
         ),
       ),
     );
@@ -260,7 +260,7 @@ class _DetailRow extends StatelessWidget {
       style: TextStyle(
         fontSize: 12.sp,
         color: const Color(0xFF7A6FA2),
-        fontFamily: "bodyFont",
+        fontFamily: "OpenText",
       ),
       overflow: TextOverflow.ellipsis,
     );
@@ -288,9 +288,9 @@ class JobPriceText extends StatelessWidget {
       price,
       style: TextStyle(
         fontSize: 16.sp,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w400,
         color: AllColor.black87,
-        fontFamily: "bodyFont",
+        fontFamily: "OpenText",
       ),
     );
   }
@@ -360,9 +360,9 @@ class _PillButton extends StatelessWidget {
         label,
         style: TextStyle(
           fontSize: 14.sp,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w400,
           color: fg,
-          fontFamily: "bodyFont",
+          fontFamily: "OpenText",
         ),
       ),
     );

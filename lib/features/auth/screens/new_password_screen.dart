@@ -6,6 +6,8 @@ import 'package:workpleis/core/widget/global_bottom.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
+
+import '../../../core/constants/color_control/all_color.dart';
 class NewPasswordScreen extends StatelessWidget {
   const NewPasswordScreen({super.key});
   static final routeName = "/newPasswordScreen";
@@ -24,13 +26,13 @@ class NewPasswordScreen extends StatelessWidget {
               Spacer(),
               Text(
                 "Reset your password",
-                style:theme.headlineLarge,
+                style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black),
               ),
               SizedBox(height: 8.h),
               Text(
                 "The password must be \n different then before",
                 textAlign: TextAlign.center,
-                style:theme.titleMedium,
+                style:TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
               ),
               SizedBox(height: 30.h),
               // 🔹 Full Name

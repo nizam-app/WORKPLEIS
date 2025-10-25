@@ -172,7 +172,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
             SizedBox(height: 30.h),
             GlobalGetStartedButton(onTap: () {globalShowAlertDialog(context: context, oneTap: (){
              Navigator.pop(context); 
-            },message:"Post create success" );}, buttonName: "Post a Job", color: AllColor.primary,),
+            },message:"Post create success" );}, buttonName: "Post a Job", color: AllColor.bgcolor,),
           SizedBox(height: 20.h,)
           ],
         ),

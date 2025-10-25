@@ -109,7 +109,7 @@ class _Onboarding02BottonbarState
             children: [
               Text(
                 "A SUNTAINABLE MARKETPLACE FOR BUSINESSES",
-                style:TextStyle(fontSize: 12.sp,),
+                style:TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w400, fontFamily: "OpenText"),
               ),
               SizedBox(height: 5.h),
               Text(

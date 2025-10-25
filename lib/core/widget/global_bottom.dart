@@ -23,10 +23,10 @@ class GlobalButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width:100.w, // full width
+      width:140.w, // full width
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: color ?? AllColor.primary, // default black
+          backgroundColor: color ?? AllColor.bgcolor, // default black
           padding: padding ?? EdgeInsets.symmetric(vertical: 12.h),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.r),
@@ -36,10 +36,10 @@ class GlobalButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            color:textColor,
-            fontSize: fontSize ?? 13.sp,
-            fontWeight: FontWeight.w500,
-            fontFamily: "bodyFont"
+            color:AllColor.grey,
+            fontSize: fontSize ?? 18.sp,
+            fontWeight: FontWeight.w600,
+            fontFamily: "OpenText"
           ),
         ),
       ),

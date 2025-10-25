@@ -93,7 +93,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     
                       child: Text(
                         'Forgot password?',
-                        style: TextStyle(fontSize: 12.sp, color: AllColor.borderColor),
+                        style: TextStyle(fontSize: 12.sp, color: AllColor.borderColor, fontFamily: "OpenText", fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),]
@@ -101,7 +101,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 SizedBox(height: 30.h),
 
                 // ── Sign In button
-            GlobalGetStartedButton(onTap: (){context.push(AddPaymentMethodScreen.routeName);},color: AllColor.primary,buttonName: "Sign In",),
+            GlobalGetStartedButton(onTap: (){context.push(AddPaymentMethodScreen.routeName);},color: AllColor.bgcolor,buttonName: "Sign In",),
             CustomGmailButton(onTop: () { context.push(OnboardingScreen03.routeName);}, taxt: 'Sign up',),
 
 
@@ -122,7 +122,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       children: [
         Text(
           "     Sign in to your \n Workpleis account",
-          style: TextStyle(fontSize: 20.sp, color:Color(0xff45454C), fontFamily: "OpenText", fontWeight: FontWeight.w400 ),
+          style: TextStyle(fontSize: 20.sp, color:Color(0xff45454C), fontFamily: "headFont", fontWeight: FontWeight.w800 ),
         ),
         SizedBox(height: 28.h),
       ],

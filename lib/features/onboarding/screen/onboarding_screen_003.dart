@@ -56,10 +56,10 @@ class OnboardingScreen02 extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
         children: [
-          Center(child: Text("Team up For Success",style: TextStyle(fontSize:24, fontWeight:FontWeight.w700, fontFamily: "OpenText" ))),
+          Center(child: Text("Team up For Success",style: TextStyle(fontSize:24.sp, fontWeight:FontWeight.w800, fontFamily:"headFont" ))),
           SizedBox(height: 5.h,),
           Text("Get ready to unleash your potential and \n"
-              " witness the power of teamwork",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenText", fontWeight: FontWeight.w400, fontSize: 12.sp),)
+              " witness the power of teamwork",textAlign: TextAlign.center,style: TextStyle(fontFamily:"OpenText", fontWeight: FontWeight.w400, fontSize: 12.sp),)
         ],
       );
   }
