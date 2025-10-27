@@ -105,8 +105,9 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
       text,
       style: TextStyle(
         fontSize: 16.sp,
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.w700,
         color: AllColor.black,
+        fontFamily: "headFont",
       ),
     );
   }
@@ -154,7 +155,7 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
               .map((opt) => DropdownMenuItem(
             value: opt,
             child: Text(opt,
-                style: TextStyle(fontSize: 13.sp, color: AllColor.black)),
+                style: TextStyle(fontSize: 14.sp, color: AllColor.black, fontFamily: "OpenText")),
           ))
               .toList(),
         ),

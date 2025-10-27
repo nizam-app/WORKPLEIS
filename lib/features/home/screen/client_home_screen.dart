@@ -60,10 +60,10 @@ class HomeScreen extends StatelessWidget {
               GlobalGetStartedButton(
                 onTap: () {showChooseJobTypeBottomBar(context);},
                 color: AllColor.bgcolor,
-                buttonName: "Next",
+                buttonName: "continue",
                 borderRadius: 25,
                 height: 40,
-                textColor: AllColor.borderColor,
+                textColor: AllColor.grey,
               ),
             ],
           ),
@@ -404,7 +404,7 @@ class ActiveJobsSection extends StatelessWidget {
                 },
                 child: Text(
                   'See All >',
-                  style: theme.bodyMedium?.copyWith(
+                  style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w400,
                     fontSize: 14.sp,
@@ -493,7 +493,7 @@ class _JobCard extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     fontSize: 16.sp,
                     color: AllColor.black,
-                    fontFamily: "OpenText"
+                    fontFamily: "headFont"
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -548,13 +548,17 @@ class _JobCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                status,
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w400,
-                  color: AllColor.brand2_light,
-                  fontFamily: "OpenText"
+              SizedBox(height: 8.h,),
+              Padding(
+                padding:  EdgeInsets.only(left: 10.h),
+                child: Text(
+                  status,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: AllColor.brand2_light,
+                    fontFamily: "OpenText"
+                  ),
                 ),
               ),
               SizedBox(height: 48.h),
@@ -566,8 +570,8 @@ class _JobCard extends StatelessWidget {
                   'Open',
                   style: TextStyle(
                     color: AllColor.brand2_light,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
                       fontFamily: "OpenText"
                   ),
                 ),
@@ -1151,7 +1155,7 @@ class _StepCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 26.sp, color: AllColor.black),
+          Icon(icon, size: 26.sp, color: AllColor.brand2_light),
           SizedBox(height: 6.h),
           Text(
             title,
@@ -1159,7 +1163,7 @@ class _StepCard extends StatelessWidget {
             style: TextStyle(
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
-              color: Colors.black,
+              color:AllColor.black,
               fontFamily: "OpenText"
 
             ),
@@ -1318,10 +1322,10 @@ class _ChooseJobTypeBottomBarState extends State<ChooseJobTypeBottomBar> {
           Text(
             "Choose job type",
             style: TextStyle(
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w800,
               fontSize: 18.sp,
               color: Colors.black,
-              fontFamily: "OpenText"
+              fontFamily: "headFont"
             ),
           ),
           SizedBox(height: 20.h),

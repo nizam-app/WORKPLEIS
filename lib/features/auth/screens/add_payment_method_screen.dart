@@ -145,6 +145,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
                 },
                 color: AllColor.bgcolor,
                 buttonName: "Add",
+                textColor: AllColor.borderColor,
               ),
               SizedBox(height: 40.h),
             ],

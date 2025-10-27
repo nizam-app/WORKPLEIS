@@ -22,12 +22,12 @@ class CustomStepProgressSection extends StatelessWidget {
         children: [
           // 🔹 Title
           Text(
-            "Project Setup Progress",
+            "Project tracking",
             style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w500,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w800,
               color: AllColor.black,
-              fontFamily: "bodyFont",
+              fontFamily: "headFont",
             ),
           ),
           SizedBox(height: 10.h),
@@ -55,8 +55,8 @@ class CustomStepProgressSection extends StatelessWidget {
                   child: Container(
                     height: 2.h,
                     color: connectorDone
-                        ? AllColor.brand2_light
-                        : AllColor.primary.withOpacity(0.4),
+                        ? AllColor.bgcolor
+                        : AllColor.grey,
                   ),
                 );
               }
@@ -77,7 +77,7 @@ class CustomStepProgressSection extends StatelessWidget {
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                     color: AllColor.black,
-                    fontFamily: "bodyFont",
+                    fontFamily: "OpenText",
                   ),
                 ),
               );
@@ -113,21 +113,21 @@ class _StepCircle extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: filled ? AllColor.brand2_light : Colors.white,
+          color: filled ? AllColor.bgcolor : AllColor.brand2_light,
           border: Border.all(
-            color: filled ? AllColor.brand2_light : AllColor.primary,
+            color: filled ? AllColor.bgcolor : AllColor.brand2_light,
             width: 1.6,
           ),
         ),
         child: Center(
           child: isCompleted
-              ? Icon(Icons.check, size: 18.sp, color: AllColor.white)
+              ? Icon(Icons.check, size: 18.sp, color: AllColor.black)
               : Text(
             "${index + 1}",
             style: TextStyle(
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
-              color: filled ? AllColor.white : AllColor.black,
+              color: filled ? AllColor.black : AllColor.black,
             ),
           ),
         ),

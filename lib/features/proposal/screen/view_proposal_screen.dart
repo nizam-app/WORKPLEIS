@@ -100,9 +100,10 @@ class ViewProposalScreen extends ConsumerWidget {
                 Text(
                   "${filtered.length} ${tabIndex == 0 ? 'pending' : tabIndex == 1 ? 'approved' : 'rejected'}",
                   style: TextStyle(
-                    color: AllColor.black.withOpacity(.6),
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w300,
+                    color: AllColor.black,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w200,
+                    fontFamily: "headFont"
                   ),
                 )
               ],
@@ -179,7 +180,7 @@ class SegmentControl extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: AllColor.black.withOpacity(.1)),
-        borderRadius: BorderRadius.circular(999.r),
+        borderRadius: BorderRadius.circular(30.r),
       ),
       child: Row(
         children: [
@@ -194,17 +195,21 @@ class SegmentControl extends StatelessWidget {
   Widget _tab(String title, bool active, VoidCallback onTap) => GestureDetector(
     onTap: onTap,
     child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
+
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
       decoration: BoxDecoration(
-        color: active ? AllColor.brand2_light : Colors.transparent,
-        borderRadius: BorderRadius.circular(999.r),
+        color: active ? AllColor.primary : Colors.transparent,
+        borderRadius: BorderRadius.circular(30.r),
+       // border: Border.all(width: 1.h, color: AllColor.grey),
       ),
       child: Text(
         title,
         style: TextStyle(
-          fontSize: 13.sp,
-          fontWeight: FontWeight.w500,
-          color: active ? AllColor.white : AllColor.black,
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w200,
+          //color: active ? AllColor.white : AllColor.black,
+            color:AllColor.black,
+          fontFamily: "headFont"
         ),
       ),
     ),
@@ -252,20 +257,32 @@ class ProposalCard extends StatelessWidget {
                   },
                   child: Text(data.title,
                       style: TextStyle(
-                          fontSize: 16.sp, fontWeight: FontWeight.w500)),
+                          fontSize: 16.sp, fontWeight: FontWeight.w700, fontFamily: "headFont")),
                 ),
               ),
               Text("\$${_formatPrice(data.price)}",
                   style: TextStyle(
-                      fontSize: 14.sp, fontWeight: FontWeight.w500)),
+                      fontSize: 14.sp, fontWeight: FontWeight.w400, fontFamily: "OpenText")),
             ],
           ),
           8.verticalSpace,
           Text(data.details,
               style: TextStyle(
-                  color: AllColor.black.withOpacity(.7), fontSize: 13.sp)),
+                  color: AllColor.black.withOpacity(.7), fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
           12.verticalSpace,
+          // Row(
+          //   children: [
+          //     _eta("Est: ${data.eta}"),
+          //     SizedBox(width: 20.w,),
+          //     // const Spacer(),
+          //     _icon(Icons.chat_bubble_outline_outlined, () {
+          //       context.push(ChatScreen.routeName);
+          //     }),
+          //   ],
+          // ),
+
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _eta("Est: ${data.eta}"),
               const Spacer(),
@@ -273,9 +290,9 @@ class ProposalCard extends StatelessWidget {
                 context.push(ChatScreen.routeName);
               }),
               if (showActions) ...[
-                8.horizontalSpace,
+                 8.horizontalSpace,
                 _actionButton("Accept", onAccept),
-                8.horizontalSpace,
+                 8.horizontalSpace,
                 _actionButton("Reject", onReject),
               ]
             ],
@@ -301,8 +318,8 @@ class ProposalCard extends StatelessWidget {
       Text(label,
           style: TextStyle(
               fontSize: 12.sp,
-              fontWeight: FontWeight.w600,
-              fontFamily: "bodyFont",
+              fontWeight: FontWeight.w400,
+              fontFamily: "OpenText",
               color: AllColor.grey)),
     ],
   );
@@ -319,8 +336,9 @@ class ProposalCard extends StatelessWidget {
           label,
           style: TextStyle(
             color: AllColor.brand2_light,
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w500,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w400,
+            fontFamily: "OpenText"
           ),
         ),
       ),
@@ -395,9 +413,11 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
               children: [
                 Text(
                   widget.text1,
-                  style: theme.titleSmall?.copyWith(
+                  style: TextStyle(
                     color: AllColor.black,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16.sp,
+                    fontFamily: "headFont"
                   ),
                 ),
                 const Spacer(),
@@ -442,9 +462,11 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                     ),
                     child: Text(
                       "Cancel",
-                      style: theme.titleMedium?.copyWith(
+                      style: TextStyle(
                         color: AllColor.black,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "OpenText",
+                        fontSize: 16.sp
                       ),
                     ),
                   ),
@@ -457,7 +479,7 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                       widget.onSubmit(text);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AllColor.brand2_light,
+                      backgroundColor: AllColor.bgcolor,
                       foregroundColor: AllColor.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(999.r),
@@ -468,9 +490,13 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                     ),
                     child: Text(
                       "Submit",
-                      style: theme.titleMedium?.copyWith(
-                        color: AllColor.white,
-                        fontWeight: FontWeight.w600,
+                      style: TextStyle(
+                        color: AllColor.black,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "OpenText",
+                        fontSize: 16.sp,
+
+
                       ),
                     ),
                   ),

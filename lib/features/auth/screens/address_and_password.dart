@@ -65,7 +65,8 @@ class AddressAndPassword extends StatelessWidget {
               ),
             ),
             SizedBox(height: 25.h),
-            GlobalButton(text: "Submit", onPressed: () {
+            GlobalButton(
+                text: "Submit", onPressed: () {
               globalShowAlertDialog(context: context, oneTap: () {context.push(LoginScreen.routeName);});
             })
             ,

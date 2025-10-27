@@ -57,8 +57,9 @@ class ProjectDescriptionSection extends StatelessWidget {
           "Project Description",
           style: TextStyle(
             fontSize: 16.sp,
-            fontWeight: FontWeight.w300,
+            fontWeight: FontWeight.w800,
             color: AllColor.black,
+            fontFamily: "headFont"
           ),
         ),
         SizedBox(height: 8.h),
@@ -115,8 +116,9 @@ class _UrgencySectionState extends State<UrgencySection> {
           "Urgency",
           style: TextStyle(
             fontSize: 16.sp,
-            fontWeight: FontWeight.w300,
+            fontWeight: FontWeight.w800,
             color: AllColor.black,
+            fontFamily: "headFont"
           ),
         ),
         SizedBox(height: 5.h),
@@ -168,6 +170,12 @@ class _UrgencyTile extends StatelessWidget {
               groupValue: selected ? title : "",
               onChanged: (_) => onTap(),
               activeColor: AllColor.black,
+              fillColor: MaterialStateProperty.resolveWith<Color>(
+                    (states) => states.contains(MaterialState.selected)
+                    ? AllColor.brand2_light
+                    : Colors.grey.shade400,
+              ),
+
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             SizedBox(width: 6.w),
@@ -179,16 +187,19 @@ class _UrgencyTile extends StatelessWidget {
                     title,
                     style: TextStyle(
                       fontSize: 14.sp,
-                      fontWeight: FontWeight.w300,
+                      fontWeight: FontWeight.w400,
                       color: AllColor.black,
+                      fontFamily: "OpenText"
                     ),
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     subtitle,
                     style: TextStyle(
-                      fontSize: 11.sp,
+                      fontSize: 12.sp,
                       color: AllColor.black87,
+                      fontFamily: "OpenText",
+                      fontWeight: FontWeight.w400
                     ),
                   ),
                 ],
@@ -237,14 +248,15 @@ class _NdaSectionState extends State<NdaSection> {
                 "NDA Required",
                 style: TextStyle(
                   fontSize: 14.sp,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w500,
                   color: AllColor.black,
+                  fontFamily: "OpenText"
                 ),
               ),
               SizedBox(height: 4.h),
               Text(
                 "This project involves confidential information that requires a non-disclosure agreement",
-                style: TextStyle(fontSize: 11.sp, color: AllColor.grey),
+                style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontFamily: "OpenText"),
               ),
             ],
           ),

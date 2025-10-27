@@ -40,7 +40,7 @@ class GlobalAleartBox extends StatelessWidget {
               color: AllColor.primary,
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.check, color: Colors.white, size: 40),
+            child: const Icon(Icons.check, color: AllColor.bgcolor, size: 40),
           ),
           SizedBox(height: 20.h),
 
@@ -53,6 +53,7 @@ class GlobalAleartBox extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: Colors.black,
               height: 1.4,
+              fontFamily: "OpenText"
             ),
           ),
           SizedBox(height: 24.h),
@@ -76,6 +77,7 @@ class GlobalAleartBox extends StatelessWidget {
                   color: Colors.black,
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w600,
+                  fontFamily: "OpenText"
                 ),
               ),
             ),
@@ -99,7 +101,9 @@ void globalShowAlertDialog({
     barrierDismissible: false, // prevent closing by tapping outside
     builder: (BuildContext context) {
       return Dialog(
+
         backgroundColor: Colors.transparent,
+
         insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
         child: GlobalAleartBox(oneTap: oneTap, message: message),
       );

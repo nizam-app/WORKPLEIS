@@ -74,9 +74,11 @@ class ProjectHeaderCard extends StatelessWidget {
                   8.horizontalSpace,
                   Text(
                     "Special Project",
-                    style: textTheme.titleSmall?.copyWith(
-                      color: AllColor.black,
-                      fontWeight: FontWeight.w600,
+                    style:TextStyle(
+                      fontSize: 16.h,
+                      color: AllColor.black87,
+                      fontWeight: FontWeight.w800,
+                      fontFamily: "headFont"
                     ),
                   ),
                 ],
@@ -89,10 +91,12 @@ class ProjectHeaderCard extends StatelessWidget {
                 ),
                 child: Text(
                   "in progress",
-                  style: textTheme.titleMedium?.copyWith(
+
+                  style: TextStyle(
                     fontSize: 12.sp,
                     color: AllColor.white,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "OpenText"
                   ),
                 ),
               ),
@@ -104,7 +108,7 @@ class ProjectHeaderCard extends StatelessWidget {
           /// Sub Text
           Text(
             "Title :",
-            style: textTheme.titleMedium?.copyWith(color: AllColor.black),
+            style: TextStyle(color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400, fontSize: 14.sp),
           ),
 
           14.verticalSpace,
@@ -112,7 +116,7 @@ class ProjectHeaderCard extends StatelessWidget {
           /// Progress Label + Bar
           Text(
             "Progress",
-            style: textTheme.titleMedium?.copyWith(fontSize: 11.sp),
+            style: TextStyle(fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400, color: AllColor.black87),
           ),
           6.verticalSpace,
           Row(
@@ -190,10 +194,10 @@ class ProjectTimelineSection extends StatelessWidget {
           Text(
             "Project Timeline",
             style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w800,
               color: AllColor.black,
-              fontFamily: "bodyFont",
+              fontFamily: "headFont",
             ),
           ),
           SizedBox(height: 14.h),
@@ -242,14 +246,15 @@ class TimelineItem extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w300,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
                     color: AllColor.black,
+                    fontFamily: "OpenText"
                   ),
                 ),
                 Text(
                   desc,
-                  style: TextStyle(fontSize: 12.sp, color: Color(0xff45454C)),
+                  style: TextStyle(fontSize: 12.sp, color: Color(0xff45454C), fontWeight: FontWeight.w400, fontFamily: "headFont"),
                 ),
               ],
             ),
