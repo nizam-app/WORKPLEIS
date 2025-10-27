@@ -157,14 +157,14 @@ class _AccountOverviewClientScreenState
                   children: [
                     Text(profileData["name"],
                         style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.w300)),
+                            fontSize: 16.sp, fontWeight: FontWeight.w400, fontFamily: "OpenText", color: AllColor.black)),
                     SizedBox(width: 6.w),
                     
                   ],
                 ),
                 SizedBox(height: 4.h),
                 Text(profileData["email"],
-                    style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
+                    style: TextStyle(color: AllColor.grey, fontSize: 14.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
               ],
             ),
           ),
@@ -175,8 +175,8 @@ class _AccountOverviewClientScreenState
                    Text("Verified",
                       style: TextStyle(
                           color: AllColor.brand2_light,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500)),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400, fontFamily: "OpenText",)),
 
               SizedBox(height: 10.h,),
                 
@@ -193,8 +193,8 @@ class _AccountOverviewClientScreenState
 
                    // border: Border.all(color: AllColor.grey, width: 1 ),
                   ),
-                  child: const Text("Edit",
-                      style: TextStyle(color: AllColor.brand2_light, fontSize: 12,  fontWeight: FontWeight.w500)),
+                  child:  Text("Edit",
+                      style: TextStyle(color: AllColor.brand2_light, fontSize: 12.sp,  fontWeight: FontWeight.w400, fontFamily: "OpenText")),
                 ),
               )
             ],
@@ -212,9 +212,12 @@ class _AccountOverviewClientScreenState
       children: [
         Text("Account Overview",
             style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 14.sp,
-                color: Colors.black)),
+                fontWeight: FontWeight.w800,
+                fontSize: 16.sp,
+                color: Colors.black,
+              fontFamily: "headFont",
+
+            )),
         SizedBox(height: 10.h),
         Wrap(
           spacing: 12.w,
@@ -254,12 +257,12 @@ class _AccountOverviewClientScreenState
             Text(value,
                 style: TextStyle(
                     fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black)),
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black, fontFamily: "OpenText")),
           ]),
           SizedBox(height: 4.h),
           Text(label,
-              style: TextStyle(fontSize: 14.sp, color: AllColor.black)),
+              style: TextStyle(fontSize: 14.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
         ],
       ),
     );
@@ -288,15 +291,15 @@ class _AccountOverviewClientScreenState
             Expanded(
               child: Text("Add Payment Method",
                   style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black)),
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.black, fontFamily: "headFont", )),
             ),
           ]),
           SizedBox(height: 5.h),
            Text(
             "Securely save your wallet for faster checkout.",
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w200, color: Colors.black),
+            style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: Colors.black, fontFamily: "OpenText"),
           ),
           SizedBox(height: 10.h),
           CustomButtom(onTap:(){

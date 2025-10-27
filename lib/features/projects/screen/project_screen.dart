@@ -87,10 +87,11 @@ class JobStatusList extends ConsumerWidget {
               ref.read(jobStatusProvider.notifier).state = label;
             },
             child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 6.h),
+             duration: const Duration(milliseconds: 200),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
+             // padding: EdgeInsets.only(left: 15.h, right: 15.h, top: 8.h, bottom: 8.h ),
               decoration: BoxDecoration(
-                color: isSelected ? AllColor.brand2_light : Colors.transparent,
+                color: isSelected ? AllColor.bgcolor : Colors.transparent,
                 borderRadius: BorderRadius.circular(30.r),
                 border: Border.all(
                   color: const Color(0xff154E7B).withOpacity(0.2),
@@ -100,9 +101,12 @@ class JobStatusList extends ConsumerWidget {
               child: Center(
                 child: Text(
                   label,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.w300,
-                    color: isSelected ? AllColor.white : AllColor.black,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w200,
+                    //color: isSelected ? AllColor.white : AllColor.black,
+                      color: AllColor.black,
+                    fontFamily: "headFont"
                   ),
                 ),
               ),
@@ -161,9 +165,10 @@ class JobCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "openText",
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "headFont",
+                    color: AllColor.black
                   ),
                 ),
               ),
@@ -206,7 +211,7 @@ class _StatusChip extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: 14.sp,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
           color: AllColor.brand2_light,
           fontFamily: "OpenText",
         ),
@@ -231,9 +236,10 @@ class _DetailRow extends StatelessWidget {
     final content = Text(
       text,
       style: TextStyle(
-        fontSize: 14.sp,
-        color: const Color(0xFF7A6FA2),
+        fontSize: 12.sp,
+       color: const Color(0xFF7A6FA2),
         fontFamily: "OpenText",
+        fontWeight: FontWeight.w400
       ),
       overflow: TextOverflow.ellipsis,
     );
@@ -341,8 +347,8 @@ class _BottomBar extends StatelessWidget {
               price,
               style: TextStyle(
                 fontSize: 16.sp,
-                fontWeight: FontWeight.w700,
-                color: AllColor.black,
+                fontWeight: FontWeight.w400,
+                color: AllColor.black87,
                 fontFamily: "OpenText"
               ),
             ),
@@ -356,9 +362,9 @@ class _BottomBar extends StatelessWidget {
         Text(
           price,
           style: TextStyle(
-            fontSize: 15.sp,
-            fontWeight: FontWeight.w700,
-            color: AllColor.black,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+            color: AllColor.black87,
             fontFamily: "OpenText"
           ),
         ),
@@ -408,7 +414,7 @@ class _PillButton extends StatelessWidget {
             label,
             style: TextStyle(
               fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
               color: fg,
               fontFamily: "OpenText",
             ),
@@ -740,9 +746,11 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
               children: [
                 Text(
                   "Project Completion",
-                  style: theme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
                     color: AllColor.black,
+                    fontFamily: "headFont",
+                    fontSize: 16.sp
                   ),
                 ),
                 const Spacer(),
@@ -758,9 +766,11 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
             /// Subtitle
             Text(
               "The team has completed this order.",
-              style: theme.titleMedium?.copyWith(
-                fontSize: 13.sp,
-                color: AllColor.black.withOpacity(0.6),
+              style:TextStyle(
+                fontSize: 14.sp,
+                color: AllColor.black87,
+                fontFamily: "OpenText",
+                fontWeight: FontWeight.w400
               ),
             ),
 
@@ -769,9 +779,11 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
             /// Message Label
             Text(
               "Message",
-              style: theme.titleSmall?.copyWith(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w500,
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                fontFamily: "OpenText",
+                color: AllColor.black87,
               ),
             ),
 
@@ -787,9 +799,12 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
               ),
               child: Text(
                 "All plumbing issues have been resolved. Replaced the faulty pipes and installed new faucets as requested. System tested and working perfectly.",
-                style: theme.titleMedium?.copyWith(
+                style: TextStyle(
                   fontSize: 12.sp,
                   height: 1.4,
+                  fontFamily: "OpenText",
+                  fontWeight: FontWeight.w400,
+                  color: AllColor.black87
                 ),
               ),
             ),
@@ -799,9 +814,12 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
             /// Attachments Label
             Text(
               "Attachments",
-              style: theme.titleSmall?.copyWith(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w500,
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                fontFamily: "OpenText",
+                color: AllColor.black87,
+
               ),
             ),
 
@@ -827,7 +845,7 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AllColor.primary,
+                        backgroundColor: AllColor.bgcolor,
                         foregroundColor: AllColor.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.r),
@@ -840,9 +858,11 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
                       ),
                       child: Text(
                         "Approve",
-                        style: theme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w500,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
                           color: AllColor.borderColor,
+                          fontFamily: "OpenText",
+                          fontSize: 14.sp
                         ),
                       ),
                     ),
@@ -885,9 +905,11 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
                       ),
                       child: Text(
                         "Needs Modification",
-                        style: theme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w500,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
                           color: AllColor.borderColor,
+                          fontFamily: "OpenText",
+                          fontSize: 14.sp
                         ),
                       ),
                     ),
@@ -906,7 +928,7 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
       children: [
         Icon(
           Icons.attach_file_rounded,
-          size: 16.sp,
+          size: 14.sp,
           color: AllColor.black.withOpacity(.7),
         ),
         6.horizontalSpace,
@@ -914,8 +936,10 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
           fileName,
           style: TextStyle(
             color: AllColor.brand2_light,
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w500,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w400,
+            fontFamily: "OpenText",
+
           ),
         ),
       ],
@@ -956,9 +980,12 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
               children: [
                 Text(
                   "Ratings",
-                  style: theme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w500,
+                  style:TextStyle(
+                    fontWeight: FontWeight.w800,
                     color: AllColor.black,
+                    fontSize: 16.sp,
+                    fontFamily: "headFont",
+
                   ),
                 ),
                 SizedBox(width: 18.w,),
@@ -979,7 +1006,7 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
               "Message",
               style: theme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w500,
-                fontSize: 13.sp,
+                fontSize: 12.sp,
               ),
             ),
 
@@ -1018,7 +1045,7 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
 
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AllColor.primary,
+                  backgroundColor: AllColor.bgcolor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(999.r),
                   ),
@@ -1027,9 +1054,11 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                 ),
                 child: Text(
                   "Submit Review",
-                  style: theme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: AllColor.borderColor,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: AllColor.black,
+                    fontFamily: "OpenText",
+                    fontSize: 16.sp
                   ),
                 ),
               ),
@@ -1074,15 +1103,16 @@ class ProjectReviewCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: AllColor.primary,
+                  color: AllColor.bgcolor,
                   borderRadius: BorderRadius.circular(999.r),
                 ),
                 child: Text(
                   "Delivered",
-                  style: theme.titleMedium?.copyWith(
+                  style: TextStyle(
                     color: AllColor.borderColor,
-                    fontSize: 10.sp,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "OpenText"
                   ),
                 ),
               ),
@@ -1113,10 +1143,11 @@ class ProjectReviewCard extends StatelessWidget {
             children: [
               Text(
                 "\$50",
-                style: theme.titleSmall?.copyWith(
+                style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14.sp,
                   color: AllColor.black,
+                  fontFamily: 'OpenText'
                 ),
               ),
               GestureDetector(
@@ -1132,10 +1163,11 @@ class ProjectReviewCard extends StatelessWidget {
                 },
                 child: Text(
                   "View Details",
-                  style: theme.titleMedium?.copyWith(
+                  style: TextStyle(
                     color: AllColor.brand2_light,
                     fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "OpenText"
                   ),
                 ),
               ),
@@ -1157,7 +1189,7 @@ class ProjectReviewCard extends StatelessWidget {
           style: TextStyle(
             fontSize: 14.sp,
             color: AllColor.borderColor,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
             fontFamily: "OpenText"
           ),
         )
@@ -1180,7 +1212,7 @@ class ProjectReviewCard extends StatelessWidget {
               user,
               style: TextStyle(
                 fontSize: 12.sp,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
                 color: AllColor.black,
                 fontFamily: "OpenText"
               ),
@@ -1190,7 +1222,7 @@ class ProjectReviewCard extends StatelessWidget {
             6.horizontalSpace,
             Text(
               stars.toString(),
-              style: TextStyle(fontSize: 12.sp, color: AllColor.black),
+              style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontFamily: "OpenText"),
             ),
           ],
         ),

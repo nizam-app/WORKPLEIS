@@ -87,22 +87,24 @@ class JobStatusList extends ConsumerWidget {
             },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 4.h),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
               decoration: BoxDecoration(
-                color: isSelected ? AllColor.brand2_light  : Colors.transparent,
+                color: isSelected ? AllColor.bgcolor  : Colors.transparent,
                 borderRadius: BorderRadius.circular(30.r),
                 border: Border.all(
                   color: const Color(0xff154E7B).withOpacity(0.2),
-                  width: 1,
+                  width: 1.w,
                 ),
               ),
               child: Center(
                 child: Text(
                   label,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w500, color: isSelected? AllColor.white: AllColor.black ,fontSize: 12.sp,),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w200,
+                      //color: isSelected? AllColor.white: AllColor.black ,
+                      color: AllColor.black,
+                      fontSize: 12.sp,
+                      fontFamily: "headFont"),
                 ),
               ),
             ),
@@ -178,8 +180,8 @@ class JobCard extends StatelessWidget {
                       title,
                       style: TextStyle(
                         fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: "OpenText",
+                        fontWeight: FontWeight.w700,
+                        fontFamily: "headFont",
                       ),
                     ),
 
@@ -233,7 +235,7 @@ class _StatusChip extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 12.sp,
+          fontSize: 14.sp,
           fontWeight: FontWeight.w400,
           color:AllColor.brand2_light,
           fontFamily: "OpenText",

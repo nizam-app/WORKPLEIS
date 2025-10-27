@@ -23,8 +23,8 @@ class CustomChooseFile extends StatelessWidget {
             style: TextStyle(
               color: AllColor.borderColor, // soft purple-gray
               fontSize: 16.sp,
-              fontWeight: FontWeight.w400,
-              fontFamily: "OpenText",
+              fontWeight: FontWeight.w800,
+              fontFamily: "headFont",
             ),
           ),
         ),

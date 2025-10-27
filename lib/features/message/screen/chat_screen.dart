@@ -51,8 +51,8 @@ class ChatScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Emilly Davis", style:theme.bodySmall!.copyWith(fontSize:22 ),),
-            Text("Deep house cleaning service needed", style:theme.bodySmall!.copyWith(fontSize:14 ),),
+            Text("Emilly Davis", style:TextStyle(fontSize:22.sp , fontFamily: "headFont", fontWeight: FontWeight.w800,color: AllColor.white),),
+            Text("Deep house cleaning service needed", style:TextStyle(fontSize:14.sp, fontWeight: FontWeight.w700, fontFamily: "OpenText", color: AllColor.white ),),
           ],
         ),
       ),
@@ -128,7 +128,7 @@ class ChatBubble extends StatelessWidget {
                 ),
                 child: Text(
                   message.text,
-                  style: TextStyle(fontSize: 12.sp, color: AllColor.black),
+                  style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400),
                 ),
               ),
             ),
@@ -146,7 +146,7 @@ class ChatBubble extends StatelessWidget {
               left: isMe ? 0 : 40.w, right: isMe ? 40.w : 0, top: 2.h),
           child: Text(
             message.time,
-            style: TextStyle(fontSize: 10.sp, color: AllColor.black87),
+            style: TextStyle(fontSize: 10.sp, color: AllColor.black87, fontFamily: "OpenText", fontWeight: FontWeight.w400),
           ),
         )
       ],
@@ -176,6 +176,7 @@ class ChatInputField extends StatelessWidget {
                 contentPadding: EdgeInsets.symmetric(horizontal: 12.w),
                 hintText: "Type a message...",
                 border: InputBorder.none,
+
               ),
             ),
           ),

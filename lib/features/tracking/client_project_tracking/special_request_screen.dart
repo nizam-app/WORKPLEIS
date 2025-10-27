@@ -100,7 +100,8 @@ class CustomCategoryDropdown extends ConsumerWidget {
             color: Colors.white,
             border: Border.all(
               color: AllColor.borderColor,
-              width: 1.2,
+              width: 1,
+
             ),
             borderRadius: BorderRadius.circular(12.r),
           ),
@@ -147,8 +148,9 @@ class CustomCategoryDropdown extends ConsumerWidget {
                           value,
                           style: TextStyle(
                             fontSize: 14.sp,
-                            color: isSelected ? Colors.white : Colors.black87,
+                            color: isSelected ? Colors.white : Colors.black,
                             fontWeight: FontWeight.w400,
+                            fontFamily: "OpenText"
                           ),
                         ),
                       ),
@@ -237,9 +239,9 @@ class ReviewNoticeCard extends StatelessWidget {
                 "Review the completed job",
                 style: TextStyle(
                   fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: Colors.black87,
-                  fontFamily: "bodyFond"
+                  fontFamily: "OpenText"
                 ),
               ),
             ],
@@ -254,10 +256,10 @@ class ReviewNoticeCard extends StatelessWidget {
                 Text(
                   "View Details",
                   style: TextStyle(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
                     color: Colors.red,
-                    fontFamily: "bodyFont"
+                    fontFamily: "OpenText"
                   ),
                 ),
                 4.horizontalSpace,

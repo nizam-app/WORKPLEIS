@@ -162,8 +162,11 @@ class SupportingDocumentsSection extends StatelessWidget {
         Text("Supporting Documents (Optional)",
             style: TextStyle(
                 fontSize: 16.sp,
-                fontWeight: FontWeight.w300,
-                color: AllColor.black)),
+                fontWeight: FontWeight.w700,
+                color: AllColor.black,
+                fontFamily: "headFont"
+
+            )),
         SizedBox(height: 5.h),
         Container(
           width: double.infinity,
@@ -178,9 +181,9 @@ class SupportingDocumentsSection extends StatelessWidget {
               Icon(Icons.upload_file, size: 36.sp, color: AllColor.grey),
               SizedBox(height: 8.h),
               Text("Choose files or drag and drop",
-                  style: TextStyle(fontSize: 13.sp, color: AllColor.black87)),
+                  style: TextStyle(fontSize: 14.sp, color: AllColor.black87,fontWeight: FontWeight.w400, fontFamily: "OpenText")),
               Text("Any file type accepted",
-                  style: TextStyle(fontSize: 12.sp, color: AllColor.grey)),
+                  style: TextStyle(fontSize: 12.sp, color: AllColor.grey, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
             ],
           ),
         ),
@@ -196,7 +199,7 @@ class DisclaimerSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       "This project involves confidential information that requires a non-disclosure agreement",
-      style: TextStyle(fontSize: 11.sp, color: AllColor.grey),
+      style: TextStyle(fontSize: 12.sp, color: AllColor.grey, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
     );
   }
 }

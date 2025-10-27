@@ -146,7 +146,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
                     width: 45.w,
                     height: 45.w,
                     decoration: BoxDecoration(
-                      color: AllColor.primary, // lime color
+                      color: AllColor.bgcolor, // lime color
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Icon(
@@ -201,12 +201,12 @@ class _PostJobScreenState extends State<PostJobScreen> {
           value: value,
           hint: Text(
             hint,
-            style: TextStyle(fontSize: 13.sp, color: AllColor.borderColor),
+            style: TextStyle(fontSize: 12.sp, color: AllColor.borderColor, fontFamily: "OpenText", fontWeight: FontWeight.w400),
           ),
           isExpanded: true,
           icon: Icon(Icons.keyboard_arrow_down, color: AllColor.black),
           dropdownColor: AllColor.white,
-          style: TextStyle(fontSize: 13.sp, color: AllColor.black),
+          style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
           onChanged: onChanged,
           items: options
               .map(
@@ -214,7 +214,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   value: opt,
                   child: Text(
                     opt,
-                    style: TextStyle(fontSize: 13.sp, color: AllColor.black),
+                    style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
                   ),
                 ),
               )
@@ -232,6 +232,25 @@ class _PostJobScreenState extends State<PostJobScreen> {
           initialDate: DateTime.now(),
           firstDate: DateTime.now(),
           lastDate: DateTime(2100),
+          builder: (context, child) {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.light(
+                  primary: AllColor.green, // 🔹 selected date + header color
+                  onPrimary: Colors.white, // 🔹 header text color
+                  onSurface: AllColor.black,
+                  // 🔹 normal text color
+                ),
+                textButtonTheme: TextButtonThemeData(
+                  style: TextButton.styleFrom(
+                    foregroundColor: AllColor.black87,
+                    // 🔹 "OK"/"Cancel" color
+                  ),
+                ),
+              ),
+              child: child!,
+            );
+          },
         );
         if (pickedDate != null) {
           setState(() => selectedDate = pickedDate);
@@ -242,6 +261,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
         decoration: BoxDecoration(
           border: Border.all(color: AllColor.borderColor, width: 1.2),
           borderRadius: BorderRadius.circular(6.r),
+
         ),
         child: Row(
           children: [
@@ -251,7 +271,10 @@ class _PostJobScreenState extends State<PostJobScreen> {
               selectedDate == null
                   ? "dd/mm/yyyy"
                   : "${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}",
-              style: TextStyle(fontSize: 12.sp, color: AllColor.black87),
+              style: TextStyle(fontSize: 12.sp,
+                color: AllColor.black87,
+                fontFamily: "OpenText",
+              ),
             ),
           ],
         ),
@@ -352,8 +375,9 @@ class _CustomDropdownState extends State<CustomDropdown> {
                   item,
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     fontSize: 14.sp,
+                    fontFamily: "OpenText"
                   ),
                 ),
               );
@@ -371,7 +395,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
               child: Container(
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? AllColor.primary // highlight in menu only
+                      ? AllColor.bgcolor // highlight in menu only
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(6.r),
                 ),
@@ -384,7 +408,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: isSelected
-                              ? FontWeight.w600
+                              ? FontWeight.w400
                               : FontWeight.w400,
                           fontSize: 14.sp,
                         ),
@@ -491,8 +515,9 @@ class _SearchLocationBottomBarState extends State<SearchLocationBottomBar> {
                 "Search the location",
                 style: TextStyle(
                   fontSize: 16.sp,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w400,
                   color: Colors.black,
+                  fontFamily: "headFont"
                 ),
               ),
               SizedBox(height: 10.h),
@@ -577,7 +602,8 @@ class _SearchLocationBottomBarState extends State<SearchLocationBottomBar> {
                         title: Text(
                           location,
                           style: TextStyle(
-                              fontSize: 14.sp, color: Colors.black87),
+                              fontSize: 14.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400
+                          ),
                         ),
                         onTap: () {
                           _controller.text = location;
