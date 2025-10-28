@@ -357,7 +357,7 @@ class ActiveJobsSection extends StatelessWidget {
         'title': 'Kitchen Renovation',
         'location': 'New York, NY',
         'time': '3h ago',
-        'budget': '\$300',
+        'budget': '\$3,500',
         'offers': '5',
         'status': 'In progress',
       },
@@ -441,176 +441,6 @@ class ActiveJobsSection extends StatelessWidget {
 }
 
 
-class _JobCard extends StatelessWidget {
-  const _JobCard({
-    required this.title,
-    required this.location,
-    required this.time,
-    required this.budget,
-    required this.offers,
-    required this.status,
-  });
-
-  final String title;
-  final String location;
-  final String time;
-  final String budget;
-  final String offers;
-  final String status;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
-
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(16.w),
-      //margin: EdgeInsets.only(bottom: 10.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14.r),
-        border: Border.all(color: AllColor.borderColor.withOpacity(0.3)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// 🔹 Left Section — Job Info
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /// 🔸 Title
-                Text(
-                  title,
-                  style:TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16.sp,
-                    color: AllColor.black,
-                    fontFamily: "headFont"
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 10.h),
-
-                /// 🔸 Location & Time
-                Row(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Icon(Icons.location_on_outlined,
-                        color: Colors.grey, size: 16),
-                    SizedBox(width: 2.w),
-                    Text(
-                      location,
-                      style: theme.bodySmall?.copyWith(
-                        color: AllColor.grey,
-                        fontSize: 12.sp,
-                        fontFamily: "OpenText"
-                      ),
-                    ),
-                    SizedBox(width: 12.w),
-                    const Icon(Icons.access_time_rounded,
-                        color: AllColor.grey, size: 16),
-                    SizedBox(width: 4.w),
-                    Text(
-                      time,
-                      style: theme.bodySmall?.copyWith(
-                        color: AllColor.grey,
-                        fontSize: 12.sp,
-                        fontFamily: "OpenText"
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 12.h),
-
-                /// 🔸 Budget & Offers
-                Row(
-                  children: [
-                    _infoRow("Budget", budget, theme),
-                    SizedBox(width: 30.w),
-                    _infoRow("Offers", offers, theme),
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          /// 🔹 Right Section — Status & Open Text
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 8.h,),
-              Padding(
-                padding:  EdgeInsets.only(left: 10.h),
-                child: Text(
-                  status,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: AllColor.brand2_light,
-                    fontFamily: "OpenText"
-                  ),
-                ),
-              ),
-              SizedBox(height: 48.h),
-              GestureDetector(
-                onTap: () {
-                  context.push(JobsScreen.routeName);
-                },
-                child: Text(
-                  'Open',
-                  style: TextStyle(
-                    color: AllColor.brand2_light,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                      fontFamily: "OpenText"
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 🔹 Reusable info label:value text
-  Widget _infoRow(String label, String value, TextTheme theme) {
-    return Row(
-      children: [
-        Text(
-          '$label: ',
-          style: theme.bodySmall?.copyWith(
-            color: Colors.grey[600],
-            fontSize: 12.sp,
-            fontFamily: "OpenText"
-          ),
-        ),
-        Text(
-          value,
-          style: theme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w400,
-            color: Colors.black,
-            fontSize: 12.sp,
-            fontFamily: "OpenText"
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-
-
 // class _JobCard extends StatelessWidget {
 //   const _JobCard({
 //     required this.title,
@@ -635,233 +465,104 @@ class _JobCard extends StatelessWidget {
 //     return Container(
 //       width: double.infinity,
 //       padding: EdgeInsets.all(16.w),
+//       //margin: EdgeInsets.only(bottom: 10.h),
 //       decoration: BoxDecoration(
 //         color: Colors.white,
-//         borderRadius: BorderRadius.circular(12.r),
-//         border: Border.all(
-//           color: AllColor.borderColor.withOpacity(0.4),
-//         ),
+//         borderRadius: BorderRadius.circular(14.r),
+//         border: Border.all(color: AllColor.borderColor.withOpacity(0.3)),
 //         boxShadow: [
 //           BoxShadow(
 //             color: Colors.black.withOpacity(0.05),
-//             blurRadius: 6,
+//             blurRadius: 8,
 //             offset: const Offset(0, 3),
 //           ),
 //         ],
 //       ),
 //       child: Row(
-//
-//          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//          crossAxisAlignment: CrossAxisAlignment.start,
+//         crossAxisAlignment: CrossAxisAlignment.start,
 //         children: [
-//           Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             mainAxisAlignment: MainAxisAlignment.start,
-//             children: [
-//               /// 🔹 Top Row (Title + Status)
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   Text(
-//                     title,
-//                     style: theme.bodyMedium?.copyWith(
-//                       fontWeight: FontWeight.w500,
-//                       fontSize: 18.sp,
-//                     ),
+//           /// 🔹 Left Section — Job Info
+//           Expanded(
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 /// 🔸 Title
+//                 Text(
+//                   title,
+//                   style:TextStyle(
+//                     fontWeight: FontWeight.w700,
+//                     fontSize: 16.sp,
+//                     color: AllColor.black,
+//                     fontFamily: "headFont"
 //                   ),
-//                   // Container(
-//                   //   padding:
-//                   //   EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-//                   //   decoration: BoxDecoration(
-//                   //
-//                   //     borderRadius: BorderRadius.circular(8.r),
-//                   //     //border: Border.all(color: Colors.black, width: 1),
-//                   //   ),
-//                   //   child: Text(
-//                   //     status,
-//                   //     style: TextStyle(
-//                   //       fontSize: 12.sp,
-//                   //       fontWeight: FontWeight.w500,
-//                   //       color: AllColor.brand2_light,
-//                   //     ),
-//                   //   ),
-//                   // ),
-//                 ],
-//               ),
+//                   overflow: TextOverflow.ellipsis,
+//                 ),
+//                 SizedBox(height: 10.h),
 //
-//               SizedBox(height: 6.h),
-//
-//               /// 🔹 Location + Time
-//               Row(
-//                 children: [
-//                   const Icon(Icons.location_on_outlined,
-//                       color: Colors.grey, size: 14),
-//                   SizedBox(width: 4.w),
-//                   Text(
-//                     location,
-//                     style: theme.titleMedium?.copyWith(
-//                       color: Colors.grey[700],
-//                       fontSize: 12.sp,
-//                     ),
-//                   ),
-//                   SizedBox(width: 8.w),
-//                   const Icon(Icons.access_time_rounded,
-//                       color: Colors.grey, size: 14),
-//                   SizedBox(width: 4.w),
-//                   Text(
-//                     time,
-//                     style: theme.titleMedium?.copyWith(
-//                       color: Colors.grey[700],
-//                       fontSize: 12.sp,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//
-//               SizedBox(height: 12.h),
-//
-//               /// 🔹 Budget + Offers + View button
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   // Budget + Offers
-//                   Row(
-//                     children: [
-//                       // Column(
-//                       //   crossAxisAlignment: CrossAxisAlignment.start,
-//                       //   children: [
-//                       //     Text(
-//                       //       'Budget',
-//                       //       style: theme.bodySmall?.copyWith(
-//                       //         color: Colors.grey[600],
-//                       //         fontSize: 12.sp,
-//                       //       ),
-//                       //     ),
-//                       //     Text(
-//                       //       budget,
-//                       //       style: theme.bodyMedium?.copyWith(
-//                       //         fontWeight: FontWeight.w500,
-//                       //         color: Colors.black,
-//                       //         fontSize: 12.sp,
-//                       //       ),
-//                       //     ),
-//                       //   ],
-//                       // ),
-//                       Row(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           Text(
-//                             'Budget',
-//                             style: theme.bodySmall?.copyWith(
-//                               color: Colors.grey[600],
-//                               fontSize: 12.sp,
-//                             ),
-//                           ),
-//                           SizedBox(width: 10.w,),
-//                           Text(
-//                             budget,
-//                             style: theme.bodyMedium?.copyWith(
-//                               fontWeight: FontWeight.w500,
-//                               color: Colors.black,
-//                               fontSize: 12.sp,
-//                             ),
-//                           ),
-//                         ],
+//                 /// 🔸 Location & Time
+//                 Row(
+//                   //crossAxisAlignment: CrossAxisAlignment.start,
+//                   mainAxisAlignment: MainAxisAlignment.start,
+//                   children: [
+//                     const Icon(Icons.location_on_outlined,
+//                         color: Colors.grey, size: 16),
+//                     SizedBox(width: 2.w),
+//                     Text(
+//                       location,
+//                       style: theme.bodySmall?.copyWith(
+//                         color: AllColor.grey,
+//                         fontSize: 12.sp,
+//                         fontFamily: "OpenText"
 //                       ),
-//
-//
-//                       SizedBox(width: 40.w),
-//                       // Column(
-//                       //   crossAxisAlignment: CrossAxisAlignment.start,
-//                       //   children: [
-//                       //     Text(
-//                       //       'Offers',
-//                       //       style: theme.bodySmall?.copyWith(
-//                       //         color: Colors.grey[600],
-//                       //         fontSize: 12.sp,
-//                       //       ),
-//                       //     ),
-//                       //     Text(
-//                       //       offers,
-//                       //       style: theme.bodyMedium?.copyWith(
-//                       //         fontWeight: FontWeight.w500,
-//                       //         color: Colors.black,
-//                       //         fontSize: 12.sp,
-//                       //       ),
-//                       //     ),
-//                       //   ],
-//                       // ),
-//
-//                       Row(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           Text(
-//                             'Offers',
-//                             style: theme.bodySmall?.copyWith(
-//                               color: Colors.grey[600],
-//                               fontSize: 12.sp,
-//                             ),
-//                           ),
-//                           SizedBox(width: 10.w,),
-//                           Text(
-//                             offers,
-//                             style: theme.bodyMedium?.copyWith(
-//                               fontWeight: FontWeight.w500,
-//                               color: Colors.black,
-//                               fontSize: 12.sp,
-//                             ),
-//                           ),
-//                         ],
+//                     ),
+//                     SizedBox(width: 12.w),
+//                     const Icon(Icons.access_time_rounded,
+//                         color: AllColor.grey, size: 16),
+//                     SizedBox(width: 4.w),
+//                     Text(
+//                       time,
+//                       style: theme.bodySmall?.copyWith(
+//                         color: AllColor.grey,
+//                         fontSize: 12.sp,
+//                         fontFamily: "OpenText"
 //                       ),
-//                     ],
-//                   ),
+//                     ),
+//                   ],
+//                 ),
 //
-//                   // View button
-//                   // ElevatedButton(
-//                   //   style: ElevatedButton.styleFrom(
-//                   //     backgroundColor:  AllColor.white, // purple
-//                   //
-//                   //     shape: RoundedRectangleBorder(
-//                   //       borderRadius: BorderRadius.circular(30.r),
-//                   //
-//                   //     // border:Border.all(color: AllColor.brand2_light, width: 1),
-//                   //     ),
-//                   //     padding:
-//                   //     EdgeInsets.symmetric(horizontal: 20.w, vertical: 2.h),
-//                   //     elevation: 0,
-//                   //   ),
-//                   //   onPressed: () {
-//                   //     context.push(JobsScreen.routeName);
-//                   //   },
-//                   //   child: Text(
-//                   //     'Open',
-//                   //     style: TextStyle(
-//                   //       color: AllColor.brand2_light,
-//                   //       fontSize: 16.sp,
-//                   //       fontWeight: FontWeight.w500,
-//                   //     ),
-//                   //   ),
-//                   // ),
-//                 ],
-//               ),
-//             ],
+//                 SizedBox(height: 12.h),
+//
+//                 /// 🔸 Budget & Offers
+//                 Row(
+//                   children: [
+//                     _infoRow("Budget", budget, theme),
+//                     SizedBox(width: 30.w),
+//                     _infoRow("Offers", offers, theme),
+//                   ],
+//                 ),
+//               ],
+//             ),
 //           ),
-//           //SizedBox(width: 20.w,),
-//           Column(
-//              mainAxisAlignment: MainAxisAlignment.start,
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//          Text(
-//         status,
-//         style: TextStyle(
-//           fontSize: 12.sp,
-//           fontWeight: FontWeight.w500,
-//           color: AllColor.brand2_light,
-//         ),
 //
-//     ),
-//               SizedBox(height: 40.h,),
-//              GestureDetector(
+//           /// 🔹 Right Section — Status & Open Text
+//           Column(
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               SizedBox(height: 8.h,),
+//               Padding(
+//                 padding:  EdgeInsets.only(left: 10.h),
+//                 child: Text(
+//                   status,
+//                   style: TextStyle(
+//                     fontSize: 14.sp,
+//                     fontWeight: FontWeight.w400,
+//                     color: AllColor.brand2_light,
+//                     fontFamily: "OpenText"
+//                   ),
+//                 ),
+//               ),
+//               SizedBox(height: 48.h),
+//               GestureDetector(
 //                 onTap: () {
 //                   context.push(JobsScreen.routeName);
 //                 },
@@ -869,18 +570,285 @@ class _JobCard extends StatelessWidget {
 //                   'Open',
 //                   style: TextStyle(
 //                     color: AllColor.brand2_light,
-//                     fontSize: 16.sp,
-//                     fontWeight: FontWeight.w500,
+//                     fontSize: 14.sp,
+//                     fontWeight: FontWeight.w400,
+//                       fontFamily: "OpenText"
 //                   ),
 //                 ),
 //               ),
 //             ],
-//           )
+//           ),
 //         ],
 //       ),
 //     );
 //   }
+//
+//   /// 🔹 Reusable info label:value text
+//   Widget _infoRow(String label, String value, TextTheme theme) {
+//     return Row(
+//       children: [
+//         Text(
+//           '$label: ',
+//           style: theme.bodySmall?.copyWith(
+//             color: Colors.grey[600],
+//             fontSize: 12.sp,
+//             fontFamily: "OpenText"
+//           ),
+//         ),
+//         Text(
+//           value,
+//           style: theme.bodyMedium?.copyWith(
+//             fontWeight: FontWeight.w400,
+//             color: Colors.black,
+//             fontSize: 12.sp,
+//             fontFamily: "OpenText"
+//           ),
+//         ),
+//       ],
+//     );
+//   }
 // }
+//
+
+
+class _JobCard extends StatelessWidget {
+  const _JobCard({
+    required this.title,
+    required this.location,
+    required this.time,
+    required this.budget,
+    required this.offers,
+    required this.status,
+  });
+
+  final String title;
+  final String location;
+  final String time;
+  final String budget;
+  final String offers;
+  final String status;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: AllColor.borderColor.withOpacity(0.4),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          /// 🔹 Top Row (Title + Status)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16.sp,
+                  fontFamily: "headFont",
+                  color: AllColor.black,
+                ),
+              ),
+
+
+              Text(
+                budget,
+                style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: AllColor.black,
+                    fontSize: 14.sp,
+                    fontFamily: "OpenText"
+                ),
+              ),
+
+
+              // Container(
+              //   padding:
+              //   EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+              //   decoration: BoxDecoration(
+              //
+              //     borderRadius: BorderRadius.circular(8.r),
+              //     //border: Border.all(color: Colors.black, width: 1),
+              //   ),
+              // Text(
+              //     status,
+              //     style: TextStyle(
+              //       fontSize: 12.sp,
+              //       fontWeight: FontWeight.w500,
+              //       color: AllColor.brand2_light,
+              //     ),
+              //   ),
+              // ),
+            ],
+          ),
+
+          SizedBox(height: 6.h),
+
+          /// 🔹 Location + Time
+          Row(
+            children: [
+              const Icon(Icons.location_on_outlined,
+                  color: AllColor.brand2_light, size: 14),
+              SizedBox(width: 4.w),
+              Text(
+                location,
+                style: TextStyle(
+                    color: AllColor.brand2_light,
+                  fontSize: 12.sp,
+                  fontFamily: "OpenText",
+                  fontWeight:FontWeight.w400
+                ),
+              ),
+              SizedBox(width: 8.w),
+              const Icon(Icons.access_time_rounded,
+                  color: AllColor.brand2_light, size: 14),
+              SizedBox(width: 4.w),
+              Text(
+                time,
+                style: TextStyle(
+                  color: AllColor.brand2_light,
+                  fontSize: 12.sp,
+                  fontFamily: "OpenText",
+                  fontWeight: FontWeight.w400
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 12.h),
+
+          /// 🔹 Budget + Offers + View button
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Budget + Offers
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  Icon(Icons.real_estate_agent, color: AllColor.brand2_light, size: 14.sp),
+                  SizedBox(width: 4.w,),
+                  Text(
+                    'Offers',
+                    style: TextStyle(
+                      color: AllColor.brand2_light,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: "OpenText"
+                    ),
+                  ),
+                  SizedBox(width: 4.w,),
+                  Text(
+                    offers,
+                    style: TextStyle(
+                        color: AllColor.brand2_light,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "OpenText"
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(width: 40.w),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+
+                  Container(
+
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:  AllColor.primary, // purple
+
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.r),
+
+                        // border:Border.all(color: AllColor.brand2_light, width: 1),
+                        ),
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, ),
+                        elevation: 0,
+                      ),
+                      onPressed: () {
+                        context.push(JobsScreen.routeName);
+                      },
+                      child: Text(
+                        'Open',
+                        style: TextStyle(
+                          color: AllColor.black,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "OpenText"
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10.w,),
+                  SizedBox(
+                    height: 30.h,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:  Colors.grey, // purple
+
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.r),
+
+
+                          // border:Border.all(color: AllColor.brand2_light, width: 1),
+                        ),
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 10.w,),
+                        elevation: 0,
+                      ),
+                      onPressed: () {
+                       // context.push(JobsScreen.routeName);
+                      },
+                      child: Text(
+                       status,
+                        style: TextStyle(
+                          color: AllColor.white,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "OpenText"
+                        ),
+                      ),
+                    ),
+                  ),
+
+
+                ],
+              ),
+
+              // View button
+
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class ServiceProvidersSection extends StatelessWidget {
   const ServiceProvidersSection({super.key});

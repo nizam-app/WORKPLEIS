@@ -151,64 +151,56 @@ class JobCard extends StatelessWidget {
         ],
         border: Border.all(color: Colors.black.withOpacity(0.1)),
       ),
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "bodyFont",
+                  ),
+                ),
+              ),
+              _StatusChip(text: status),
+            ],
+          ),
+
+          // Text(
+          //         title,
+          //         style: TextStyle(
+          //           fontSize: 16.sp,
+          //           fontWeight: FontWeight.w700,
+          //           fontFamily: "headFont",
+          //         ),
+          //       ),
+          //
+          // _StatusChip(text: status),
+
+                     SizedBox(height: 8.h),
+
+                    /// Details
+                    _DetailRow(icon: Icons.location_on, text: locations),
+                    SizedBox(height: 6.h),
+                    _DetailRow(icon: Icons.calendar_today, text: calender, ),
+                    SizedBox(height: 6.h),
+                    _DetailRow(icon: Icons.schedule, text: time, ),
+                     SizedBox(height: 10.h),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
             children: [
-              /// Header (title + status chip)
-              // Row(
-              //   children: [
-              //     Expanded(
-              //       child: Text(
-              //         title,
-              //         style: TextStyle(
-              //           fontSize: 16.sp,
-              //           fontWeight: FontWeight.w400,
-              //           fontFamily: "bodyFont",
-              //         ),
-              //       ),
-              //     ),
-              //     _StatusChip(text: status),
-              //   ],
-              // ),
-
-              Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: "headFont",
-                      ),
-                    ),
-
-             // _StatusChip(text: status),
-
-           SizedBox(height: 8.h),
-
-          /// Details
-          _DetailRow(icon: Icons.location_on, text: locations),
-          SizedBox(height: 6.h),
-          _DetailRow(icon: Icons.calendar_today, text: calender, ),
-          SizedBox(height: 6.h),
-          _DetailRow(icon: Icons.schedule, text: time, ),
-           SizedBox(height: 10.h),
               JobPriceText(price: price),
 
-          /// Bottom actions + price
-        ],
-          ),
-          SizedBox(width: 38.w,),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
 
-            children: [
-              _StatusChip(text: status),
-              SizedBox(height: 100.h,),
               JobStatusAction(status: status),
+
               //_BottomBar(status: status, price: price),
             ],
           )
@@ -226,9 +218,9 @@ class _StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: AllColor.white, // lime chip (mock-এর মতো)
+        color: AllColor.primary, // lime chip (mock-এর মতো)
         borderRadius: BorderRadius.circular(8.r),
         //border: Border.all(color:Colors.black, width: 1)
       ),
@@ -237,7 +229,7 @@ class _StatusChip extends StatelessWidget {
         style: TextStyle(
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
-          color:AllColor.brand2_light,
+          color:AllColor.black,
           fontFamily: "OpenText",
         ),
       ),
@@ -261,15 +253,16 @@ class _DetailRow extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: 12.sp,
-        color: const Color(0xFF7A6FA2),
+        color: AllColor.brand2_light,
         fontFamily: "OpenText",
+        fontWeight: FontWeight.w400
       ),
       overflow: TextOverflow.ellipsis,
     );
     return Row(
       children: [
 
-        Icon(icon, size: 18, color: const Color(0xFF7A6FA2)),
+        Icon(icon, size: 18, color: AllColor.brand2_light),
         SizedBox(width: 6.w),
         if (expandable) Expanded(child: content) else content,
       ],
@@ -307,7 +300,7 @@ class JobStatusAction extends StatelessWidget {
   Widget build(BuildContext context) {
     // Track Job button depending on status
     final Widget? trackButton = switch (status) {
-      "Open" => _PillButton.purple("View Offers", onTap: () {
+      "Open" => _PillButton.purple("View Offers",  onTap: () {
         context.push(ViewProposalScreen.routeName);
       }),
       "Assigned" => _PillButton.purple("Track Job", onTap: () {
@@ -349,24 +342,32 @@ class _PillButton extends StatelessWidget {
   factory _PillButton.lime(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-        AllColor.white,
+        AllColor.grey,
         AllColor.brand2_light,
         onTap: onTap,
+
       );
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+    onTap: onTap,
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
+      decoration: BoxDecoration(
+        color: AllColor.brand2_light,
+        borderRadius: BorderRadius.circular(10.r),
+      ),
       child: Text(
         label,
         style: TextStyle(
           fontSize: 14.sp,
-          fontWeight: FontWeight.w400,
-          color: fg,
+          fontWeight: FontWeight.w500,
+          color: AllColor.white,
           fontFamily: "OpenText",
         ),
       ),
+    ),
     );
   }
 }

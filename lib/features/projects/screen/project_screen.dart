@@ -40,7 +40,7 @@ class ProjectScreen extends ConsumerWidget {
                     time: "Immediate",
                     budget: "\$5,000–\$20,000",
                     period: "Afternoon (12PM–5PM)",
-                    price: "\$50",
+                    description: "some description about project.this is a project description",
                   );
                 },
               ),
@@ -128,7 +128,7 @@ class JobCard extends StatelessWidget {
     required this.time,
     required this.budget,
     required this.period,
-    required this.price,
+    required this.description,
   });
 
   final String title;
@@ -136,7 +136,7 @@ class JobCard extends StatelessWidget {
   final String time;
   final String budget;
   final String period;
-  final String price;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +161,7 @@ class JobCard extends StatelessWidget {
           /// Header (title + status chip)
           Row(
             children: [
+
               Expanded(
                 child: Text(
                   title,
@@ -172,6 +173,7 @@ class JobCard extends StatelessWidget {
                   ),
                 ),
               ),
+
               _StatusChip(text: status),
             ],
           ),
@@ -186,7 +188,11 @@ class JobCard extends StatelessWidget {
           // SizedBox(height: 10.h),
 
           /// Bottom actions + price
-          _BottomBar(status: status, price: price),
+          Row(
+            children: [
+              _BottomBar(status: status, price: description),
+            ],
+          ),
         ],
       ),
     );
@@ -203,17 +209,17 @@ class _StatusChip extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: AllColor.white, // lime chip (mock-এর মতো)
+        color: AllColor.grey, // lime chip (mock-এর মতো)
         borderRadius: BorderRadius.circular(8.r),
         //border: Border.all(color:Colors.black, width: 1)
       ),
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w600,
-          color: AllColor.brand2_light,
-          fontFamily: "OpenText",
+            color: AllColor.white,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w500,
+            fontFamily: "OpenText"
         ),
       ),
     );

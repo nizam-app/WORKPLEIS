@@ -24,18 +24,24 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(" Security Settings",
-                style: theme.bodyMedium?.copyWith(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                    color: AllColor.black)),
+                style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w800,
+                    color: AllColor.black,
+                  fontFamily: "headFont",
+
+
+                )),
             SizedBox(height: 12.h),
              const SecuritySettingsList(),
             SizedBox(height: 10.h),
             Text("Notifications Settings ",
-                style: theme.bodyMedium?.copyWith(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                    color: AllColor.black)),
+                style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w800,
+                    color: AllColor.black,
+                  fontFamily: "headFont"
+                )),
             SizedBox(height: 12.h),
             ViaNotificationWidget(),
           ],
@@ -93,19 +99,22 @@ class SecuritySettingsList extends StatelessWidget {
                 children: [
                   Text(s["title"] as String,
                       style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AllColor.black)),
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: AllColor.black,
+                        fontFamily: "OpenText"
+
+                      )),
                   SizedBox(height: 4.h),
                   Text(s["subtitle"] as String,
                       style: TextStyle(
-                          fontSize: 11.sp, color: AllColor.black)),
+                          fontSize: 12.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
                 ],
               ),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AllColor.brand2_light,
+                backgroundColor: AllColor.primary,
                 padding: EdgeInsets.symmetric(
                     horizontal: 14.w, vertical: 8.h),
                 shape: RoundedRectangleBorder(
@@ -121,7 +130,7 @@ class SecuritySettingsList extends StatelessWidget {
               },
               child: Text(s["action"] as String,
                   style:TextStyle(
-                      fontSize: 12.sp, color: AllColor.white)),
+                      fontSize: 14.sp, color: AllColor.black,fontWeight: FontWeight.w400, fontFamily: "OpenText")),
             )
           ],
         ),
@@ -171,133 +180,139 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
         .of(context)
         .textTheme;
 
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 16.w,
-        right: 16.w,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 16.h,
-        top: 16.h,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Change Password",
-                style: theme.bodyMedium?.copyWith(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 16.w,
+          right: 16.w,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 16.h,
+          top: 16.h,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Change Password",
+                  style:TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w800,
+                    color: AllColor.black,
+                    fontFamily: "headFont"
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.close, color: AllColor.black),
+                  onPressed: () => Navigator.pop(context),
+                )
+              ],
+            ),
+            SizedBox(height: 6.h),
+            Text(
+              "Enter your current password and choose a new secure password",
+              style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400),
+            ),
+            SizedBox(height: 10.h),
+            Text(
+              "Current Password",
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w800,
+                color: AllColor.black,
+                fontFamily: "headFont"
+              ),
+            ),
+            SizedBox(height: 10.h),
+            // Current Password
+            _passwordField(
+              controller: currentController,
+              hint: "Enter current password",
+              visible: currentVisible,
+              onToggle: () => setState(() => currentVisible = !currentVisible),
+            ),
+            SizedBox(height: 14.h),
+            Text(
+              "New Password",
+              style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w800,
                   color: AllColor.black,
-                ),
+                  fontFamily: "headFont"
               ),
-              IconButton(
-                icon: Icon(Icons.close, color: AllColor.black),
-                onPressed: () => Navigator.pop(context),
-              )
-            ],
-          ),
-          SizedBox(height: 6.h),
-
-          Text(
-            "Enter your current password and choose a new secure password",
-            style: theme.bodyMedium?.copyWith(fontSize: 11.sp, color: AllColor.black87),
-          ),
-          SizedBox(height: 16.h),
-          Text(
-            "Current Password",
-            style: theme.bodyMedium?.copyWith(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: AllColor.grey,
             ),
-          ),
-          SizedBox(height: 10.h),
-          // Current Password
-          _passwordField(
-            controller: currentController,
-            hint: "Enter current password",
-            visible: currentVisible,
-            onToggle: () => setState(() => currentVisible = !currentVisible),
-          ),
-          SizedBox(height: 14.h),
-          Text(
-            "New Password",
-            style: theme.bodyMedium?.copyWith(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: AllColor.grey,
+            SizedBox(height: 10.h),
+      
+            // New Password
+            _passwordField(
+              controller: newController,
+              hint: "New password",
+              visible: newVisible,
+              onToggle: () => setState(() => newVisible = !newVisible),
             ),
-          ),
-          SizedBox(height: 10.h),
-
-          // New Password
-          _passwordField(
-            controller: newController,
-            hint: "New password",
-            visible: newVisible,
-            onToggle: () => setState(() => newVisible = !newVisible),
-          ),
-          SizedBox(height: 14.h),
-          Text(
-            "Confirm New password",
-            style: theme.bodyMedium?.copyWith(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: AllColor.grey,
-            ),
-          ),
-          SizedBox(height: 10.h),
-
-          // Confirm Password
-          _passwordField(
-            controller: confirmController,
-            hint: "Confirm your password",
-            visible: confirmVisible,
-            onToggle: () => setState(() => confirmVisible = !confirmVisible),
-          ),
-          SizedBox(height: 22.h),
-
-          // Change Button
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AllColor.brand2_light,
-                padding: EdgeInsets.symmetric(vertical: 14.h),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
+            SizedBox(height: 14.h),
+            Text(
+              "Confirm New password",
+              style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w800,
+                  color: AllColor.black,
+                  fontFamily: "headFont"
               ),
-              onPressed: () {
-                context.pop();
-              },
-              child: Text(
-                "Change Password",
-                style: theme.bodyMedium?.copyWith(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                  color: AllColor.white,
+            ),
+            SizedBox(height: 10.h),
+      
+            // Confirm Password
+            _passwordField(
+              controller: confirmController,
+              hint: "Confirm your password",
+              visible: confirmVisible,
+              onToggle: () => setState(() => confirmVisible = !confirmVisible),
+            ),
+            SizedBox(height: 22.h),
+      
+            // Change Button
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AllColor.primary,
+                  padding: EdgeInsets.symmetric(vertical: 14.h),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                ),
+                onPressed: () {
+                  context.pop();
+                },
+                child: Text(
+                  "Change Password",
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: AllColor.black,
+                    fontFamily: "OpenText"
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 12.h),
-
-          // Cancel
-          // Center(
-          //   child: TextButton(
-          //     onPressed: () => Navigator.pop(context),
-          //     child: Text(
-          //       "Cancel",
-          //       style: TextStyle(fontSize: 12.sp, color: AllColor.black),
-          //     ),
-          //   ),
-          // )
-        ],
+            SizedBox(height: 12.h),
+      
+            // Cancel
+            // Center(
+            //   child: TextButton(
+            //     onPressed: () => Navigator.pop(context),
+            //     child: Text(
+            //       "Cancel",
+            //       style: TextStyle(fontSize: 12.sp, color: AllColor.black),
+            //     ),
+            //   ),
+            // )
+          ],
+        ),
       ),
     );
   }
@@ -421,22 +436,24 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
               children: [
                 Text(title,
                     style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
                       color: AllColor.black,
+                      fontFamily: "OpenText"
                     )),
                 SizedBox(height: 4.h),
                 Text(
                   subtitle,
                   style: TextStyle(
-                    fontSize: 11.sp,
-                    color: AllColor.black87.withOpacity(0.8),
+                    fontSize: 12.sp,
+                    color: AllColor.black,
+                    fontFamily: "OpenTex",
+
                   ),
                 ),
               ],
             ),
           ),
-
           // Switch
         if(swtchCheck==false)  Transform.scale(
             scale: 0.9,
@@ -444,9 +461,9 @@ class _ViaNotificationWidgetState extends State<ViaNotificationWidget> {
               value: value,
               onChanged: onChanged,
               activeColor: AllColor.white,
-              activeTrackColor: AllColor.borderColor,
+              activeTrackColor: AllColor.primary,
               inactiveThumbColor: AllColor.white,
-              inactiveTrackColor: AllColor.grey300,
+              inactiveTrackColor: AllColor.grey,
             ),
           ),
         ],

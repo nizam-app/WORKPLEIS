@@ -123,7 +123,7 @@ class ChatBubble extends StatelessWidget {
                 padding: EdgeInsets.all(12.w),
                 margin: EdgeInsets.symmetric(vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: AllColor.grey300,
+                  color: AllColor.lime,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Text(
@@ -146,7 +146,7 @@ class ChatBubble extends StatelessWidget {
               left: isMe ? 0 : 40.w, right: isMe ? 40.w : 0, top: 2.h),
           child: Text(
             message.time,
-            style: TextStyle(fontSize: 10.sp, color: AllColor.black87, fontFamily: "OpenText", fontWeight: FontWeight.w400),
+            style: TextStyle(fontSize: 10.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400),
           ),
         )
       ],
@@ -163,7 +163,7 @@ class ChatInputField extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: AllColor.grey300)),
+        border: Border(top: BorderSide(color: AllColor.grey)),
         color: AllColor.white,
       ),
       child: Row(

@@ -61,7 +61,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   Center(
                     child: Text(
                       "Tap to change photo",
-                      style: TextStyle(fontSize: 12.sp, color: AllColor.black87,fontFamily: "bodyFont"),
+                      style: TextStyle(fontSize: 12.sp, color: AllColor.black,fontFamily: "OpenText", fontWeight: FontWeight.w400),
                     ),
                   ),
 
@@ -154,11 +154,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             SizedBox(height: 30.h),
 
             // Save Changes
-            GlobalGetStartedButton(onTap: () {context.pop();},color: AllColor.primary,height: 35.h,buttonName: "Save Changes",textColor:AllColor.borderColor)
+            GlobalGetStartedButton(onTap: () {context.pop();},color: AllColor.primary, buttonName: "Save Changes",textColor:AllColor.borderColor)
             // SizedBox(
             //   width: double.infinity,
             //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
+            //     style: ElevatedButton.styleFrom
             //       backgroundColor: AllColor.primary,
             //       shape: RoundedRectangleBorder(
             //         borderRadius: BorderRadius.circular(8.r),
@@ -185,14 +185,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Widget _label(String text) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 6.h),
+      padding: EdgeInsets.only(bottom: 4.h),
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 13.sp,
-          fontWeight: FontWeight.w500,
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w400,
           color: AllColor.black,
-          fontFamily: "bodyFont"
+          fontFamily: "headFont"
         ),
       ),
     );
@@ -201,10 +201,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget _inputField(
       {required TextEditingController controller,
         required String hint,
-        int maxLines = 1}) {
+
+        int maxLines = 1,
+
+      }) {
     return TextField(
       controller: controller,
       maxLines: maxLines,
+      style: TextStyle(color:AllColor.black,fontWeight: FontWeight.w400, fontFamily: "OpenText", fontSize: 12.sp),
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(fontSize: 12.sp, color: AllColor.grey),
@@ -279,7 +283,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                   color: AllColor.white,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.camera_alt_outlined, color: Colors.black, size: 12.sp),
+                child: Icon(Icons.camera_alt_outlined, color: AllColor.black, size: 12.sp),
               ),
             ),
           ),
@@ -377,7 +381,7 @@ class _CountryCityPickerState extends State<CountryCityPicker> {
     padding: EdgeInsets.only(bottom: 6.h),
     child: Text(
       text,
-      style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500,fontFamily: "bodyFont"),
+      style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400,fontFamily: "headFont", color: AllColor.black),
     ),
   );
 
@@ -399,7 +403,7 @@ class _CountryCityPickerState extends State<CountryCityPicker> {
                 onTap: _showCountryPicker,
                 child: Container(
                   padding:
-                  EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                  EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
                   decoration: BoxDecoration(
                     border: Border.all(
                         color: AllColor.borderColor, width: 1.2),
@@ -409,13 +413,13 @@ class _CountryCityPickerState extends State<CountryCityPicker> {
                     children: [
                       if (selectedCountry != null) ...[
                         Text(selectedCountry!.flagEmoji,
-                            style: TextStyle(fontSize: 20.sp)),
+                            style: TextStyle(fontSize: 20.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400, color: AllColor.black)),
                         SizedBox(width: 8.w),
                         Expanded(
                           child: Text(
                             selectedCountry!.name,
                             style: TextStyle(
-                                fontSize: 14.sp, color: Colors.black),
+                                fontSize: 14.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400 ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -423,7 +427,7 @@ class _CountryCityPickerState extends State<CountryCityPicker> {
                         Text(
                           "Select Country",
                           style: TextStyle(
-                              fontSize: 14.sp, color: Colors.grey),
+                              fontSize: 14.sp, color: Colors.grey, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
                         ),
                     ],
                   ),
@@ -523,7 +527,7 @@ class _TagInputFieldState extends State<TagInputField> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(label, style: TextStyle(fontSize: 12.sp, fontFamily: "bodyFond")),
+          Text(label, style: TextStyle(fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400, color: AllColor.black)),
           6.horizontalSpace,
           GestureDetector(
             onTap: () => _removeItem(label),
@@ -539,9 +543,10 @@ class _TagInputFieldState extends State<TagInputField> {
     child: Text(
       text,
       style: TextStyle(
-        fontSize: 13.sp,
-        fontWeight: FontWeight.w500,
-        fontFamily: "bodyFont",
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w400,
+        fontFamily: "OpenText",
+        color:AllColor.black,
       ),
     ),
   );
@@ -602,9 +607,11 @@ class _TagInputFieldState extends State<TagInputField> {
               ),
               child: Text(
                 "Add",
-                style: theme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w500,
+                style:TextStyle(
+                  fontWeight: FontWeight.w400,
                   color: AllColor. borderColor,
+                  fontSize: 14.sp,
+                  fontFamily: "OpenText"
                 ),
               ),
             ),
