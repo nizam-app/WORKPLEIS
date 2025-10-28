@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workpleis/features/Payment/screen/payment_methods_screen.dart';
 import 'package:workpleis/features/account/screen/profile_edit_screen.dart';
 import 'package:workpleis/features/account/widget/custom_buttom.dart';
-import 'package:workpleis/features/home/screen/job_details_screen.dart';
 import 'package:workpleis/features/jobs/screen/service_my_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/security/screen/settings_screen.dart';
@@ -14,7 +13,6 @@ import 'package:workpleis/features/wallet/screen/wallet_screen.dart';
 import '../../../core/constants/color_control/all_color.dart';
 import '../../../core/widget/global_app_bar.dart';
 import '../../security/screen/security_guide_screen.dart';
-import '../../security/screen/security_screen.dart';
 
 class AccountOverviewClientScreen extends StatefulWidget {
   const AccountOverviewClientScreen({super.key});
@@ -86,9 +84,9 @@ class _AccountOverviewClientScreenState
             SizedBox(height: 20.h),
             _accountOverviewSection(),
             SizedBox(height: 20.h),
-            _paymentMethodSection(),
+            _paymentMethodSection(context),
             SizedBox(height: 20.h),
-            if (userRole == "client")  _specialProjectsSection(),
+            if (userRole == "client")  _specialProjectsSection(context),
             SizedBox(height: 20.h),
             InkWell(
               onTap: (){
@@ -118,7 +116,7 @@ class _AccountOverviewClientScreenState
             SizedBox(height: 30.h),
             Text(
               "Member since $memberSince",
-              style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+              style: TextStyle(color: Colors.grey, fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400),
             ),
             SizedBox(height: 10.h),
             _signOutButton(),
@@ -138,7 +136,7 @@ class _AccountOverviewClientScreenState
         border: Border.all(color: AllColor.brand2_light, width: 1),
         boxShadow: [
           BoxShadow(
-              color: Colors.black12, blurRadius: 5, offset: const Offset(0, 2))
+              color: AllColor.black, blurRadius: 5, offset: const Offset(0, 2))
         ],
       ),
       child: Row(
@@ -157,7 +155,7 @@ class _AccountOverviewClientScreenState
                   children: [
                     Text(profileData["name"],
                         style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.w400, fontFamily: "OpenText", color: AllColor.black)),
+                            fontSize: 16.sp, fontWeight: FontWeight.w800, fontFamily: "headFont", color: AllColor.brand2_light)),
                     SizedBox(width: 6.w),
                     
                   ],
@@ -246,115 +244,121 @@ class _AccountOverviewClientScreenState
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: bgColor.withOpacity(0.5), // ✅ Light background tint
-        border: Border.all(color: borderColor, width: 1.2), // same border color
+        border: Border.all(color: borderColor, width: 1.2),  // same border color
         borderRadius: BorderRadius.circular(10.r),
       ),
       child: Column(
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Icon(icon, color: borderColor, size: 18.sp),
+            Icon(icon, color: AllColor.brand2_light, size: 18.sp, ),
             SizedBox(width: 6.w),
             Text(value,
                 style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
-                    color: Colors.black, fontFamily: "OpenText")),
+                    color: AllColor.brand2_light, fontFamily: "OpenText")),
           ]),
           SizedBox(height: 4.h),
           Text(label,
-              style: TextStyle(fontSize: 14.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
+              style: TextStyle(fontSize: 14.sp, color: AllColor.brand2_light, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
         ],
       ),
     );
   }
+  //
+  // /// ---------------- PAYMENT METHOD ----------------
+  // Widget _paymentMethodSection() {
+  //   return Container(
+  //     width: double.infinity,
+  //     padding: EdgeInsets.all(14.w),
+  //     decoration: BoxDecoration(
+  //       gradient: const LinearGradient(
+  //         colors: [AllColor.white, AllColor.grey],
+  //         begin: Alignment.topLeft,
+  //         end: Alignment.bottomRight,
+  //       ),
+  //       borderRadius: BorderRadius.circular(10.r),
+  //       border: Border.all(color:AllColor.brand2_light, width: 1)
+  //     ),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Row(children: [
+  //           const Icon(Icons.credit_card, color: Colors.black),
+  //           SizedBox(width: 10.w),
+  //           Expanded(
+  //             child: Text("Add Payment Method",
+  //                 style: TextStyle(
+  //                     fontSize: 16.sp,
+  //                     fontWeight: FontWeight.w800,
+  //                     color: Colors.black,
+  //                   fontFamily: "headFont", )
+  //             ),
+  //           ),
+  //         ]),
+  //         SizedBox(height: 5.h),
+  //          Text(
+  //           "Securely save your wallet for faster checkout.",
+  //           style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: AllColor.black, fontFamily: "OpenText"),
+  //         ),
+  //         SizedBox(height: 10.h),
+  //         CustomButtom(onTap:(){
+  //                            context.push(PaymentMethodsScreen.routeName);
+  //         },text: "Add Payment", icon: Icons.credit_card, color: AllColor.primary)
+  //
+  //       ],
+  //     ),
+  //   );
+  // }
+  //
+  // /// ---------------- SPECIAL PROJECTS ----------------
+  // Widget _specialProjectsSection() {
+  //   return Container(
+  //     width: double.infinity,
+  //     padding: EdgeInsets.all(14.w),
+  //     decoration: BoxDecoration(
+  //       gradient: const LinearGradient(
+  //         colors: [AllColor.white, AllColor.grey],
+  //         begin: Alignment.topLeft,
+  //         end: Alignment.bottomRight,
+  //       ),
+  //       borderRadius: BorderRadius.circular(10.r),
+  //         border: Border.all(color:AllColor.borderColor, width: 1)
+  //     ),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Row(children: [
+  //           const Icon(Icons.assignment, color: AllColor.black),
+  //           SizedBox(width: 10.w),
+  //           Expanded(
+  //             child: Text("Track Your Special Projects",
+  //                 style: TextStyle(
+  //                     fontSize: 16.sp,
+  //                     fontWeight: FontWeight.w800,
+  //                     color: Colors.black,
+  //                   fontFamily: "headFont",
+  //
+  //                 )),
+  //           ),
+  //         ]),
+  //         SizedBox(height: 5.h),
+  //          Text(
+  //           "Monitor the progress of your confidential high-stakes projects.",
+  //           style: TextStyle( fontWeight: FontWeight.w400, fontSize: 12.sp, color: AllColor.black, fontFamily: "OpenText"),
+  //         ),
+  //         SizedBox(height: 10.h),
+  //         CustomButtom(
+  //             onTap: (){
+  //
+  //             },
+  //             text: "Track Special Project", icon: Icons.fingerprint, color: AllColor.primary, )
+  //
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  /// ---------------- PAYMENT METHOD ----------------
-  Widget _paymentMethodSection() {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(14.w),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [AllColor.white, AllColor.allcolor],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(10.r),
-        border: Border.all(color:AllColor.brand2_light, width: 1)
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(children: [
-            const Icon(Icons.credit_card, color: Colors.black87),
-            SizedBox(width: 10.w),
-            Expanded(
-              child: Text("Add Payment Method",
-                  style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.black, fontFamily: "headFont", )),
-            ),
-          ]),
-          SizedBox(height: 5.h),
-           Text(
-            "Securely save your wallet for faster checkout.",
-            style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: Colors.black, fontFamily: "OpenText"),
-          ),
-          SizedBox(height: 10.h),
-          CustomButtom(onTap:(){
-                             context.push(PaymentMethodsScreen.routeName);
-          },text: "Add Payment", icon: Icons.credit_card, color: AllColor.white)
-
-        ],
-      ),
-    );
-  }
-
-  /// ---------------- SPECIAL PROJECTS ----------------
-  Widget _specialProjectsSection() {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(14.w),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [AllColor.white, AllColor.parpale],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(10.r),
-          border: Border.all(color:AllColor.borderColor, width: 1)
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(children: [
-            const Icon(Icons.assignment, color: Colors.black87),
-            SizedBox(width: 10.w),
-            Expanded(
-              child: Text("Track Your Special Projects",
-                  style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black)),
-            ),
-          ]),
-          SizedBox(height: 5.h),
-          const Text(
-            "Monitor the progress of your confidential high-stakes projects.",
-            style: TextStyle( fontWeight: FontWeight.w200, fontSize: 12,color: AllColor.black),
-          ),
-          SizedBox(height: 10.h),
-          CustomButtom(
-              onTap: (){
-                
-              },
-              text: "Track Special Project", icon: Icons.fingerprint, color: AllColor.white)
-          
-        ],
-      ),
-    );
-  }
 
   /// ---------------- MENU ----------------
   Widget _menuTile(IconData icon, String title) {
@@ -368,12 +372,12 @@ class _AccountOverviewClientScreenState
       ),
       child: Row(
         children: [
-          Icon(icon, color: Colors.black, size: 22.sp),
+          Icon(icon, color: AllColor.black, size: 22.sp),
           SizedBox(width: 10.w),
           Expanded(
               child: Text(title,
-                  style: TextStyle(fontSize: 18.sp, color: AllColor.black, fontWeight: FontWeight.w500))),
-          const Icon(Icons.arrow_forward_ios, color: AllColor.grey, size: 18),
+                  style: TextStyle(fontSize: 18.sp, color: AllColor.black, fontWeight: FontWeight.w800, fontFamily: "headFont"))),
+           Icon(Icons.arrow_forward_ios, color: AllColor.grey, size: 18.sp),
         ],
       ),
     );
@@ -385,6 +389,117 @@ class _AccountOverviewClientScreenState
       onTap: (){
         context.push("/loginScreen");
       },
-        icon: Icons.logout, text: "Sign out", color: AllColor.white, textColor: AllColor.red,);
+        icon: Icons.logout, text: "Sign out", color: AllColor.primary, textColor: AllColor.black,);
+  }
+}
+
+
+
+/// ---------------- PAYMENT METHOD ----------------
+Widget _paymentMethodSection(BuildContext context) {
+  return CustomSectionCard(
+    icon: Icons.credit_card,
+    title: "Add Payment Method",
+    description: "Securely save your wallet for faster checkout.",
+    buttonText: "Add Payment",
+    buttonIcon: Icons.credit_card,
+    onTap: () => context.push(PaymentMethodsScreen.routeName),
+    borderColor: AllColor.brand2_light,
+  );
+}
+
+/// ---------------- SPECIAL PROJECTS ----------------
+Widget _specialProjectsSection(BuildContext context) {
+  return CustomSectionCard(
+    icon: Icons.assignment,
+    title: "Track Your Special Projects",
+    description:
+    "Monitor the progress of your confidential high-stakes projects.",
+    buttonText: "Track Special Project",
+    buttonIcon: Icons.fingerprint,
+    onTap: () {
+      // handle navigation or action
+    },
+    borderColor: AllColor.borderColor,
+  );
+}
+
+
+class CustomSectionCard extends StatelessWidget {
+  const CustomSectionCard({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.description,
+    required this.buttonText,
+    required this.buttonIcon,
+    required this.onTap,
+    this.borderColor = AllColor.borderColor,
+    this.gradientColors = const [AllColor.white, AllColor.grey],
+  });
+
+  final IconData icon;
+  final String title;
+  final String description;
+  final String buttonText;
+  final IconData buttonIcon;
+  final VoidCallback onTap;
+  final List<Color> gradientColors;
+  final Color borderColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(14.w),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: gradientColors,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(10.r),
+        border: Border.all(color: borderColor, width: 1),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, color: AllColor.black),
+              SizedBox(width: 10.w),
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.black,
+                    fontFamily: "headFont",
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 5.h),
+          Text(
+            description,
+            style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w400,
+              color: AllColor.black,
+              fontFamily: "OpenText",
+            ),
+          ),
+          SizedBox(height: 10.h),
+          CustomButtom(
+            onTap: onTap,
+            text: buttonText,
+            icon: buttonIcon,
+            color: AllColor.primary,
+          ),
+        ],
+      ),
+    );
   }
 }

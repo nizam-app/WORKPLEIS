@@ -96,7 +96,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
   /* 🔹 Top Section Card */
   Widget _topCard() {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
         color: AllColor.white,
         borderRadius: BorderRadius.circular(12.r),
@@ -105,10 +105,10 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundColor: AllColor.brand2_light,
+            backgroundColor: AllColor.primary,
             radius: 22.r,
             
-            child: Icon(Icons.verified_user, color: AllColor.white, size: 28.sp),
+            child: Icon(Icons.verified_user, color: AllColor.black, size: 28.sp),
           ),
           SizedBox(width: 12.w),
           Expanded(
@@ -117,13 +117,15 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
               children: [
                 Text("Help & Support",
                     style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AllColor.black)),
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w800,
+                        color: AllColor.black,
+                        fontFamily: "headFont"
+                    ),),
                 SizedBox(height: 4.h),
                 Text("Find answers, get help, and learn how to use Workpleis.",
                     style:
-                    TextStyle(fontSize: 12.sp, color: AllColor.black87)),
+                    TextStyle(fontSize: 12.sp, color: AllColor.black87, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
               ],
             ),
           ),
@@ -140,17 +142,17 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 8.h),
         decoration: BoxDecoration(
-          color: isSelected ? AllColor.brand2_light : Colors.transparent,
+          color: isSelected ? AllColor.primary : Colors.transparent,
           borderRadius: BorderRadius.circular(8.r),
           border: Border.all(
-              color: isSelected ? AllColor.brand2_light : AllColor.grey300),
+              color: isSelected ? AllColor.primary : AllColor.grey300),
         ),
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w500,
-            color: isSelected ? AllColor.white : AllColor.black,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w400,
+            color: isSelected ? AllColor.black : AllColor.black, fontFamily: "OpenText"
           ),
         ),
       ),
@@ -179,11 +181,11 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: AllColor.brand2_light,
+                      backgroundColor: AllColor.primary,
                       radius: 18.r,
                       child: Icon(
                         f["icon"] as IconData,
-                        color: AllColor.white,
+                        color: AllColor.black,
                         size: 20.sp,
                       ),
                     ),
@@ -192,14 +194,15 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                       f["title"] as String,
                       style: TextStyle(
                         fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w800,
                         color: AllColor.black,
+                        fontFamily: "headFont"
                       ),
                     ),
                   ],
                 ),
-                const Icon(Icons.keyboard_arrow_down_sharp,
-                    color: AllColor.black),
+                 Icon(Icons.keyboard_arrow_down_sharp,
+                    color: AllColor.black,size: 20.sp,),
               ],
             ),
           ),
@@ -217,9 +220,10 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
           child: Text(
             "Send us a message",
             style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w300,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w800,
               color: AllColor.black,
+              fontFamily: "headFont"
             ),
           ),
         ),
@@ -228,9 +232,12 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
         // Category
         Text("Category",
             style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: AllColor.black87)),
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w800,
+                color: AllColor.black,
+              fontFamily: "headFont"
+
+            )),
         SizedBox(height: 6.h),
         GestureDetector(
           onTap: () => _showCategoryDialog(),
@@ -245,7 +252,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
               children: [
                 Text(
                   selectedCategory,
-                  style: TextStyle(fontSize: 14.sp, color: AllColor.black),
+                  style: TextStyle(fontSize: 14.sp, color: AllColor.black, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
                 ),
                 Icon(Icons.keyboard_arrow_down_rounded,
                     color: AllColor.grey, size: 20.sp),
@@ -258,9 +265,12 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
         // Subject
         Text("Subject",
             style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: AllColor.black87)),
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w800,
+                color: AllColor.black,
+            fontFamily: "headFont"
+            )
+        ),
         SizedBox(height: 6.h),
         TextField(
           decoration: InputDecoration(
@@ -277,9 +287,11 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
         // Message
         Text("Message",
             style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: AllColor.black87)),
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w800,
+                color: AllColor.black,
+                fontFamily: "headFont"
+            )),
         SizedBox(height: 6.h),
         TextField(
           maxLines: 5,
@@ -303,11 +315,13 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
               "Send Message",
               style: TextStyle(
                   color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14.sp),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.sp,
+              fontFamily: "OpenText"
+              ),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: AllColor.brand2_light,
+              backgroundColor: AllColor.primary,
               padding: EdgeInsets.symmetric(vertical: 14.h),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
@@ -336,7 +350,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
             decoration: BoxDecoration(
               color: AllColor.white,
               borderRadius: BorderRadius.circular(10.r),
-              border: Border.all(color: AllColor.grey300, width: 1.w), 
+              border: Border.all(color: AllColor.grey, width: 1.w),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -344,11 +358,11 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: AllColor.brand2_light,
+                      backgroundColor: AllColor.primary,
                       radius: 18.r,
                       child: Icon(
                         g["icon"] as IconData,
-                        color: Colors.white,
+                        color: AllColor.black,
                         size: 20.sp,
                       ),
                     ),
@@ -360,8 +374,9 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                           g["title"] as String,
                           style: TextStyle(
                             fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                             color: AllColor.black,
+                            fontFamily: "OpenText"
                           ),
                         ),
                         Text(
@@ -369,6 +384,8 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: AllColor.black,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "OpenText"
                           ),
                         ),
                       ],
@@ -448,9 +465,10 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
           title: Text(
             "Select Category",
             style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w800,
               color: AllColor.black,
+              fontFamily: "headFont"
             ),
           ),
           content: SizedBox(
@@ -465,8 +483,10 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                   title: Text(
                     cat,
                     style: TextStyle(
-                      fontSize: 13.sp,
+                      fontSize: 14.sp,
                       color: AllColor.black,
+                      fontFamily: "OpenText",
+                      fontWeight: FontWeight.w400
                     ),
                   ),
                   trailing: selectedCategory == cat

@@ -64,17 +64,17 @@ class CustomButtom extends StatelessWidget {
             if (icon != null) ...[
               Icon(
                 icon,
-                size: iconSize ?? 18.sp,
-                color: iconColor ?? textColor ?? Colors.black,
+                size: iconSize ?? 16.sp,
+                color: iconColor ?? textColor ?? AllColor.black,
               ),
               SizedBox(width: 6.w),
             ],
             Text(
               text,
               style: TextStyle(
-                fontSize: 16.sp,
+                fontSize: 14.sp,
                 fontWeight: fontWeight ?? FontWeight.w400,
-                color: textColor ?? Colors.black,
+                color: textColor ?? AllColor.black,
                 letterSpacing: 0.5,
                 fontFamily: "OpenText"
               ),

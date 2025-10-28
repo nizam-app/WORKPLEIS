@@ -40,7 +40,7 @@ class GlobalAleartBox extends StatelessWidget {
               color: AllColor.primary,
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.check, color: AllColor.bgcolor, size: 40),
+            child: const Icon(Icons.check, color: AllColor.white, size: 40),
           ),
           SizedBox(height: 20.h),
 

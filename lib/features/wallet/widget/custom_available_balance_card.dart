@@ -25,21 +25,23 @@ class CustomAavailableBalanceCard extends StatelessWidget {
           Text(
             "Available Balance",
             style: TextStyle(
-                color: AllColor.black54,
+                color: AllColor.black,
                 fontWeight: FontWeight.w400,
-                fontSize: 18.sp),
+                fontSize: 18.sp,
+              fontFamily: "OpenText"
+            ),
           ),
           SizedBox(height: 6.h),
           Text(
             "\$1,250.00",
             style: TextStyle(
-                fontSize: 26.sp, fontWeight: FontWeight.w600),
+                fontSize: 26.sp, fontWeight: FontWeight.w700, fontFamily: "OpenText"),
           ),
-          SizedBox(height: 10.h),
+          // SizedBox(height: 10.h),
 
           Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: CustomButtom(text: buttonText, color: AllColor.white, ),
+            padding: const EdgeInsets.all(20.0),
+            child: CustomButtom(text: buttonText, color: AllColor.primary, fontWeight: FontWeight.w400, ),
           ),
 
         ],

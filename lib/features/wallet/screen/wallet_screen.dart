@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_app_bar.dart';
-import 'package:workpleis/features/account/widget/custom_buttom.dart';
 
 import '../widget/custom_available_balance_card.dart';
 
@@ -106,30 +105,34 @@ class _WalletScreenState extends State<WalletScreen> {
 
   Widget _statCard(String title, String amount) => Expanded(
     child: Container(
-      padding: EdgeInsets.symmetric(vertical: 14.h),
+      padding: EdgeInsets.symmetric(vertical: 15.h),
       decoration: BoxDecoration(
         color: AllColor.white,
         borderRadius: BorderRadius.circular(10.r),
-        border: Border.all(color: Colors.black12),
+        border: Border.all(color: AllColor.grey),
       ),
       child: Column(
         children: [
           Icon(Icons.wallet_rounded, color: AllColor.brand2_light),
-          SizedBox(height: 6.h),
+          SizedBox(height: 4.h),
           Text(
             title,
             style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 10.sp,
-                color: Colors.black87),
+                fontWeight: FontWeight.w400,
+                fontSize: 12.sp,
+                color: AllColor.black,
+              fontFamily: "OpenText"
+            ),
           ),
           SizedBox(height: 4.h),
           Text(
             amount,
             style: TextStyle(
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
                 fontSize: 14.sp,
-                color: Colors.black),
+                color: AllColor.black,
+            fontFamily: "OpenText"
+            ),
           ),
         ],
       ),
@@ -143,18 +146,19 @@ class _WalletScreenState extends State<WalletScreen> {
         padding: EdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
           color: selectedTab == index
-              ? AllColor.brand2_light
+              ? AllColor.primary
               : Colors.transparent,
-          borderRadius: BorderRadius.circular(999.r),
+          borderRadius: BorderRadius.circular(30.r),
         ),
         alignment: Alignment.center,
         child: Text(
           text,
           style: TextStyle(
             fontSize: 16.sp,
-            fontWeight: FontWeight.w500,
+            fontFamily: "OpenText",
+            fontWeight: FontWeight.w400,
             color: selectedTab == index
-                ? Colors.white
+                ? Colors.black
                 : Colors.black,
           ),
         ),
@@ -191,9 +195,10 @@ class _WalletScreenState extends State<WalletScreen> {
                 child: Text(
                   data['title'],
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 13.5.sp,
-                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14.sp,
+                    color: AllColor.black,
+                    fontFamily: "OpenText"
                   ),
                 ),
               ),
@@ -201,9 +206,10 @@ class _WalletScreenState extends State<WalletScreen> {
                 (isIncome ? "+" : "") +
                     "\$${data['amount'].abs().toStringAsFixed(2)}",
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w400,
                   color: color,
-                  fontSize: 13.sp,
+                  fontSize: 14.sp,
+                  fontFamily:"OpenText"
                 ),
               ),
             ],
@@ -212,16 +218,20 @@ class _WalletScreenState extends State<WalletScreen> {
           Text(
             data['desc'],
             style: TextStyle(
-              color: Colors.black54,
+              color: AllColor.black,
               fontSize: 12.sp,
+              fontFamily: "OpenText",
+              fontWeight: FontWeight.w400
             ),
           ),
           SizedBox(height: 6.h),
           Text(
             "3 mins ago",
             style: TextStyle(
-              color: Colors.black38,
-              fontSize: 11.sp,
+              color: AllColor.black,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w200,
+              fontFamily: "OpenText"
             ),
           ),
         ],
