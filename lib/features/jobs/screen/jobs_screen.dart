@@ -39,7 +39,7 @@ class JobsScreen extends ConsumerWidget {
                     locations: "Topasham Me 04",
                     calender: "Today",
                     time: "Any Time",
-                    price: "\$50",
+                    price: "\$3,500",
                   );
                 },
               ),
@@ -167,7 +167,8 @@ class JobCard extends StatelessWidget {
                   ),
                 ),
               ),
-              _StatusChip(text: status),
+              JobPriceText(price: price),
+
             ],
           ),
 
@@ -193,12 +194,11 @@ class JobCard extends StatelessWidget {
                      SizedBox(height: 10.h),
 
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
 
             children: [
-              JobPriceText(price: price),
-
-
+              _StatusChip(text: status),
+              SizedBox(width: 20.w,),
               JobStatusAction(status: status),
 
               //_BottomBar(status: status, price: price),
@@ -218,17 +218,17 @@ class _StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
       decoration: BoxDecoration(
         color: AllColor.primary, // lime chip (mock-এর মতো)
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(10.r),
         //border: Border.all(color:Colors.black, width: 1)
       ),
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w400,
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w500,
           color:AllColor.black,
           fontFamily: "OpenText",
         ),
@@ -282,9 +282,9 @@ class JobPriceText extends StatelessWidget {
     return Text(
       price,
       style: TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w400,
-        color: AllColor.black87,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w700,
+        color: AllColor.black,
         fontFamily: "OpenText",
       ),
     );
@@ -353,15 +353,15 @@ class _PillButton extends StatelessWidget {
     return GestureDetector(
     onTap: onTap,
     child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
       decoration: BoxDecoration(
-        color: AllColor.brand2_light,
+        color: AllColor.grey,
         borderRadius: BorderRadius.circular(10.r),
       ),
       child: Text(
         label,
         style: TextStyle(
-          fontSize: 14.sp,
+          fontSize: 12.sp,
           fontWeight: FontWeight.w500,
           color: AllColor.white,
           fontFamily: "OpenText",

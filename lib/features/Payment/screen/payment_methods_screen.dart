@@ -19,7 +19,7 @@ class PaymentMethodsScreen extends StatelessWidget {
           children: [
             Text(
               "Manage your payment methods for secure transactions",
-              style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+              style: TextStyle(fontSize: 18.sp, color: AllColor.black, fontWeight: FontWeight.w800, fontFamily: "headFont"),
             ),
             SizedBox(height: 20.h),
 
@@ -28,7 +28,7 @@ class PaymentMethodsScreen extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AllColor.borderColor,
+                  backgroundColor: AllColor.primary,
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.r),
@@ -46,7 +46,7 @@ class PaymentMethodsScreen extends StatelessWidget {
                   );
                 },
                 child: Text("Add Payment Method",
-                    style: TextStyle(fontSize: 16.sp, color: Colors.white)),
+                    style: TextStyle(fontSize: 16.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w500)),
               ),
             ),
             SizedBox(height: 20.h),
@@ -60,24 +60,24 @@ class PaymentMethodsScreen extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.credit_card, size: 28.sp),
+                  Icon(Icons.credit_card, size: 28.sp, color: AllColor.brand2_light),
                   SizedBox(width: 10.w),
                   Expanded(
                     child: Text("**** **** **** 1234",
-                        style: TextStyle(fontSize: 16.sp)),
+                        style: TextStyle(fontSize: 16.sp, fontFamily: "OpenText", fontWeight: FontWeight.w500, color: AllColor.brand2_light)),
                   ),
                   Container(
                     padding:
                     EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                     decoration: BoxDecoration(
-                      color: Colors.green,
+                      color: AllColor.primary,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Text("Default",
-                        style: TextStyle(fontSize: 12.sp, color: Colors.white)),
+                        style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontWeight: FontWeight.w400, fontFamily: "OpenText")),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
+                    icon: const Icon(Icons.delete, color: AllColor.red),
                     onPressed: () {},
                   ),
                 ],
@@ -113,7 +113,7 @@ class AddPaymentMethodSheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Add Payment Method",
-                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w800, fontFamily: "headFont", color: AllColor.black)),
             SizedBox(height: 20.h),
 
             // Card Number
@@ -178,7 +178,7 @@ class AddPaymentMethodSheet extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AllColor.borderColor,
+                  backgroundColor: AllColor.primary,
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.r),
@@ -188,7 +188,7 @@ class AddPaymentMethodSheet extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: Text("Add Payment Method",
-                    style: TextStyle(fontSize: 16.sp, color: Colors.white)),
+                    style: TextStyle(fontSize: 16.sp, color:AllColor.black,fontFamily: "OpenText")),
               ),
             ),
 
@@ -200,7 +200,7 @@ class AddPaymentMethodSheet extends StatelessWidget {
                 onPressed: () => Navigator.pop(context),
                 child: Text("Cancel",
                     style:
-                    TextStyle(fontSize: 14.sp, color: AllColor.black)),
+                    TextStyle(fontSize: 16.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w500)),
               ),
             )
           ],

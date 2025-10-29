@@ -81,25 +81,27 @@ class _CustomServiceCardState extends State<CustomServiceCard> {
               Expanded(
                 child: Text(
                   widget.title,
-                  style: theme.titleSmall?.copyWith(
+                  style: TextStyle(
                     fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
                     color: AllColor.black,
+                    fontFamily: "headFont"
                   ),
                 ),
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: AllColor.brand2_light,
+                  color: AllColor.primary,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
                   widget.status,
-                  style: theme.titleMedium?.copyWith(
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.w500,
-                    color: AllColor.white,
+                  style:TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                    color: AllColor.black,
+                    fontFamily: "OpenText"
                   ),
                 ),
               ),
@@ -109,10 +111,11 @@ class _CustomServiceCardState extends State<CustomServiceCard> {
 
           Text(
             widget.providerName,
-            style: theme.titleMedium?.copyWith(
+            style: TextStyle(
               fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-              color: AllColor.black.withOpacity(.7),
+              fontWeight: FontWeight.w400,
+              color: AllColor.brand2_light,
+              fontFamily: "OpenText"
             ),
           ),
           8.verticalSpace,
@@ -121,36 +124,40 @@ class _CustomServiceCardState extends State<CustomServiceCard> {
             children: [
               Text(
                 "\$${widget.price}",
-                style: theme.titleSmall?.copyWith(
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w700,
-                  color: AllColor.black,
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: AllColor.brand2_light,
+                    fontFamily: "OpenText"
                 ),
               ),
               16.horizontalSpace,
               Icon(Icons.location_on_outlined,
-                  size: 14.sp, color: AllColor.black.withOpacity(.6)),
+                  size: 14.sp, color: AllColor.brand2_light),
               4.horizontalSpace,
               Expanded(
                 child: Text(
                   widget.location,
-                  style: theme.titleMedium?.copyWith(
-                    fontSize: 12.sp,
-                    color: AllColor.black.withOpacity(.6),
+                  style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: AllColor.brand2_light,
+                      fontFamily: "OpenText"
                   ),
                 ),
               ),
               Text(
                 widget.date,
-                style: theme.titleMedium?.copyWith(
-                  fontSize: 12.sp,
-                  color: AllColor.black.withOpacity(.6),
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: AllColor.brand2_light,
+                    fontFamily: "OpenText"
                 ),
               ),
             ],
           ),
           12.verticalSpace,
-
           if (widget.trakingID >= 2)
             ReviewNoticeCard(onTap: () {
               showModalBottomSheet(
@@ -167,10 +174,12 @@ class _CustomServiceCardState extends State<CustomServiceCard> {
 
           Text(
             widget.description,
-            style: theme.bodyMedium?.copyWith(
-              fontSize: 13.sp,
-              color: AllColor.black87,
-              height: 1.3,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: AllColor.brand2_light,
+              height: 1,
+              fontWeight: FontWeight.w400,
+              fontFamily: "OpenText"
             ),
           ),
           12.verticalSpace,
@@ -197,7 +206,7 @@ class _CustomServiceCardState extends State<CustomServiceCard> {
                 ),
               ],
             ),
-            GlobalGetStartedButton(onTap:widget.onTap ?? (){}, color: AllColor.brand2_light,height: 40,borderRadius: 20.r,textColor: AllColor.white,buttonName: widget.buttonText ??"Get Started",)
+            GlobalGetStartedButton(onTap:widget.onTap ?? (){}, color: AllColor.primary,height: 40,borderRadius: 20.r,textColor: AllColor.black,buttonName: widget.buttonText ??"Get Started",)
         ],
       ),
     );

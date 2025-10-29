@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,7 +40,7 @@ class ProjectScreen extends ConsumerWidget {
                     time: "Immediate",
                     budget: "\$5,000–\$20,000",
                     period: "Afternoon (12PM–5PM)",
-                    description: "some description about project.this is a project description",
+                    description: "some description about project.\nthis is a project description",
                   );
                 },
               ),
@@ -67,8 +67,9 @@ class JobStatusList extends ConsumerWidget {
       "Submitted",
       "Proposal Sent",
       "In Progress",
+      "Completed",
       "In Review",
-      "Delivered", // ← new
+      "Delivered"// ← new
     ];
 
     return SizedBox(
@@ -88,7 +89,7 @@ class JobStatusList extends ConsumerWidget {
             },
             child: AnimatedContainer(
              duration: const Duration(milliseconds: 200),
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
              // padding: EdgeInsets.only(left: 15.h, right: 15.h, top: 8.h, bottom: 8.h ),
               decoration: BoxDecoration(
                 color: isSelected ? AllColor.bgcolor : Colors.transparent,
@@ -161,7 +162,6 @@ class JobCard extends StatelessWidget {
           /// Header (title + status chip)
           Row(
             children: [
-
               Expanded(
                 child: Text(
                   title,
@@ -174,23 +174,47 @@ class JobCard extends StatelessWidget {
                 ),
               ),
 
-              _StatusChip(text: status),
+              Text(
+                budget,
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "OpenText",
+                    color: AllColor.black
+                ),
+              ),
+
+              // _StatusChip(text: status),
             ],
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 4.h),
 
+          Text(
+            description,
+            style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                fontFamily: "OpenText",
+                color: AllColor.brand2_light,
+
+            ),
+          ),
+          SizedBox(height: 6.h),
           /// Details
           _DetailRow(icon: Icons.timer, text: time),
           SizedBox(height: 6.h),
-          _DetailRow(icon: Icons.request_quote_outlined, text: budget),
-          SizedBox(height: 6.h),
+        //  _DetailRow(icon: Icons.request_quote_outlined, text: budget),
           _DetailRow(icon: Icons.call_outlined, text: period, expandable: true),
-          // SizedBox(height: 10.h),
+          SizedBox(height: 10.h),
 
           /// Bottom actions + price
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _BottomBar(status: status, price: description),
+
+              _BottomBar(status: status, ),
+              SizedBox(width: 10.w,),
+              _StatusChip(text: status),
             ],
           ),
         ],
@@ -207,10 +231,10 @@ class _StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
       decoration: BoxDecoration(
         color: AllColor.grey, // lime chip (mock-এর মতো)
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(10.r),
         //border: Border.all(color:Colors.black, width: 1)
       ),
       child: Text(
@@ -225,6 +249,7 @@ class _StatusChip extends StatelessWidget {
     );
   }
 }
+
 
 class _DetailRow extends StatelessWidget {
   const _DetailRow({
@@ -242,8 +267,8 @@ class _DetailRow extends StatelessWidget {
     final content = Text(
       text,
       style: TextStyle(
-        fontSize: 12.sp,
-       color: const Color(0xFF7A6FA2),
+        fontSize: 14.sp,
+       color: AllColor.brand2_light,
         fontFamily: "OpenText",
         fontWeight: FontWeight.w400
       ),
@@ -251,7 +276,7 @@ class _DetailRow extends StatelessWidget {
     );
     return Row(
       children: [
-        Icon(icon, size: 18, color: const Color(0xFF7A6FA2)),
+        Icon(icon, size: 16, color: AllColor.brand2_light),
         SizedBox(width: 6.w),
         if (expandable) Expanded(child: content) else content,
       ],
@@ -260,15 +285,12 @@ class _DetailRow extends StatelessWidget {
 }
 
 class _BottomBar extends StatelessWidget {
-  const _BottomBar({required this.status, required this.price});
+  const _BottomBar({required this.status});
 
   final String status;
-  final String price;
 
   @override
   Widget build(BuildContext context) {
-    final showButtons = status != "Submitted";
-
     final buttons = switch (status) {
       "Proposal Sent" => [
         _PillButton.purple(
@@ -286,9 +308,10 @@ class _BottomBar extends StatelessWidget {
           },
         ),
       ],
-      "In Review" => [
-        _PillButton.lime(
-          "View Details",
+
+      "Completed" => [
+        _PillButton.purple(
+          "Review Delivery",
           onTap: () {
             showModalBottomSheet(
               context: context,
@@ -300,17 +323,11 @@ class _BottomBar extends StatelessWidget {
             );
           },
         ),
-        SizedBox(width: 8.w),
-        _PillButton.purple(
-          "Track Project",
-          onTap: () {
-            context.push(RequestTrackerScreen.routeName);
-          },
-        ), // ← both buttons
       ],
-      "Delivered" => [
+
+      "In Review" => [
         _PillButton.purple(
-          "Leave us a review",
+          "Leave a review",
           onTap: () {
             showModalBottomSheet(
               context: context,
@@ -322,9 +339,31 @@ class _BottomBar extends StatelessWidget {
             );
           },
         ),
-        SizedBox(width: 8.w),
-        _PillButton.lime(
-          "View Details",
+
+        // _PillButton.lime(
+        //   "View Details",
+        //   onTap: () {
+        //     showModalBottomSheet(
+        //       context: context,
+        //       isScrollControlled: true,
+        //       shape: RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+        //       ),
+        //       builder: (_) => const CustomProjectCompletionBottomSheet(),
+        //     );
+        //   },
+        // ),
+        // SizedBox(width: 8.w),
+        // _PillButton.purple(
+        //   "Track Project",
+        //   onTap: () {
+        //     context.push(RequestTrackerScreen.routeName);
+        //   },
+        // ),
+      ],
+      "Delivered" => [
+        _PillButton.purple(
+          "View Completion",
           onTap: () {
             showModalBottomSheet(
               context: context,
@@ -336,50 +375,142 @@ class _BottomBar extends StatelessWidget {
               const CustomProjectCompletionBottomSheet(check: true),
             );
           },
-        ), // ← only this
+        ),
+
       ],
       _ => <Widget>[],
     };
 
-    if (!showButtons) {
-      return Padding(
-        padding: const EdgeInsets.only(right: 12.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(),
-
-            Text(
-              price,
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w400,
-                color: AllColor.black87,
-                fontFamily: "OpenText"
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Text(
-          price,
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w600,
-            color: AllColor.black87,
-            fontFamily: "OpenText"
-          ),
-        ),
-        const Spacer(),
         ...buttons,
       ],
     );
   }
 }
+
+// class _BottomBar extends StatelessWidget {
+//   const _BottomBar({required this.status, required this.price});
+//
+//   final String status;
+//   final String price;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final showButtons = status != "Submitted";
+//
+//     final buttons = switch (status) {
+//       "Proposal Sent" => [
+//         _PillButton.purple(
+//           "View Proposal",
+//           onTap: () {
+//             context.push(ViewProposalScreen.routeName);
+//           },
+//         ),
+//       ],
+//       "In Progress" => [
+//         _PillButton.purple(
+//           "Track Project",
+//           onTap: () {
+//             context.push(RequestTrackerScreen.routeName);
+//           },
+//         ),
+//       ],
+//       "In Review" => [
+//         _PillButton.lime(
+//           "View Details",
+//           onTap: () {
+//             showModalBottomSheet(
+//               context: context,
+//               isScrollControlled: true,
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+//               ),
+//               builder: (_) => const CustomProjectCompletionBottomSheet(),
+//             );
+//           },
+//         ),
+//         SizedBox(width: 8.w),
+//         _PillButton.purple(
+//           "Track Project",
+//           onTap: () {
+//             context.push(RequestTrackerScreen.routeName);
+//           },
+//         ), // ← both buttons
+//       ],
+//       "Delivered" => [
+//         _PillButton.purple(
+//           "Leave us a review",
+//           onTap: () {
+//             showModalBottomSheet(
+//               context: context,
+//               isScrollControlled: true,
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+//               ),
+//               builder: (_) => const ReviewBottomSheet(),
+//             );
+//           },
+//         ),
+//         SizedBox(width: 8.w),
+//         _PillButton.lime(
+//           "View Details",
+//           onTap: () {
+//             showModalBottomSheet(
+//               context: context,
+//               isScrollControlled: true,
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+//               ),
+//               builder: (_) =>
+//               const CustomProjectCompletionBottomSheet(check: true),
+//             );
+//           },
+//         ), // ← only this
+//       ],
+//       _ => <Widget>[],
+//     };
+//
+//     if (!showButtons) {
+//       return Padding(
+//         padding: const EdgeInsets.only(right: 12.0),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.end,
+//           children: [
+//             Container(),
+//
+//             Text(
+//               price,
+//               style: TextStyle(
+//                 fontSize: 16.sp,
+//                 fontWeight: FontWeight.w400,
+//                 color: AllColor.black87,
+//                 fontFamily: "OpenText"
+//               ),
+//             ),
+//           ],
+//         ),
+//       );
+//     }
+//
+//     return Row(
+//       children: [
+//         Text(
+//           price,
+//           style: TextStyle(
+//             fontSize: 16.sp,
+//             fontWeight: FontWeight.w600,
+//             color: AllColor.black87,
+//             fontFamily: "OpenText"
+//           ),
+//         ),
+//         const Spacer(),
+//         ...buttons,
+//       ],
+//     );
+//   }
+// }
 
 class _PillButton extends StatelessWidget {
   const _PillButton._(this.label, this.bg, this.fg, {required this.onTap});
@@ -392,8 +523,8 @@ class _PillButton extends StatelessWidget {
   factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-        AllColor.white, // শেডেড পার্পল (mock vibe)
-        AllColor.brand2_light,
+        AllColor.primary, // শেডেড পার্পল (mock vibe)
+        AllColor.black,
 
         onTap: onTap,
       );
@@ -410,18 +541,18 @@ class _PillButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: bg,
-      borderRadius: BorderRadius.circular(22.r),
+      borderRadius: BorderRadius.circular(10.r),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(22.r),
+        borderRadius: BorderRadius.circular(10.r),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: fg,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+              color: AllColor.black,
               fontFamily: "OpenText",
             ),
           ),
@@ -1005,14 +1136,14 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
             ),
             6.verticalSpace,
 
-            16.verticalSpace,
-
             /// Message label
             Text(
               "Message",
-              style: theme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w500,
-                fontSize: 12.sp,
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 16.sp,
+                fontFamily: "headFont",
+
               ),
             ),
 
@@ -1025,14 +1156,14 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
               style: theme.titleMedium?.copyWith(color: AllColor.black),
               decoration: const InputDecoration(
                   // border: InputBorder.none,
-              hintText: "Write your review here..."),
+              hintText: "happy to work with you. great job done."),
             ),
 
             20.verticalSpace,
 
             /// Submit Button
             SizedBox(
-              width: double.infinity,
+              width: 150.w,
               child: ElevatedButton(
                 onPressed: () {
                   final rating = selectedRating;
@@ -1053,7 +1184,7 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AllColor.bgcolor,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(999.r),
+                    borderRadius: BorderRadius.circular(20.r),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 12.h),
                   elevation: 0,
@@ -1061,10 +1192,10 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                 child: Text(
                   "Submit Review",
                   style: TextStyle(
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w500,
                     color: AllColor.black,
                     fontFamily: "OpenText",
-                    fontSize: 16.sp
+                    fontSize: 12.sp
                   ),
                 ),
               ),
@@ -1100,9 +1231,11 @@ class ProjectReviewCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   "Deliver something for me",
-                  style: theme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14.sp,
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      color: AllColor.black,
+                      fontFamily: "headFont"
                   ),
                 ),
               ),
