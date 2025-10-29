@@ -444,8 +444,8 @@ class ReviewCard extends StatelessWidget {
             child: Text(
               comment,
               style: TextStyle(
-                fontSize: 13.sp,
-                color: Colors.black87,
+                fontSize: 14.sp,
+                color: Colors.black,
                 height: 1.3,
               ),
             ),

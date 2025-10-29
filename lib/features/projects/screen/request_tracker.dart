@@ -84,17 +84,16 @@ class ProjectHeaderCard extends StatelessWidget {
                 ],
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
                 decoration: BoxDecoration(
-                  color: AllColor.brand2_light,
-                  borderRadius: BorderRadius.circular(999.r),
+                  color: AllColor.primary,
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: Text(
                   "in progress",
-
                   style: TextStyle(
                     fontSize: 12.sp,
-                    color: AllColor.white,
+                    color: AllColor.black,
                     fontWeight: FontWeight.w400,
                     fontFamily: "OpenText"
                   ),
@@ -103,44 +102,53 @@ class ProjectHeaderCard extends StatelessWidget {
             ],
           ),
 
-          12.verticalSpace,
+          4.verticalSpace,
+              Padding(
+                padding:  EdgeInsets.only(right: 35.w, left: 40.w),
+                child: Text(
+                  "Title ",
+                  style: TextStyle(color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400, fontSize: 14.sp),
+                ),
+              ),
+              6.verticalSpace,
+              Padding(
+                padding:  EdgeInsets.only(right: 35.w, left: 40.w),
+                child: Text(
+                  "Progress",
+                  style: TextStyle(fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400, color: AllColor.black87),
+                ),
+              ),
 
-          /// Sub Text
-          Text(
-            "Title :",
-            style: TextStyle(color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400, fontSize: 14.sp),
-          ),
-
-          14.verticalSpace,
 
           /// Progress Label + Bar
-          Text(
-            "Progress",
-            style: TextStyle(fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400, color: AllColor.black87),
-          ),
+
           6.verticalSpace,
-          Row(
-            children: [
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(6.r),
-                  child: LinearProgressIndicator(
-                    value: progressPercent,
-                    backgroundColor: AllColor.grey300,
-                    color: AllColor.brand2_light,
-                    minHeight: 8.h,
+          Padding(
+            padding:  EdgeInsets.only(right: 35.w, left: 40.w),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(6.r),
+                    child: LinearProgressIndicator(
+                      value: progressPercent,
+                      backgroundColor: AllColor.grey300,
+                      color: AllColor.primary,
+                      minHeight: 5.h,
+                    ),
                   ),
                 ),
-              ),
-              8.horizontalSpace,
-              Text(
-                "$progress%",
-                style: textTheme.titleMedium?.copyWith(
-                  fontSize: 11.sp,
-                  fontWeight: FontWeight.w500,
+                8.horizontalSpace,
+                Text(
+                  "$progress%",
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "OpenText "
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -172,12 +180,17 @@ class ProjectTimelineSection extends StatelessWidget {
       },
       {
         "title": "Completed",
-        "desc": "The project has been successfully delivered and all tasks are finalized.",
-        "done": false,
+        "desc": "The project has been successfully completed. please review you project.",
+        "done": true,
+      },
+      {
+        "title": "In Review",
+        "desc": "WThe project has been reviewed by client",
+        "done": true,
       },
       {
         "title": "Delivered",
-        "desc": "Work on your project has been completed, and our team is actively making progress toward completion.",
+        "desc": "Project has been delivered and accepted by client.",
         "done": false,
       },
     ];
@@ -195,7 +208,7 @@ class ProjectTimelineSection extends StatelessWidget {
             "Project Timeline",
             style: TextStyle(
               fontSize: 16.sp,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w700,
               color: AllColor.black,
               fontFamily: "headFont",
             ),
@@ -235,7 +248,7 @@ class TimelineItem extends StatelessWidget {
         children: [
           Icon(
             isDone ? Icons.check_circle : Icons.radio_button_unchecked,
-            color: isDone ? AllColor.borderColor : AllColor.grey,
+            color: isDone ? AllColor.primary : AllColor.black,
             size: 22.sp,
           ),
           SizedBox(width: 10.w),
@@ -246,7 +259,7 @@ class TimelineItem extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 12.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     color: AllColor.black,
                     fontFamily: "OpenText"
@@ -254,7 +267,7 @@ class TimelineItem extends StatelessWidget {
                 ),
                 Text(
                   desc,
-                  style: TextStyle(fontSize: 12.sp, color: Color(0xff45454C), fontWeight: FontWeight.w400, fontFamily: "headFont"),
+                  style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
                 ),
               ],
             ),

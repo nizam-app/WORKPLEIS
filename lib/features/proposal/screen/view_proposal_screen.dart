@@ -36,15 +36,16 @@ class _ProposalNotifier extends StateNotifier<List<Proposal>> {
   _ProposalNotifier()
       : super([
     Proposal("Deliver something for me", 3500,
-        "Modern e-commerce React/Node.js.", "3–5 days"),
-    Proposal("Deliver something for me", 1200, "LP redesign, blog, CMS.",
+        "Seeking experienced full-stack developer to build modern e-commerce platform with React/Node.js. ", "3–5 days"),
+    Proposal("Deliver something for me",
+        1200, "Seeking experienced full-stack developer to build modern e-commerce platform with React/Node.js.",
         "5–7 days"),
     Proposal("Deliver something for me", 800,
-        "Bug-fix, TestFlight, analytics.", "2–4 days"),
+        "Seeking experienced full-stack developer to build modern e-commerce platform with React/Node.js.", "2–4 days"),
     Proposal("Deliver something for me", 2100, "RBAC, charts, CSV.",
         "6–10 days"),
     Proposal(
-        "Deliver something for me", 600, "Checkout, webhooks.", "1–2 days"),
+        "Deliver something for me", 600, "Seeking experienced full-stack developer to build modern e-commerce platform with React/Node.js.", "1–2 days"),
   ]);
 
   void accept(int index) {
@@ -217,6 +218,7 @@ class SegmentControl extends StatelessWidget {
 }
 
 class ProposalCard extends StatelessWidget {
+
   final Proposal data;
   final bool showActions;
   final VoidCallback onAccept, onReject;
@@ -231,6 +233,7 @@ class ProposalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final  selectedColor = true;
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -262,13 +265,13 @@ class ProposalCard extends StatelessWidget {
               ),
               Text("\$${_formatPrice(data.price)}",
                   style: TextStyle(
-                      fontSize: 14.sp, fontWeight: FontWeight.w400, fontFamily: "OpenText")),
+                      fontSize: 14.sp, fontWeight: FontWeight.w500, fontFamily: "OpenText", color: AllColor.black)),
             ],
           ),
           8.verticalSpace,
           Text(data.details,
               style: TextStyle(
-                  color: AllColor.black.withOpacity(.7), fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
+                  color: AllColor.brand2_light, fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
           12.verticalSpace,
           // Row(
           //   children: [
@@ -286,14 +289,14 @@ class ProposalCard extends StatelessWidget {
             children: [
               _eta("Est: ${data.eta}"),
               const Spacer(),
-              _icon(Icons.chat_bubble_outline_outlined, () {
+              _icon(Icons.chat_bubble_outline, () {
                 context.push(ChatScreen.routeName);
               }),
               if (showActions) ...[
                  8.horizontalSpace,
-                _actionButton("Accept", onAccept),
+                _actionButton("Accept", true,  onAccept, ),
                  8.horizontalSpace,
-                _actionButton("Reject", onReject),
+                _actionButton("Reject",false,  onReject),
               ]
             ],
           )
@@ -320,22 +323,22 @@ class ProposalCard extends StatelessWidget {
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
               fontFamily: "OpenText",
-              color: AllColor.grey)),
+              color: AllColor.brand2_light)),
     ],
   );
 
-  Widget _actionButton(String label, VoidCallback onPressed) => Material(
-    color: AllColor.white,
-    borderRadius: BorderRadius.circular(999.r),
+  Widget _actionButton(String label, bool selectedColor,  VoidCallback onPressed) => Material(
+    color: selectedColor? AllColor.primary : AllColor.grey,
+    borderRadius: BorderRadius.circular(10.r),
     child: InkWell(
       onTap: onPressed,
-      borderRadius: BorderRadius.circular(999.r),
+      borderRadius: BorderRadius.circular(10.r),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
         child: Text(
           label,
           style: TextStyle(
-            color: AllColor.brand2_light,
+            color: selectedColor? AllColor.black: AllColor.white,
             fontSize: 12.sp,
             fontWeight: FontWeight.w400,
             fontFamily: "OpenText"
@@ -347,13 +350,14 @@ class ProposalCard extends StatelessWidget {
 
   Widget _icon(IconData icon, VoidCallback onPressed) => InkWell(
     onTap: onPressed,
-    borderRadius: BorderRadius.circular(999.r),
+    borderRadius: BorderRadius.circular(30.r),
+
     child: Padding(
       padding: EdgeInsets.all(8.r),
       child: Icon(
         icon,
-        size: 16.sp,
-        color: AllColor.grey,
+        size: 20.sp,
+        color: AllColor.brand2_light,
       ),
     ),
   );
