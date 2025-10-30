@@ -36,9 +36,9 @@ class JobsScreen extends ConsumerWidget {
                   return JobCard(
                     title: "Deliver something for me",
                     status: selectedStatus,
-                    locations: "Topasham Me 04",
-                    calender: "Today",
-                    time: "Any Time",
+                    locations: "New York, NY",
+                    offer: "Offer 5",
+                    time: "3h ago",
                     price: "\$3,500",
                   );
                 },
@@ -71,10 +71,10 @@ class JobStatusList extends ConsumerWidget {
     ];
 
     return SizedBox(
-      height: 40.h,
+      height: 35.h,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 4.w),
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
         itemCount: statuses.length,
         separatorBuilder: (_, __) => SizedBox(width: 10.w),
         itemBuilder: (context, index) {
@@ -100,7 +100,7 @@ class JobStatusList extends ConsumerWidget {
                 child: Text(
                   label,
                   style: TextStyle(
-                      fontWeight: FontWeight.w200,
+                      fontWeight: FontWeight.w400,
                       //color: isSelected? AllColor.white: AllColor.black ,
                       color: AllColor.black,
                       fontSize: 12.sp,
@@ -122,7 +122,7 @@ class JobCard extends StatelessWidget {
     required this.title,
     required this.status,
     required this.locations,
-    required this.calender,
+    required this.offer,
     required this.time,
     required this.price,
   });
@@ -130,7 +130,7 @@ class JobCard extends StatelessWidget {
   final String title;
   final String status;
   final String locations;
-  final String calender;
+  final String offer;
   final String time;
   final String price;
 
@@ -162,8 +162,9 @@ class JobCard extends StatelessWidget {
                   title,
                   style: TextStyle(
                     fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "bodyFont",
+                    fontWeight: FontWeight.w800,
+                    fontFamily: "headFont",
+                    color: Colors.black
                   ),
                 ),
               ),
@@ -183,27 +184,41 @@ class JobCard extends StatelessWidget {
           //
           // _StatusChip(text: status),
 
-                     SizedBox(height: 8.h),
+                     SizedBox(height: 6.h),
 
                     /// Details
-                    _DetailRow(icon: Icons.location_on, text: locations),
-                    SizedBox(height: 6.h),
-                    _DetailRow(icon: Icons.calendar_today, text: calender, ),
-                    SizedBox(height: 6.h),
-                    _DetailRow(icon: Icons.schedule, text: time, ),
-                     SizedBox(height: 10.h),
+                    Row(
+                      children: [
+                        _DetailRow(icon: Icons.location_on, text: locations),
+                        SizedBox(width: 6.h),
+                        _DetailRow(icon: Icons.schedule, text: time, ),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+                      ],
+                    ),
 
-            children: [
-              _StatusChip(text: status),
-              SizedBox(width: 20.w,),
-              JobStatusAction(status: status),
+                    SizedBox(height: 15.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            _DetailRow(icon: Icons.real_estate_agent, text: offer, ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            _StatusChip(text: status),
+                            SizedBox(width: 15.w,),
+                            JobStatusAction(status: status),
 
-              //_BottomBar(status: status, price: price),
-            ],
-          )
+                            //_BottomBar(status: status, price: price),
+                          ],
+                        )
+
+                      ],
+                    ),
 
         ]
       )
@@ -221,7 +236,7 @@ class _StatusChip extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
       decoration: BoxDecoration(
         color: AllColor.primary, // lime chip (mock-এর মতো)
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(30.r),
         //border: Border.all(color:Colors.black, width: 1)
       ),
       child: Text(
@@ -262,7 +277,7 @@ class _DetailRow extends StatelessWidget {
     return Row(
       children: [
 
-        Icon(icon, size: 18, color: AllColor.brand2_light),
+        Icon(icon, size: 14.sp, color: AllColor.brand2_light),
         SizedBox(width: 6.w),
         if (expandable) Expanded(child: content) else content,
       ],
@@ -356,7 +371,7 @@ class _PillButton extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
       decoration: BoxDecoration(
         color: AllColor.grey,
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(30.r),
       ),
       child: Text(
         label,

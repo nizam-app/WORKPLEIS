@@ -18,7 +18,7 @@ class AllColor {
   static const Color parpale =Color(0xFFa49acf);
   static const Color orange = Colors.orange;
   static const Color lightBlue = Colors.lightBlue;
-  static const Color grey = Colors.grey;
+  static const Color grey = Color(0xFF686382);
   static final Color grey200 = Colors.grey.shade200;
   static final Color grey100 = Colors.grey.shade100;
   static final Color grey300 = Colors.grey.shade300;

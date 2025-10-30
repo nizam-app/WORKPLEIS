@@ -7,12 +7,13 @@ import 'package:workpleis/core/widget/global_get_started_button.dart';
 import 'package:workpleis/features/home/screen/post_job_screen.dart';
 import 'package:workpleis/features/home/screen/see_all_jobs_screen.dart';
 import 'package:workpleis/features/jobs/screen/Service_jobs_details.dart';
+import 'package:workpleis/features/notification/screen/notificaition_screen.dart';
 
 import '../../../core/constants/color_control/all_color.dart';
 import '../../tracking/client_project_tracking/special_request_screen.dart';
 
 class ServiceHomeScreen extends StatelessWidget {
-  ServiceHomeScreen({super.key});
+ const ServiceHomeScreen({super.key});
 
   static const routeName = '/service_home';
 
@@ -25,14 +26,12 @@ class ServiceHomeScreen extends StatelessWidget {
         child: Column(
           children: [
             HomeHeaderSection(),
-
             CategoriesSection(),
-            SizedBox(height: 15.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: EdgeInsets.only(top: 10.h, left: 20.h, ),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text("Recent Jobs", style: theme.headlineLarge),
+                child: Text("Recent Jobs", style: TextStyle(fontWeight: FontWeight.w800, fontFamily: "headFont", fontSize:16.sp, color: AllColor.black)),
               ),
             ),
             CustomJobListScreen(),
@@ -132,20 +131,20 @@ class HomeHeaderSection extends StatelessWidget {
                 children: [
                   Text(
                     'Hello,',
-                    style: theme.bodyMedium?.copyWith(
+                    style: TextStyle(
                       color: AllColor.brand2_light,
                       fontFamily: "headFont",
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16.sp,
                     ),
                   ),
                   Text(
                     'Jhone Doe',
-                    style: theme.titleMedium?.copyWith(
+                    style: TextStyle(
                       color: AllColor.brand2_light,
-                      fontWeight: FontWeight.w600,
                       fontFamily: "headFont",
-                      fontSize: 26.sp,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 18.sp,
                     ),
                   ),
                 ],
@@ -164,7 +163,7 @@ class HomeHeaderSection extends StatelessWidget {
                   _buildCircleIcon(
                     icon: Icons.notifications_none_rounded,
                     onTap: () {
-                      context.push("/notificationScreen");
+                      context.push(NotificationsScreen.routeName);
                     },
                   ),
                   // green dot
@@ -175,7 +174,7 @@ class HomeHeaderSection extends StatelessWidget {
                       width: 8.w,
                       height: 8.w,
                       decoration: const BoxDecoration(
-                        color: Color(0xFFCCFF33), // lime green
+                        color:AllColor.primary, // lime green
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -202,7 +201,7 @@ class HomeHeaderSection extends StatelessWidget {
           color: Colors.white,
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, color: Colors.black87, size: 22.sp),
+        child: Icon(icon, color: Colors.black, size: 22.sp),
       ),
     );
   }
@@ -253,10 +252,12 @@ class CategoriesSection extends StatelessWidget {
         children: [
           Text(
             'Select Category',
-            style: theme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              fontSize: 18.sp,
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              color: AllColor.black,
+              fontSize: 16.sp,
+              fontFamily: "headFont",
+
             ),
           ),
           SizedBox(height: 10.h),
@@ -318,7 +319,7 @@ class _CategoryCard extends StatelessWidget {
           ),
         ],
       ),
-      padding: EdgeInsets.only(left: 15.w, top: 10.h, bottom: 25.h, right: 5.w),
+      padding: EdgeInsets.only(left: 15.w, top: 15.h, bottom: 15.h, right: 5.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -332,21 +333,24 @@ class _CategoryCard extends StatelessWidget {
             ),
             child: Icon(icon, color: iconColor, size: 22.sp),
           ),
-          Spacer(),
+          SizedBox(height: 20.h,),
           Text(
             jobs,
-            style: theme.bodySmall?.copyWith(
-              color: Colors.grey[600],
-              fontSize: 10.sp,
+            style: TextStyle(
+              color: AllColor.brand2_light,
+              fontSize: 12.sp,
+              fontFamily: "OpenText",
+              fontWeight: FontWeight.w400
             ),
           ),
           SizedBox(height: 4.h),
           Text(
             title,
-            style: theme.bodyMedium?.copyWith(
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-              fontSize: 12.sp,
+            style: TextStyle(
+                color: AllColor.brand2_light,
+                fontSize: 14.sp,
+                fontFamily: "OpenText",
+                fontWeight: FontWeight.w400
             ),
           ),
         ],
@@ -479,9 +483,9 @@ class JobCard extends StatelessWidget {
   Color get statusColor {
     switch (job.status.toLowerCase()) {
       case "open":
-        return Color(0xff686382); // light lime green
+        return AllColor.brand2_light; // light lime green
       case "closed":
-        return Color(0xff686382);
+        return AllColor.brand2_light;
       default:
         return AllColor.grey;
     }
@@ -497,7 +501,7 @@ class JobCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AllColor.white,
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: AllColor.borderColor.withOpacity(0.4)),
+        border: Border.all(color: AllColor.grey100),
         boxShadow: [
           BoxShadow(
             color: Colors.black12.withOpacity(0.03),
@@ -526,22 +530,24 @@ class JobCard extends StatelessWidget {
                   children: [
                     Text(
                       job.title,
-                      style: theme.titleSmall?.copyWith(
+                      style: TextStyle(
                         fontWeight: FontWeight.w700,
                         color: AllColor.black,
                         fontSize: 16.sp,
+                        fontFamily: "headFont"
                       ),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       job.poster,
-                      style: theme.titleMedium?.copyWith(
-                        color: AllColor.warmDarkGrey,
-                        fontSize: 13.sp,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: AllColor.brand2_light,
+                          fontSize: 14.sp,
+                          fontFamily: "OpenText"
                       ),
                     ),
                     SizedBox(height: 6.h),
-
                     /// Category & Time
                     Row(
                       children: [
@@ -553,14 +559,15 @@ class JobCard extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: AllColor.white,
                             borderRadius: BorderRadius.circular(20.r),
-                            border: Border.all(color: Color(0xff686382)),
+                            border: Border.all(color: AllColor.brand2_light),
                           ),
                           child: Text(
                             job.category,
-                            style: theme.headlineSmall?.copyWith(
-                              fontSize: 11.sp,
-                              color: AllColor.black,
-                              fontWeight: FontWeight.w400,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                color: AllColor.brand2_light,
+                                fontSize: 12.sp,
+                                fontFamily: "OpenText"
                             ),
                           ),
                         ),
@@ -568,14 +575,16 @@ class JobCard extends StatelessWidget {
                         Icon(
                           Icons.access_time,
                           size: 14.sp,
-                          color: AllColor.warmDarkGrey,
+                          color: AllColor.brand2_light,
                         ),
                         SizedBox(width: 3.w),
                         Text(
                           job.timeAgo,
-                          style: theme.headlineSmall?.copyWith(
-                            fontSize: 12.sp,
-                            color: AllColor.warmDarkGrey,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              color: AllColor.brand2_light,
+                              fontSize: 12.sp,
+                              fontFamily: "OpenText"
                           ),
                         ),
                       ],
@@ -590,17 +599,18 @@ class JobCard extends StatelessWidget {
                   context.push(ServiceJobDetails.routeName);
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                   decoration: BoxDecoration(
-                    color: AllColor.white,
-                    borderRadius: BorderRadius.circular(20.r),
+                    color: AllColor.primary,
+                    borderRadius: BorderRadius.circular(30.r),
                   ),
                   child: Text(
                     job.status,
-                    style: theme.headlineSmall?.copyWith(
-                      color: AllColor.brand2_light,
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: AllColor.black,
+                        fontSize: 12.sp,
+                        fontFamily: "OpenText"
                     ),
                   ),
                 ),
@@ -613,18 +623,17 @@ class JobCard extends StatelessWidget {
           /// Description
           Text(
             job.description,
-            style: theme.bodyMedium?.copyWith(
-              fontSize: 13.sp,
-              color: AllColor.black.withOpacity(0.7),
-              height: 1.4,
+            style: TextStyle(
+                fontWeight: FontWeight.w400,
+                color: AllColor.brand2_light,
+                fontSize: 12.sp,
+                fontFamily: "OpenText"
             ),
           ),
 
           SizedBox(height: 10.h),
-          Divider(color: const Color(0xffE3E3E3), height: 1),
-
+          Divider(color:  AllColor.brand2_light, height: 1),
           SizedBox(height: 10.h),
-
           /// Info Row + Apply Button
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -645,19 +654,20 @@ class JobCard extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AllColor.white,
+                    backgroundColor: AllColor.primary,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.r),
+                      borderRadius: BorderRadius.circular(16.r),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
                   ),
                   child: Text(
                     "Apply",
-                    style: theme.headlineSmall?.copyWith(
-                      fontSize: 14.sp,
-                      color: AllColor.brand2_light,
-                      fontWeight: FontWeight.w600,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: AllColor.black,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: "OpenText"
                     ),
                   ),
                 ),
@@ -675,25 +685,27 @@ class JobCard extends StatelessWidget {
       children: [
         Text(
           label,
-          style: theme.headlineSmall?.copyWith(
-            fontSize: 12.sp,
-            color: AllColor.warmDarkGrey,
+          style: TextStyle(
+              fontWeight: FontWeight.w400,
+              color: AllColor.brand2_light,
+              fontSize: 12.sp,
+              fontFamily:"OpenText"
           ),
         ),
         SizedBox(height: 4.h),
         Text(
           value.length > 11 ? value.substring(0, 10) + ".." : value,
-          style: theme.titleSmall?.copyWith(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w600,
-            color: AllColor.black,
+          style: TextStyle(
+              fontWeight: FontWeight.w400,
+              color: AllColor.brand2_light,
+              fontSize: 12.sp,
+              fontFamily:"OpenText"
           ),
         ),
       ],
     );
   }
 }
-
 class _ServiceProviderCard extends StatelessWidget {
   _ServiceProviderCard({
     required this.name,
@@ -716,12 +728,12 @@ class _ServiceProviderCard extends StatelessWidget {
     return Container(
       width: 170.w,
       decoration: BoxDecoration(
-        color: AllColor.white,
+        color: AllColor.primary,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(color: AllColor.borderColor.withOpacity(0.4)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black,
             blurRadius: 6,
             offset: Offset(0, 3),
           ),
@@ -830,10 +842,12 @@ class HowItWorksSection extends StatelessWidget {
             // 🔹 Title
             Text(
               'How it works',
-              style: theme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
                 color: AllColor.black,
-                fontSize: 22.sp,
+                fontSize: 18.sp,
+                fontFamily: "headFont",
+
               ),
             ),
 
@@ -889,15 +903,16 @@ class _StepCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 26.sp, color: AllColor.black),
+          Icon(icon, size: 20.sp, color: AllColor.brand2_light),
           SizedBox(height: 6.h),
           Text(
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 11.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w400,
+              color: AllColor.brand2_light,
+              fontFamily: "OpenText"
             ),
           ),
         ],
@@ -1005,7 +1020,8 @@ class _PillButton extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14.sp,
-              color: Colors.black,
+              color: AllColor.black,
+              fontFamily: "OpenText"
             ),
           ),
         ),

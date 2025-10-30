@@ -28,20 +28,20 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
               children: [
                 Text(
                   'Make an offer now',
-                  style: TextStyle(fontSize: 20.sp, color: AllColor.black),
+                  style: TextStyle(fontSize: 16.sp, color: AllColor.black, fontFamily: "headFont", fontWeight: FontWeight.w800),
                 ),
                 SizedBox(height: 5.h),
                 Text(
                   '10 Job Seekers have offered this job already',
-                  style: TextStyle(fontSize: 14.sp, color: AllColor.black87),
+                  style: TextStyle(fontSize: 14.sp, color: AllColor.brand2_light, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
                 ),
                 SizedBox(height: 10.h),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AllColor.brand2_light,
-                      foregroundColor: AllColor.white,
+                      backgroundColor: AllColor.primary,
+                      foregroundColor: AllColor.black,
                       padding: EdgeInsets.symmetric(vertical: 12.w),
                     ),
                     onPressed: () {
@@ -79,8 +79,10 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                   Text(
                     'Deep house cleaning service needed',
                     style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "headFont",
+                      color:AllColor.brand2_light
                     ),
                   ),
                   SizedBox(height: 6.h),

@@ -25,14 +25,14 @@ final String buttonText;
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
             decoration: BoxDecoration(
-              color: AllColor.black.withOpacity(0.1), // Light grey
+              color: AllColor.grey, // Light grey
               borderRadius: BorderRadius.circular(30.r),
             ),
             child: Text(
               "Back",
               style: TextStyle(
                 fontSize: 14.sp,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.w300,
               ),
             ),
@@ -45,15 +45,16 @@ final String buttonText;
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
             decoration: BoxDecoration(
-              color: AllColor.brand2_light, // Neon green
+              color: AllColor.primary, // Neon green
               borderRadius: BorderRadius.circular(30.r),
             ),
             child: Text(
               buttonText,
               style: TextStyle(
-                fontSize: 14.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.w300,
+                fontSize: 12.sp,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+                fontFamily: "OpenText"
               ),
             ),
           ),

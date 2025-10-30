@@ -234,7 +234,7 @@ class _NdaSectionState extends State<NdaSection> {
             value: ndaRequired,
             onChanged: (v) => setState(() => ndaRequired = v),
             activeColor: AllColor.white,
-            activeTrackColor: AllColor.black,
+            activeTrackColor: AllColor.primary,
             inactiveThumbColor: AllColor.white,
             inactiveTrackColor: AllColor.grey300,
           ),

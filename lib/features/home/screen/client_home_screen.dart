@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
+import 'package:workpleis/features/home/screen/job_details_screen.dart';
 
 import 'package:workpleis/features/home/screen/post_job_screen.dart';
 import 'package:workpleis/features/projects/screen/project_screen.dart';
@@ -657,16 +658,20 @@ class _JobCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16.sp,
-                  fontFamily: "headFont",
-                  color: AllColor.black,
+              GestureDetector(
+                onTap: (){
+                  context.push(JobDetailScreen.routeName);
+                },
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16.sp,
+                    fontFamily: "headFont",
+                    color: AllColor.black,
+                  ),
                 ),
               ),
-
 
               Text(
                 budget,
@@ -782,7 +787,7 @@ class _JobCard extends StatelessWidget {
                         backgroundColor:  AllColor.primary, // purple
 
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.r),
+                          borderRadius: BorderRadius.circular(30.r),
 
                         // border:Border.all(color: AllColor.brand2_light, width: 1),
                         ),
@@ -809,12 +814,9 @@ class _JobCard extends StatelessWidget {
                     height: 30.h,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:  Colors.grey, // purple
-
+                        backgroundColor:  AllColor.grey, // purple
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.r),
-
-
+                          borderRadius: BorderRadius.circular(30.r),
                           // border:Border.all(color: AllColor.brand2_light, width: 1),
                         ),
                         padding:
@@ -835,7 +837,6 @@ class _JobCard extends StatelessWidget {
                       ),
                     ),
                   ),
-
 
                 ],
               ),
@@ -1352,9 +1353,9 @@ class _PillButton extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         height: 45.h,
         decoration: BoxDecoration(
-          color: isSelected ? AllColor.brand2_light : Colors.white,
+          color: isSelected ? AllColor.primary : Colors.white,
           borderRadius: BorderRadius.circular(40.r),
-          border: Border.all(color: AllColor.brand2_light, width: 1),
+          border: Border.all(color: AllColor.primary, width: 1),
         ),
         child: Center(
           child: Text(
@@ -1362,7 +1363,7 @@ class _PillButton extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 14.sp,
-              color: isSelected? AllColor.white: Colors.black,
+              color: isSelected? AllColor.black: Colors.black,
               fontFamily: "OpenText"
             ),
           ),
