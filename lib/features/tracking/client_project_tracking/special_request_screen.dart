@@ -390,10 +390,10 @@ class ReviewCard extends StatelessWidget {
               Text(
                 isYou ? "You" : name,
                 style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                  fontFamily: "bodyFont"
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  color: AllColor.black,
+                  fontFamily: "OpenText"
                 ),
               ),
               6.horizontalSpace,
@@ -413,9 +413,10 @@ class ReviewCard extends StatelessWidget {
               Text(
                 rating.toStringAsFixed(0),
                 style: TextStyle(
-                  fontSize: 13.sp,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                  color: AllColor.black,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "OpenText"
                 ),
               ),
             ],
@@ -434,9 +435,10 @@ class ReviewCard extends StatelessWidget {
             child: Text(
               comment,
               style: TextStyle(
-                fontSize: 13.sp,
-                color: Colors.black87,
+                fontSize: 14.sp,
+                color: AllColor.black,
                 height: 1.3,
+                fontFamily: "OpenText"
               ),
             ),
           ),

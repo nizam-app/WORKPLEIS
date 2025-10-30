@@ -234,7 +234,7 @@ class _StatusChip extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
       decoration: BoxDecoration(
         color: AllColor.grey, // lime chip (mock-এর মতো)
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(30.r),
         //border: Border.all(color:Colors.black, width: 1)
       ),
       child: Text(
@@ -541,10 +541,10 @@ class _PillButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: bg,
-      borderRadius: BorderRadius.circular(10.r),
+      borderRadius: BorderRadius.circular(30.r),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(30.r),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
           child: Text(
@@ -1184,7 +1184,7 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AllColor.bgcolor,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.r),
+                    borderRadius: BorderRadius.circular(30.r),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 12.h),
                   elevation: 0,
@@ -1243,7 +1243,7 @@ class ProjectReviewCard extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
                   color: AllColor.bgcolor,
-                  borderRadius: BorderRadius.circular(999.r),
+                  borderRadius: BorderRadius.circular(30.r),
                 ),
                 child: Text(
                   "Delivered",
@@ -1295,7 +1295,7 @@ class ProjectReviewCard extends StatelessWidget {
                     context: context,
                     isScrollControlled: true,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
                     ),
                     builder: (_) => const CustomProjectCompletionBottomSheet(check: true,),
                   );

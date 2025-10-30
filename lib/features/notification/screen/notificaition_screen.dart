@@ -50,16 +50,16 @@ class NotificationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
+      margin: EdgeInsets.only(bottom: 16.h, top: 10.h),
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       decoration: BoxDecoration(
-        color: isUnread ? AllColor.grey100 : AllColor.white,
+        color: isUnread ? AllColor.white : AllColor.white,
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: AllColor.black.withOpacity(0.05),
-            blurRadius: 10.r,
-            offset: const Offset(0, 4),
+            color: AllColor.black,
+            blurRadius: 5.r,
+            offset: const Offset(0, 2),
           )
         ],
       ),
@@ -67,9 +67,9 @@ class NotificationTile extends StatelessWidget {
         children: [
           // 🔹 Icon section
           CircleAvatar(
-            backgroundColor: AllColor.lime.withOpacity(0.15), // light lime bg
+            backgroundColor: AllColor.brand2_light, // light lime bg
             radius: 24.r,
-            child: Icon(Icons.notifications_none, color: AllColor.lime),
+            child: Icon(Icons.notifications_none, color: AllColor.black),
           ),
           SizedBox(width: 12.w),
 
@@ -80,16 +80,22 @@ class NotificationTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontWeight: FontWeight.w600,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
                     color: AllColor.black,
+                    fontFamily: "headFont",
+                    fontSize: 16.sp,
+
                   ),
                 ),
                 SizedBox(height: 4.h),
                 Text(
                   'Learn more about managing account info and activity',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: AllColor.grey600,
+                  style: TextStyle(
+                    color: AllColor.brand2_light,
+                    fontSize: 12.sp,
+                    fontFamily: "OpenText",
+                    fontWeight: FontWeight.w400
                   ),
                 )
               ],
@@ -103,16 +109,18 @@ class NotificationTile extends StatelessWidget {
             children: [
               Text(
                 time,
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  fontSize: 10.sp,
-                  color: AllColor.grey600,
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  color: AllColor.grey,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "OpenText"
                 ),
               ),
               SizedBox(height: 8.h),
               if (isUnread)
                 CircleAvatar(
                   radius: 5.r,
-                  backgroundColor: AllColor.lime, // 🔹 brand color
+                  backgroundColor: AllColor.black, // 🔹 brand color
                 )
             ],
           )

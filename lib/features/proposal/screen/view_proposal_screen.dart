@@ -329,7 +329,7 @@ class ProposalCard extends StatelessWidget {
 
   Widget _actionButton(String label, bool selectedColor,  VoidCallback onPressed) => Material(
     color: selectedColor? AllColor.primary : AllColor.grey,
-    borderRadius: BorderRadius.circular(10.r),
+    borderRadius: BorderRadius.circular(30.r),
     child: InkWell(
       onTap: onPressed,
       borderRadius: BorderRadius.circular(10.r),
