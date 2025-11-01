@@ -82,19 +82,30 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
                       fontFamily: "headFont",
-                      color:AllColor.brand2_light
+                      color:AllColor.black
                     ),
                   ),
                   SizedBox(height: 6.h),
                   Row(
                     children: [
-                      Icon(Icons.access_time, size: 16.sp),
+                      Icon(Icons.access_time, size: 16.sp, color: AllColor.brand2_light,),
                       SizedBox(width: 4.h),
-                      Text('Posted 2h ago'),
+                      Text('Posted 2h ago',
+                        style: TextStyle(
+                            fontFamily: "OpenText",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12.sp,
+                            color: AllColor.brand2_light),
+                      ),
                       SizedBox(width: 12.w),
-                      Icon(Icons.group, color: AllColor.black, size: 16.sp),
+                      Icon(Icons.group, color: AllColor.brand2_light, size: 16.sp, ),
                       SizedBox(width: 4.w),
-                      Text('42 applied'),
+                      Text('42 applied',style: TextStyle(
+                          fontFamily: "OpenText",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12.sp,
+                          color: AllColor.brand2_light)
+                      ),
                     ],
                   ),
                   SizedBox(height: 16.h),
@@ -103,22 +114,24 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                   Text(
                     'About This Job',
                     style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w800,
+                      fontFamily: "headFont",
+                      color: AllColor.black,
                     ),
                   ),
                   SizedBox(height: 6.h),
                   Text(
                     'Looking for experienced cleaner for weekly deep cleaning of modern 3-bedroom house near Bondi Beach. Includes kitchen deep clean, bathroom sanitizing, living areas, and window cleaning. Must bring own eco-friendly supplies and equipment.',
-                    style: TextStyle(fontSize: 13.sp),
+                    style: TextStyle(fontSize: 14.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400, color: AllColor.brand2_light),
                   ),
                   SizedBox(height: 16.h),
                   Row(
                     children: [
-                      const CircleAvatar(
+                       CircleAvatar(
                         radius: 20,
-                        backgroundColor: Colors.grey,
-                        child: Icon(Icons.person, color: Colors.white),
+                        backgroundColor: AllColor.primary,
+                        child: Icon(Icons.person, color: AllColor.black, size: 28.sp,),
                       ),
                       SizedBox(width: 10.w),
                       Column(
@@ -126,12 +139,16 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                         children: [
                           Text('John Due',
                               style: TextStyle(
-                                  fontSize: 14.sp, fontWeight: FontWeight.w600)),
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "OpenText",
+                                  color: AllColor.black)),
                           Row(
                             children: [
-                              Icon(Icons.star, size: 14.sp, color: Colors.orange),
+                              Icon(Icons.star, size: 16.sp, color: AllColor.primary),
                               SizedBox(width: 4.w),
-                              Text('4.9', style: TextStyle(fontSize: 12.sp)),
+                              Text('4.9', style: TextStyle(fontSize: 12.sp, fontFamily: "OpenText",
+                                  fontWeight: FontWeight.w400, color: AllColor.black)),
                             ],
                           )
                         ],
@@ -146,7 +163,7 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                     decoration: BoxDecoration(
                       color: AllColor.white,
                       borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: AllColor.brand2_light, width: 1.w),
+                      border: Border.all(color: AllColor.primary, width: 1.w),
                     ),
                     child: Row(
                       children: [
@@ -157,7 +174,7 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                               duration: const Duration(milliseconds: 200),
                               decoration: BoxDecoration(
                                 color: selectedIndex == 0
-                                    ? AllColor.brand2_light
+                                    ? AllColor.primary
                                     : AllColor.white,
                                 borderRadius: BorderRadius.circular(30),
                               ),
@@ -165,10 +182,10 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                               child: Text(
                                 'Offers',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12.sp,
                                   color: selectedIndex == 0
-                                      ? Colors.white
+                                      ? Colors.black
                                       : AllColor.black,
                                 ),
                               ),
@@ -182,7 +199,7 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                               duration: const Duration(milliseconds: 200),
                               decoration: BoxDecoration(
                                 color: selectedIndex == 1
-                                    ? AllColor.brand2_light
+                                    ? AllColor.primary
                                     : AllColor.white,
                                 borderRadius: BorderRadius.circular(30),
                               ),
@@ -190,10 +207,10 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                               child: Text(
                                 'Questions',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12.sp,
                                   color: selectedIndex == 1
-                                      ? Colors.white
+                                      ? Colors.black
                                       : AllColor.black,
                                 ),
                               ),
@@ -245,12 +262,21 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
             flex: 3,
             child: Text(
               title,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.sp,
+                  fontFamily: "OpenText",
+                  color: AllColor.brand2_light),
             ),
           ),
           Expanded(
             flex: 5,
-            child: Text(value, style: TextStyle(fontSize: 13.sp)),
+            child: Text(value, style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 14.sp,
+                fontFamily: "OpenText",
+                color: AllColor.brand2_light),
+          )
           ),
         ],
       ),
@@ -270,6 +296,7 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
   Widget offerCard(String price, String duration) {
     return Card(
       elevation: 6,
+      color: AllColor.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: EdgeInsets.all(10),
@@ -278,8 +305,8 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
           children: [
             CircleAvatar(
               radius: 22.r,
-              backgroundColor: Colors.grey,
-              child: Icon(Icons.person, color: Colors.black),
+              backgroundColor: AllColor.primary,
+              child: Icon(Icons.person, color: AllColor.black, size: 28.sp,),
             ),
             SizedBox(width: 12.w),
             Expanded(
@@ -288,25 +315,26 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                 children: [
                   Text('John Due',
                       style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 14.sp)),
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "OpenText",
+                          color: AllColor.black)),
                   Row(
                     children: [
-                      Icon(Icons.star, size: 16.sp, color: Colors.orange),
+                      Icon(Icons.star, size: 16.sp, color: AllColor.primary),
                       SizedBox(width: 4.w),
-                      Text('4.9', style: TextStyle(fontSize: 12.sp)),
-                      const Spacer(),
-                      Text(price,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text('4.9', style: TextStyle(fontSize: 12.sp, fontFamily: "OpenText",
+                          fontWeight: FontWeight.w400, color: AllColor.black)),
                     ],
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     'Seeking experienced full-stack developer to build modern e-commerce platform with React/Node.js.',
-                    style: TextStyle(fontSize: 12.sp),
+                    style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, fontFamily: "OpenText", color: AllColor.brand2_light),
                   ),
                   SizedBox(height: 4.h),
                   Text('Est: $duration',
-                      style: TextStyle(fontSize: 12, color: AllColor.grey)),
+                      style: TextStyle(fontSize: 12.sp, color: AllColor.brand2_light, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
                 ],
               ),
             )
@@ -335,13 +363,13 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
         padding: EdgeInsets.all(10),
         constraints: BoxConstraints(maxWidth: 250.w),
         decoration: BoxDecoration(
-          color: isMe ? const Color(0xFF5B4DBC) : Colors.grey.shade300,
+          color: isMe ? const Color(0xFF5B4DBC) : AllColor.lime,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
           message,
           style: TextStyle(
-              color: isMe ? Colors.white : Colors.black87, fontSize: 13.sp),
+              color: isMe ? Colors.white :AllColor.black, fontSize: 12.sp, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
         ),
       ),
     );
@@ -358,9 +386,9 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
                 contentPadding:
                 EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
                 hintText: 'Ask a question',
-                hintStyle: TextStyle(fontSize: 13.sp),
+                hintStyle: TextStyle(fontSize: 12.sp ,color: AllColor.lime, fontFamily: "OpenText", fontWeight: FontWeight.w400),
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: AllColor.lime,
                 border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               ),
@@ -369,7 +397,7 @@ class _ServiceJobDetailsState extends State<ServiceJobDetails> {
           SizedBox(width: 8.w),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.send, color: Color(0xFF5B4DBC)),
+            icon:  Icon(Icons.send, color:AllColor.brand2_light, size: 28.sp,),
           )
         ],
       ),
@@ -389,75 +417,76 @@ class _ApplyForm extends StatelessWidget {
       borderSide: const BorderSide(color: Color(0xFFCCCCCC), width: 1.2),
     );
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        _label("Price"),
-         SizedBox(height: 6.h),
-        TextField(
-          keyboardType: TextInputType.number,
-          decoration: InputDecoration(
-            hintText: "\$60",
-            border: border,
-            enabledBorder: border,
-            focusedBorder: border.copyWith(
-              borderSide: const BorderSide(color: Color(0xFF5B4DBC), width: 1.4),
-            ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-          ),
-        ),
-         SizedBox(height: 16.h),
-        _label("Note for client"),
-         SizedBox(height: 6.h),
-        TextField(
-          maxLines: 3,
-          decoration: InputDecoration(
-            hintText: "Explain here, why you are the right person.",
-            border: border,
-            enabledBorder: border,
-            focusedBorder: border.copyWith(
-              borderSide: const BorderSide(color: Color(0xFF5B4DBC), width: 1.4),
-            ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-          ),
-        ),
-         SizedBox(height: 16.h),
-
-        _label("Estimated Completion"),
-         SizedBox(height: 6.h),
-        TextField(
-          decoration: InputDecoration(
-            hintText: "e.g. 1 days, 5 days, 1 week",
-            border: border,
-            enabledBorder: border,
-            focusedBorder: border.copyWith(
-              borderSide: const BorderSide(color: Color(0xFF5B4DBC), width: 1.4),
-            ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-          ),
-        ),
-         SizedBox(height: 20.h),
-
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AllColor.brand2_light, // neon green
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _label("Price"),
+           SizedBox(height: 6.h),
+          TextField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              hintText: "\$60",
+              border: border,
+              enabledBorder: border,
+              focusedBorder: border.copyWith(
+                borderSide: const BorderSide(color: Color(0xFF5B4DBC), width: 1.4),
               ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
             ),
-            onPressed: () {
-
-
-            },
-            child: const Text("Apply", style: TextStyle(fontWeight: FontWeight.w600)),
           ),
-        ),
-         SizedBox(height: 20.h),
-      ],
+           SizedBox(height: 16.h),
+          _label("Note for client"),
+           SizedBox(height: 6.h),
+          TextField(
+            maxLines: 3,
+            decoration: InputDecoration(
+              hintText: "Explain here, why you are the right person.",
+              border: border,
+              enabledBorder: border,
+              focusedBorder: border.copyWith(
+                borderSide: const BorderSide(color: Color(0xFF5B4DBC), width: 1.4),
+              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+            ),
+          ),
+           SizedBox(height: 16.h),
+      
+          _label("Estimated Completion"),
+           SizedBox(height: 6.h),
+          TextField(
+            decoration: InputDecoration(
+              hintText: "e.g. 1 days, 5 days, 1 week",
+              border: border,
+              enabledBorder: border,
+              focusedBorder: border.copyWith(
+                borderSide: const BorderSide(color: Color(0xFF5B4DBC), width: 1.4),
+              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+            ),
+          ),
+           SizedBox(height: 20.h),
+      
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AllColor.primary, // neon green
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () {
+      
+              },
+              child:  Text("Apply", style: TextStyle(fontWeight: FontWeight.w400, fontFamily: "OpenText", fontSize: 12.sp, color: AllColor.black)),
+            ),
+          ),
+           SizedBox(height: 20.h),
+        ],
+      ),
     );
   }
 
@@ -466,9 +495,11 @@ class _ApplyForm extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(text,
           style:  TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF5B4DBC),
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w800,
+            color: AllColor.black,
+            fontFamily: "headFont"
+
           )),
     );
   }
