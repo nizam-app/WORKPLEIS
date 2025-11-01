@@ -71,13 +71,13 @@ class _ProfileHeaderSectionState extends State<ProfileHeaderSection> {
         ),
         10.h.verticalSpace,
         Text("Jhon Doe",
-            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, color: AllColor.black,fontFamily: "bodyFont")),
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, color: AllColor.black,fontFamily: "OpenText")),
         6.h.verticalSpace,
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
           decoration: BoxDecoration(color: AllColor.allcolor, borderRadius: BorderRadius.circular(6.r)),
           child: Text("Client",
-              style: TextStyle(fontSize: 16.sp, color: AllColor.grey, fontWeight: FontWeight.w500,fontFamily: "bodyFont")),
+              style: TextStyle(fontSize: 16.sp, color: AllColor.grey, fontWeight: FontWeight.w500,fontFamily: "OpenText")),
         ),
         10.h.verticalSpace,
 
@@ -373,7 +373,7 @@ class _RatingsSummary extends StatelessWidget {
             6.w.horizontalSpace,
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(999.r),
+                borderRadius: BorderRadius.circular(30.r),
                 child: LinearProgressIndicator(
                   minHeight: 10.h,
                   value: total==0 ? 0 : (v/total).clamp(0,1),

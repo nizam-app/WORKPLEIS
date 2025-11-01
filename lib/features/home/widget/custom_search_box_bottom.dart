@@ -40,10 +40,10 @@ class CustomSearchBoxBottom extends StatelessWidget {
             width: 37.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: AllColor.brand2_light,
+              color: AllColor.primary,
             ),
             child: Center(
-              child: Icon(Icons.filter_alt_outlined, size: 25, color: AllColor.white),
+              child: Icon(Icons.filter_alt_outlined, size: 25.sp, color: AllColor.white),
             ),
           ),
         ),

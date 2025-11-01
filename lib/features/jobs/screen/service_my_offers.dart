@@ -82,9 +82,9 @@ class JobsOffers extends ConsumerWidget {
             Text(
               "${filtered.length} ${["Pending", "Accepted", "Rejected"][tab]}",
               style: TextStyle(
-                color: AllColor.brand2_light,
+                color: AllColor.black,
                 fontWeight: FontWeight.w500,
-                fontSize: 13.sp,
+                fontSize: 12.sp,
               ),
             ),
           ],
@@ -150,7 +150,7 @@ class _TabBar extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
               decoration: BoxDecoration(
-                color: selected ? AllColor.brand2_light : AllColor.white,
+                color: selected ? AllColor.primary : AllColor.white,
                 border: Border.all(
                   color: const Color(0xFF154E7B).withOpacity(0.2),
                   width: 1,
@@ -162,8 +162,8 @@ class _TabBar extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
-                  color:selected? AllColor.white: AllColor.black,
-                  fontFamily: "bodyFont"
+                  color:selected? AllColor.black: AllColor.black,
+                  fontFamily: "OpenText"
 
                 ),
               ),
@@ -202,7 +202,7 @@ class _JobCard extends StatelessWidget {
           10.verticalSpace,
           Text(
             data.desc,
-            style: TextStyle(color: AllColor.black87, fontSize: 13.sp, height: 1.3),
+            style: TextStyle(color: AllColor.black87, fontSize: 12.sp, height: 1.3),
           ),
           10.verticalSpace,
           Row(
@@ -212,7 +212,7 @@ class _JobCard extends StatelessWidget {
                 style: TextStyle(color: AllColor.black.withOpacity(.8), fontSize: 12.sp, fontWeight: FontWeight.w500),
               ),
               const Spacer(),
-              if (status == "pending") _pill("")
+              if (status == "pending") _pill("View Job")
               else if (status == "accepted") _pill("Update Job",onTop: (){context.push(OfferTackingScreen.routeName);})
               else InkWell(
                     onTap: (){
@@ -258,11 +258,22 @@ class _JobCard extends StatelessWidget {
   }
 
   Widget _pill(String? label, {VoidCallback? onTop}) {
-    return InkWell(
-      onTap:onTop,
-      child: Text(
-        label ??"",
-        style: TextStyle(color: AllColor.brand2_light, fontWeight: FontWeight.w600, fontSize: 12.5.sp, fontFamily: "bodyFont"),
+    return Container(
+      padding: EdgeInsets.all(10.w),
+      decoration: BoxDecoration(
+        color: AllColor.primary,
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(color: AllColor.primary),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.02), offset:  Offset(0, 1)),
+        ],
+      ),
+      child: InkWell(
+        onTap:onTop,
+        child: Text(
+          label ??"",
+          style: TextStyle(color: AllColor.black, fontWeight: FontWeight.w400, fontSize: 12..sp, fontFamily: "OpenText"),
+        ),
       ),
     );
   }
@@ -297,8 +308,9 @@ void showRejectionMessageSheet(BuildContext context) {
                   "Rejection Message",
                   style: TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w800,
                     color: AllColor.black,
+                    fontFamily: "headFont",
                   ),
                 ),
                 GestureDetector(
@@ -321,8 +333,9 @@ void showRejectionMessageSheet(BuildContext context) {
                 "All plumbing issues have been resolved. Replaced the faulty pipes and installed new faucets as requested. System tested and working perfectly.",
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.black87,
+                  color: AllColor.black,
                   height: 1.4,
+                  fontFamily: "OpenText"
                 ),
               ),
             ),
