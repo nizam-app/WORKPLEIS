@@ -61,7 +61,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   Center(
                     child: Text(
                       "Tap to change photo",
-                      style: TextStyle(fontSize: 12.sp, color: AllColor.black,fontFamily: "OpenText", fontWeight: FontWeight.w400),
+                      style: TextStyle(fontSize: 14.sp,
+                          color: AllColor.brand2_light,
+                          fontFamily: "OpenText",
+                          fontWeight: FontWeight.w400),
                     ),
                   ),
 
@@ -190,7 +193,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         text,
         style: TextStyle(
           fontSize: 16.sp,
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w700,
           color: AllColor.black,
           fontFamily: "headFont"
         ),
@@ -360,7 +363,7 @@ class _CountryCityPickerState extends State<CountryCityPicker> {
       countryListTheme: CountryListThemeData(
         flagSize: 25,
         backgroundColor: Colors.white,
-        textStyle: const TextStyle(fontSize: 16, color: Colors.black87),
+        textStyle: const TextStyle(fontSize: 16, color: AllColor.black),
         bottomSheetHeight: 500,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16.r),
@@ -381,7 +384,7 @@ class _CountryCityPickerState extends State<CountryCityPicker> {
     padding: EdgeInsets.only(bottom: 6.h),
     child: Text(
       text,
-      style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400,fontFamily: "headFont", color: AllColor.black),
+      style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700,fontFamily: "headFont", color: AllColor.black),
     ),
   );
 
@@ -413,13 +416,13 @@ class _CountryCityPickerState extends State<CountryCityPicker> {
                     children: [
                       if (selectedCountry != null) ...[
                         Text(selectedCountry!.flagEmoji,
-                            style: TextStyle(fontSize: 20.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400, color: AllColor.black)),
+                            style: TextStyle(fontSize: 20.sp, fontFamily: "headFont", fontWeight: FontWeight.w700, color: AllColor.black)),
                         SizedBox(width: 8.w),
                         Expanded(
                           child: Text(
                             selectedCountry!.name,
                             style: TextStyle(
-                                fontSize: 14.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400 ),
+                                fontSize: 14.sp, color: AllColor.black, fontFamily: "headFont", fontWeight: FontWeight.w700 ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
