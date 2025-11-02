@@ -45,7 +45,7 @@ class CustomButtom extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(borderRadius ?? 10.r),
-          border: Border.all(color: AllColor.grey, width: 1),
+          border: Border.all(color: AllColor.primary, width: 1),
           boxShadow: hasShadow
               ? [
             BoxShadow(
@@ -72,8 +72,8 @@ class CustomButtom extends StatelessWidget {
             Text(
               text,
               style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: fontWeight ?? FontWeight.w400,
+                fontSize: 12.sp,
+                fontWeight: fontWeight ?? FontWeight.w500,
                 color: textColor ?? AllColor.black,
                 letterSpacing: 0.5,
                 fontFamily: "OpenText"

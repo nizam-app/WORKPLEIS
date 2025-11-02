@@ -89,8 +89,8 @@ class _ProviderWalletScreenState extends State<ProviderWalletScreen> {
               height: 45,
               decoration: BoxDecoration(
                 color: AllColor.white,
-                borderRadius: BorderRadius.circular(999.r),
-                border: Border.all(color: AllColor.brand2_light),
+                borderRadius: BorderRadius.circular(30.r),
+                border: Border.all(color: AllColor.primary),
               ),
               child: Row(
                 children: [
@@ -100,7 +100,7 @@ class _ProviderWalletScreenState extends State<ProviderWalletScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           color: selectedTab == 0
-                              ? AllColor.brand2_light
+                              ? AllColor.primary
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(199.r),
                         ),
@@ -109,9 +109,10 @@ class _ProviderWalletScreenState extends State<ProviderWalletScreen> {
                           "All",
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
+                            fontFamily: 'OpenText',
                             color: selectedTab == 0
-                                ? AllColor.white
-                                : AllColor.black87,
+                                ? AllColor.black
+                                : AllColor.black,
                           ),
                         ),
                       ),
@@ -123,7 +124,7 @@ class _ProviderWalletScreenState extends State<ProviderWalletScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           color: selectedTab == 1
-                              ? AllColor.brand2_light
+                              ? AllColor.primary
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(999),
                         ),
@@ -132,9 +133,10 @@ class _ProviderWalletScreenState extends State<ProviderWalletScreen> {
                           "Withdrawals",
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
+                            fontFamily: 'OpenText',
                             color: selectedTab == 1
-                                ? AllColor.white
-                                : AllColor.black87,
+                                ? AllColor.black
+                                : AllColor.black,
                           ),
                         ),
                       ),
@@ -151,7 +153,7 @@ class _ProviderWalletScreenState extends State<ProviderWalletScreen> {
                 padding: EdgeInsets.only(top: 40.h),
                 child: Text(
                   "No Transactions Found",
-                  style: TextStyle(color: AllColor.black45),
+                  style: TextStyle(color: AllColor.black, fontFamily: "headFont", fontWeight: FontWeight.w800, fontSize: 16.sp),
                 ),
               )
             else
@@ -193,29 +195,33 @@ class _StatCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
-          color: isSecondary ? AllColor.black87 : AllColor.black87,
+          color: isSecondary ? AllColor.brand2_light : AllColor.brand2_light,
         ),
       ),
       child: Column(
         children: [
           Icon(icon,
-              color: isSecondary ? AllColor.black45 : AllColor.black87, size: 24),
+              color: isSecondary ? AllColor.brand2_light : AllColor.brand2_light, size: 24.sp),
            SizedBox(height: 8.h),
           Text(
             title,
             style:  TextStyle(
-              fontSize: 13.sp,
-              fontWeight: FontWeight.w500,
-              color: AllColor.black87,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w800,
+              color: AllColor.black,
+              fontFamily: 'headFont'
+
             ),
           ),
            SizedBox(height: 4.h),
           Text(
             value,
             style:  TextStyle(
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w700,
-              color: AllColor.black,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                color: AllColor.brand2_light,
+                fontFamily: "OpenText",
+
             ),
           ),
         ],
@@ -258,8 +264,10 @@ class _TransactionTile extends StatelessWidget {
                 child: Text(
                   data['title'],
                   style:  TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16.sp,
+                    fontFamily: "headFont",
+                    color: AllColor.black
                   ),
                 ),
               ),
@@ -268,8 +276,8 @@ class _TransactionTile extends StatelessWidget {
                     "\$${data['amount'].abs().toStringAsFixed(2)}",
                 style: TextStyle(
                   color: color,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12.sp,
                 ),
               ),
             ],
@@ -277,12 +285,12 @@ class _TransactionTile extends StatelessWidget {
            SizedBox(height: 6.h),
           Text(
             data['desc'],
-            style:  TextStyle(fontSize: 12.sp, color: AllColor.black54),
+            style:  TextStyle(fontSize: 12.sp, color: AllColor.brand2_light , fontFamily: "OpenText" ,fontWeight: FontWeight.w400),
           ),
            SizedBox(height: 6.h),
           Text(
             data['time'],
-            style:  TextStyle(fontSize: 11.sp, color: AllColor.black87),
+            style:  TextStyle(fontSize: 12.sp, color: AllColor.brand2_light, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
           ),
         ],
       ),

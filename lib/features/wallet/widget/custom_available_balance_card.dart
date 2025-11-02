@@ -16,7 +16,7 @@ class CustomAavailableBalanceCard extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 20.h),
       decoration: BoxDecoration(
-        color: AllColor.brand2_light,
+        color: AllColor.white24,
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: AllColor.grey, width: 1.w),
       ),
@@ -26,16 +26,16 @@ class CustomAavailableBalanceCard extends StatelessWidget {
             "Available Balance",
             style: TextStyle(
                 color: AllColor.black,
-                fontWeight: FontWeight.w400,
-                fontSize: 18.sp,
-              fontFamily: "OpenText"
+                fontWeight: FontWeight.w800,
+                fontSize: 16.sp,
+              fontFamily: "headFont"
             ),
           ),
           SizedBox(height: 6.h),
           Text(
             "\$1,250.00",
             style: TextStyle(
-                fontSize: 26.sp, fontWeight: FontWeight.w700, fontFamily: "OpenText"),
+                fontSize: 26.sp, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
           ),
           // SizedBox(height: 10.h),
 
