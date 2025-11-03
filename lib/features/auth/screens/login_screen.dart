@@ -64,6 +64,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   validator: emailValidator,
+                    style:  TextStyle(
+                      color: AllColor.black,
+                      fontFamily: "OpenText",
+                      fontSize: 14.sp, fontWeight: FontWeight.w400,
+                    ),
                   decoration: const InputDecoration(hintText: 'Enter your Email')),
                 SizedBox(height: 16.h),
                 CustomLabelText(title: "Password"),
@@ -71,6 +76,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   controller: _passController,
                   obscureText: _obscure,
                   validator: passwordValidator,
+                    style:  TextStyle(
+                      color: AllColor.black,
+                      fontFamily: "OpenText",
+                      fontSize: 14.sp, fontWeight: FontWeight.w400,
+                    ),
                   decoration: InputDecoration(
                     hintText: 'Enter your Password',
                     suffixIcon: IconButton(

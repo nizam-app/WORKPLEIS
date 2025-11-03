@@ -114,6 +114,11 @@ class _SpecialRequestScreen3State extends State<SpecialRequestScreen3> {
   Widget _inputField({required TextEditingController controller, required String hint}) {
     return TextField(
       controller: controller,
+      style:  TextStyle(
+        color: AllColor.brand2_light,
+        fontFamily: "OpenText",
+        fontSize: 14.sp, fontWeight: FontWeight.w400,
+      ),
       decoration: InputDecoration(
         hintText: hint,
         contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
+import 'package:workpleis/features/auth/logic/get_started_video_reverpod.dart';
 import 'package:workpleis/features/home/screen/job_details_screen.dart';
 
 import 'package:workpleis/features/home/screen/post_job_screen.dart';
+import 'package:workpleis/features/notification/screen/notificaition_screen.dart';
 import 'package:workpleis/features/projects/screen/project_screen.dart';
 
 import 'package:workpleis/features/tracking/client_project_tracking/special_request_screen.dart';
@@ -45,6 +47,11 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 40.h,
                 child: TextFormField(
+                  style:  TextStyle(
+                    color: AllColor.black,
+                    fontFamily: "OpenText",
+                    fontSize: 14.sp, fontWeight: FontWeight.w400,
+                  ),
                   decoration:
                       InputDecoration(
                         hintText: 'What do you need done today ?',
@@ -142,6 +149,7 @@ class HomeHeaderSection extends StatelessWidget {
           /// 🔹 Right side (icons)
           Row(
             children: [
+              if(isClientProvider ==false)
               _buildCircleIcon(icon: Icons.search_rounded, onTap: () {}),
               SizedBox(width: 10.w),
               Stack(
@@ -150,7 +158,7 @@ class HomeHeaderSection extends StatelessWidget {
                   _buildCircleIcon(
                     icon: Icons.notifications_none_rounded,
                     onTap: () {
-                      context.push("/notificationScreen") ;
+                      context.push(NotificationsScreen.routeName) ;
                     },
                   ),
                   // green dot

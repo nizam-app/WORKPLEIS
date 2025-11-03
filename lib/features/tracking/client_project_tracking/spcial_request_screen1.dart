@@ -65,6 +65,11 @@ class ProjectDescriptionSection extends StatelessWidget {
         SizedBox(height: 8.h),
         TextField(
           maxLines: 6,
+          style:  TextStyle(
+            color: AllColor.brand2_light,
+            fontFamily: "OpenText",
+            fontSize: 14.sp, fontWeight: FontWeight.w400,
+          ),
           decoration: InputDecoration(
             hintText: "Write your project details...",
             hintStyle: TextStyle(color: AllColor.grey),
@@ -75,14 +80,14 @@ class ProjectDescriptionSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.r),
               borderSide: BorderSide(color: AllColor.borderColor),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: AllColor.borderColor),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: AllColor.borderColor, width: 1.6),
-            ),
+            // enabledBorder: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(12.r),
+            //   borderSide: BorderSide(color: AllColor.borderColor),
+            // ),
+            // focusedBorder: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(12.r),
+            //   borderSide: BorderSide(color: AllColor.borderColor, width: 1.6),
+            // ),
           ),
         ),
       ],
@@ -172,7 +177,7 @@ class _UrgencyTile extends StatelessWidget {
               activeColor: AllColor.black,
               fillColor: MaterialStateProperty.resolveWith<Color>(
                     (states) => states.contains(MaterialState.selected)
-                    ? AllColor.brand2_light
+                    ? AllColor.primary
                     : Colors.grey.shade400,
               ),
 

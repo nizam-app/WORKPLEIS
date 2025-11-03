@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workpleis/features/Payment/screen/payment_methods_screen.dart';
 import 'package:workpleis/features/account/screen/profile_edit_screen.dart';
 import 'package:workpleis/features/account/widget/custom_buttom.dart';
+import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:workpleis/features/jobs/screen/service_my_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/security/screen/settings_screen.dart';
@@ -387,7 +388,7 @@ class _AccountOverviewClientScreenState
   Widget _signOutButton() {
     return CustomButtom(
       onTap: (){
-        context.push("/loginScreen");
+        context.push(LoginScreen.routeName);
       },
         icon: Icons.logout, text: "Sign out", color: AllColor.primary, textColor: AllColor.black,);
   }
