@@ -31,9 +31,10 @@ final String buttonText;
             child: Text(
               "Back",
               style: TextStyle(
-                fontSize: 14.sp,
+                fontSize: 12.sp,
                 color: Colors.white,
-                fontWeight: FontWeight.w300,
+                fontWeight: FontWeight.w500,
+                fontFamily:"OpenText"
               ),
             ),
           ),

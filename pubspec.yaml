@@ -132,6 +132,19 @@ flutter:
          - asset: assets/fonts/Migra-Extrabold.ttf
            weight: 200
   #        weight: 700
+
+  #Style Helvetica
+     - family: helvetica
+       fonts:
+          - asset: assets/fonts/Helvetica.ttf
+            weight: 800
+          - asset: assets/fonts/Migra-Extrabold.ttf
+            weight: 200
+    #        weight: 700
+
+
+
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

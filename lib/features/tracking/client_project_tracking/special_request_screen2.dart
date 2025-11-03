@@ -134,7 +134,7 @@ class _BudgetRangeSectionState extends State<BudgetRangeSection> {
                     ? Icons.radio_button_checked
                     : Icons.radio_button_off,
                 color: selectedBudget == b
-                    ? AllColor.borderColor
+                    ? AllColor.primary
                     : AllColor.grey,
                 size: 20.sp,
               ),

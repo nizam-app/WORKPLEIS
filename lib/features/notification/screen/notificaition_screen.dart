@@ -67,7 +67,7 @@ class NotificationTile extends StatelessWidget {
         children: [
           // 🔹 Icon section
           CircleAvatar(
-            backgroundColor: AllColor.brand2_light, // light lime bg
+            backgroundColor: AllColor.primary, // light lime bg
             radius: 24.r,
             child: Icon(Icons.notifications_none, color: AllColor.black),
           ),
@@ -120,7 +120,7 @@ class NotificationTile extends StatelessWidget {
               if (isUnread)
                 CircleAvatar(
                   radius: 5.r,
-                  backgroundColor: AllColor.black, // 🔹 brand color
+                  backgroundColor: AllColor.primary, // 🔹 brand color
                 )
             ],
           )

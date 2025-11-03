@@ -47,8 +47,14 @@ class _PostJobScreenState extends State<PostJobScreen> {
             TextFormField(
                 controller:_titleController ,
                 maxLines: 1,
+                style:  TextStyle(
+                  color: AllColor.brand2_light,
+                  fontFamily: "OpenText",
+                  fontSize: 14.sp, fontWeight: FontWeight.w400,
+                ),
                 decoration: InputDecoration(
                   hintText: "What do you need help with",
+
                 )),
             SizedBox(height: 16.h),
 
@@ -67,6 +73,11 @@ class _PostJobScreenState extends State<PostJobScreen> {
             TextFormField(
                 controller:_descriptionController ,
                 maxLines: 5,
+                style:  TextStyle(
+                  color: AllColor.brand2_light,
+                  fontFamily: "OpenText",
+                  fontSize: 14.sp, fontWeight: FontWeight.w400,
+                ),
                 decoration: InputDecoration(
                   hintText: "What do you need help with",
 
@@ -134,6 +145,11 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   child: TextFormField(
                       controller:_locationController ,
                       maxLines: 1,
+                      style:  TextStyle(
+                        color: AllColor.brand2_light,
+                        fontFamily: "OpenText",
+                        fontSize: 14.sp, fontWeight: FontWeight.w400,
+                      ),
                       decoration: InputDecoration(
                         hintText: "Enter your location",
                       )),
@@ -166,6 +182,11 @@ class _PostJobScreenState extends State<PostJobScreen> {
             TextFormField(
                 controller:_amountController ,
                 maxLines: 1,
+                style:  TextStyle(
+                  color: AllColor.brand2_light,
+                  fontFamily: "OpenText",
+                  fontSize: 14.sp, fontWeight: FontWeight.w400,
+                ),
                 decoration: InputDecoration(
                   hintText: "Total amount",
                 )),

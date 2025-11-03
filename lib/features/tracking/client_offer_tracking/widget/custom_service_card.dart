@@ -206,7 +206,10 @@ class _CustomServiceCardState extends State<CustomServiceCard> {
                 ),
               ],
             ),
-            GlobalGetStartedButton(onTap:widget.onTap ?? (){}, color: AllColor.primary,height: 40,borderRadius: 20.r,textColor: AllColor.black,buttonName: widget.buttonText ??"Get Started",)
+         if(checkRole == "provider")   GlobalGetStartedButton(onTap:widget.onTap ?? (){}, color: AllColor.primary,
+              height: 40,borderRadius: 20.r,
+              textColor: AllColor.black,
+              buttonName: widget.buttonText ??"Get Started",)
         ],
       ),
     );

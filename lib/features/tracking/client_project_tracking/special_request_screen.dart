@@ -59,6 +59,11 @@ class ProjectTitleSection extends StatelessWidget {
         //SizedBox(height: 6.h),
         TextField(
           controller: TextEditingController(),
+          style:  TextStyle(
+            color: AllColor.brand2_light,
+            fontFamily: "OpenText",
+            fontSize: 14.sp, fontWeight: FontWeight.w400,
+          ),
           decoration: InputDecoration(
             hintText: "Enter project title",
           ),
