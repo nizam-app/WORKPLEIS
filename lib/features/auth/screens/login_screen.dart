@@ -67,7 +67,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     style:  TextStyle(
                       color: AllColor.black,
                       fontFamily: "OpenText",
-                      fontSize: 14.sp, fontWeight: FontWeight.w400,
+                      fontSize: 16.sp, fontWeight: FontWeight.w400,
                     ),
                   decoration: const InputDecoration(hintText: 'Enter your Email')),
                 SizedBox(height: 16.h),
@@ -79,7 +79,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     style:  TextStyle(
                       color: AllColor.black,
                       fontFamily: "OpenText",
-                      fontSize: 14.sp, fontWeight: FontWeight.w400,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
                     ),
                   decoration: InputDecoration(
                     hintText: 'Enter your Password',
@@ -103,7 +104,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     
                       child: Text(
                         'Forgot password?',
-                        style: TextStyle(fontSize: 12.sp, color: AllColor.borderColor, fontFamily: "OpenText", fontWeight: FontWeight.w400),
+                        style: TextStyle(fontSize: 16.sp, color: AllColor.borderColor, fontFamily: "OpenText", fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),]
@@ -131,8 +132,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     return Column(
       children: [
         Text(
-          "     Sign in to your \n Workpleis account",
-          style: TextStyle(fontSize: 20.sp, color:Color(0xff45454C), fontFamily: "headFont", fontWeight: FontWeight.w800 ),
+          "  Sign in to your \n Workpleis account",
+          style: TextStyle(fontSize: 24.sp, color:Color(0xff45454C), fontFamily: "headFont", fontWeight: FontWeight.w800 ),
         ),
         SizedBox(height: 28.h),
       ],

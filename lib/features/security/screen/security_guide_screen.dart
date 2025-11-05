@@ -35,26 +35,6 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
     },
   ];
 
-
-  final faqs = [
-    {
-      "icon": Icons.verified_user,
-      "title": "Getting Started",
-    },
-    {
-      "icon": Icons.payment_rounded,
-      "title": "Jobs & Payments",
-    },
-    {
-      "icon": Icons.safety_check,
-      "title": "Safety & Trust",
-    },
-    {
-      "icon": Icons.person_add_alt,
-      "title": "Account & Profile",
-    },
-  ];
-
   String selectedCategory = "Safety Concern";
 
   @override
@@ -107,7 +87,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
           CircleAvatar(
             backgroundColor: AllColor.primary,
             radius: 22.r,
-            
+
             child: Icon(Icons.verified_user, color: AllColor.black, size: 28.sp),
           ),
           SizedBox(width: 12.w),
@@ -159,53 +139,147 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
     );
   }
 
-  /* 🔹 FAQ Tab */
+
+  final ValueNotifier<int?> expandedFaqIndex = ValueNotifier<int?>(null);
+
+// 🟨 Example JSON Data
+  final List<Map<String, dynamic>> faqs = [
+    {
+      "icon": Icons.verified_user,
+      "title": "Getting Started",
+      "description":
+      "Here you’ll find helpful information related to Getting Started. Tap below to explore detailed FAQs and guidance on this topic.",
+    },
+    {
+      "icon": Icons.payment_rounded,
+      "title": "Jobs & Payments",
+      "description":
+      "Here you’ll find helpful information related to Jobs & Payments. Tap below to explore detailed FAQs and guidance on this topic.",
+    },
+    {
+      "icon": Icons.safety_check,
+      "title": "Safety & Trust",
+      "description":
+      "Here you’ll find helpful information related to Safety & Trust. Tap below to explore detailed FAQs and guidance on this topic.",
+    },
+    {
+      "icon": Icons.person_add_alt,
+      "title": "Account & Profile",
+      "description":
+      "Here you’ll find helpful information related to Account & Profile. Tap below to explore detailed FAQs and guidance on this topic.",
+    },
+  ];
+
+
   Widget _faqTab() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _searchField(),
         SizedBox(height: 20.h),
-        ...faqs.map(
-              (f) => Container(
-            margin: EdgeInsets.only(bottom: 12.h),
-            padding: EdgeInsets.all(14.w),
-            decoration: BoxDecoration(
-              color: AllColor.white,
-              borderRadius: BorderRadius.circular(10.r),
-              border: Border.all(color:  AllColor.grey300, width: 1.w),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+        // 🟢 Listen for expansion toggle
+        ValueListenableBuilder<int?>(
+          valueListenable: expandedFaqIndex,
+          builder: (context, expandedIndex, _) {
+            return Column(
               children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: AllColor.primary,
-                      radius: 18.r,
-                      child: Icon(
-                        f["icon"] as IconData,
-                        color: AllColor.black,
-                        size: 20.sp,
+                ...faqs.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  var f = entry.value;
+                  bool isExpanded = expandedIndex == index;
+
+                  return GestureDetector(
+                    onTap: () {
+                      expandedFaqIndex.value = isExpanded ? null : index;
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                      margin: EdgeInsets.only(bottom: 12.h),
+                      padding: EdgeInsets.all(14.w),
+                      decoration: BoxDecoration(
+                        color: AllColor.white,
+                        borderRadius: BorderRadius.circular(10.r),
+                        border:
+                        Border.all(color: AllColor.grey, width: 1.w),
+                        boxShadow: [
+                          if (isExpanded)
+                            BoxShadow(
+                              color: AllColor.grey,
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          // Header Row
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: AllColor.primary,
+                                    radius: 18.r,
+                                    child: Icon(
+                                      f["icon"] as IconData,
+                                      color: AllColor.black,
+                                      size: 20.sp,
+                                    ),
+                                  ),
+                                  SizedBox(width: 10.w),
+                                  Text(
+                                    f["title"] as String,
+                                    style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w800,
+                                      color: AllColor.black,
+                                      fontFamily: "headFont",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Icon(
+                                isExpanded
+                                    ? Icons.keyboard_arrow_up_rounded
+                                    : Icons.keyboard_arrow_down_sharp,
+                                color: AllColor.black,
+                                size: 20.sp,
+                              ),
+                            ],
+                          ),
+
+                          // Expanded Content
+                          if (isExpanded) ...[
+                            SizedBox(height: 10.h),
+                            Divider(
+                                color: AllColor.grey, thickness: 0.5),
+                            SizedBox(height: 8.h),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                f["description"] ?? "",
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: AllColor.black,
+                                  fontFamily: "OpenText",
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.4,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
                     ),
-                    SizedBox(width: 10.w),
-                    Text(
-                      f["title"] as String,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w800,
-                        color: AllColor.black,
-                        fontFamily: "headFont"
-                      ),
-                    ),
-                  ],
-                ),
-                 Icon(Icons.keyboard_arrow_down_sharp,
-                    color: AllColor.black,size: 20.sp,),
+                  );
+                }),
               ],
-            ),
-          ),
+            );
+          },
         ),
       ],
     );
@@ -252,7 +326,8 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
               children: [
                 Text(
                   selectedCategory,
-                  style: TextStyle(fontSize: 14.sp, color: AllColor.black, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
+                  style: TextStyle(fontSize: 14.sp, color: AllColor.black,
+                      fontWeight: FontWeight.w400, fontFamily: "OpenText"),
                 ),
                 Icon(Icons.keyboard_arrow_down_rounded,
                     color: AllColor.grey, size: 20.sp),
@@ -273,6 +348,13 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
         ),
         SizedBox(height: 6.h),
         TextField(
+
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w400,
+            color: AllColor.black,
+            fontFamily: "OpenText",
+          ),
           decoration: InputDecoration(
             hintText: "Brief description of your issue",
             hintStyle: TextStyle(fontSize: 14.sp, color: AllColor.grey),
@@ -294,6 +376,13 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
             )),
         SizedBox(height: 6.h),
         TextField(
+          style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w400,
+              color: AllColor.black,
+              fontFamily: "OpenText"
+
+          ),
           maxLines: 5,
           decoration: InputDecoration(
             hintText: "Please provide as much detail as possible...",
@@ -314,8 +403,8 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
             label: Text(
               "Send Message",
               style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
+                  color: AllColor.black,
+                  fontWeight: FontWeight.w500,
                   fontSize: 14.sp,
               fontFamily: "OpenText"
               ),
@@ -337,67 +426,189 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
   }
 
   /* 🔹 Guide Tab */
+
+  //
+  // Widget _guideTab() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       _searchField(),
+  //       SizedBox(height: 20.h),
+  //       ...guides.map(
+  //             (g) => Container(
+  //           margin: EdgeInsets.only(bottom: 12.h),
+  //           padding: EdgeInsets.all(14.w),
+  //           decoration: BoxDecoration(
+  //             color: AllColor.white,
+  //             borderRadius: BorderRadius.circular(10.r),
+  //             border: Border.all(color: AllColor.grey, width: 1.w),
+  //           ),
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Row(
+  //                 children: [
+  //                   CircleAvatar(
+  //                     backgroundColor: AllColor.primary,
+  //                     radius: 18.r,
+  //                     child: Icon(
+  //                       g["icon"] as IconData,
+  //                       color: AllColor.black,
+  //                       size: 20.sp,
+  //                     ),
+  //                   ),
+  //                   SizedBox(width: 10.w),
+  //                   Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     children: [
+  //                       Text(
+  //                         g["title"] as String,
+  //                         style: TextStyle(
+  //                           fontSize: 16.sp,
+  //                           fontWeight: FontWeight.w400,
+  //                           color: AllColor.black,
+  //                           fontFamily: "OpenText"
+  //                         ),
+  //                       ),
+  //                       Text(
+  //                         g["subtitle"] as String,
+  //                         style: TextStyle(
+  //                           fontSize: 14.sp,
+  //                           color: AllColor.black,
+  //                           fontWeight: FontWeight.w400,
+  //                           fontFamily: "OpenText"
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ],
+  //               ),
+  //               const Icon(Icons.keyboard_arrow_down,
+  //                   color: AllColor.black),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+
+
+  int? expandedIndex; // Add this at top of class (state)
+
+  /* 🔹 Guide Tab */
   Widget _guideTab() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _searchField(),
         SizedBox(height: 20.h),
-        ...guides.map(
-              (g) => Container(
-            margin: EdgeInsets.only(bottom: 12.h),
-            padding: EdgeInsets.all(14.w),
-            decoration: BoxDecoration(
-              color: AllColor.white,
-              borderRadius: BorderRadius.circular(10.r),
-              border: Border.all(color: AllColor.grey, width: 1.w),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: AllColor.primary,
-                      radius: 18.r,
-                      child: Icon(
-                        g["icon"] as IconData,
+        ...guides.asMap().entries.map((entry) {
+          int index = entry.key;
+          var g = entry.value;
+          bool isExpanded = expandedIndex == index;
+
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                expandedIndex = isExpanded ? null : index;
+              });
+            },
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeInOut,
+              margin: EdgeInsets.only(bottom: 12.h),
+              padding: EdgeInsets.all(14.w),
+              decoration: BoxDecoration(
+                color: AllColor.white,
+                borderRadius: BorderRadius.circular(10.r),
+                border: Border.all(color: AllColor.grey, width: 1.w),
+                boxShadow: [
+                  if (isExpanded)
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  // top row (same as before)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: AllColor.primary,
+                            radius: 18.r,
+                            child: Icon(
+                              g["icon"] as IconData,
+                              color: AllColor.black,
+                              size: 20.sp,
+                            ),
+                          ),
+                          SizedBox(width: 10.w),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                g["title"] as String,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w800,
+                                  color: AllColor.black,
+                                  fontFamily: "headFont",
+                                ),
+                              ),
+                              // Text(
+                              //   g["subtitle"] as String,
+                              //   style: TextStyle(
+                              //     fontSize: 14.sp,
+                              //     color: AllColor.black,
+                              //     fontWeight: FontWeight.w400,
+                              //     fontFamily: "OpenText",
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Icon(
+                        isExpanded
+                            ? Icons.keyboard_arrow_up
+                            : Icons.keyboard_arrow_down,
                         color: AllColor.black,
-                        size: 20.sp,
+                      ),
+                    ],
+                  ),
+
+                  // expanded area
+                  if (isExpanded) ...[
+                    SizedBox(height: 10.h),
+                    Divider(color: AllColor.grey, thickness: 0.5),
+                    SizedBox(height: 8.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "This section contains important guidance for ${g["title"]}. Tap here to learn more or open detailed instructions.",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: AllColor.black,
+                          fontFamily: "OpenText",
+                          fontWeight: FontWeight.w400,
+                          height: 1.4,
+                        ),
                       ),
                     ),
-                    SizedBox(width: 10.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          g["title"] as String,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w400,
-                            color: AllColor.black,
-                            fontFamily: "OpenText"
-                          ),
-                        ),
-                        Text(
-                          g["subtitle"] as String,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: AllColor.black,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: "OpenText"
-                          ),
-                        ),
-                      ],
-                    ),
+
                   ],
-                ),
-                const Icon(Icons.keyboard_arrow_down,
-                    color: AllColor.black),
-              ],
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        }),
       ],
     );
   }
@@ -505,6 +716,12 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
     );
   }
 }
+
+
+
+
+
+
 
 
 // import 'package:flutter/material.dart';

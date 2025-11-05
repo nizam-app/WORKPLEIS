@@ -29,7 +29,7 @@ class OnboardingScreen01 extends StatelessWidget {
                 Text(
                   "A SUSTAINABLE MARKETPLACE FOR BUSINESSES",
                   style: TextStyle(
-                    fontSize: 9.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400,
+                    fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400,color: AllColor.black
                   ),
                 ),
                 Spacer(),

@@ -172,6 +172,12 @@ class ChatInputField extends StatelessWidget {
           SizedBox(width: 8.w),
           Expanded(
             child: TextFormField(
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: AllColor.black,
+                fontFamily: "OpenText",
+              ),
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(horizontal: 12.w),
                 hintText: "Type a message...",

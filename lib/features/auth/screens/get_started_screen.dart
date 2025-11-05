@@ -25,13 +25,11 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
   @override
   void initState() {
     super.initState();
-    // 🔁 দ্বিতীয়বার স্ক্রিনে ঢুকলে পুরনো কন্ট্রোলার/স্টেট থাকতে পারে।
-    // একবারই রিসেট করব: completion=false এবং controller invalidate.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted && !_didResetOnce) {
-        // completion রিসেট
+        // completion
         ref.read(videoSequenceCompletedProvider.notifier).state = false;
-        // কন্ট্রোলার আবার নতুন করে ইনিশিয়ালাইজ করাতে
+
         ref.invalidate(videoCtlP);
         _didResetOnce = true;
       }

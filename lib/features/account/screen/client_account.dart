@@ -134,12 +134,12 @@ class _AccountOverviewClientScreenState
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: AllColor.brand2_light, width: 1),
-        boxShadow: [
-          BoxShadow(
-              color: AllColor.black, blurRadius: 5, offset: const Offset(0, 2))
-        ],
-      ),
+        border: Border.all(color: AllColor.grey, width: 1),
+      //   boxShadow: [
+      //     BoxShadow(
+      //         color: AllColor.grey, blurRadius: 0.5, offset: const Offset(0, 0))
+      //   ],
+     ),
       child: Row(
         children: [
           CircleAvatar(

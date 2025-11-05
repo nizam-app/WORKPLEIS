@@ -19,11 +19,11 @@ class EnterYourEmail  extends StatelessWidget {
           children: [
             Spacer(),
             Text("Enter Your Email",
-                style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black) ),
+                style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 24.sp,color: AllColor.black) ),
             SizedBox(height: 8.h),
             Text("We’ll send you a one time code to \n "
                 "verify your email.",textAlign: TextAlign.center,
-                style:TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText)),
+                style:TextStyle(fontSize: 16.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText)),
             SizedBox(height: 30.h),
 
             //🔹 Full Name
@@ -34,11 +34,17 @@ class EnterYourEmail  extends StatelessWidget {
 
                 child: Text("Email",
                     style: TextStyle(
-                        fontSize: 12.sp, fontWeight: FontWeight.w400, color: AllColor.borderColor, fontFamily:"OpenText")),
+                        fontSize: 18.sp, fontWeight: FontWeight.w800, color: AllColor.borderColor, fontFamily:"OpenText")),
               ),
             ),
             SizedBox(height: 6.h),
             TextFormField(
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w400,
+                color: AllColor.black,
+                fontFamily: "OpenText",
+              ),
               keyboardType: TextInputType.emailAddress,
               controller: _emailController,
               validator: (v) =>

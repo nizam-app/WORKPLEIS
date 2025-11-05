@@ -22,7 +22,7 @@ class CustomChooseFile extends StatelessWidget {
             title,
             style: TextStyle(
               color: AllColor.borderColor, // soft purple-gray
-              fontSize: 16.sp,
+              fontSize: 18.sp,
               fontWeight: FontWeight.w800,
               fontFamily: "headFont",
             ),
@@ -58,7 +58,7 @@ class CustomChooseFile extends StatelessWidget {
                     'Choose files or drag and drop',
                     style: TextStyle(
                       color: AllColor.borderColor,
-                      fontSize: 12.sp,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                       fontFamily: "OpenText",
                     ),
@@ -68,7 +68,7 @@ class CustomChooseFile extends StatelessWidget {
                     'Only jpg or png file type accepted',
                     style: TextStyle(
                       color: AllColor.borderColor,
-                      fontSize: 12.sp,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                       fontFamily: "OpenText",
                     ),

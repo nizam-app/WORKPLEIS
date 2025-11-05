@@ -24,13 +24,13 @@ class BusinessVerificationScreen extends StatelessWidget {
             child: Column(
               children: [
                 Spacer(),
-                Text("Verify Your Business", style: TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black)),
+                Text("Verify Your Business", style: TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 24.sp,color: AllColor.black)),
                 SizedBox(height: 8.h),
                 Text(
                   "Upload a clear photo of any of your business \n"
                   " documents listed below.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
+                  style: TextStyle(fontSize: 16.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
                 ),
                 SizedBox(height: 30.h),
                 BusinessDocumentsList(),

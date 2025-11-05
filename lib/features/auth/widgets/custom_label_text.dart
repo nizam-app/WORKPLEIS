@@ -17,7 +17,7 @@ class CustomLabelText extends StatelessWidget {
 
         child: Text(title,
             style: TextStyle(
-                fontSize: 16.sp, fontWeight: FontWeight.w800, color: AllColor.borderColor, fontFamily: "headFont")),
+                fontSize: 18.sp, fontWeight: FontWeight.w800, color: AllColor.borderColor, fontFamily: "headFont")),
       ),
     );
   }

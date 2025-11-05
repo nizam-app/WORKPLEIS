@@ -24,13 +24,13 @@ class IndentityVerificationScreen extends StatelessWidget {
                 Spacer(),
                 Text(
                   "Verify Your Identity",
-                  style: TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black)
+                  style: TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 24.sp,color: AllColor.black)
                 ),
                 SizedBox(height: 8.h),
                 Text(
                   "Upload a clear photo of the front and back of \n your government-issued ID to complete verification",
                   textAlign: TextAlign.center,
-                  style:TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
+                  style:TextStyle(fontSize: 16.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
                 ),
                 SizedBox(height: 30.h),
                 const CustomChooseFile(),

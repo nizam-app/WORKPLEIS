@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
 import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_aleart_box.dart';
@@ -48,9 +49,9 @@ class _PostJobScreenState extends State<PostJobScreen> {
                 controller:_titleController ,
                 maxLines: 1,
                 style:  TextStyle(
-                  color: AllColor.brand2_light,
+                  color: AllColor.black,
                   fontFamily: "OpenText",
-                  fontSize: 14.sp, fontWeight: FontWeight.w400,
+                  fontSize: 16.sp, fontWeight: FontWeight.w400,
                 ),
                 decoration: InputDecoration(
                   hintText: "What do you need help with",
@@ -74,9 +75,9 @@ class _PostJobScreenState extends State<PostJobScreen> {
                 controller:_descriptionController ,
                 maxLines: 5,
                 style:  TextStyle(
-                  color: AllColor.brand2_light,
+                  color: AllColor.black,
                   fontFamily: "OpenText",
-                  fontSize: 14.sp, fontWeight: FontWeight.w400,
+                  fontSize: 16.sp, fontWeight: FontWeight.w400,
                 ),
                 decoration: InputDecoration(
                   hintText: "What do you need help with",
@@ -146,9 +147,9 @@ class _PostJobScreenState extends State<PostJobScreen> {
                       controller:_locationController ,
                       maxLines: 1,
                       style:  TextStyle(
-                        color: AllColor.brand2_light,
+                        color: AllColor.black,
                         fontFamily: "OpenText",
-                        fontSize: 14.sp, fontWeight: FontWeight.w400,
+                        fontSize: 16.sp, fontWeight: FontWeight.w400,
                       ),
                       decoration: InputDecoration(
                         hintText: "Enter your location",
@@ -183,9 +184,9 @@ class _PostJobScreenState extends State<PostJobScreen> {
                 controller:_amountController ,
                 maxLines: 1,
                 style:  TextStyle(
-                  color: AllColor.brand2_light,
+                  color: AllColor.black,
                   fontFamily: "OpenText",
-                  fontSize: 14.sp, fontWeight: FontWeight.w400,
+                  fontSize: 16.sp, fontWeight: FontWeight.w400,
                 ),
                 decoration: InputDecoration(
                   hintText: "Total amount",
@@ -226,8 +227,9 @@ class _PostJobScreenState extends State<PostJobScreen> {
           ),
           isExpanded: true,
           icon: Icon(Icons.keyboard_arrow_down, color: AllColor.black),
-          dropdownColor: AllColor.white,
-          style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
+          dropdownColor: AllColor.black,
+          style: TextStyle(fontSize: 14.sp, color: AllColor.black,
+              fontWeight: FontWeight.w400, fontFamily: "OpenText"),
           onChanged: onChanged,
           items: options
               .map(
@@ -235,7 +237,8 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   value: opt,
                   child: Text(
                     opt,
-                    style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontWeight: FontWeight.w400, fontFamily: "OpenText"),
+                    style: TextStyle(fontSize: 14.sp, color: AllColor.black,
+                        fontWeight: FontWeight.w400, fontFamily: "OpenText"),
                   ),
                 ),
               )
@@ -260,11 +263,12 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   primary: AllColor.green, // 🔹 selected date + header color
                   onPrimary: Colors.white, // 🔹 header text color
                   onSurface: AllColor.black,
-                  // 🔹 normal text color
+
                 ),
                 textButtonTheme: TextButtonThemeData(
                   style: TextButton.styleFrom(
                     foregroundColor: AllColor.black87,
+
                     // 🔹 "OK"/"Cancel" color
                   ),
                 ),
@@ -295,6 +299,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
               style: TextStyle(fontSize: 12.sp,
                 color: AllColor.black87,
                 fontFamily: "OpenText",
+                fontWeight: FontWeight.w400,
               ),
             ),
           ],
@@ -371,7 +376,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
       height: 48.h,
       padding: EdgeInsets.symmetric(horizontal: 14.w),
       decoration: BoxDecoration(
-        color: const Color(0xFFF9F7FF), // soft light bg
+        color: AllColor.white, // soft light bg
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
           color: AllColor.borderColor.withOpacity(0.8),
@@ -397,7 +402,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w400,
-                    fontSize: 14.sp,
+                    fontSize: 16.sp,
                     fontFamily: "OpenText"
                   ),
                 ),
@@ -405,7 +410,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
             }).toList();
           },
 
-          dropdownColor: Colors.white,
+          dropdownColor: AllColor.white,
           borderRadius: BorderRadius.circular(10.r),
 
           // custom highlight only when menu is open
@@ -427,7 +432,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                       child: Text(
                         item,
                         style: TextStyle(
-                          color: Colors.black,
+                          color: AllColor.black,
                           fontWeight: isSelected
                               ? FontWeight.w400
                               : FontWeight.w400,
@@ -463,7 +468,7 @@ Future<void> showSearchLocationBottomBar(BuildContext context) {
   return showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    backgroundColor: Colors.white,
+    backgroundColor: AllColor.white,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
     ),
@@ -532,19 +537,37 @@ class _SearchLocationBottomBarState extends State<SearchLocationBottomBar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// Title
-              Text(
-                "Search the location",
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                  fontFamily: "headFont"
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  
+                  Text(
+                    "Search the location",
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                      fontFamily: "headFont"
+                    ),
+                  ),
+
+                  InkWell(
+                    onTap: (){
+                      context.pop();
+                    },
+                      child: Icon(Icons.close, size: 24.sp, fontWeight: FontWeight.w400,color: AllColor.black,))
+                ],
               ),
               SizedBox(height: 10.h),
 
               /// Search Field
               TextField(
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                  fontFamily: "OpenText"
+                ),
                 controller: _controller,
                 onChanged: _onSearchChanged,
                 decoration: InputDecoration(

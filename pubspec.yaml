@@ -125,7 +125,7 @@ flutter:
 
 
   #         style: italic
-     - family: headFont
+     - family: migraText
        fonts:
          - asset: assets/fonts/Migra-Extralight.ttf
            weight: 800
@@ -134,12 +134,14 @@ flutter:
   #        weight: 700
 
   #Style Helvetica
-     - family: helvetica
+     - family: headFont
        fonts:
           - asset: assets/fonts/Helvetica.ttf
             weight: 800
-          - asset: assets/fonts/Migra-Extrabold.ttf
-            weight: 200
+          - asset: assets/fonts/Helvetica-bold.ttf
+            weight: 600
+          - asset: assets/fonts/Helvetica.ttf
+            weight: 400
     #        weight: 700
 
 

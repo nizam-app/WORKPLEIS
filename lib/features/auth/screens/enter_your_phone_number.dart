@@ -24,10 +24,10 @@ class EnterYourPhoneNumber  extends ConsumerWidget {
           children: [
             Spacer(),
             Text("Enter Your Phone Number",
-                style: TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black)),
+                style: TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 24.sp,color: AllColor.black)),
             SizedBox(height: 8.h),
             Text("We’ll send you a one time code \n to verify your number.",textAlign: TextAlign.center,
-                style:TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText)),
+                style:TextStyle(fontSize: 16.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText)),
             SizedBox(height: 30.h),
 
             // 🔹 Full Name
@@ -38,11 +38,17 @@ class EnterYourPhoneNumber  extends ConsumerWidget {
 
                 child: Text("Mobile Number",
                     style: TextStyle(
-                        fontSize: 12.sp, fontWeight: FontWeight.w400, color: AllColor.borderColor, fontFamily:"OpenText")),
+                        fontSize: 18.sp, fontWeight: FontWeight.w800, color: AllColor.borderColor, fontFamily:"OpenText")),
               ),
             ),
             SizedBox(height: 6.h),
             TextFormField(
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w400,
+                color: AllColor.black,
+                fontFamily: "OpenText",
+              ),
               controller: _emailController,
               validator: (v) =>
               v == null || v.isEmpty ? "Enter your phone number" : null,

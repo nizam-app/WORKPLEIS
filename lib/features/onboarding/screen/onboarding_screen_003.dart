@@ -56,10 +56,11 @@ class OnboardingScreen02 extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
         children: [
-          Center(child: Text("Team up For Success",style: TextStyle(fontSize:24.sp, fontWeight:FontWeight.w800, fontFamily:"headFont" ))),
+          Center(child: Text("Team up For Success",style: TextStyle(fontSize:24.sp, fontWeight:FontWeight.w700, fontFamily:"headFont" ,color:AllColor.black ))),
           SizedBox(height: 5.h,),
           Text("Get ready to unleash your potential and \n"
-              " witness the power of teamwork",textAlign: TextAlign.center,style: TextStyle(fontFamily:"OpenText", fontWeight: FontWeight.w400, fontSize: 12.sp),)
+              " witness the power of teamwork",textAlign: TextAlign.center,style: TextStyle(
+              fontFamily:"OpenText", fontWeight: FontWeight.w400, fontSize: 16.sp, color: AllColor.black),)
         ],
       );
   }
@@ -186,14 +187,15 @@ class _Onboarding02BottonbarState
                 child: RichText(
                   text: TextSpan(
                     style: TextStyle(
-                      fontSize: 12.sp,
+                      fontSize: 14.sp,
                       height: 1.35,
                       color: AllColor.black.withOpacity(0.75),
                       fontWeight: FontWeight.w400,
                     ),
                     children: [
                        TextSpan(
-                        text: 'By signing up, I agree to Workpleis ',style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, fontFamily: "OpenText"),
+                        text: 'By signing up, I agree to Workpleis ',style: TextStyle(
+                           fontSize: 13.sp, fontWeight: FontWeight.w500, fontFamily: "OpenText", color: AllColor.black),
                       ),
                       TextSpan(
 
@@ -201,7 +203,7 @@ class _Onboarding02BottonbarState
                         style:  TextStyle(
                           color: AllColor.black,
                           fontWeight: FontWeight.w700,
-                          decorationThickness: 1.1,
+                          decorationThickness: 1,
                           fontFamily: "OpenText",
                           fontSize: 12.sp
                         ),
@@ -214,7 +216,7 @@ class _Onboarding02BottonbarState
                         style:  TextStyle(
                           color: AllColor.black,
                           fontWeight: FontWeight.w700,
-                          decorationThickness: 1.1,
+                          decorationThickness: 1,
                             fontFamily: "OpenText",
                             fontSize: 12.sp
                         ),
@@ -227,7 +229,7 @@ class _Onboarding02BottonbarState
                         style:  TextStyle(
                           color: AllColor.black,
                           fontWeight: FontWeight.w700,
-                          decorationThickness: 1.1,
+                          decorationThickness: 1,
                             fontFamily: "OpenText",
                             fontSize: 12.sp
                         ),
