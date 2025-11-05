@@ -315,7 +315,7 @@ void showRejectionMessageSheet(BuildContext context) {
                 ),
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: const Icon(Icons.close, color: Colors.black, size: 20),
+                  child: const Icon(Icons.close, color: AllColor.black, size: 20),
                 ),
               ],
             ),

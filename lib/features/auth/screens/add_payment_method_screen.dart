@@ -36,7 +36,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
                         style: TextStyle(
                           color: AllColor.black,
                           fontFamily: "OpenText",
-                          fontSize: 14.sp,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
                         ),
                         decoration: const InputDecoration(
@@ -51,7 +51,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
                         style: TextStyle(
                           color: AllColor.black,
                           fontFamily: "OpenText",
-                          fontSize: 14.sp,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
                         ),
                         decoration: const InputDecoration(
@@ -66,7 +66,7 @@ class AddPaymentMethodScreen extends StatelessWidget {
                         style: TextStyle(
                           color: AllColor.black,
                           fontFamily: "OpenText",
-                          fontSize: 14.sp,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
                         ),
                         decoration: const InputDecoration(

@@ -48,10 +48,14 @@ class OnboardingScreen04 extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Center(child: Text("Easy Task Creation",style:TextStyle(fontSize:24, fontFamily: "headFont",fontWeight: FontWeight.w800))),
+        Center(child: Text("Easy Task Creation",style:TextStyle(fontSize:24.sp, fontFamily: "headFont",fontWeight: FontWeight.w800))),
         SizedBox(height: 5.h,),
         Text("Quickly add tasks, add due date, add \n"
-            "description with ease",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12.sp, fontFamily: "OpenText",),)
+            "description with ease",textAlign: TextAlign.center,style: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 16.sp,
+            fontFamily: "OpenText",
+            color: AllColor.black),)
       ],
     );
   }

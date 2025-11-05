@@ -138,7 +138,7 @@ class HomeHeaderSection extends StatelessWidget {
                       color:  AllColor.brand2_light,
                       fontWeight: FontWeight.w800,
                       fontFamily: "headFont",
-                      fontSize: 26.sp,
+                      fontSize: 24.sp,
                     ),
                   ),
                 ],
@@ -313,9 +313,9 @@ class _CategoryCard extends StatelessWidget {
           ),
         ],
       ),
-      padding: EdgeInsets.only(left: 15.w, top: 10.h, bottom: 25.h, right: 5.w),
+      padding: EdgeInsets.only(left: 15.w, top: 20.h, bottom: 10.h, right: 5.w),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // icon box
           Container(
@@ -327,12 +327,13 @@ class _CategoryCard extends StatelessWidget {
             ),
             child: Icon(icon, color: iconColor, size: 22.sp),
           ),
-            Spacer(),
+          SizedBox(height: 10.h,),
           Text(
             jobs,
             style: TextStyle(
-              color: Colors.grey[600],
-              fontSize: 10.sp,
+              color: AllColor.grey,
+              fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
                 fontFamily: "OpenText"
             ),
           ),
@@ -340,9 +341,9 @@ class _CategoryCard extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: Colors.black,
+              color: AllColor.black,
               fontWeight: FontWeight.w400,
-              fontSize: 12.sp,
+              fontSize: 14.sp,
               fontFamily: "OpenText"
             ),
           ),
@@ -416,7 +417,7 @@ class ActiveJobsSection extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w400,
-                    fontSize: 14.sp,
+                    fontSize: 16.sp,
                     fontFamily: "OpenText"
                   ),
                 ),
@@ -641,219 +642,242 @@ class _JobCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
 
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(
-          color: AllColor.borderColor.withOpacity(0.4),
+    return GestureDetector(
+      onTap: (){
+        context.push(JobsScreen.routeName);
+      },
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(
+            color: AllColor.borderColor.withOpacity(0.4),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          /// 🔹 Top Row (Title + Status)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: (){
-                  context.push(JobDetailScreen.routeName);
-                },
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16.sp,
-                    fontFamily: "headFont",
-                    color: AllColor.black,
-                  ),
-                ),
-              ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            /// 🔹 Top Row (Title + Status)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: (){
 
-              Text(
-                budget,
-                style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: AllColor.black,
-                    fontSize: 14.sp,
-                    fontFamily: "OpenText"
-                ),
-              ),
-
-
-              // Container(
-              //   padding:
-              //   EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-              //   decoration: BoxDecoration(
-              //
-              //     borderRadius: BorderRadius.circular(8.r),
-              //     //border: Border.all(color: Colors.black, width: 1),
-              //   ),
-              // Text(
-              //     status,
-              //     style: TextStyle(
-              //       fontSize: 12.sp,
-              //       fontWeight: FontWeight.w500,
-              //       color: AllColor.brand2_light,
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
-
-          SizedBox(height: 6.h),
-
-          /// 🔹 Location + Time
-          Row(
-            children: [
-              const Icon(Icons.location_on_outlined,
-                  color: AllColor.brand2_light, size: 14),
-              SizedBox(width: 4.w),
-              Text(
-                location,
-                style: TextStyle(
-                    color: AllColor.brand2_light,
-                  fontSize: 12.sp,
-                  fontFamily: "OpenText",
-                  fontWeight:FontWeight.w400
-                ),
-              ),
-              SizedBox(width: 8.w),
-              const Icon(Icons.access_time_rounded,
-                  color: AllColor.brand2_light, size: 14),
-              SizedBox(width: 4.w),
-              Text(
-                time,
-                style: TextStyle(
-                  color: AllColor.brand2_light,
-                  fontSize: 12.sp,
-                  fontFamily: "OpenText",
-                  fontWeight: FontWeight.w400
-                ),
-              ),
-            ],
-          ),
-
-          SizedBox(height: 12.h),
-
-          /// 🔹 Budget + Offers + View button
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Budget + Offers
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Icon(Icons.real_estate_agent, color: AllColor.brand2_light, size: 14.sp),
-                  SizedBox(width: 4.w,),
-                  Text(
-                    'Offers',
+                  },
+                  child: Text(
+                    title,
                     style: TextStyle(
-                      color: AllColor.brand2_light,
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "OpenText"
+                      fontWeight: FontWeight.w800,
+                      fontSize: 18.sp,
+                      fontFamily: "headFont",
+                      color: AllColor.black,
                     ),
                   ),
-                  SizedBox(width: 4.w,),
-                  Text(
-                    offers,
-                    style: TextStyle(
+                ),
+
+                Text(
+                  budget,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: AllColor.black,
+                      fontSize: 16.sp,
+                      fontFamily: "OpenText"
+                  ),
+                ),
+
+
+                // Container(
+                //   padding:
+                //   EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                //   decoration: BoxDecoration(
+                //
+                //     borderRadius: BorderRadius.circular(8.r),
+                //     //border: Border.all(color: Colors.black, width: 1),
+                //   ),
+                // Text(
+                //     status,
+                //     style: TextStyle(
+                //       fontSize: 12.sp,
+                //       fontWeight: FontWeight.w500,
+                //       color: AllColor.brand2_light,
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
+
+            SizedBox(height: 6.h),
+
+            /// 🔹 Location + Time
+            Row(
+              children: [
+                const Icon(Icons.location_on_outlined,
+                    color: AllColor.brand2_light, size: 14),
+                SizedBox(width: 4.w),
+                Text(
+                  location,
+                  style: TextStyle(
+                      color: AllColor.brand2_light,
+                    fontSize: 14.sp,
+                    fontFamily: "OpenText",
+                    fontWeight:FontWeight.w400
+                  ),
+                ),
+                SizedBox(width: 8.w),
+                const Icon(Icons.access_time_rounded,
+                    color: AllColor.brand2_light, size: 14),
+                SizedBox(width: 4.w),
+                Text(
+                  time,
+                  style: TextStyle(
+                    color: AllColor.brand2_light,
+                    fontSize: 14.sp,
+                    fontFamily: "OpenText",
+                    fontWeight: FontWeight.w400
+                  ),
+                ),
+              ],
+            ),
+
+            SizedBox(height: 12.h),
+
+            /// 🔹 Budget + Offers + View button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Budget + Offers
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+                    Icon(Icons.real_estate_agent, color: AllColor.brand2_light, size: 14.sp),
+                    SizedBox(width: 4.w,),
+                    Text(
+                      'Offers',
+                      style: TextStyle(
                         color: AllColor.brand2_light,
-                        fontSize: 12.sp,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         fontFamily: "OpenText"
-                    ),
-                  ),
-                ],
-              ),
-
-              SizedBox(width: 40.w),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-
-                  Container(
-
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:  AllColor.primary, // purple
-
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.r),
-
-                        // border:Border.all(color: AllColor.brand2_light, width: 1),
-                        ),
-                        padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, ),
-                        elevation: 0,
                       ),
-                      onPressed: () {
-                        context.push(JobsScreen.routeName);
-                      },
-                      child: Text(
-                        'Open',
-                        style: TextStyle(
-                          color: AllColor.black,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
+                    ),
+                    SizedBox(width: 4.w,),
+                    Text(
+                      offers,
+                      style: TextStyle(
+                          color: AllColor.brand2_light,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
                           fontFamily: "OpenText"
-                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 10.w,),
-                  SizedBox(
-                    height: 30.h,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:  AllColor.grey, // purple
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.r),
-                          // border:Border.all(color: AllColor.brand2_light, width: 1),
-                        ),
-                        padding:
-                        EdgeInsets.symmetric(horizontal: 10.w,),
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                       // context.push(JobsScreen.routeName);
+                  ],
+                ),
+
+                SizedBox(width: 40.w),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    // SizedBox(
+                    //   height: 30.h,
+                    //   child: ElevatedButton(
+                    //     style: ElevatedButton.styleFrom(
+                    //       backgroundColor:  AllColor.primary, // purple
+                    //
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(30.r),
+                    //
+                    //       // border:Border.all(color: AllColor.brand2_light, width: 1),
+                    //       ),
+                    //       padding:
+                    //       EdgeInsets.symmetric(horizontal: 10.w, ),
+                    //       elevation: 0,
+                    //     ),
+                    //     onPressed: () {
+                    //       context.push(JobsScreen.routeName);
+                    //     },
+                    //     child: Text(
+                    //       'Open',
+                    //       style: TextStyle(
+                    //         color: AllColor.black,
+                    //         fontSize: 12.sp,
+                    //         fontWeight: FontWeight.w500,
+                    //         fontFamily: "OpenText"
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    SizedBox(width: 10.w,),
+
+                    GestureDetector(
+                      onTap: (){
+
                       },
-                      child: Text(
-                       status,
-                        style: TextStyle(
-                          color: AllColor.white,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "OpenText"
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                        decoration: BoxDecoration(
+                          color: AllColor.grey300,
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Text(
+                          status,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AllColor.black,
+                            fontFamily: "OpenText",
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
-                ],
-              ),
+                    // SizedBox(
+                    //   height: 30.h,
+                    //   child: ElevatedButton(
+                    //     style: ElevatedButton.styleFrom(
+                    //       backgroundColor:  AllColor.grey, // purple
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(10.r),
+                    //         // border:Border.all(color: AllColor.brand2_light, width: 1),
+                    //       ),
+                    //       padding:
+                    //       EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                    //       //elevation: 0,
+                    //     ),
+                    //     onPressed: () {
+                    //      // context.push(JobsScreen.routeName);
+                    //     },
+                    //     child: Text(
+                    //      status,
+                    //       style: TextStyle(
+                    //         color: AllColor.white,
+                    //         fontSize: 14.sp,
+                    //         fontWeight: FontWeight.w500,
+                    //         fontFamily: "OpenText"
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
+                ),
 
-              // View button
+                // View button
 
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -64,6 +64,12 @@ class RegisterScreen extends ConsumerWidget {
                   ),
                   SizedBox(height: 6.h),
                   TextFormField(
+                    style: TextStyle(
+                      color: AllColor.black,
+                      fontFamily: "OpenText",
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
                     controller: _nameController,
                     validator: (v) =>
                     v == null || v.isEmpty ? "Enter your full name" : null,
@@ -85,6 +91,12 @@ class RegisterScreen extends ConsumerWidget {
                   ),
                   SizedBox(height: 6.h),
                   TextFormField(
+                    style: TextStyle(
+                      color: AllColor.black,
+                      fontFamily: "OpenText",
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
                     controller: _emailController,
                     validator: emailValidator,
                     decoration: const InputDecoration(
@@ -105,6 +117,12 @@ class RegisterScreen extends ConsumerWidget {
                   ),
                   SizedBox(height: 6.h),
                   TextFormField(
+                    style: TextStyle(
+                      color: AllColor.black,
+                      fontFamily: "OpenText",
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
                     controller: _passController,
                     validator: passwordValidator,
                     obscureText: obscurePass,
@@ -134,6 +152,12 @@ class RegisterScreen extends ConsumerWidget {
                   ),
                   SizedBox(height: 6.h),
                   TextFormField(
+                    style: TextStyle(
+                      color: AllColor.black,
+                      fontFamily: "OpenText",
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
                     controller: _confirmPassController,
                     validator: (v) {
                       if (v == null || v.isEmpty) {

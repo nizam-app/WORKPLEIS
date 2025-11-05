@@ -102,7 +102,7 @@ class ViewProposalScreen extends ConsumerWidget {
                   "${filtered.length} ${tabIndex == 0 ? 'pending' : tabIndex == 1 ? 'approved' : 'rejected'}",
                   style: TextStyle(
                     color: AllColor.black,
-                    fontSize: 12.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w200,
                     fontFamily: "headFont"
                   ),
@@ -206,7 +206,7 @@ class SegmentControl extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-          fontSize: 12.sp,
+          fontSize: 14.sp,
           fontWeight: FontWeight.w200,
           //color: active ? AllColor.white : AllColor.black,
             color:AllColor.black,
@@ -265,13 +265,13 @@ class ProposalCard extends StatelessWidget {
               ),
               Text("\$${_formatPrice(data.price)}",
                   style: TextStyle(
-                      fontSize: 14.sp, fontWeight: FontWeight.w500, fontFamily: "OpenText", color: AllColor.black)),
+                      fontSize: 14.sp, fontWeight: FontWeight.w600, fontFamily: "OpenText", color: AllColor.black)),
             ],
           ),
           8.verticalSpace,
           Text(data.details,
               style: TextStyle(
-                  color: AllColor.brand2_light, fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
+                  color: AllColor.brand2_light, fontSize: 14.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
           12.verticalSpace,
           // Row(
           //   children: [
@@ -320,27 +320,27 @@ class ProposalCard extends StatelessWidget {
     children: [
       Text(label,
           style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
               fontFamily: "OpenText",
               color: AllColor.brand2_light)),
     ],
   );
 
   Widget _actionButton(String label, bool selectedColor,  VoidCallback onPressed) => Material(
-    color: selectedColor? AllColor.primary : AllColor.grey,
-    borderRadius: BorderRadius.circular(30.r),
+    color: selectedColor? AllColor.lime_0: AllColor.grey300,
+    borderRadius: BorderRadius.circular(10.r),
     child: InkWell(
       onTap: onPressed,
       borderRadius: BorderRadius.circular(10.r),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
         child: Text(
           label,
           style: TextStyle(
-            color: selectedColor? AllColor.black: AllColor.white,
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w400,
+            color: selectedColor? AllColor.black: AllColor.black,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w800,
             fontFamily: "OpenText"
           ),
         ),

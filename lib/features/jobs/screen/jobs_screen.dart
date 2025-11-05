@@ -25,10 +25,8 @@ class JobsScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             const JobStatusList(),
             SizedBox(height: 16.h),
-
             Expanded(
               child: ListView.builder(
                 itemCount: 6,
@@ -37,9 +35,10 @@ class JobsScreen extends ConsumerWidget {
                     title: "Deliver something for me",
                     status: selectedStatus,
                     locations: "New York, NY",
-                    offer: "Offer 5",
+                    offer: " Offer:",
                     time: "3h ago",
                     price: "\$3,500",
+                    number: 12,
                   );
                 },
               ),
@@ -100,10 +99,10 @@ class JobStatusList extends ConsumerWidget {
                 child: Text(
                   label,
                   style: TextStyle(
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                       //color: isSelected? AllColor.white: AllColor.black ,
                       color: AllColor.black,
-                      fontSize: 12.sp,
+                      fontSize: 14.sp,
                       fontFamily: "headFont"),
                 ),
               ),
@@ -125,6 +124,7 @@ class JobCard extends StatelessWidget {
     required this.offer,
     required this.time,
     required this.price,
+    required this.number,
   });
 
   final String title;
@@ -133,6 +133,7 @@ class JobCard extends StatelessWidget {
   final String offer;
   final String time;
   final String price;
+  final int number;
 
   @override
   Widget build(BuildContext context) {
@@ -144,12 +145,12 @@ class JobCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
+            color: AllColor.grey,
+            blurRadius: 0.5,
+            offset: const Offset(0, 0.5),
           ),
         ],
-        border: Border.all(color: Colors.black.withOpacity(0.1)),
+        border: Border.all(color: AllColor.grey, width: 0.5.w),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,10 +162,10 @@ class JobCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w800,
                     fontFamily: "headFont",
-                    color: Colors.black
+                    color: AllColor.black
                   ),
                 ),
               ),
@@ -204,12 +205,14 @@ class JobCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             _DetailRow(icon: Icons.real_estate_agent, text: offer, ),
+                            SizedBox(width: 10.w,),
+                            _OfferCount(number:number),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            _StatusChip(text: status),
+                           // _StatusChip(text: status),
                             SizedBox(width: 15.w,),
                             JobStatusAction(status: status),
 
@@ -252,6 +255,28 @@ class _StatusChip extends StatelessWidget {
   }
 }
 
+
+
+class _OfferCount extends StatelessWidget {
+  const _OfferCount({required this.number});
+  final int number;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      number.toString(),
+        style: TextStyle(
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w400,
+          color:AllColor.brand2_light,
+          fontFamily: "OpenText",
+        ),
+
+    );
+  }
+}
+
+
 class _DetailRow extends StatelessWidget {
   const _DetailRow({
     required this.icon,
@@ -267,17 +292,16 @@ class _DetailRow extends StatelessWidget {
     final content = Text(
       text,
       style: TextStyle(
-        fontSize: 12.sp,
+        fontSize: 14.sp,
         color: AllColor.brand2_light,
         fontFamily: "OpenText",
-        fontWeight: FontWeight.w400
+        fontWeight: FontWeight.w500
       ),
       overflow: TextOverflow.ellipsis,
     );
     return Row(
       children: [
-
-        Icon(icon, size: 14.sp, color: AllColor.brand2_light),
+        Icon(icon, size: 16.sp, color: AllColor.brand2_light),
         SizedBox(width: 6.w),
         if (expandable) Expanded(child: content) else content,
       ],
@@ -297,8 +321,8 @@ class JobPriceText extends StatelessWidget {
     return Text(
       price,
       style: TextStyle(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w700,
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w800,
         color: AllColor.black,
         fontFamily: "OpenText",
       ),
@@ -368,17 +392,17 @@ class _PillButton extends StatelessWidget {
     return GestureDetector(
     onTap: onTap,
     child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       decoration: BoxDecoration(
-        color: AllColor.grey,
-        borderRadius: BorderRadius.circular(30.r),
+        color: AllColor.grey300,
+        borderRadius: BorderRadius.circular(10.r),
       ),
       child: Text(
         label,
         style: TextStyle(
-          fontSize: 12.sp,
-          fontWeight: FontWeight.w500,
-          color: AllColor.white,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w700,
+          color: AllColor.black,
           fontFamily: "OpenText",
         ),
       ),

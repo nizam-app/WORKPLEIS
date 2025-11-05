@@ -57,8 +57,8 @@ class NotificationTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: AllColor.black,
-            blurRadius: 5.r,
+            color: AllColor.grey,
+            blurRadius: 3.r,
             offset: const Offset(0, 2),
           )
         ],
@@ -81,7 +81,7 @@ class NotificationTile extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w600,
                     color: AllColor.black,
                     fontFamily: "headFont",
                     fontSize: 16.sp,
@@ -93,7 +93,7 @@ class NotificationTile extends StatelessWidget {
                   'Learn more about managing account info and activity',
                   style: TextStyle(
                     color: AllColor.brand2_light,
-                    fontSize: 12.sp,
+                    fontSize: 14.sp,
                     fontFamily: "OpenText",
                     fontWeight: FontWeight.w400
                   ),

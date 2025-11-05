@@ -62,7 +62,7 @@ class ProjectTitleSection extends StatelessWidget {
           style:  TextStyle(
             color: AllColor.brand2_light,
             fontFamily: "OpenText",
-            fontSize: 14.sp, fontWeight: FontWeight.w400,
+            fontSize: 16.sp, fontWeight: FontWeight.w600,
           ),
           decoration: InputDecoration(
             hintText: "Enter project title",

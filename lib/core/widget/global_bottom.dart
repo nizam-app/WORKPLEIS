@@ -29,7 +29,7 @@ class GlobalButton extends StatelessWidget {
           backgroundColor: color ?? AllColor.bgcolor, // default black
           padding: padding ?? EdgeInsets.symmetric(vertical: 12.h),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.r),
+            borderRadius: BorderRadius.circular(10.r),
           ),
         ),
         onPressed: onPressed,

@@ -103,8 +103,8 @@ class JobStatusList extends ConsumerWidget {
                 child: Text(
                   label,
                   style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w200,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
                     //color: isSelected ? AllColor.white : AllColor.black,
                       color: AllColor.black,
                     fontFamily: "headFont"
@@ -166,8 +166,8 @@ class JobCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
                     fontFamily: "headFont",
                     color: AllColor.black
                   ),
@@ -178,7 +178,7 @@ class JobCard extends StatelessWidget {
                 budget,
                 style: TextStyle(
                     fontSize: 14.sp,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w400,
                     fontFamily: "OpenText",
                     color: AllColor.black
                 ),
@@ -214,7 +214,7 @@ class JobCard extends StatelessWidget {
 
               _BottomBar(status: status, ),
               SizedBox(width: 10.w,),
-              _StatusChip(text: status),
+            //  _StatusChip(text: status),
             ],
           ),
         ],
@@ -241,7 +241,7 @@ class _StatusChip extends StatelessWidget {
         text,
         style: TextStyle(
             color: AllColor.white,
-            fontSize: 12.sp,
+            fontSize: 14.sp,
             fontWeight: FontWeight.w500,
             fontFamily: "OpenText"
         ),
@@ -523,7 +523,7 @@ class _PillButton extends StatelessWidget {
   factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-        AllColor.primary, // শেডেড পার্পল (mock vibe)
+        AllColor.grey300, // শেডেড পার্পল (mock vibe)
         AllColor.black,
 
         onTap: onTap,
@@ -541,17 +541,17 @@ class _PillButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: bg,
-      borderRadius: BorderRadius.circular(30.r),
+      borderRadius: BorderRadius.circular(10.r),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(30.r),
+        borderRadius: BorderRadius.circular(10.r),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w500,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w700,
               color: AllColor.black,
               fontFamily: "OpenText",
             ),

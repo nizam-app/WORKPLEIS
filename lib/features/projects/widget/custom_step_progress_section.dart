@@ -24,7 +24,7 @@ class CustomStepProgressSection extends StatelessWidget {
           Text(
             "Project tracking",
             style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 18.sp,
               fontWeight: FontWeight.w800,
               color: AllColor.black,
               fontFamily: "headFont",
@@ -69,12 +69,12 @@ class CustomStepProgressSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(_labels.length, (idx) {
               return SizedBox(
-                width: 60.w,
+                width: 65.w,
                 child: Text(
                   _labels[idx],
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 12.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     color: AllColor.black,
                     fontFamily: "OpenText",
@@ -125,7 +125,7 @@ class _StepCircle extends StatelessWidget {
               : Text(
             "${index + 1}",
             style: TextStyle(
-              fontSize: 12.sp,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w400,
               color: filled ? AllColor.black : AllColor.black,
             ),

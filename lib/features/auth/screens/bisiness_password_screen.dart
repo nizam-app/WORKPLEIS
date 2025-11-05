@@ -26,13 +26,13 @@ class BusinessPasswordScreen extends StatelessWidget {
               Spacer(),
               Text(
                 "Set Up Password",
-                style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black),
+                style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 24.sp,color: AllColor.black),
               ),
               SizedBox(height: 8.h),
               Text(
                 "Complete these steps to finish setting up \n your account.",
                 textAlign: TextAlign.center,
-                style:TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
+                style:TextStyle(fontSize: 16.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
               ),
               SizedBox(height: 30.h),
 
@@ -40,6 +40,12 @@ class BusinessPasswordScreen extends StatelessWidget {
              CustomLabelText(title: "Password"),
               SizedBox(height: 6.h),
               TextFormField(
+                style: TextStyle(
+                  color: AllColor.black,
+                  fontFamily: "OpenText",
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w400,
+                ),
                 controller: _passwordController,
                 validator: (v) =>
                 v == null || v.isEmpty ? "Enter your Password" : null,
@@ -50,6 +56,12 @@ class BusinessPasswordScreen extends StatelessWidget {
               SizedBox(height: 25.h),
               CustomLabelText(title: "Confirm Password"),
               TextFormField(
+                style: TextStyle(
+                  color: AllColor.black,
+                  fontFamily: "OpenText",
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w400,
+                ),
                 controller: _confirmPasswordController,
                 validator: (v) =>
                 v == null || v.isEmpty ? "Enter your Confirm Password" : null,
