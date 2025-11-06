@@ -97,7 +97,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
               children: [
                 Text("Help & Support",
                     style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.w800,
                         color: AllColor.black,
                         fontFamily: "headFont"
@@ -105,7 +105,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                 SizedBox(height: 4.h),
                 Text("Find answers, get help, and learn how to use Workpleis.",
                     style:
-                    TextStyle(fontSize: 12.sp, color: AllColor.black87, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
+                    TextStyle(fontSize: 14.sp, color: AllColor.black87, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
               ],
             ),
           ),
@@ -130,8 +130,8 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w400,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
             color: isSelected ? AllColor.black : AllColor.black, fontFamily: "OpenText"
           ),
         ),
@@ -234,7 +234,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                                   Text(
                                     f["title"] as String,
                                     style: TextStyle(
-                                      fontSize: 16.sp,
+                                      fontSize: 18.sp,
                                       fontWeight: FontWeight.w800,
                                       color: AllColor.black,
                                       fontFamily: "headFont",
@@ -263,7 +263,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                               child: Text(
                                 f["description"] ?? "",
                                 style: TextStyle(
-                                  fontSize: 14.sp,
+                                  fontSize: 16.sp,
                                   color: AllColor.black,
                                   fontFamily: "OpenText",
                                   fontWeight: FontWeight.w400,
@@ -306,7 +306,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
         // Category
         Text("Category",
             style: TextStyle(
-                fontSize: 16.sp,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w800,
                 color: AllColor.black,
               fontFamily: "headFont"
@@ -326,7 +326,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
               children: [
                 Text(
                   selectedCategory,
-                  style: TextStyle(fontSize: 14.sp, color: AllColor.black,
+                  style: TextStyle(fontSize: 16.sp, color: AllColor.black,
                       fontWeight: FontWeight.w400, fontFamily: "OpenText"),
                 ),
                 Icon(Icons.keyboard_arrow_down_rounded,
@@ -340,7 +340,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
         // Subject
         Text("Subject",
             style: TextStyle(
-                fontSize: 16.sp,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w800,
                 color: AllColor.black,
             fontFamily: "headFont"
@@ -348,7 +348,6 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
         ),
         SizedBox(height: 6.h),
         TextField(
-
           style: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w400,
@@ -369,7 +368,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
         // Message
         Text("Message",
             style: TextStyle(
-                fontSize: 16.sp,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w800,
                 color: AllColor.black,
                 fontFamily: "headFont"
@@ -404,7 +403,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
               "Send Message",
               style: TextStyle(
                   color: AllColor.black,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                   fontSize: 14.sp,
               fontFamily: "OpenText"
               ),
@@ -556,7 +555,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                               Text(
                                 g["title"] as String,
                                 style: TextStyle(
-                                  fontSize: 16.sp,
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.w800,
                                   color: AllColor.black,
                                   fontFamily: "headFont",
@@ -594,7 +593,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
                       child: Text(
                         "This section contains important guidance for ${g["title"]}. Tap here to learn more or open detailed instructions.",
                         style: TextStyle(
-                          fontSize: 14.sp,
+                          fontSize: 16.sp,
                           color: AllColor.black,
                           fontFamily: "OpenText",
                           fontWeight: FontWeight.w400,
@@ -622,7 +621,7 @@ class _SecurityGuideScreenState extends State<SecurityGuideScreen> {
         isDense: true,
         prefixIcon: Icon(Icons.search, color: AllColor.grey),
         hintText: "Search frequently asked questions..",
-        hintStyle: TextStyle(fontSize: 12.sp, color: AllColor.grey),
+        hintStyle: TextStyle(fontSize: 14.sp, color: AllColor.grey),
         border: InputBorder.none, // No underline or box
         contentPadding: EdgeInsets.symmetric(vertical: 10.h),
       ),

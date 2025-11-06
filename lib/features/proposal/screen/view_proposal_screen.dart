@@ -328,7 +328,7 @@ class ProposalCard extends StatelessWidget {
   );
 
   Widget _actionButton(String label, bool selectedColor,  VoidCallback onPressed) => Material(
-    color: selectedColor? AllColor.lime_0: AllColor.grey300,
+    color: selectedColor? AllColor.parpale: AllColor.grey300,
     borderRadius: BorderRadius.circular(10.r),
     child: InkWell(
       onTap: onPressed,
@@ -459,7 +459,7 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                       foregroundColor: AllColor.black,
                       side: BorderSide(color: AllColor.black.withOpacity(.6)),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(999.r),
+                        borderRadius: BorderRadius.circular(10.r),
                       ),
                       padding: EdgeInsets.symmetric(
                           horizontal: 16.w, vertical: 10.h),
@@ -486,7 +486,7 @@ class _CustomRejectBottomSheetState extends State<CustomRejectBottomSheet> {
                       backgroundColor: AllColor.bgcolor,
                       foregroundColor: AllColor.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(999.r),
+                        borderRadius: BorderRadius.circular(10.r),
                       ),
                       padding: EdgeInsets.symmetric(
                           horizontal: 16.w, vertical: 10.h),

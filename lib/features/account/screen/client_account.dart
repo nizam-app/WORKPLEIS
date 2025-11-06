@@ -156,7 +156,7 @@ class _AccountOverviewClientScreenState
                   children: [
                     Text(profileData["name"],
                         style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.w800, fontFamily: "headFont", color: AllColor.brand2_light)),
+                            fontSize: 18.sp, fontWeight: FontWeight.w800, fontFamily: "headFont", color: AllColor.brand2_light)),
                     SizedBox(width: 6.w),
                     
                   ],
@@ -174,7 +174,7 @@ class _AccountOverviewClientScreenState
                    Text("Verified",
                       style: TextStyle(
                           color: AllColor.brand2_light,
-                          fontSize: 12.sp,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400, fontFamily: "OpenText",)),
 
               SizedBox(height: 10.h,),
@@ -190,10 +190,10 @@ class _AccountOverviewClientScreenState
                     color: AllColor.white,
                     borderRadius: BorderRadius.circular(10.r),
 
-                   // border: Border.all(color: AllColor.grey, width: 1 ),
+                  border: Border.all(color: AllColor.grey300, width: 1.w ),
                   ),
                   child:  Text("Edit",
-                      style: TextStyle(color: AllColor.brand2_light, fontSize: 12.sp,  fontWeight: FontWeight.w400, fontFamily: "OpenText")),
+                      style: TextStyle(color: AllColor.black, fontSize: 14.sp,  fontWeight: FontWeight.w400, fontFamily: "OpenText")),
                 ),
               )
             ],
@@ -212,7 +212,7 @@ class _AccountOverviewClientScreenState
         Text("Account Overview",
             style: TextStyle(
                 fontWeight: FontWeight.w800,
-                fontSize: 16.sp,
+                fontSize: 18.sp,
                 color: Colors.black,
               fontFamily: "headFont",
 
@@ -473,7 +473,7 @@ class CustomSectionCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w800,
                     color: Colors.black,
                     fontFamily: "headFont",
@@ -486,7 +486,7 @@ class CustomSectionCard extends StatelessWidget {
           Text(
             description,
             style: TextStyle(
-              fontSize: 12.sp,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w400,
               color: AllColor.black,
               fontFamily: "OpenText",

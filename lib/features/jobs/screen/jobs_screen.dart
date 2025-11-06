@@ -53,6 +53,14 @@ class JobsScreen extends ConsumerWidget {
 /// 🔹 Riverpod provider to track selected status
 final jobStatusProvider = StateProvider<String>((ref) => "Open");
 
+final Map<String, Color> statusColors = {
+  "Open": const Color(0xFFB3E5FC),
+  "Assigned": const Color(0xFFFFF59D),
+  "In Progress": const Color(0xFF90CAF9),
+  "In Review": const Color(0xFFFFCC80),
+  "Delivered": const Color(0xFFB39DDB),
+};
+
 /// 🔹 Horizontal status selector
 class JobStatusList extends ConsumerWidget {
   const JobStatusList({super.key});
@@ -88,7 +96,7 @@ class JobStatusList extends ConsumerWidget {
               duration: const Duration(milliseconds: 200),
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
               decoration: BoxDecoration(
-                color: isSelected ? AllColor.bgcolor  : Colors.transparent,
+                color: isSelected ? statusColors[label]??  AllColor.bgcolor  : Colors.transparent,
                 borderRadius: BorderRadius.circular(30.r),
                 border: Border.all(
                   color: const Color(0xff154E7B).withOpacity(0.2),

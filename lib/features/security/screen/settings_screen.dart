@@ -25,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
           children: [
             Text(" Security Settings",
                 style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w800,
                     color: AllColor.black,
                   fontFamily: "headFont",
@@ -37,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
             SizedBox(height: 10.h),
             Text("Notifications Settings ",
                 style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w800,
                     color: AllColor.black,
                   fontFamily: "headFont"
@@ -99,8 +99,8 @@ class SecuritySettingsList extends StatelessWidget {
                 children: [
                   Text(s["title"] as String,
                       style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
                           color: AllColor.black,
                         fontFamily: "OpenText"
 
@@ -108,7 +108,7 @@ class SecuritySettingsList extends StatelessWidget {
                   SizedBox(height: 4.h),
                   Text(s["subtitle"] as String,
                       style: TextStyle(
-                          fontSize: 12.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
+                          fontSize: 14.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400)),
                 ],
               ),
             ),
@@ -199,7 +199,7 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
                 Text(
                   "Change Password",
                   style:TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w800,
                     color: AllColor.black,
                     fontFamily: "headFont"
@@ -214,13 +214,13 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
             SizedBox(height: 6.h),
             Text(
               "Enter your current password and choose a new secure password",
-              style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400),
+              style: TextStyle(fontSize: 14.sp, color: AllColor.black, fontFamily: "OpenText", fontWeight: FontWeight.w400),
             ),
             SizedBox(height: 10.h),
             Text(
               "Current Password",
               style: TextStyle(
-                fontSize: 16.sp,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w800,
                 color: AllColor.black,
                 fontFamily: "headFont"
@@ -229,6 +229,7 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
             SizedBox(height: 10.h),
             // Current Password
             _passwordField(
+
               controller: currentController,
               hint: "Enter current password",
               visible: currentVisible,
@@ -238,7 +239,7 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
             Text(
               "New Password",
               style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w800,
                   color: AllColor.black,
                   fontFamily: "headFont"
@@ -257,7 +258,7 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
             Text(
               "Confirm New password",
               style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w800,
                   color: AllColor.black,
                   fontFamily: "headFont"
@@ -324,6 +325,12 @@ class _ChangePasswordFormState extends State<_ChangePasswordForm> {
     required VoidCallback onToggle,
   }) {
     return TextField(
+      style: TextStyle(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w400,
+          color: AllColor.black,
+          fontFamily: "OpenText"
+      ),
       controller: controller,
       obscureText: !visible,
       decoration: InputDecoration(

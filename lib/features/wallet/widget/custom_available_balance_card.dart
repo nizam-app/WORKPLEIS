@@ -27,7 +27,7 @@ class CustomAavailableBalanceCard extends StatelessWidget {
             style: TextStyle(
                 color: AllColor.black,
                 fontWeight: FontWeight.w800,
-                fontSize: 16.sp,
+                fontSize: 18.sp,
               fontFamily: "headFont"
             ),
           ),
