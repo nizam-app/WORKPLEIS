@@ -51,8 +51,18 @@ class ProjectScreen extends ConsumerWidget {
     );
   }
 }
-//
-// /// 🔹 Riverpod provider to track selected status
+
+// Status color mapping
+final Map<String, Color> statusColors = {
+  "Submitted": Colors.grey.shade300,
+  "Proposal Sent": Colors.yellowAccent,
+  "In Progress": Colors.blueAccent,
+  "Completed": Colors.greenAccent,
+  "In Review": Colors.orangeAccent,
+  "Delivered": Colors.purpleAccent,
+};
+
+/// 🔹 Riverpod provider to track selected status
 final jobStatusProvider = StateProvider<String>((ref) => "Submitted");
 
 /// 🔹 Horizontal status selector
@@ -92,7 +102,7 @@ class JobStatusList extends ConsumerWidget {
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
              // padding: EdgeInsets.only(left: 15.h, right: 15.h, top: 8.h, bottom: 8.h ),
               decoration: BoxDecoration(
-                color: isSelected ? AllColor.bgcolor : Colors.transparent,
+                color: isSelected ? statusColors[label] ?? AllColor.bgcolor : Colors.transparent,
                 borderRadius: BorderRadius.circular(30.r),
                 border: Border.all(
                   color: const Color(0xff154E7B).withOpacity(0.2),
@@ -118,7 +128,6 @@ class JobStatusList extends ConsumerWidget {
     );
   }
 }
-
 
 // 🔹 Single job card widget
 class JobCard extends StatelessWidget {
@@ -523,8 +532,8 @@ class _PillButton extends StatelessWidget {
   factory _PillButton.purple(String label, {required VoidCallback onTap}) =>
       _PillButton._(
         label,
-        AllColor.grey300, // শেডেড পার্পল (mock vibe)
-        AllColor.black,
+      AllColor.grey300 , // শেডেড পার্পল (mock vibe)
+     AllColor.black,
 
         onTap: onTap,
       );
@@ -904,10 +913,10 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
             Text(
               "The team has completed this order.",
               style:TextStyle(
-                fontSize: 14.sp,
-                color: AllColor.black87,
-                fontFamily: "OpenText",
-                fontWeight: FontWeight.w400
+                fontSize: 16.sp,
+                color: AllColor.black,
+                fontFamily: "headFont",
+                fontWeight: FontWeight.w800
               ),
             ),
 
@@ -917,9 +926,9 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
             Text(
               "Message",
               style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                fontFamily: "OpenText",
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                fontFamily: "headFont",
                 color: AllColor.black87,
               ),
             ),
@@ -937,7 +946,7 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
               child: Text(
                 "All plumbing issues have been resolved. Replaced the faulty pipes and installed new faucets as requested. System tested and working perfectly.",
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 14.sp,
                   height: 1.4,
                   fontFamily: "OpenText",
                   fontWeight: FontWeight.w400,
@@ -952,10 +961,10 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
             Text(
               "Attachments",
               style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                fontFamily: "OpenText",
-                color: AllColor.black87,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                fontFamily: "headFont",
+                color: AllColor.black,
 
               ),
             ),
@@ -985,7 +994,7 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
                         backgroundColor: AllColor.bgcolor,
                         foregroundColor: AllColor.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.r),
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 16.w,
@@ -996,10 +1005,10 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
                       child: Text(
                         "Approve",
                         style: TextStyle(
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w600,
                           color: AllColor.borderColor,
                           fontFamily: "OpenText",
-                          fontSize: 14.sp
+                          fontSize: 16.sp
                         ),
                       ),
                     ),
@@ -1033,7 +1042,7 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
                           color: AllColor.black.withOpacity(0.4),
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.r),
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 16.w,
@@ -1043,7 +1052,7 @@ class CustomProjectCompletionBottomSheet extends StatelessWidget {
                       child: Text(
                         "Needs Modification",
                         style: TextStyle(
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w600,
                           color: AllColor.borderColor,
                           fontFamily: "OpenText",
                           fontSize: 14.sp
@@ -1184,18 +1193,18 @@ class _ReviewBottomSheetState extends State<ReviewBottomSheet> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AllColor.bgcolor,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.r),
+                    borderRadius: BorderRadius.circular(10.r),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 12.h),
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
                   elevation: 0,
                 ),
                 child: Text(
                   "Submit Review",
                   style: TextStyle(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                     color: AllColor.black,
                     fontFamily: "OpenText",
-                    fontSize: 12.sp
+                    fontSize: 6.sp
                   ),
                 ),
               ),

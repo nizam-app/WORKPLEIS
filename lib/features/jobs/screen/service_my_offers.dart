@@ -139,7 +139,7 @@ class _TabBar extends StatelessWidget {
       padding: EdgeInsets.all(2.r),
       decoration: BoxDecoration(
         color: AllColor.white,
-        borderRadius: BorderRadius.circular(30.r),
+        borderRadius: BorderRadius.circular(10.r),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,8 +160,8 @@ class _TabBar extends StatelessWidget {
               child: Text(
                 items[i],
                 style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
                   color:selected? AllColor.black: AllColor.black,
                   fontFamily: "OpenText"
 
@@ -202,14 +202,14 @@ class _JobCard extends StatelessWidget {
           10.verticalSpace,
           Text(
             data.desc,
-            style: TextStyle(color: AllColor.black87, fontSize: 12.sp, height: 1.3),
+            style: TextStyle(color: AllColor.black87, fontSize: 14.sp, height: 1.3),
           ),
           10.verticalSpace,
           Row(
             children: [
               Text(
                 "Est: ${data.eta}",
-                style: TextStyle(color: AllColor.black.withOpacity(.8), fontSize: 12.sp, fontWeight: FontWeight.w500),
+                style: TextStyle(color: AllColor.black.withOpacity(.8), fontSize: 14.sp, fontWeight: FontWeight.w500),
               ),
               const Spacer(),
               if (status == "pending") _pill("View Job")
@@ -246,13 +246,13 @@ class _JobCard extends StatelessWidget {
                 children: [
                   Icon(Icons.star, size: 14.sp, color: AllColor.brand2_light),
                   4.horizontalSpace,
-                  Text("4.9", style: TextStyle(fontSize: 12.sp, color: AllColor.black, fontWeight: FontWeight.w600)),
+                  Text("4.9", style: TextStyle(fontSize: 14.sp, color: AllColor.black, fontWeight: FontWeight.w600)),
                 ],
               ),
             ],
           ),
         ),
-        Text("\$${data.price}", style: TextStyle(color: AllColor.black, fontWeight: FontWeight.w700, fontSize: 14.sp)),
+        Text("\$${data.price}", style: TextStyle(color: AllColor.black, fontWeight: FontWeight.w700, fontSize: 16.sp)),
       ],
     );
   }
@@ -261,9 +261,9 @@ class _JobCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
-        color: AllColor.primary,
-        borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: AllColor.primary),
+        color: AllColor.grey300,
+        borderRadius: BorderRadius.circular(10.r),
+        border: Border.all(color: AllColor.grey300),
         boxShadow: [
           BoxShadow(color: Colors.black.withOpacity(0.02), offset:  Offset(0, 1)),
         ],
@@ -272,7 +272,7 @@ class _JobCard extends StatelessWidget {
         onTap:onTop,
         child: Text(
           label ??"",
-          style: TextStyle(color: AllColor.black, fontWeight: FontWeight.w400, fontSize: 12..sp, fontFamily: "OpenText"),
+          style: TextStyle(color: AllColor.black, fontWeight: FontWeight.w600, fontSize: 16.sp, fontFamily: "OpenText"),
         ),
       ),
     );
