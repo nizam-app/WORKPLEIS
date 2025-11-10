@@ -27,7 +27,9 @@ class GlobalGetStartedButton extends StatelessWidget {
         height: height.h, // responsive height
         decoration: BoxDecoration(
           color: color, // neon green background
-          borderRadius: BorderRadius.circular(borderRadius.r), // rounded corners
+          borderRadius: BorderRadius.circular(borderRadius.r),
+          border: Border.all(width: 1.w, color:AllColor.grey),
+          // rounded corners
         ),
         child: Center(
           child: Text(

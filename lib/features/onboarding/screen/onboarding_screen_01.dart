@@ -5,6 +5,7 @@ import 'package:workpleis/core/constants/color_control/all_color.dart';
 import 'package:workpleis/core/widget/global_get_started_button.dart';
 import 'package:workpleis/core/widget/global_logo.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
+import 'package:workpleis/features/onboarding/screen/onboarding_screen_05.dart';
 
 class OnboardingScreen01 extends StatelessWidget {
   const OnboardingScreen01({super.key});
@@ -35,7 +36,8 @@ class OnboardingScreen01 extends StatelessWidget {
                 Spacer(),
                 GlobalGetStartedButton(
                   onTap: () {
-                    context.push(OnboardingScreen03.routeName);
+                  //  context.push(OnboardingScreen03.routeName);
+                    context.push(OnboardingScreen05.routeName);
                   },
                 ),
                 SizedBox(height: 75.h),

@@ -48,6 +48,7 @@ import '../features/my_task/screen/my_task_screen.dart';
 import '../features/nav_bar/screen/bottom_nav_bar.dart';
 import '../features/notification/screen/notificaition_screen.dart';
 import '../features/notification/screen/notification_setting_screen.dart';
+import '../features/onboarding/screen/onboarding_screen_05.dart';
 import '../features/projects/screen/project_screen.dart';
 import '../features/projects/screen/recieved_request.dart';
 import '../features/projects/screen/request_tracker.dart';
@@ -125,15 +126,11 @@ class AppRouter {
         name: IndentityVerificationScreen.routeName,
         builder: (context, state) => const IndentityVerificationScreen(),
       ),
-  // GoRoute(
-      //   path: GetStartedScreen.routeName, // 👈 no :param in path
-      //   name: GetStartedScreen.routeName,
-      //   builder: (context, state) {
-      //     // 👇 safely read optional value
-      //     final title = state.extra is String ? state.extra as String : null;
-      //     return GetStartedScreen(title: title);
-      //   },
-      // ),
+  GoRoute(
+        path: OnboardingScreen05.routeName, // 👈 no :param in path
+        name: OnboardingScreen05.routeName,
+        builder: (context, state) => OnboardingScreen05(),
+      ),
 
       GoRoute(
         path: AddressAndPassword.routeName,
