@@ -9,7 +9,10 @@ class CustomOnboardingUpperLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:  EdgeInsets.symmetric(horizontal: 20.w),
-      child: GlobalLogo(width: 120,height: 26,),
+      child: GlobalLogo(
+     //   width: 120,
+
+        height: 26,),
     );
   }
 }

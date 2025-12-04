@@ -7,12 +7,27 @@ import 'package:workpleis/core/widget/global_logo.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_05.dart';
 
-class OnboardingScreen01 extends StatelessWidget {
+class OnboardingScreen01 extends StatefulWidget {
   const OnboardingScreen01({super.key});
 
   static const String routeName = '/onboarding_screen_01';
 
   @override
+  State<OnboardingScreen01> createState() => _OnboardingScreen01State();
+}
+
+class _OnboardingScreen01State extends State<OnboardingScreen01> {
+  @override
+  void initState() {
+    super.initState();
+
+    // 3 seconds por RoleSelectionScreen e navigate
+    Future.delayed(const Duration(seconds: 3), () {
+      if (!mounted) return;
+      context.push(OnboardingScreen05.routeName);
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AllColor.primary,
@@ -24,23 +39,25 @@ class OnboardingScreen01 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Spacer(),
-                const GlobalLogo(image: "assets/images/workpleis1.png"),
-                SizedBox(height: 5.h),
-                Text(
-                  "A SUSTAINABLE MARKETPLACE FOR BUSINESSES",
-                  style: TextStyle(
-                    fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400,color: AllColor.black
-                  ),
-                ),
-                Spacer(),
-                GlobalGetStartedButton(
-                  onTap: () {
-                  //  context.push(OnboardingScreen03.routeName);
-                    context.push(OnboardingScreen05.routeName);
-                  },
-                ),
-                SizedBox(height: 75.h),
+                // Spacer(),
+                const GlobalLogo(image: "assets/images/goloballogo.png"),
+                // SizedBox(height: 15.h,),
+                // const CircularProgressIndicator(color: Colors.black87,),
+
+                // Text(
+                //   "A SUSTAINABLE MARKETPLACE FOR BUSINESSES",
+                //   style: TextStyle(
+                //     fontSize: 12.sp, fontFamily: "OpenText", fontWeight: FontWeight.w400,color: AllColor.black
+                //   ),
+                // ),
+                // Spacer(),
+                // GlobalGetStartedButton(
+                //   onTap: () {
+                //   //  context.push(OnboardingScreen03.routeName);
+                //     context.push(OnboardingScreen05.routeName);
+                //   },
+                // ),
+
               ],
             ),
           ),

@@ -32,7 +32,11 @@ import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart'
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_002.dart';
 
 import 'package:workpleis/features/proposal/screen/view_proposal_screen.dart';
+import 'package:workpleis/features/role_screen/screen/genNotifications.dart';
+import 'package:workpleis/features/role_screen/screen/seclect_role_screen.dart';
+import 'package:workpleis/features/role_screen/screen/seclect_type_screen.dart';
 import 'package:workpleis/features/security/screen/settings_screen.dart';
+import 'package:workpleis/features/spalashScreen/screen/splashScreen.dart';
 import 'package:workpleis/features/verification/screen/verification_screen.dart';
 import 'package:workpleis/features/wallet/screen/service_wallet_screen.dart';
 import 'package:workpleis/features/wallet/screen/wallet_screen.dart';
@@ -68,7 +72,7 @@ import '../features/tracking/client_project_tracking/special_request_screen3.dar
 import 'error_screen.dart';
 
 class AppRouter {
-  static final String initial = OnboardingScreen01.routeName;
+  static final String initial = SplashScreen.routeName;
 
   static final GoRouter appRouter = GoRouter(
     initialLocation: initial,
@@ -131,6 +135,31 @@ class AppRouter {
         name: OnboardingScreen05.routeName,
         builder: (context, state) => OnboardingScreen05(),
       ),
+
+      GoRoute(
+        path: SplashScreen.routeName, // 👈 no :param in path
+        name: SplashScreen.routeName,
+        builder: (context, state) => SplashScreen(),
+      ),
+      GoRoute(
+        path: SeclectRoleScreen.routeName, // 👈 no :param in path
+        name: SeclectRoleScreen.routeName,
+        builder: (context, state) => SeclectRoleScreen(),
+      ),
+
+      GoRoute(
+        path: SeclectTypeScreen.routeName, // 👈 no :param in path
+        name: SeclectTypeScreen.routeName,
+        builder: (context, state) => SeclectTypeScreen(),
+      ),
+
+      GoRoute(
+        path: Gennotifications.routeName, // 👈 no :param in path
+        name: Gennotifications.routeName,
+        builder: (context, state) => Gennotifications(),
+      ),
+
+
 
       GoRoute(
         path: AddressAndPassword.routeName,

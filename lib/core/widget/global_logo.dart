@@ -3,8 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class GlobalLogo extends StatelessWidget {
-  const GlobalLogo({super.key,  this.width = 220, this.height = 45, this.image = "assets/images/workpleis.png"});
-  final double width ;
+  const GlobalLogo({super.key,
+    //this.width = 220,
+    this.height = 85,
+    this.image = "assets/images/goloballogo.png"});
+  //final double width ;
   final double height ;
   final String image;
 
@@ -13,7 +16,7 @@ class GlobalLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Image.asset(
           image,
-          width: width.w,
+       //   width: width.w,
           height: height.h,
           fit: BoxFit.cover,
         );

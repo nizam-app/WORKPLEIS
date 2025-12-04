@@ -7,7 +7,7 @@ void main(){
   runApp(
     ProviderScope(
       child: ScreenUtilInit(
-        designSize: const Size(393, 852),
+        designSize: const Size(430, 932),
         minTextAdapt: true,
         splitScreenMode: true,
         useInheritedMediaQuery: true,
