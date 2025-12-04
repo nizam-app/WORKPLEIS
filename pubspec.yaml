@@ -145,6 +145,17 @@ flutter:
     #        weight: 700
 
 
+    #Style Helvetica
+     - family: sf_pro
+       fonts:
+         - asset: assets/fonts/SF-Pro-Display-Bold.otf
+           weight: 700
+         - asset: assets/fonts/SF-Pro-Display-Semibold.otf
+           weight: 600
+         - asset: assets/fonts/SF-Pro-Display-Medium.otf
+           weight: 500
+         - asset: assets/fonts/SF-Pro-Display-Regular.otf
+           weight: 400
 
 
   #
