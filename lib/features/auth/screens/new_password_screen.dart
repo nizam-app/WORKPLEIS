@@ -1,269 +1,238 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workpleis/core/widget/global_aleart_box.dart';
-import 'package:workpleis/core/widget/global_bottom.dart';
+import 'package:workpleis/features/auth/screens/account_successful.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
-import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
+import 'package:workpleis/features/auth/logic/password_valitedor.dart'; // <- passwordValidator
 import '../../../core/constants/color_control/all_color.dart';
+import '../../../core/widget/global_get_started_button.dart';
 
-class NewPasswordScreen extends StatelessWidget {
+class NewPasswordScreen extends StatefulWidget {
   const NewPasswordScreen({super.key});
   static const routeName = "/newPasswordScreen";
 
   @override
+  State<NewPasswordScreen> createState() => _NewPasswordScreenState();
+}
+
+class _NewPasswordScreenState extends State<NewPasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+  TextEditingController();
+
+  bool _obscurePassword = true;
+  bool _obscureConfirm = true;
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController _passwordController = TextEditingController();
-    final TextEditingController _confirmPasswordController =
-    TextEditingController();
-
-    final ValueNotifier<bool> _passwordVisible = ValueNotifier(false);
-    final ValueNotifier<bool> _confirmPasswordVisible = ValueNotifier(false);
-
-    final _formKey = GlobalKey<FormState>();
-
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
           child: Form(
             key: _formKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 60.h),
-                  Text(
-                    "Reset your password",
-                    style: TextStyle(
-                      fontFamily: "headFont",
-                      fontWeight: FontWeight.w800,
-                      fontSize: 24.sp,
-                      color: AllColor.black,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 4.h),
+
+                /// Back button
+                InkWell(
+                  onTap: () => context.pop(),
+                  borderRadius: BorderRadius.circular(14.r),
+                  child: Container(
+                    height: 40.w,
+                    width: 40.w,
+                    decoration: BoxDecoration(
+                      color: AllColor.grey70,
+                      borderRadius: BorderRadius.circular(14.r),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 24.sp,
+                        color: const Color(0xff111111),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    "The password must be different than before",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontFamily: "OpenText",
-                      fontWeight: FontWeight.w400,
-                      color: AllColor.levelText,
-                    ),
+                ),
+
+                SizedBox(height: 24.h),
+
+                /// Title
+                Text(
+                  'Create new password',
+                  style: TextStyle(
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AllColor.black,
+                    fontFamily: 'sf_pro',
                   ),
-                  SizedBox(height: 30.h),
+                ),
+                SizedBox(height: 8.h),
 
-                  // 🔹 New Password Field
-                  const CustomLabelText(title: "New Password"),
-                  SizedBox(height: 6.h),
-                  ValueListenableBuilder<bool>(
-                    valueListenable: _passwordVisible,
-                    builder: (context, isVisible, _) {
-                      return TextFormField(
-                        controller: _passwordController,
-                        obscureText: !isVisible,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                          color: AllColor.black,
-                          fontFamily: "OpenText",
-                        ),
-                        validator: (v) =>
-                        v == null || v.isEmpty ? "Enter your new password" : null,
-                        decoration: InputDecoration(
-                          hintText: "Enter your password",
-                          hintStyle: TextStyle(
-                            color: AllColor.levelText,
-                            fontFamily: "OpenText",
-                            fontSize: 16.sp,
-                          ),
-                          errorStyle: TextStyle( // ✅ only validation text styled
-                            color: Colors.red,
-                            fontFamily: "OpenText",
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              isVisible ? Icons.visibility : Icons.visibility_off,
-                              color: AllColor.levelText,
-                            ),
-                            onPressed: () =>
-                            _passwordVisible.value = !_passwordVisible.value,
-                          ),
-                        ),
-                      );
-                    },
+                /// Subtitle
+                Text(
+                  "Your new password must be different from previously used passwords.",
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    height: 1.5,
+                    color: AllColor.black,
+                    fontFamily: 'sf_pro',
+                    fontWeight: FontWeight.w400,
                   ),
+                ),
 
-                  SizedBox(height: 25.h),
+                SizedBox(height: 24.h),
 
-                  // 🔹 Confirm Password Field
-                  const CustomLabelText(title: "Confirm Password"),
-                  SizedBox(height: 6.h),
-                  ValueListenableBuilder<bool>(
-                    valueListenable: _confirmPasswordVisible,
-                    builder: (context, isVisible, _) {
-                      return TextFormField(
-                        controller: _confirmPasswordController,
-                        obscureText: !isVisible,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                          color: AllColor.black,
-                          fontFamily: "OpenText",
-                        ),
-                        validator: (v) {
-                          if (v == null || v.isEmpty) {
-                            return "Enter your confirm password";
-                          } else if (v != _passwordController.text) {
-                            return "Passwords do not match";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Re-enter your password",
-                          hintStyle: TextStyle(
-                            color: AllColor.levelText,
-                            fontFamily: "OpenText",
-                            fontSize: 16.sp,
-                          ),
-                          errorStyle: TextStyle( // ✅ styled validation text only
-                            color: Colors.red,
-                            fontFamily: "OpenText",
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              isVisible ? Icons.visibility : Icons.visibility_off,
-                              color: AllColor.levelText,
-                            ),
-                            onPressed: () => _confirmPasswordVisible.value =
-                            !_confirmPasswordVisible.value,
-                          ),
-                        ),
-                      );
-                    },
+                // ── Password
+                Text(
+                  "Password",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: const Color(0xff171717),
+                    fontFamily: "sf_pro",
+                    fontWeight: FontWeight.w500,
                   ),
-
-                  SizedBox(height: 40.h),
-
-                  GlobalButton(
-                    text: "Continue",
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        globalShowAlertDialog(
-                          context: context,
-                          oneTap: () {
-                            context.push(LoginScreen.routeName);
-                          },
-                          message:
-                          "Your password has been changed successfully",
-                        );
-                      }
-                    },
+                ),
+                SizedBox(height: 8.h),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: _obscurePassword,
+                  validator: passwordValidator,
+                  style: TextStyle(
+                    color: AllColor.black,
+                    fontFamily: "sf_pro",
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
                   ),
-                ],
-              ),
+                  decoration: _inputDecoration(
+                    hint: 'Enter your password',
+                    onToggle: () =>
+                        setState(() => _obscurePassword = !_obscurePassword),
+                    obscure: _obscurePassword,
+                  ),
+                ),
+
+                SizedBox(height: 16.h),
+
+                Text(
+                  "Password is strong",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: AllColor.bluecolor,
+                    fontFamily: "sf_pro",
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+
+                SizedBox(height: 24.h),
+
+                // ── Re-Password
+                Text(
+                  "Re-Password",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: const Color(0xff171717),
+                    fontFamily: "sf_pro",
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                TextFormField(
+                  controller: _confirmPasswordController,
+                  obscureText: _obscureConfirm,
+                  validator: (value) {
+                    // age base password rules check
+                    final baseError = passwordValidator(value);
+                    if (baseError != null) return baseError;
+
+                    // pore match check
+                    if (value != _passwordController.text) {
+                      return 'Passwords do not match';
+                    }
+                    return null;
+                  },
+                  style: TextStyle(
+                    color: AllColor.black,
+                    fontFamily: "sf_pro",
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  decoration: _inputDecoration(
+                    hint: 'Re-enter your password',
+                    onToggle: () =>
+                        setState(() => _obscureConfirm = !_obscureConfirm),
+                    obscure: _obscureConfirm,
+                  ),
+                ),
+                SizedBox(height: 80.h,),
+              ],
             ),
           ),
         ),
       ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.fromLTRB(22.w, 0, 22.w, 24.h),
+        child: SizedBox(
+          width: double.infinity,
+          height: 56.h,
+          child: CustomButton(
+            text: "Submit",
+            onTap: () {
+              //if (!(_formKey.currentState?.validate() ?? false)) return;
+              context.push(AccountSuccessful.routeName);
+            },
+          ),
+        ),
+      ),
+
     );
   }
+
+  InputDecoration _inputDecoration({
+    required String hint,
+    required VoidCallback onToggle,
+    required bool obscure,
+  }) {
+    return InputDecoration(
+      hintText: hint,
+      suffixIcon: IconButton(
+        onPressed: onToggle,
+        icon: Icon(obscure ? Icons.visibility_off : Icons.visibility),
+      ),
+      hintStyle: TextStyle(
+        color: Colors.black.withOpacity(0.3),
+        fontSize: 16.sp,
+      ),
+      filled: true,
+      fillColor: const Color(0xffF7F7F7),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(
+          color: AllColor.grey50,
+          width: 1.2,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(
+          color: AllColor.grey50,
+          width: 1.2,
+        ),
+      ),
+    );
+  }
+
 }
-
-
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:go_router/go_router.dart';
-// import 'package:workpleis/core/widget/global_aleart_box.dart';
-// import 'package:workpleis/core/widget/global_bottom.dart';
-// import 'package:workpleis/features/auth/screens/login_screen.dart';
-// import 'package:workpleis/features/auth/widgets/custom_label_text.dart';
-// import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
-//
-// import '../../../core/constants/color_control/all_color.dart';
-// class NewPasswordScreen extends StatelessWidget {
-//   const NewPasswordScreen({super.key});
-//   static final routeName = "/newPasswordScreen";
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     TextEditingController _passwordController = TextEditingController();
-//     TextEditingController _confirmPasswordController = TextEditingController();
-//     TextTheme theme = Theme.of(context).textTheme;
-//     return Scaffold(
-//       body: SafeArea(
-//         child: Padding(
-//           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-//           child: SingleChildScrollView(
-//             child: Column(
-//               children: [
-//                 Spacer(),
-//                 Text(
-//                   "Reset your password",
-//                   style:TextStyle(fontFamily:"headFont", fontWeight: FontWeight.w800, fontSize: 20.sp,color: AllColor.black),
-//                 ),
-//                 SizedBox(height: 8.h),
-//                 Text(
-//                   "The password must be \n different then before",
-//                   textAlign: TextAlign.center,
-//                   style:TextStyle(fontSize: 14.sp,  fontFamily:"OpenText", fontWeight: FontWeight.w400, color: AllColor.levelText),
-//                 ),
-//                 SizedBox(height: 30.h),
-//                 // 🔹 Full Name
-//                 CustomLabelText(title: "New Password"),
-//                 SizedBox(height: 6.h),
-//                 TextFormField(
-//                   style: TextStyle(
-//                       fontSize: 14.sp,
-//                       fontWeight: FontWeight.w400,
-//                       color: AllColor.black,
-//                       fontFamily: "OpenText"
-//                   ),
-//
-//                   controller: _passwordController,
-//                   validator: (v) =>
-//                   v == null || v.isEmpty ? "Enter your New Password" : null,
-//                   decoration: const InputDecoration(
-//                     hintText: "Enter Your Password",
-//                   ),
-//                 ),
-//                 SizedBox(height: 25.h),
-//                 CustomLabelText(title: "Confirm Password"),
-//                 TextFormField(
-//                   style: TextStyle(
-//                       fontSize: 14.sp,
-//                       fontWeight: FontWeight.w400,
-//                       color: AllColor.black,
-//                       fontFamily: "OpenText"
-//                   ),
-//
-//                   controller: _confirmPasswordController,
-//                   validator: (v) =>
-//                   v == null || v.isEmpty ? "Enter your Confirm Password" : null,
-//                   decoration: const InputDecoration(
-//                     hintText: "Enter Your Confirm Password",
-//                   ),
-//                 ),
-//                 SizedBox(height: 25.h),
-//                 GlobalButton(
-//                   text: "Continue ",
-//                   onPressed: () {
-//                    globalShowAlertDialog(context: context, oneTap: (){context.push(LoginScreen.routeName);
-//                      },message: "Your password has been changed successfully");
-//                   },
-//                 ),
-//                 Spacer(),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

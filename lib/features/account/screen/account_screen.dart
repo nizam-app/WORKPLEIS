@@ -70,6 +70,7 @@ class _ProfileHeaderSectionState extends State<ProfileHeaderSection> {
           backgroundColor: AllColor.grey200,
         ),
         10.h.verticalSpace,
+
         Text("Jhon Doe",
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, color: AllColor.black,fontFamily: "OpenText")),
         6.h.verticalSpace,
