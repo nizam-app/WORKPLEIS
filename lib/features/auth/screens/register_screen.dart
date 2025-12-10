@@ -1,312 +1,356 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:workpleis/core/constants/color_control/all_color.dart';
-import 'package:workpleis/core/widget/global_snack_bar.dart';
 import 'package:workpleis/features/auth/logic/email_valitedor.dart';
 import 'package:workpleis/features/auth/logic/password_valitedor.dart';
-import 'package:workpleis/features/auth/logic/textfromfield_revarpod.dart';
-import 'package:workpleis/core/screen/base_gradient_scaffold.dart';
-
-import '../../../core/constants/image_control/image_path.dart';
-import '../data/register_users.dart';
-import '../logic/role_reverpod.dart';
-import '../widgets/custom_google_button.dart';
-import '../widgets/outline_border.dart';
+import 'package:workpleis/features/auth/screens/phone_number_verification.dart';
+import '../../../core/widget/global_get_started_button.dart';
 import 'login_screen.dart';
 
-class RegisterScreen extends ConsumerWidget {
-  RegisterScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
   static const routeName = '/registerScreen';
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final _nameController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
-  final _confirmPassController = TextEditingController();
+
+  bool _obscurePass = true;
+  bool _agreeTerms = false;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final obscurePass = ref.watch(passwordVisibleProvider);
-    final obscureConfirm = ref.watch(confirmPasswordVisibleProvider);
-    final role = ref.watch(roleProvider); // 🔹 role state riverpod থেকে নিলাম
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
 
-    return  BaseGradientScaffold(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 20.h),
-                  Image.asset(ImagePath.pngLogo, height: 110.h),
-                  SizedBox(height: 16.h),
-        
-                  Text("Create account",
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white, // ✅ pure white background
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+          physics: const BouncingScrollPhysics(),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // ── Logo
+                SizedBox(height: 8.h),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Image.asset(
+                    "assets/images/goloballogo.png",
+                    height: 31.h,
+                  ),
+                ),
+
+                SizedBox(height: 32.h),
+
+                // ── Title
+                Text(
+                  'Create account',
+                  style: TextStyle(
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AllColor.black,
+                    fontFamily: 'sf_pro',
+                  ),
+                ),
+                SizedBox(height: 8.h),
+
+                // ── Already have account? Log In
+                Row(
+                  children: [
+                    Text(
+                      "Already have an account? ",
                       style: TextStyle(
-                          fontSize: 24.sp, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 4.h),
-                  Text("Join Workpleis today",
-                      style: TextStyle(fontSize: 16.sp, color: Colors.grey)),
-                  SizedBox(height: 30.h),
-        
-                  // 🔹 Full Name
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Full Name",
-                        style: TextStyle(
-                            fontSize: 13.sp, fontWeight: FontWeight.w600)),
-                  ),
-                  SizedBox(height: 6.h),
-                  TextFormField(
-                    style: TextStyle(
-                      color: AllColor.black,
-                      fontFamily: "OpenText",
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    controller: _nameController,
-                    validator: (v) =>
-                    v == null || v.isEmpty ? "Enter your full name" : null,
-                    decoration: const InputDecoration(
-                      hintText: "Your full name",
-                    ).copyWith(
-                      enabledBorder: CustomOutlineBorder.border(),
-                      focusedBorder: CustomOutlineBorder.border(),
-                    ),
-                  ),
-                  SizedBox(height: 16.h),
-        
-                  // 🔹 Email
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Email",
-                        style: TextStyle(
-                            fontSize: 13.sp, fontWeight: FontWeight.w600)),
-                  ),
-                  SizedBox(height: 6.h),
-                  TextFormField(
-                    style: TextStyle(
-                      color: AllColor.black,
-                      fontFamily: "OpenText",
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    controller: _emailController,
-                    validator: emailValidator,
-                    decoration: const InputDecoration(
-                      hintText: "Your email",
-                    ).copyWith(
-                      enabledBorder: CustomOutlineBorder.border(),
-                      focusedBorder: CustomOutlineBorder.border(),
-                    ),
-                  ),
-                  SizedBox(height: 16.h),
-        
-                  // 🔹 Password
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Password",
-                        style: TextStyle(
-                            fontSize: 13.sp, fontWeight: FontWeight.w600)),
-                  ),
-                  SizedBox(height: 6.h),
-                  TextFormField(
-                    style: TextStyle(
-                      color: AllColor.black,
-                      fontFamily: "OpenText",
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    controller: _passController,
-                    validator: passwordValidator,
-                    obscureText: obscurePass,
-                    decoration: InputDecoration(
-                      hintText: "Enter your password",
-                      suffixIcon: IconButton(
-                        onPressed: () => ref
-                            .read(passwordVisibleProvider.notifier)
-                            .state = !obscurePass,
-                        icon: Icon(obscurePass
-                            ? Icons.visibility_off
-                            : Icons.visibility),
+                        fontSize: 16.sp,
+                        color: AllColor.black,
+                        fontFamily: "sf_pro",
+                        fontWeight: FontWeight.w400,
                       ),
-                    ).copyWith(
-                      enabledBorder: CustomOutlineBorder.border(),
-                      focusedBorder: CustomOutlineBorder.border(),
                     ),
-                  ),
-                  SizedBox(height: 16.h),
-        
-                  // 🔹 Confirm Password
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Confirm password",
+                    GestureDetector(
+                      onTap: () => context.push(LoginScreen.routeName),
+                      child: Text(
+                        "Log In",
                         style: TextStyle(
-                            fontSize: 13.sp, fontWeight: FontWeight.w600)),
-                  ),
-                  SizedBox(height: 6.h),
-                  TextFormField(
-                    style: TextStyle(
-                      color: AllColor.black,
-                      fontFamily: "OpenText",
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    controller: _confirmPassController,
-                    validator: (v) {
-                      if (v == null || v.isEmpty) {
-                        return "Confirm your password";
-                      }
-                      if (v != _passController.text) {
-                        return "Passwords do not match";
-                      }
-                      return null;
-                    },
-                    obscureText: obscureConfirm,
-                    decoration: InputDecoration(
-                      hintText: "Confirm your password",
-                      suffixIcon: IconButton(
-                        onPressed: () => ref
-                            .read(confirmPasswordVisibleProvider.notifier)
-                            .state = !obscureConfirm,
-                        icon: Icon(obscureConfirm
-                            ? Icons.visibility_off
-                            : Icons.visibility),
-                      ),
-                    ).copyWith(
-                      enabledBorder: CustomOutlineBorder.border(),
-                      focusedBorder: CustomOutlineBorder.border(),
-                    ),
-                  ),
-                  SizedBox(height: 24.h),
-        
-                  // 🔹 Client / Job Seeker Selectable Buttons
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () {
-                            ref.read(roleProvider.notifier).state = "CLIENT";
-                          },
-                          style: OutlinedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 14.h),
-                            side: BorderSide(
-                              color: role == "CLIENT"
-                                  ? AllColor.borderColor
-                                  : Colors.grey,
-                              width: 1,
-                            ),
-                            backgroundColor: role == "CLIENT"
-                                ? AllColor.borderColor.withOpacity(0.5)
-                                : Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                          ),
-                          child: Text(
-                            "I'm a Client",
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              color:
-                                   AllColor.black,
-                            ),
-                          ),
+                          fontSize: 16.sp,
+                          color: AllColor.black,
+                          fontFamily: "sf_pro",
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.underline,
+                          decorationColor: AllColor.black,
+                          decorationThickness: 1.5,
                         ),
                       ),
-                      SizedBox(width: 10.w),
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () {
-                            ref.read(roleProvider.notifier).state = "JOB_SEEKER";
-                          },
-                          style: OutlinedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 14.h),
-                            side: BorderSide(
-                              color: role == "JOB_SEEKER"
-                                  ? AllColor.borderColor
-                                  : Colors.grey,
-                              width: 1,
-                            ),
-                            backgroundColor: role == "JOB_SEEKER"
-                                ? AllColor.borderColor.withOpacity(0.5)
-                                : Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                          ),
-                          child: Text(
-                            "I'm a Job Seeker",
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              color
-                                  : AllColor.black,
-                            ),
-                          ),
-                        ),
-                      ),
+                    ),
+                  ],
+                ),
 
-                    ],
+                SizedBox(height: 28.h),
+
+                // First name
+                Text(
+                  "First name",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: const Color(0xff171717),
+                    fontFamily: "sf_pro",
+                    fontWeight: FontWeight.w500,
                   ),
-                  SizedBox(height: 24.h),
-        
-                  // 🔹 Create Account Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          if (role == null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Please select a role"),
+                ),
+                SizedBox(height: 8.h),
+                TextFormField(
+                  controller: _firstNameController,
+                  style: _fieldTextStyle,
+                  validator: (v) =>
+                  v == null || v.isEmpty ? "Enter your first name" : null,
+                  decoration: _inputDecoration(hint: 'Enter your first name'),
+                ),
+
+                SizedBox(height: 16.h),
+
+                // Last name
+                Text(
+                  "Last name",
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: const Color(0xff171717),
+                    fontFamily: "sf_pro",
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                TextFormField(
+                  controller: _lastNameController,
+                  style: _fieldTextStyle,
+                  validator: (v) =>
+                  v == null || v.isEmpty ? "Enter your last name" : null,
+                  decoration: _inputDecoration(hint: 'Enter your last name'),
+                ),
+
+                SizedBox(height: 16.h),
+
+                // Email
+                Text(
+                  "Email*",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: const Color(0xff171717),
+                    fontFamily: "sf_pro",
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  style: _fieldTextStyle,
+                  validator: emailValidator,
+                  decoration: _inputDecoration(hint: 'Enter email'),
+                ),
+
+                SizedBox(height: 16.h),
+
+                // Password
+                Text(
+                  "Create a password*",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: const Color(0xff171717),
+                    fontFamily: "sf_pro",
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                TextFormField(
+                  controller: _passController,
+                  obscureText: _obscurePass,
+                  style: _fieldTextStyle,
+                  validator: passwordValidator,
+                  decoration: _inputDecoration(
+                    hint: 'Enter your password',
+                    suffix: IconButton(
+                      onPressed: () =>
+                          setState(() => _obscurePass = !_obscurePass),
+                      icon: Icon(
+                        _obscurePass
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 24.h),
+
+                // Terms checkbox
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12),
+                      child: SizedBox(
+                        height: 18.h,
+                        width: 18.w,
+                        child: Checkbox(
+                          value: _agreeTerms,
+                          onChanged: (val) {
+                            setState(() => _agreeTerms = val ?? false);
+                          },
+                          activeColor: Colors.black.withOpacity(0.6),
+                          checkColor: AllColor.white,
+                          side:  BorderSide(
+                            color: Colors.black.withOpacity(0.6),
+                            width: 1.5,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8.w),
+                    Expanded(
+                      child: Text.rich(
+                        TextSpan(
+                          text:
+                          "By creating an account, I agree to Salesman ",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            height: 1.4,
+                            color: const Color(0xff888888),
+                            fontFamily: 'sf_pro',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: "Terms of Service",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                decoration: TextDecoration.underline,
+                                fontSize: 16.sp,
+                                  color: AllColor.black
                               ),
-                            );
-                            return;
-                          }
-                          registerUsers(
-                            context: context,
-                            name: _nameController.text.trim(),
-                            email: _emailController.text.trim(),
-                            password: _passController.text.trim(),
-                            confirmPassword: _confirmPassController.text.trim(),
-                            role: role, // 🔹 Riverpod থেকে role পাঠানো হলো
-                          );
-
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        padding: EdgeInsets.symmetric(vertical: 16.h),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r),
+                            ),
+                             TextSpan(text: " and ",
+                               style:TextStyle(
+                                   fontSize: 16.sp,
+                                   height: 1.4,
+                                   color: const Color(0xff888888),
+                                   fontFamily: 'sf_pro',
+                                   fontWeight: FontWeight.w400,
+                             ),)  ,
+                            TextSpan(
+                              text: "Privacy Policy",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                decoration: TextDecoration.underline,
+                                fontSize: 16.sp,
+                                color: AllColor.black
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      child: const Text(
-                        "Create Account",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      ),
                     ),
+                  ],
+                ),
+
+                SizedBox(height: 40.h),
+
+                SizedBox(
+                  width: double.infinity,
+                  height: 56.h,
+                  child: CustomButton(
+                    text: "Create Account",
+                    onTap: _onSubmit,
                   ),
+                ),
 
-        
-                  CustomGmailButton(onTop: () { context.push(LoginScreen.routeName);}, taxt: 'Sign in',)
-                ],
-              ),
-
+                SizedBox(height: 16.h),
+              ],
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
+
+  TextStyle get _fieldTextStyle => TextStyle(
+    color: AllColor.black,
+    fontFamily: "sf_pro",
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+  );
+
+  InputDecoration _inputDecoration({required String hint, Widget? suffix}) {
+    return InputDecoration(
+      hintText: hint,
+      hintStyle: TextStyle(
+        color: Colors.black.withOpacity(0.3),
+        fontSize: 16.sp,
+        fontFamily: 'sf_pro',
+      ),
+      filled: true,
+      fillColor: const Color(0xffF7F7F7),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+      suffixIcon: suffix,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(
+          color: AllColor.grey50,
+          width: 1.2,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(
+          color: AllColor.grey50,
+          width: 1.2,
+        ),
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(
+          color: AllColor.grey50,
+          width: 1.2,
+        ),
+      ),
+    );
+  }
+
+  void _onSubmit() {
+   // if (!(_formKey.currentState?.validate() ?? false)) return;
+
+    // if (!_agreeTerms) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(
+    //       content:
+    //       Text("Please agree to Terms of Service and Privacy Policy."),
+    //     ),
+    //   );
+    //   return;
+    // }
+
+    // TODO: ekhane register API call korbe
+    context.push(PhoneNumberVerification.routeName);
   }
 }

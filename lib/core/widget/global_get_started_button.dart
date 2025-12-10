@@ -28,19 +28,79 @@ class GlobalGetStartedButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: color, // neon green background
           borderRadius: BorderRadius.circular(borderRadius.r),
-          border: Border.all(width: 1.w, color:AllColor.grey),
+          border: Border.all(width: 1.w, color:AllColor.black),
           // rounded corners
         ),
         child: Center(
           child: Text(
             buttonName,
             style: TextStyle(
-              fontSize: 18.sp, // responsive font
+              fontSize: 16.sp, // responsive font
               fontWeight: FontWeight.w600,
               color: textColor,
-              fontFamily: "OpenText"
+              fontFamily: "sf_pro"
 
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class CustomButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onTap;
+  final Color bgColor;
+  final Color textColor;
+  final IconData? icon;
+
+  const CustomButton({
+    super.key,
+    required this.text,
+    required this.onTap,
+    this.bgColor = Colors.black,
+    this.textColor = Colors.white,
+    this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(32.r),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 14.h),
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(32.r),
+          ),
+          alignment: Alignment.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                text,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: textColor,
+                  fontFamily: "sf_pro",
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              if (icon != null) ...[
+                SizedBox(width: 8.w),
+                Icon(
+                  icon,
+                  color: textColor,
+                  size: 16.sp,
+                ),
+              ]
+            ],
           ),
         ),
       ),

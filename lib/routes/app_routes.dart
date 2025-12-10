@@ -3,13 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:workpleis/core/widget/global_snack_bar.dart';
 import 'package:workpleis/features/account/screen/client_account.dart';
 import 'package:workpleis/features/account/screen/profile_edit_screen.dart';
+import 'package:workpleis/features/auth/screens/account_successful.dart';
 import 'package:workpleis/features/auth/screens/add_payment_method_screen.dart';
 import 'package:workpleis/features/auth/screens/address_and_password.dart';
 import 'package:workpleis/features/auth/screens/bisiness_password_screen.dart';
 import 'package:workpleis/features/auth/screens/business_verification_screen.dart';
 import 'package:workpleis/features/auth/screens/enter_your_phone_number.dart';
 import 'package:workpleis/features/auth/screens/forget_verification_code_screen.dart';
-import 'package:workpleis/features/auth/screens/get_started_screen.dart';
 import 'package:workpleis/features/auth/screens/indentity_verification_screen.dart';
 import 'package:workpleis/features/auth/screens/login_screen.dart';
 import 'package:workpleis/features/auth/screens/phone_number_verification.dart';
@@ -25,12 +25,10 @@ import 'package:workpleis/features/jobs/screen/Service_jobs_details.dart';
 import 'package:workpleis/features/jobs/screen/service_my_offers.dart';
 import 'package:workpleis/features/jobs/screen/jobs_screen.dart';
 import 'package:workpleis/features/message/screen/chat_screen.dart';
-import 'package:workpleis/features/nav_bar/screen/service_bottom_nav_bar.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_01.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_003.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_001.dart';
 import 'package:workpleis/features/onboarding/screen/onboarding_screen_002.dart';
-
 import 'package:workpleis/features/proposal/screen/view_proposal_screen.dart';
 import 'package:workpleis/features/role_screen/screen/genNotifications.dart';
 import 'package:workpleis/features/role_screen/screen/seclect_role_screen.dart';
@@ -158,6 +156,13 @@ class AppRouter {
         name: Gennotifications.routeName,
         builder: (context, state) => Gennotifications(),
       ),
+
+      GoRoute(
+        path: AccountSuccessful.routeName, // 👈 no :param in path
+        name: AccountSuccessful.routeName,
+        builder: (context, state) => AccountSuccessful(),
+      ),
+
 
 
 

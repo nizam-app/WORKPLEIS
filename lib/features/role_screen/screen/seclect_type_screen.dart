@@ -22,157 +22,160 @@ class _SeclectTypeScreenState extends State<SeclectTypeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// top logo
-              Padding(
-                padding: EdgeInsets.only(top: 8.h),
-                child: Image.asset(
-                  'assets/images/splashlogo.png',
-                  height: 47.h, // একটু ছোট, screenshot এর মত
-                  fit: BoxFit.contain,
-                ),
-              ),
-
-              SizedBox(height: 32.h),
-
-              /// center icon
-              Center(
-                child: Image.asset(
-                  'assets/images/typeicon.png',
-                  height: 115.h,
-                  fit: BoxFit.contain,
-                ),
-              ),
-
-              SizedBox(height: 28.h),
-
-              /// title
-              Center(
-                child: Text(
-                  'Select your Type',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 40.sp,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'sf_Pro',
-                    color: Colors.black,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// top logo
+                Padding(
+                  padding: EdgeInsets.only(top: 8.h),
+                  child: Image.asset(
+                    'assets/images/splashlogo.png',
+                    height: 47.h,
+                    fit: BoxFit.contain,
                   ),
                 ),
-              ),
 
-              SizedBox(height: 8.h),
+                SizedBox(height: 32.h),
 
-              /// subtitle
-              Center(
-                child: Text(
-                  'A  Sustainable Marketplace For\nBusinesses',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'sf_Pro',
-                    color: Colors.black.withOpacity(0.6),
-                    height: 1.3,
+                /// center icon
+                Center(
+                  child: Image.asset(
+                    'assets/images/typeicon.png',
+                    height: 115.h,
+                    fit: BoxFit.contain,
                   ),
                 ),
-              ),
 
-              SizedBox(height: 32.h),
+                SizedBox(height: 28.h),
 
-              /// type cards
-              _RoleCard(
-                label: "For Individual",
-                selected: _selected == UserRole.client,
-                onTap: () {
-                  setState(() => _selected = UserRole.client);
-                },
-              ),
-              SizedBox(height: 16.h),
-              _RoleCard(
-                label: "For Business",
-                selected: _selected == UserRole.provider,
-                onTap: () {
-                  setState(() => _selected = UserRole.provider);
-                },
-              ),
-
-              const Spacer(),
-
-              /// Next button
-              SizedBox(
-                width: double.infinity,
-                height: 56.h,
-                child: ElevatedButton(
-                  onPressed: _selected == null
-                      ? null
-                      : () {
-                   context.push(Gennotifications.routeName);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF03051A),
-                    disabledBackgroundColor:
-                    const Color(0xFF03051A).withOpacity(0.25),
-                    shape: const StadiumBorder(),
-                    elevation: 0,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        'Next',
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'sf_Pro',
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(width: 8.w),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: 16.sp,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 16.h),
-
-              /// Skip
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    context.push(Gennotifications.routeName);
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    padding: EdgeInsets.zero,
-                  ),
+                /// title
+                Center(
                   child: Text(
-                    'Skip',
+                    'Select your Type',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 40.sp,
+                      fontWeight: FontWeight.w600,
                       fontFamily: 'sf_Pro',
-                      fontWeight: FontWeight.w400,
-                      decoration: TextDecoration.underline,
-                      decorationColor: Colors.black,
+                      color: Colors.black,
                     ),
                   ),
                 ),
-              ),
 
-              SizedBox(height: 8.h),
-            ],
+                SizedBox(height: 8.h),
+
+                /// subtitle
+                Center(
+                  child: Text(
+                    'A  Sustainable Marketplace For\nBusinesses',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'sf_Pro',
+                      color: Colors.black.withOpacity(0.6),
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 32.h),
+
+                /// type cards
+                _RoleCard(
+                  label: "For Individual",
+                  selected: _selected == UserRole.client,
+                  onTap: () {
+                    setState(() => _selected = UserRole.client);
+                  },
+                ),
+                SizedBox(height: 16.h),
+                _RoleCard(
+                  label: "For Business",
+                  selected: _selected == UserRole.provider,
+                  onTap: () {
+                    setState(() => _selected = UserRole.provider);
+                  },
+                ),
+
+                SizedBox(height: 32.h),
+
+                /// Next button
+                SizedBox(
+                  width: double.infinity,
+                  height: 56.h,
+                  child: ElevatedButton(
+                    onPressed: _selected == null
+                        ? null
+                        : () {
+                      context.push(Gennotifications.routeName);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF03051A),
+                      disabledBackgroundColor:
+                      const Color(0xFF03051A).withOpacity(0.25),
+                      shape: const StadiumBorder(),
+                      elevation: 0,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Next',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'sf_Pro',
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 16.sp,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 16.h),
+
+                /// Skip
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      context.push(Gennotifications.routeName);
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      padding: EdgeInsets.zero,
+                    ),
+                    child: Text(
+                      'Skip',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontFamily: 'sf_Pro',
+                        fontWeight: FontWeight.w400,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 8.h),
+              ],
+            ),
           ),
         ),
       ),
+
     );
   }
 }

@@ -9,6 +9,7 @@ class AllColor {
   static const Color brand2_light = Color(0xFFA49ACF);
   static const Color white = Colors.white;
   static const Color allcolor = Color(0xFFCAFF45);
+  static const Color bluecolor = Color(0xFF3071FF);
   //static const Color bgcolor = Color(0xFFF1FFCD);
   static const Color bgcolor = Color(0xFFCAFF45);
   static const Color borderColor = Color(0xff686382);
@@ -19,6 +20,9 @@ class AllColor {
   static const Color orange = Colors.orange;
   static const Color lightBlue = Colors.lightBlue;
   static const Color grey = Color(0xFF686382);
+  static const Color grey50 = Color(0xFFEDEDED);
+  static const Color grey70 = Color(0xFFEEEEEC);
+
   static final Color grey200 = Colors.grey.shade200;
   static final Color grey100 = Colors.grey.shade100;
   static final Color grey300 = Colors.grey.shade300;
